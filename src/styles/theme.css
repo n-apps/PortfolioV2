@@ -3,8 +3,8 @@
 :root {
   --font-size: 16px;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 
   --background: #fafafa;
   --foreground: #0a0a0a;

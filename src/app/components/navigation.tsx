@@ -4,7 +4,6 @@ import { motion } from "motion/react";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/now", label: "Now" },
 ];
 
 export function Navigation() {

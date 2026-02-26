@@ -1,7 +1,10 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
+import { useInView, useSpring, useTransform, motion } from "motion/react";
 import { SectionAnimate } from "./section-animate";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { nbsp } from "./utils/nbsp";
 import problemImage from "figma:asset/106f1dd596e37509baec7f1d82ee8047793086df.png";
 import heroImage from "figma:asset/00413c12f7b394f8a95ae07d5c61238f28edcd3e.png";
 import testimonialsImage from "figma:asset/26145f2d7d13ce66997df6a134404c1f40648cb3.png";
@@ -19,48 +22,48 @@ const innerGap = "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)";
 /* ── Data ─────────────────────────────────────────────── */
 
 const metadata = [
-  { label: "Role", value: "Creator — Design & Development" },
-  { label: "Timeframe", value: "2016 – Present" },
+  { label: "Role", value: "Creator \u2014 Design & Development" },
+  { label: "Timeframe", value: "2016 \u2013 Present" },
   { label: "Platform", value: "Android" },
-  { label: "Team", value: "Solo (with community contributors)" },
+  { label: "Team", value: "Solo (with\u00a0community contributors)" },
 ];
 
 const snapshotRows = [
   {
-    key: "What it is",
+    key: "What it\u00a0is",
     value:
-      "A scorekeeper app for board games, card games, and any activity that needs counting",
+      "A\u00a0scorekeeper app for\u00a0board games, card games, and\u00a0any activity that needs counting",
   },
   {
     key: "Audience",
     value:
-      "Board game players, families, tabletop groups — anyone replacing pen & paper score tracking",
+      "Board game players, families, tabletop groups \u2014 anyone replacing pen\u00a0& paper score tracking",
   },
   {
     key: "Key use cases",
     value:
-      "Track scores for multiple players, use timers for turn-based games, sort players by rank, count anything",
+      "Track scores for\u00a0multiple players, use timers for\u00a0turn-based games, sort players by\u00a0rank, count anything",
   },
-  { key: "Installs", value: "600K+ (organic, zero ad spend)" },
+  { key: "Installs", value: "600K+ (organic, zero ad\u00a0spend)" },
   {
     key: "Active users",
     value:
-      "180K+ monthly active devices (grew from 109K to 170K in 2025 alone)",
+      "180K+ monthly active devices (grew from 109K to\u00a0170K in\u00a02025 alone)",
   },
   {
     key: "Rating",
-    value: "4.9 on Google Play (maintained consistently)",
+    value: "4.9 on\u00a0Google Play (maintained consistently)",
   },
   {
     key: "Monetization",
-    value: "Zero ads — and keeping it that way",
+    value: "Zero ads \u2014 and\u00a0keeping it\u00a0that way",
   },
 ];
 
 const successCriteria = [
-  "Time from launch to first score entry: under 10 seconds",
-  "Maintain a 4.8+ rating on Google Play",
-  "Grow through word-of-mouth only — zero marketing budget",
+  "Time from launch to\u00a0first score entry: under 10\u00a0seconds",
+  "Maintain a\u00a04.8+ rating on\u00a0Google Play",
+  "Grow through word-of-mouth only \u2014 zero marketing budget",
 ];
 
 const impactStats = [
@@ -71,15 +74,15 @@ const impactStats = [
 ];
 
 const proudOf = [
-  "Sustained quality over nine years. This isn't a portfolio piece I shipped and forgot — it's a living product with 108 commits in 2025 alone, real users, and a 4.9 rating that has been maintained, not inflated by launch spikes.",
-  "Growth without marketing. 600K installs driven entirely by product quality, word-of-mouth, and organic discovery. That's evidence that design decisions — simplicity, no ads, respect for the user — compound over time.",
-  "Community impact. A contributor was inspired enough to build a web version. Others volunteer translations. The app has become something people care about beyond just using it, and that's the most meaningful signal I can point to.",
+  "Sustained quality over nine years. This isn't a\u00a0portfolio piece I\u00a0shipped and\u00a0forgot \u2014 it's a\u00a0living product with\u00a0108 commits in\u00a02025 alone, real users, and\u00a0a\u00a04.9 rating that has been maintained, not inflated by\u00a0launch spikes.",
+  "Growth without marketing. 600K installs driven entirely by\u00a0product quality, word-of-mouth, and\u00a0organic discovery. That's evidence that design decisions \u2014 simplicity, no ads, respect for\u00a0the\u00a0user \u2014 compound over time.",
+  "Community impact. A\u00a0contributor was inspired enough to\u00a0build a\u00a0web version. Others volunteer translations. The\u00a0app has become something people care about beyond just using it, and\u00a0that's the\u00a0most meaningful signal I\u00a0can point to.",
 ];
 
 const doDifferently = [
-  "Document the design process earlier. For years I iterated without saving artifacts. If I'd kept a design journal from the start, this case study would be richer with before/after evidence.",
+  "Document the\u00a0design process earlier. For\u00a0years I\u00a0iterated without saving artifacts. If\u00a0I'd kept a\u00a0design journal from the\u00a0start, this case study would be\u00a0richer with\u00a0before/after evidence.",
   "Explore lightweight analytics sooner. Understanding which features are actually used (vs. requested) would have sharpened prioritization.",
-  "Consider cross-platform earlier. The fan-made web version proved there's demand beyond Android — I should have explored that signal sooner.",
+  "Consider cross-platform earlier. The\u00a0fan-made web version proved there's demand beyond Android \u2014 I\u00a0should have explored that signal sooner.",
 ];
 
 
@@ -121,6 +124,81 @@ function CalloutBox({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** Parse a display value like "600K+", "4.9", "$0" into parts for animation */
+function parseStatValue(display: string): {
+  prefix: string;
+  numericValue: number;
+  suffix: string;
+  decimals: number;
+} {
+  const match = display.match(/^([^0-9]*)([0-9]+(?:\.[0-9]+)?)(.*)$/);
+  if (!match) return { prefix: "", numericValue: 0, suffix: display, decimals: 0 };
+  const prefix = match[1];
+  const num = parseFloat(match[2]);
+  const suffix = match[3];
+  const decimalPart = match[2].split(".")[1];
+  const decimals = decimalPart ? decimalPart.length : 0;
+  return { prefix, numericValue: num, suffix, decimals };
+}
+
+function AnimatedStatValue({
+  displayValue,
+  isInView,
+}: {
+  displayValue: string;
+  isInView: boolean;
+}) {
+  const { prefix, numericValue, suffix, decimals } = parseStatValue(displayValue);
+  const spring = useSpring(0, { mass: 0.8, stiffness: 75, damping: 15 });
+  const display = useTransform(spring, (current) => {
+    const rounded = decimals > 0
+      ? current.toFixed(decimals)
+      : Math.round(current).toLocaleString();
+    return `${prefix}${rounded}${suffix}`;
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      spring.set(numericValue);
+    }
+  }, [isInView, spring, numericValue]);
+
+  return <motion.span>{display}</motion.span>;
+}
+
+function ImpactStatsGrid() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <div ref={ref} className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+      {impactStats.map((s) => (
+        <div
+          key={s.label}
+          className="rounded-xl bg-card border border-border p-4 sm:p-5 flex flex-col gap-1 items-center text-center"
+        >
+          <span
+            className="text-foreground"
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)",
+              lineHeight: 1.3,
+            }}
+          >
+            <AnimatedStatValue displayValue={s.value} isInView={isInView} />
+          </span>
+          <span
+            className="text-muted-foreground"
+            style={{ fontSize: "0.75rem", lineHeight: 1.3 }}
+          >
+            {s.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /* ── Page ─────────────────────────────────────────────── */
 
 export function ScoreCounterPage() {
@@ -156,9 +234,7 @@ export function ScoreCounterPage() {
             className="text-muted-foreground"
             style={{ fontSize: fluidBase, lineHeight: 1.5 }}
           >
-            I designed and built an Android utility app that grew entirely
-            through product quality, reaching 180K+ monthly active users and a
-            4.9 rating — without spending a dollar on marketing.
+            {nbsp("I designed and built an Android utility app that grew entirely through product quality, reaching 180K+ monthly active users and a 4.9 rating \u2014 without spending a dollar on marketing.")}
           </p>
         </div>
       </SectionAnimate>
@@ -224,19 +300,10 @@ export function ScoreCounterPage() {
           <SectionHeading>Context</SectionHeading>
           <div className="flex flex-col gap-4">
             <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              Score Counter started in 2016 as a personal itch: I needed a
-              simple way to track scores during board game nights without
-              fumbling for pen and paper. At the time, I was transitioning from
-              Android development to product design at Eventssion, so building a
-              small utility app felt natural — a way to practice both craft and
-              product thinking.
+              {nbsp("Score Counter started in 2016 as a personal itch: I needed a simple way to track scores during board game nights without fumbling for pen and paper. At the time, I was transitioning from Android development to product design at Eventssion, so building a small utility app felt natural \u2014 a way to practice both craft and product thinking.")}
             </p>
             <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              What surprised me was the demand. The app kept growing organically,
-              year after year, eventually crossing 600K installs. Nine years
-              later, I still maintain it — shipping updates, responding to user
-              feedback, and treating it as a living product rather than a
-              one-time release.
+              {nbsp("What surprised me was the demand. The app kept growing organically, year after year, eventually crossing 600K installs. Nine years later, I still maintain it \u2014 shipping updates, responding to user feedback, and treating it as a living product rather than a one-time release.")}
             </p>
           </div>
         </div>
@@ -248,16 +315,10 @@ export function ScoreCounterPage() {
           <SectionHeading>Problem &amp; Goals</SectionHeading>
           <div className="flex flex-col gap-4">
             <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              The core problem was straightforward: people playing board games,
-              card games, or any group activity need a fast, reliable way to
-              track scores. The existing solutions were either bloated with ads,
-              overly complicated, or aesthetically dated.
+              {nbsp("The core problem was straightforward: people playing board games, card games, or any group activity need a fast, reliable way to track scores. The existing solutions were either bloated with ads, overly complicated, or aesthetically dated.")}
             </p>
             <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              My goal was to build something that felt effortless — an app that
-              disappears into the background of a game night. Open it, add
-              players, start counting. No onboarding walls, no ad interruptions,
-              no unnecessary features.
+              {nbsp("My goal was to build something that felt effortless \u2014 an app that disappears into the background of a game night. Open it, add players, start counting. No onboarding walls, no ad interruptions, no unnecessary features.")}
             </p>
           </div>
         </div>
@@ -287,7 +348,7 @@ export function ScoreCounterPage() {
                 key={i}
                 style={{ fontSize: "0.875rem", lineHeight: 1.6 }}
               >
-                {c}
+                {nbsp(c)}
               </li>
             ))}
           </ul>
@@ -300,17 +361,10 @@ export function ScoreCounterPage() {
           <SectionHeading>My Role &amp; Responsibilities</SectionHeading>
           <div className="flex flex-col gap-4">
             <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              This is a solo project. I own everything: product strategy, UX/UI
-              design, Android development, release management, and user support.
-              Over the years, the community has contributed translations (the app
-              now supports multiple languages), and one contributor was so
-              inspired that he built an independent web version.
+              {nbsp("This is a solo project. I own everything: product strategy, UX/UI design, Android development, release management, and user support. Over the years, the community has contributed translations (the app now supports multiple languages), and one contributor was so inspired that he built an independent web version.")}
             </p>
             <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              The dual hat — designer and developer — gives me an unusual
-              feedback loop. I can validate a design decision in code within
-              hours, ship it, and watch real usage data to confirm or correct
-              course.
+              {nbsp("The dual hat \u2014 designer and developer \u2014 gives me an unusual feedback loop. I can validate a design decision in code within hours, ship it, and watch real usage data to confirm or correct course.")}
             </p>
           </div>
         </div>
@@ -321,7 +375,7 @@ export function ScoreCounterPage() {
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Design Principles</SectionHeading>
           <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            Three principles have guided every decision over nine years of building Score Counter. They work as both a creative compass and a set of constraints — especially when saying no to a feature request or resisting a monetization shortcut.
+            {nbsp("Three principles have guided every decision over nine years of building Score Counter. They work as both a creative compass and a set of constraints \u2014 especially when saying no to a feature request or resisting a monetization shortcut.")}
           </p>
           <div className="flex flex-col gap-4 mt-2">
             <div className="flex flex-col gap-1">
@@ -329,7 +383,7 @@ export function ScoreCounterPage() {
                 <strong>Simplicity over feature richness</strong>
               </h3>
               <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-                The primary flow is three steps: open, add counters, count. Every feature request is measured against that loop — if it adds cognitive load to the core path, it doesn't ship. This constraint kept the app focused while competitors kept adding complexity.
+                {nbsp("The primary flow is three steps: open, add counters, count. Every feature request is measured against that loop \u2014 if it adds cognitive load to the core path, it doesn't ship. This constraint kept the app focused while competitors kept adding complexity.")}
               </p>
             </div>
             <div className="flex flex-col gap-1">
@@ -337,7 +391,7 @@ export function ScoreCounterPage() {
                 <strong>Never show ads</strong>
               </h3>
               <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-                Not showing ads isn't just an ethical choice — it's a design constraint. Without ad placements competing for screen real estate, the UI has to earn its keep on usability alone. The result is a clean, fast experience that users trust enough to recommend, which is how the app grew to 600K installs with zero marketing spend.
+                {nbsp("Not showing ads isn't just an ethical choice \u2014 it's a design constraint. Without ad placements competing for screen real estate, the UI has to earn its keep on usability alone. The result is a clean, fast experience that users trust enough to recommend, which is how the app grew to 600K installs with zero marketing spend.")}
               </p>
             </div>
             <div className="flex flex-col gap-1">
@@ -345,7 +399,7 @@ export function ScoreCounterPage() {
                 <strong>Respect the platform ecosystem</strong>
               </h3>
               <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-                Score Counter follows Material Design conventions, supports the latest Android versions early (Android 16 compatibility shipped in 2025), and embraces community contributions for localization. Instead of fighting the platform, the app leans into it — which keeps maintenance sustainable and the experience native.
+                {nbsp("Score Counter follows Material Design conventions, supports the latest Android versions early (Android 16 compatibility shipped in 2025), and embraces community contributions for localization. Instead of fighting the platform, the app leans into it \u2014 which keeps maintenance sustainable and the experience native.")}
               </p>
             </div>
           </div>
@@ -368,37 +422,9 @@ export function ScoreCounterPage() {
       <SectionAnimate delay={0.26}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Outcome &amp; Impact</SectionHeading>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-            {impactStats.map((s) => (
-              <div
-                key={s.label}
-                className="rounded-xl bg-card border border-border p-4 sm:p-5 flex flex-col gap-1 items-center text-center"
-              >
-                <span
-                  className="text-foreground"
-                  style={{
-                    fontFamily: "var(--font-serif)",
-                    fontSize: "clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {s.value}
-                </span>
-                <span
-                  className="text-muted-foreground"
-                  style={{ fontSize: "0.75rem", lineHeight: 1.3 }}
-                >
-                  {s.label}
-                </span>
-              </div>
-            ))}
-          </div>
+          <ImpactStatsGrid />
           <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            Active devices grew from 109K in January 2025 to approximately 170K
-            by year's end — a 56% increase in a single year, entirely organic.
-            The app has inspired community contributions (translations, a
-            fan-made web version) and remains a top-rated utility in its
-            category.
+            {nbsp("Active devices grew from 109K in January 2025 to approximately 170K by year's end \u2014 a 56% increase in a single year, entirely organic. The app has inspired community contributions (translations, a fan-made web version) and remains a top-rated utility in its category.")}
           </p>
         </div>
       </SectionAnimate>
@@ -414,7 +440,7 @@ export function ScoreCounterPage() {
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.7 }}
               >
-                {item}
+                {nbsp(item)}
               </li>
             ))}
           </ul>
@@ -457,10 +483,10 @@ export function ScoreCounterPage() {
           <SectionHeading>Bonus: Unexpected Use Cases</SectionHeading>
           <div className="flex flex-col gap-4">
             <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              I built Score Counter for board game nights. What I didn't expect was how far beyond that people would take it. Over the years, Play Store reviews and emails have revealed use cases I never designed for — scoring camogie matches in Ireland, counting beers, tracking vehicles on a road, and one user who created a tally called "little spoiled brats" to count every time a child annoyed them (227 reasons and counting).
+              {nbsp("I built Score Counter for board game nights. What I didn't expect was how far beyond that people would take it. Over the years, Play Store reviews and emails have revealed use cases I never designed for \u2014 scoring camogie matches in Ireland, counting beers, tracking vehicles on a road, and one user who created a tally called \"little spoiled brats\" to count every time a child annoyed them (227 reasons and counting).")}
             </p>
             <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              These stories are my favorite proof that simplicity scales. When you build a tool that does one thing well and stays out of the way, people will find uses you never imagined.
+              {nbsp("These stories are my favorite proof that simplicity scales. When you build a tool that does one thing well and stays out of the way, people will find uses you never imagined.")}
             </p>
           </div>
         </div>

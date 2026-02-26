@@ -1,9 +1,10 @@
+import scoreCounterCover from "figma:asset/17122ee947852557aefe5267e9027acc7d06d38a.png";
+import designSystemCover from "figma:asset/b0c20c60ec2282e3a1aa5cd9db0f98db85d8fb0b.png";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { SectionAnimate } from "./section-animate";
 import * as Separator from "@radix-ui/react-separator";
-import scoreCounterCover from "figma:asset/17122ee947852557aefe5267e9027acc7d06d38a.png";
-import designSystemCover from "figma:asset/b0c20c60ec2282e3a1aa5cd9db0f98db85d8fb0b.png";
+import { nbsp } from "./utils/nbsp";
 
 const fluidBase = "clamp(1rem, 0.94rem + 0.3vw, 1.25rem)";
 const fluidSmall = "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)";
@@ -58,22 +59,22 @@ const workExperience = [
   {
     title: "Product designer at Yesim",
     period: "Apr 2021 - Mar 2026",
-    context: "Web and mobile platforms - B2B and B2C contexts",
+    context: "Web and\u00a0mobile platforms - B2B and\u00a0B2C contexts",
     description: "Worldwide eSIM store serving 3M+ customers",
     link: { href: "https://yesim.app/", label: "Try Yesim" },
   },
   {
-    title: "Product designer at SMBF",
+    title: "Product designer at\u00a0SMBF",
     period: "Aug 2020 - Apr 2021",
     context: "WEB",
     description: "Online reputation SaaS platform",
   },
   {
-    title: "From Android dev to product designer at Eventssion",
+    title: "From Android dev to\u00a0product designer at\u00a0Eventssion",
     period: "Jan 2016 - Apr 2020",
-    context: "WEB, iOS, Android - B2B and B2C contexts",
+    context: "WEB, iOS, Android - B2B and\u00a0B2C contexts",
     description:
-      "Event management and online ticketing platform. From scratch to 50K users.",
+      "Event management and\u00a0online ticketing platform. From scratch to\u00a050K users.",
     link: {
       href: "https://betalist.com/startups/eventssion",
       label: "View project",
@@ -86,7 +87,7 @@ const personalProjects = [
     title: "Score Counter",
     subtitle: "Android App",
     description:
-      "Started as a side project, now a go-to counter app with 180,000+ active users and a 4.9 rating. Reached 600K+ installs with zero marketing budget.",
+      "Started as\u00a0a\u00a0side project, now a\u00a0go-to counter app with\u00a0180,000+ active users and\u00a0a\u00a04.9 rating. Reached 600K+ installs with\u00a0zero marketing budget.",
     caseStudy: "/work/score-counter",
     cover: scoreCounterCover,
   },
@@ -94,7 +95,7 @@ const personalProjects = [
     title: "B2B Design System",
     subtitle: "Yesim",
     description:
-      "Built a scalable design system from scratch for Yesim's B2B product ecosystem — enabling consistency, sub-brand theming, and faster feature delivery across three products.",
+      "Built a\u00a0scalable design system from scratch for\u00a0Yesim's B2B product ecosystem \u2014 enabling consistency, sub-brand theming, and\u00a0faster feature delivery across three products.",
     caseStudy: "/work/design-system",
     cover: designSystemCover,
   },
@@ -137,11 +138,7 @@ export function HomePage() {
               Roma Shuliatiev
             </h2>
             <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-              Product designer with 5 years of experience turning complex
-              problems into simple, useful solutions for both B2B and consumer
-              markets (SaaS, marketplaces, e-commerce). I love blending logic,
-              UX, and design systems to build experiences that feel effortless
-              and meaningful.
+              {nbsp("Product designer with 5 years of experience turning complex problems into simple, useful solutions for both B2B and consumer markets (SaaS, marketplaces, e-commerce). I love blending logic, UX, and design systems to build experiences that feel effortless and meaningful.")}
             </p>
           </div>
           <div className="flex flex-col" style={{ gap: "clamp(0.375rem, 0.35rem + 0.1vw, 0.5rem)" }}>
@@ -152,15 +149,7 @@ export function HomePage() {
               Now
             </h3>
             <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-              Creator of the top-rated Android app{" "}
-              <Link
-                to="/work/score-counter"
-                className="text-accent underline underline-offset-2 hover:opacity-80 transition-opacity"
-              >
-                Score Counter
-              </Link>
-              , which helps over 180,000 people every month. Right now, I'm
-              looking for my next adventure.
+              {nbsp("Currently, I'm looking for my next adventure 🔭. In my spare time, I work on a side project: the most popular points-counting app, which helps over 180,000 people every month.")}
             </p>
           </div>
         </section>
@@ -203,7 +192,7 @@ export function HomePage() {
                       href={job.link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-accent hover:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1"
+                      className="text-accent no-underline hover:underline underline-offset-2 hover:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1"
                       style={{ fontSize: fluidSmall, lineHeight: 1 }}
                     >
                       {job.link.label}{" "}
@@ -283,9 +272,7 @@ export function HomePage() {
             Skills & tools
           </h2>
           <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-            I work across the full design process — from research and wireframes
-            to testing and analytics — using tools like Figma, GA4, and Looker
-            Studio.
+            {nbsp("I work across the full design process \u2014 from research and wireframes to usability testing and analytics \u2014 with enough dev background to speak fluently with engineering.")}
           </p>
         </section>
       </SectionAnimate>
@@ -296,7 +283,7 @@ export function HomePage() {
           <h2 style={{ fontSize: fluidBase, lineHeight: 1 }}>Connect</h2>
           <div className="flex flex-col" style={{ gap: "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)" }}>
             <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-              I'm always online — the fastest way to reach me is on Telegram ;)
+              {nbsp("I'm always online \u2014 the fastest way to reach me is on Telegram ;)")}
             </p>
             <ul className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)" }}>
               {connectLinks.map(({ label, href, display }) => (
@@ -320,7 +307,7 @@ export function HomePage() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors inline-block truncate"
+                    className="text-muted-foreground no-underline hover:underline underline-offset-2 hover:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1"
                     style={{
                       fontSize: fluidSmall,
                       lineHeight: 1,

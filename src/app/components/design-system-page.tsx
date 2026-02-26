@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { SectionAnimate } from "./section-animate";
+import { nbsp } from "./utils/nbsp";
 
 const fluidBase = "clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem)";
 const fluidSmall = "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)";
@@ -288,7 +289,7 @@ function PrincipleCard({
         className="text-foreground/70"
         style={{ fontSize: "0.875rem", lineHeight: 1.6 }}
       >
-        {description}
+        {nbsp(description)}
       </p>
     </div>
   );
@@ -381,8 +382,7 @@ export function DesignSystemPage() {
             className="text-muted-foreground"
             style={{ fontSize: fluidBase, lineHeight: 1.5 }}
           >
-            I created Yesim's B2B design system to bring consistency, speed, and
-            sub-brand flexibility across a growing ecosystem of products.
+            {nbsp("I created Yesim's B2B design system to bring consistency, speed, and sub-brand flexibility across a growing ecosystem of products.")}
           </p>
         </div>
       </SectionAnimate>
@@ -422,9 +422,7 @@ export function DesignSystemPage() {
               fontStyle: "italic",
             }}
           >
-            Note: Some details have been generalized to respect
-            confidentiality. Product names, internal metrics, and sensitive
-            business logic are omitted or abstracted.
+            {nbsp("Note: Some details have been generalized to respect confidentiality. Product names, internal metrics, and sensitive business logic are omitted or abstracted.")}
           </p>
         </CalloutBox>
       </SectionAnimate>
@@ -438,31 +436,19 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              Yesim is a worldwide eSIM platform serving over 3 million
-              customers. Beyond its consumer-facing app, Yesim operates a group
-              of B2B products — internal tools, partner dashboards, and
-              operational platforms — that serve different audiences but share a
-              common tech stack and design DNA.
+              {nbsp("Yesim is a worldwide eSIM platform serving over 3 million customers. Beyond its consumer-facing app, Yesim operates a group of B2B products \u2014 internal tools, partner dashboards, and operational platforms \u2014 that serve different audiences but share a common tech stack and design DNA.")}
             </p>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              When I joined, these B2B products were growing independently.
-              Each had its own UI patterns, color schemes, and component
-              implementations. The inconsistency was manageable at two products;
-              at three and growing, it became a bottleneck — slowing
-              development, fragmenting the user experience, and making design
-              reviews a negotiation rather than a reference check.
+              {nbsp("When I joined, these B2B products were growing independently. Each had its own UI patterns, color schemes, and component implementations. The inconsistency was manageable at two products; at three and growing, it became a bottleneck \u2014 slowing development, fragmenting the user experience, and making design reviews a negotiation rather than a reference check.")}
             </p>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              I was tasked with building a design system from scratch: one that
-              could serve all B2B products today and scale to new ones tomorrow,
-              while allowing each product to maintain its own visual identity
-              through theming.
+              {nbsp("I was tasked with building a design system from scratch: one that could serve all B2B products today and scale to new ones tomorrow, while allowing each product to maintain its own visual identity through theming.")}
             </p>
           </div>
         </div>
@@ -476,11 +462,7 @@ export function DesignSystemPage() {
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            The core challenge was the tension between consistency and
-            flexibility. We needed a shared component library that felt unified
-            — same interaction patterns, same accessibility standards, same
-            quality — but looked different enough per product to support distinct
-            brand identities (similar to sub-brands under one umbrella).
+            {nbsp("The core challenge was the tension between consistency and flexibility. We needed a shared component library that felt unified \u2014 same interaction patterns, same accessibility standards, same quality \u2014 but looked different enough per product to support distinct brand identities (similar to sub-brands under one umbrella).")}
           </p>
         </div>
       </SectionAnimate>
@@ -492,9 +474,7 @@ export function DesignSystemPage() {
             <strong>Problem statement:</strong>
           </p>
           <p style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
-            How might we create a single design system that works across 3+ B2B
-            products with different visual identities, without forcing teams to
-            fork components or fight the system?
+            {nbsp("How might we create a single design system that works across 3+ B2B products with different visual identities, without forcing teams to fork components or fight the system?")}
           </p>
         </CalloutBox>
       </SectionAnimate>
@@ -512,7 +492,7 @@ export function DesignSystemPage() {
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.6 }}
               >
-                {m}
+                {nbsp(m)}
               </li>
             ))}
           </ul>
@@ -532,7 +512,7 @@ export function DesignSystemPage() {
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.6 }}
               >
-                {c}
+                {nbsp(c)}
               </li>
             ))}
           </ul>
@@ -547,9 +527,7 @@ export function DesignSystemPage() {
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            Before building anything, I defined a set of principles to guide
-            decisions. These served as the system's constitution — a reference
-            point for every "should we include this?" debate.
+            {nbsp("Before building anything, I defined a set of principles to guide decisions. These served as the system's constitution \u2014 a reference point for every \"should we include this?\" debate.")}
           </p>
           <div className="flex flex-col gap-3">
             {principles.map((p) => (
@@ -575,11 +553,7 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              The token architecture uses three layers: primitives, semantics,
-              and component tokens. This layered approach is what makes theming
-              possible — swapping a product's theme means overriding semantic
-              tokens only, while primitives and component structure remain
-              untouched.
+              {nbsp("The token architecture uses three layers: primitives, semantics, and component tokens. This layered approach is what makes theming possible \u2014 swapping a product's theme means overriding semantic tokens only, while primitives and component structure remain untouched.")}
             </p>
             <DataTable
               headers={["Layer", "Purpose", "Example", "Themeable?"]}
@@ -603,11 +577,7 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              Each B2B product gets a theme file that overrides semantic tokens.
-              The component library itself is product-agnostic — it references
-              semantic tokens only. Switching from "Product A" to "Product B"
-              means swapping a single theme configuration, not rebuilding
-              components.
+              {nbsp("Each B2B product gets a theme file that overrides semantic tokens. The component library itself is product-agnostic \u2014 it references semantic tokens only. Switching from \"Product A\" to \"Product B\" means swapping a single theme configuration, not rebuilding components.")}
             </p>
             <DataTable
               headers={["Token", "Product A", "Product B", "Product C"]}
@@ -641,14 +611,11 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              I established a function-first naming convention. Tokens are named
-              by what they do, not what they look like.{" "}
+              {nbsp("I established a function-first naming convention. Tokens are named by what they do, not what they look like.")}{" "}
               <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
                 color-fg-secondary
               </code>{" "}
-              tells you it's a foreground color with secondary hierarchy —
-              without needing to look up the hex value. This makes the system
-              scannable for both designers in Figma and developers in code.
+              {nbsp("tells you it's a foreground color with secondary hierarchy \u2014 without needing to look up the hex value. This makes the system scannable for both designers in Figma and developers in code.")}
             </p>
             <ImagePlaceholder label="[image with component anatomy.jpg]" />
           </div>
@@ -663,10 +630,7 @@ export function DesignSystemPage() {
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            The component library was prioritized around B2B usage patterns.
-            Consumer apps need carousels and hero sections; B2B products need
-            dense data tables, complex forms, and permission-aware states. I
-            built for the latter.
+            {nbsp("The component library was prioritized around B2B usage patterns. Consumer apps need carousels and hero sections; B2B products need dense data tables, complex forms, and permission-aware states. I built for the latter.")}
           </p>
           <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
             <strong>Priority components (Phase 1)</strong>
@@ -704,11 +668,7 @@ export function DesignSystemPage() {
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            B2B users often work with dense information. I built density as a
-            system-level token — components respond to a density setting
-            (default, compact, spacious) without requiring separate variants. A
-            table in "compact" mode tightens padding and reduces row height; the
-            component API stays the same.
+            {nbsp("B2B users often work with dense information. I built density as a system-level token \u2014 components respond to a density setting (default, compact, spacious) without requiring separate variants. A table in \"compact\" mode tightens padding and reduces row height; the component API stays the same.")}
           </p>
         </div>
       </SectionAnimate>
@@ -722,33 +682,19 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              I started with an audit. Before designing a single component, I
-              cataloged every unique UI element across all three products —
-              buttons in five different styles, three different table
-              implementations, form fields that looked similar but behaved
-              differently. The audit made the problem visible to stakeholders and
-              built alignment around why a shared system was worth investing in.
+              {nbsp("I started with an audit. Before designing a single component, I cataloged every unique UI element across all three products \u2014 buttons in five different styles, three different table implementations, form fields that looked similar but behaved differently. The audit made the problem visible to stakeholders and built alignment around why a shared system was worth investing in.")}
             </p>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              From the audit, I derived the token architecture (described above)
-              and a prioritized component roadmap. The principle was: ship the
-              components that eliminate the most inconsistency first. Tables and
-              forms topped the list because they appeared on every product's
-              most-visited pages.
+              {nbsp("From the audit, I derived the token architecture (described above) and a prioritized component roadmap. The principle was: ship the components that eliminate the most inconsistency first. Tables and forms topped the list because they appeared on every product's most-visited pages.")}
             </p>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              Each component went through a cycle: audit existing
-              implementations → define the API (props, variants, states) →
-              design in Figma with tokens → review with product teams → build
-              and validate in code → document. The Figma library and the code
-              library were kept in sync — a component wasn't "done" until it
-              existed in both and had documentation.
+              {nbsp("Each component went through a cycle: audit existing implementations \u2192 define the API (props, variants, states) \u2192 design in Figma with tokens \u2192 review with product teams \u2192 build and validate in code \u2192 document. The Figma library and the code library were kept in sync \u2014 a component wasn't \"done\" until it existed in both and had documentation.")}
             </p>
           </div>
         </div>
@@ -766,10 +712,7 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              Every component has a documentation page that includes: a live
-              preview, prop/variant table, usage guidelines (when to use, when
-              not to), accessibility notes, and a changelog. Documentation is
-              part of the definition of done — not an afterthought.
+              {nbsp("Every component has a documentation page that includes: a live preview, prop/variant table, usage guidelines (when to use, when not to), accessibility notes, and a changelog. Documentation is part of the definition of done \u2014 not an afterthought.")}
             </p>
             <ImagePlaceholder label="[image with documentation page example.jpg]" />
           </div>
@@ -783,8 +726,7 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              I designed a lightweight governance process to balance speed with
-              quality:
+              {nbsp("I designed a lightweight governance process to balance speed with quality:")}
             </p>
             <ul className="flex flex-col gap-2 pl-5 list-disc">
               {governanceSteps.map((s, i) => (
@@ -793,7 +735,7 @@ export function DesignSystemPage() {
                   className="text-foreground/80"
                   style={{ fontSize: fluidBase, lineHeight: 1.6 }}
                 >
-                  {s}
+                  {nbsp(s)}
                 </li>
               ))}
             </ul>
@@ -811,8 +753,7 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              A design system that nobody uses is just a Figma file. Adoption
-              was a deliberate effort, not a side effect.
+              {nbsp("A design system that nobody uses is just a Figma file. Adoption was a deliberate effort, not a side effect.")}
             </p>
           </div>
 
@@ -824,11 +765,7 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              Instead of mandating a full migration, I worked with each product
-              team to identify high-impact, low-risk surfaces to migrate first —
-              typically settings pages and list views. This proved the system's
-              value without disrupting active feature work. As teams saw the
-              time savings, adoption accelerated organically.
+              {nbsp("Instead of mandating a full migration, I worked with each product team to identify high-impact, low-risk surfaces to migrate first \u2014 typically settings pages and list views. This proved the system's value without disrupting active feature work. As teams saw the time savings, adoption accelerated organically.")}
             </p>
           </div>
 
@@ -843,7 +780,7 @@ export function DesignSystemPage() {
                   className="text-foreground/80"
                   style={{ fontSize: fluidBase, lineHeight: 1.6 }}
                 >
-                  {c}
+                  {nbsp(c)}
                 </li>
               ))}
             </ul>
@@ -871,8 +808,7 @@ export function DesignSystemPage() {
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            Every system makes deliberate choices about what not to solve.
-            Here's what I consciously scoped out and why:
+            {nbsp("Every system makes deliberate choices about what not to solve. Here's what I consciously scoped out and why:")}
           </p>
           <div className="flex flex-col gap-3">
             {tradeoffs.map((t) => (
@@ -900,7 +836,7 @@ export function DesignSystemPage() {
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.6 }}
               >
-                {item}
+                {nbsp(item)}
               </li>
             ))}
           </ul>
@@ -917,7 +853,7 @@ export function DesignSystemPage() {
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.7 }}
               >
-                {item}
+                {nbsp(item)}
               </li>
             ))}
           </ul>
@@ -935,7 +871,7 @@ export function DesignSystemPage() {
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.7 }}
               >
-                {item}
+                {nbsp(item)}
               </li>
             ))}
           </ul>
@@ -953,7 +889,7 @@ export function DesignSystemPage() {
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.7 }}
               >
-                {item}
+                {nbsp(item)}
               </li>
             ))}
           </ul>
@@ -971,7 +907,7 @@ export function DesignSystemPage() {
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.7 }}
               >
-                {item}
+                {nbsp(item)}
               </li>
             ))}
           </ul>
@@ -990,7 +926,7 @@ export function DesignSystemPage() {
           <ol className="flex flex-col gap-2 pl-5 list-decimal">
             {questionsForRoma.map((q, i) => (
               <li key={i} style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
-                {q}
+                {nbsp(q)}
               </li>
             ))}
           </ol>

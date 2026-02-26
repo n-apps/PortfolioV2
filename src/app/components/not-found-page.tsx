@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { SectionAnimate } from "./section-animate";
+import { nbsp } from "./utils/nbsp";
 
 const fluidBase = "clamp(1rem, 0.94rem + 0.3vw, 1.25rem)";
 const fluidSmall = "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)";
@@ -23,7 +24,7 @@ export function NotFoundPage() {
       </SectionAnimate>
       <SectionAnimate delay={0.1}>
         <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-          Sorry, the page you're looking for doesn't exist or has been moved.
+          {nbsp("Sorry, the page you're looking for doesn't exist or has been moved.")}
         </p>
       </SectionAnimate>
       <SectionAnimate delay={0.15}>
