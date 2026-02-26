@@ -1,11 +1,15 @@
+# Roma Shuliatiev — Product Designer Portfolio
 
-  # https://romamakes.com/
+This is the source code for my personal portfolio website, available at [romamakes.com](https://romamakes.com/).
 
-  This is a code bundle for https://romamakes.com/. The original project is available at https://www.figma.com/design/WCjIh3Bga6rw7hUbZnUNJ8/https---romamakes.com-.
+## Overview
+I am a Product Designer with over 5 years of experience turning complex problems into simple, useful solutions for B2B and consumer markets (SaaS, marketplaces, e-commerce). I am also the creator of Score Counter, a top-rated Android app with over 180,000 monthly active users.
 
-  ## Running the code
-
-  Run `npm i` to install the dependencies.
-
-  Run `npm run dev` to start the development server.
-  
+## Tech Stack
+This project is built using modern web technologies to ensure optimal performance, responsive design, and smooth interactions:
+*   **Framework**: React 18, Vite
+*   **Routing**: React Router
+*   **Styling**: Tailwind CSS
+*   **UI Components**: Radix UI primitives
+*   **Animations**: Motion (Framer Motion)
+*   **Icons**: Lucide React

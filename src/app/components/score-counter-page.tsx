@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { useInView, useSpring, useTransform, motion } from "motion/react";
 import { SectionAnimate } from "./section-animate";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "./image-with-fallback";
 import { nbsp } from "./utils/nbsp";
 const problemImage = "/images/score-counter-problem.png";
 const heroImage = "/images/score-counter-hero.png";
