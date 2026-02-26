@@ -2,7 +2,7 @@ import { SectionAnimate } from "./section-animate";
 import { nbsp } from "./utils/nbsp";
 import * as Separator from "@radix-ui/react-separator";
 import { Heart, Star, MessageCircle, ExternalLink } from "lucide-react";
-import heroImage from "figma:asset/5d6106a09367a1e23366525346d3f7913e61d910.png";
+const heroImage = "/images/support-hero.png";
 
 const fluidBase = "clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem)";
 const fluidSmall = "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)";

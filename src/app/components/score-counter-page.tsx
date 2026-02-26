@@ -5,11 +5,11 @@ import { useInView, useSpring, useTransform, motion } from "motion/react";
 import { SectionAnimate } from "./section-animate";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { nbsp } from "./utils/nbsp";
-import problemImage from "figma:asset/106f1dd596e37509baec7f1d82ee8047793086df.png";
-import heroImage from "figma:asset/00413c12f7b394f8a95ae07d5c61238f28edcd3e.png";
-import testimonialsImage from "figma:asset/26145f2d7d13ce66997df6a134404c1f40648cb3.png";
-import flowImage from "figma:asset/b269287ad961da5c26b40436e40d9308ffef9c59.png";
-import unexpectedUseCasesImage from "figma:asset/6d3c70010140f28047d6c06bd248c425e6d114e2.png";
+const problemImage = "/images/score-counter-problem.png";
+const heroImage = "/images/score-counter-hero.png";
+const testimonialsImage = "/images/score-counter-testimonials.png";
+const flowImage = "/images/score-counter-flow.png";
+const unexpectedUseCasesImage = "/images/score-counter-unexpected-uses.png";
 
 const fluidBase = "clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem)";
 const fluidSmall = "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)";

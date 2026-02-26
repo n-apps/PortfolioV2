@@ -1,5 +1,5 @@
-import scoreCounterCover from "figma:asset/17122ee947852557aefe5267e9027acc7d06d38a.png";
-import designSystemCover from "figma:asset/b0c20c60ec2282e3a1aa5cd9db0f98db85d8fb0b.png";
+const scoreCounterCover = "/images/score-counter-cover.png";
+const designSystemCover = "/images/design-system-cover.png";
 import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 import { SectionAnimate } from "./section-animate";
