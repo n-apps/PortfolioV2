@@ -2,6 +2,11 @@ import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { SectionAnimate } from "./section-animate";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import problemImage from "figma:asset/106f1dd596e37509baec7f1d82ee8047793086df.png";
+import heroImage from "figma:asset/00413c12f7b394f8a95ae07d5c61238f28edcd3e.png";
+import testimonialsImage from "figma:asset/26145f2d7d13ce66997df6a134404c1f40648cb3.png";
+import flowImage from "figma:asset/b269287ad961da5c26b40436e40d9308ffef9c59.png";
+import unexpectedUseCasesImage from "figma:asset/6d3c70010140f28047d6c06bd248c425e6d114e2.png";
 
 const fluidBase = "clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem)";
 const fluidSmall = "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)";
@@ -58,15 +63,6 @@ const successCriteria = [
   "Grow through word-of-mouth only — zero marketing budget",
 ];
 
-const whatShippedList = [
-  "Grid View with landscape and tablet-optimized layouts",
-  "Auto-sorting that re-ranks players in real time",
-  "Timer for turn-based games",
-  "Multi-language support via community translations",
-  "Full Android 16 compatibility (shipped in 2025)",
-  "108 commits to the codebase in 2025 — steady, intentional iteration",
-];
-
 const impactStats = [
   { value: "600K+", label: "Installs" },
   { value: "180K+", label: "Monthly active users" },
@@ -86,19 +82,6 @@ const doDifferently = [
   "Consider cross-platform earlier. The fan-made web version proved there's demand beyond Android — I should have explored that signal sooner.",
 ];
 
-const nextSteps = [
-  "Explore a companion web or iOS version based on proven demand",
-  "Introduce lightweight analytics to move from qualitative to data-informed decisions",
-  "Continue evolving the app with the same philosophy: ship only what makes the core experience better",
-];
-
-const questionsForRoma = [
-  "Can you share 2–3 before/after screenshots showing how the UI evolved from the early versions to the current design? What drove those visual changes?",
-  "What's the monetization model, if any? Is it entirely free, or is there a donation/premium tier? If free, was there ever a deliberate decision to reject monetization?",
-  "Do you have any specific retention or engagement metrics beyond MAU (e.g., session duration, sessions per week, Day 7/30 retention)?",
-  "How do you prioritize feature requests? Is there a public backlog, a personal system, or is it more intuition-driven?",
-  "Are there any notable user stories or testimonials beyond Tarek's web version — e.g., educators, tournament organizers, or accessibility-focused users?",
-];
 
 /* ── Reusable sub-components ──────────────────────────── */
 
@@ -184,8 +167,8 @@ export function ScoreCounterPage() {
       <SectionAnimate delay={0.08}>
         <div className="-mx-4 sm:mx-0">
           <ImageWithFallback
-            src="https://raw.githubusercontent.com/n-apps/romamakes.com/main/projects/images/sc01.jpg"
-            alt="Score Counter app final result"
+            src={heroImage}
+            alt="Five smartphone screens showcasing Score Counter app features: player scores, dice roller, calculator input, and timer"
             className="w-full rounded-none sm:rounded-xl"
             loading="eager"
           />
@@ -280,6 +263,18 @@ export function ScoreCounterPage() {
         </div>
       </SectionAnimate>
 
+      {/* Problem & Goals image */}
+      <SectionAnimate delay={0.165}>
+        <div className="-mx-4 sm:mx-0">
+          <ImageWithFallback
+            src={problemImage}
+            alt="Star Realms card game counters alongside the Score Counter app interface showing player setup and score tracking"
+            className="w-full rounded-none sm:rounded-xl"
+            loading="lazy"
+          />
+        </div>
+      </SectionAnimate>
+
       {/* Success criteria callout */}
       <SectionAnimate delay={0.17}>
         <CalloutBox>
@@ -297,18 +292,6 @@ export function ScoreCounterPage() {
             ))}
           </ul>
         </CalloutBox>
-      </SectionAnimate>
-
-      {/* Image placeholder */}
-      <SectionAnimate delay={0.18}>
-        <div className="-mx-4 sm:mx-0">
-          <ImageWithFallback
-            src="https://raw.githubusercontent.com/n-apps/romamakes.com/main/projects/images/sc02.jpg"
-            alt="Score Counter app store screenshots"
-            className="w-full rounded-none sm:rounded-xl"
-            loading="lazy"
-          />
-        </div>
       </SectionAnimate>
 
       {/* My Role & Responsibilities */}
@@ -333,113 +316,51 @@ export function ScoreCounterPage() {
         </div>
       </SectionAnimate>
 
-      {/* Key Design Decisions */}
+      {/* Design Principles */}
       <SectionAnimate delay={0.22}>
-        <div className="flex flex-col" style={{ gap: sectionGap }}>
-          <SectionHeading>Key Design Decisions</SectionHeading>
-
-          {/* Decision 1 */}
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
-              <strong>1. Radical simplicity over feature richness</strong>
-            </h3>
-            <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              The biggest recurring temptation is to add more. More game
-              templates, more customization, more social features. I've
-              consistently said no to anything that adds cognitive load to the
-              primary flow: open → add players → count. Every feature earns its
-              place by proving it doesn't slow down the core loop.
-            </p>
-            <ImagePlaceholder label="[image with user flow diagram.jpg]" />
-          </div>
-
-          {/* Decision 2 */}
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
-              <strong>2. Zero-ad model as a design constraint</strong>
-            </h3>
-            <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              I made the deliberate decision to never show ads. This isn't just
-              an ethical stance — it's a design constraint that forces the UI to
-              be the product's only competitive advantage. Without ads, the
-              experience stays clean, fast, and respectful. It's one of the
-              reasons the app sustains a 4.9 rating.
-            </p>
-            <ImagePlaceholder label="[image with wireframes.jpg]" />
-          </div>
-
-          {/* Decision 3 */}
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
-              <strong>3. Grid View and tablet/landscape support</strong>
-            </h3>
-            <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              When usage data and user requests showed that people play on
-              tablets and in landscape orientation (a board game on a table,
-              phone lying flat between players), I designed a Grid View that
-              adapts the layout for larger screens. This wasn't just a responsive
-              tweak — it required rethinking how player cards scale and how touch
-              targets work in a shared-device context.
-            </p>
-            <ImagePlaceholder label="[image with iteration comparison.jpg]" />
-          </div>
-
-          {/* Decision 4 */}
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
-              <strong>
-                4. Auto-sorting and Timer — features driven by real requests
-              </strong>
-            </h3>
-            <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              Two of the most impactful additions in 2025 were Auto-sorting
-              (players re-order by score automatically) and a Timer feature for
-              turn-based games. Both came from consistent user feedback. The
-              Timer was "heavily requested" — I shipped it only once I found a
-              way to integrate it without cluttering the main interface.
-            </p>
-            <ImagePlaceholder label="[image with UI components.jpg]" />
-          </div>
-
-          {/* Decision 5 */}
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
-              <strong>5. Localization as community-driven growth</strong>
-            </h3>
-            <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-              Instead of hiring translators, I accepted community contributions.
-              In 2025 alone, two new languages were added. One contributor,
-              Tarek, first translated the app to Swedish, then was inspired
-              enough to build a web version of Score Counter as a personal
-              exercise. That's the kind of product-community loop that no
-              marketing budget can buy.
-            </p>
-            <ImagePlaceholder label="[image with edge cases.jpg]" />
+        <div className="flex flex-col" style={{ gap: innerGap }}>
+          <SectionHeading>Design Principles</SectionHeading>
+          <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+            Three principles have guided every decision over nine years of building Score Counter. They work as both a creative compass and a set of constraints — especially when saying no to a feature request or resisting a monetization shortcut.
+          </p>
+          <div className="flex flex-col gap-4 mt-2">
+            <div className="flex flex-col gap-1">
+              <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
+                <strong>Simplicity over feature richness</strong>
+              </h3>
+              <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+                The primary flow is three steps: open, add counters, count. Every feature request is measured against that loop — if it adds cognitive load to the core path, it doesn't ship. This constraint kept the app focused while competitors kept adding complexity.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
+                <strong>Never show ads</strong>
+              </h3>
+              <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+                Not showing ads isn't just an ethical choice — it's a design constraint. Without ad placements competing for screen real estate, the UI has to earn its keep on usability alone. The result is a clean, fast experience that users trust enough to recommend, which is how the app grew to 600K installs with zero marketing spend.
+              </p>
+            </div>
+            <div className="flex flex-col gap-1">
+              <h3 style={{ fontSize: fluidH3, lineHeight: 1.5 }}>
+                <strong>Respect the platform ecosystem</strong>
+              </h3>
+              <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+                Score Counter follows Material Design conventions, supports the latest Android versions early (Android 16 compatibility shipped in 2025), and embraces community contributions for localization. Instead of fighting the platform, the app leans into it — which keeps maintenance sustainable and the experience native.
+              </p>
+            </div>
           </div>
         </div>
       </SectionAnimate>
 
-      {/* What Shipped */}
-      <SectionAnimate delay={0.24}>
-        <div className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>What Shipped</SectionHeading>
-          <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            Score Counter is a mature, actively maintained Android app. The core
-            experience is deliberately minimal: users create a session, add
-            players (with optional colors/names), and tap to increment or
-            decrement scores. Beyond the core:
-          </p>
-          <ul className="flex flex-col gap-2 pl-5 list-disc">
-            {whatShippedList.map((item, i) => (
-              <li
-                key={i}
-                className="text-foreground/80"
-                style={{ fontSize: fluidBase, lineHeight: 1.6 }}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+      {/* Primary flow image */}
+      <SectionAnimate delay={0.225}>
+        <div className="-mx-4 sm:mx-0">
+          <ImageWithFallback
+            src={flowImage}
+            alt="Hand-drawn primary flow diagram: 1. Open — 2. Add Counters — 3. Count"
+            className="w-full rounded-none sm:rounded-xl"
+            loading="lazy"
+          />
         </div>
       </SectionAnimate>
 
@@ -500,18 +421,15 @@ export function ScoreCounterPage() {
         </div>
       </SectionAnimate>
 
-      {/* How I Worked */}
-      <SectionAnimate delay={0.3}>
-        <div className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>How I Worked</SectionHeading>
-          <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            As a solo creator, my process is a tight loop: identify a need (from
-            reviews, support emails, or my own usage), sketch the solution, build
-            it, ship it, and observe. I don't have the luxury of a research team
-            or A/B testing infrastructure, so I rely on qualitative signals —
-            Play Store reviews, direct emails, and community feedback — to guide
-            decisions.
-          </p>
+      {/* Testimonials */}
+      <SectionAnimate delay={0.29}>
+        <div className="-mx-4 sm:mx-0">
+          <ImageWithFallback
+            src={testimonialsImage}
+            alt="Collection of user testimonials: Bounchanh says 'Best score tracker on the planet hands down', Brandon Wong says 'I love the UX. Does what it needs to do', Lou P says 'Where's the 6 star button? That's all you need to know.'"
+            className="w-full rounded-none sm:rounded-xl"
+            loading="lazy"
+          />
         </div>
       </SectionAnimate>
 
@@ -533,54 +451,27 @@ export function ScoreCounterPage() {
         </div>
       </SectionAnimate>
 
-      {/* Learnings image placeholder */}
+      {/* Bonus: Unexpected Use Cases */}
       <SectionAnimate delay={0.33}>
-        <ImagePlaceholder label="[image with learnings summary.jpg]" />
-      </SectionAnimate>
-
-      {/* Next Steps */}
-      <SectionAnimate delay={0.34}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>Next Steps</SectionHeading>
-          <ul className="flex flex-col gap-2 pl-5 list-disc">
-            {nextSteps.map((item, i) => (
-              <li
-                key={i}
-                className="text-foreground/80"
-                style={{ fontSize: fluidBase, lineHeight: 1.7 }}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+          <SectionHeading>Bonus: Unexpected Use Cases</SectionHeading>
+          <div className="flex flex-col gap-4">
+            <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+              I built Score Counter for board game nights. What I didn't expect was how far beyond that people would take it. Over the years, Play Store reviews and emails have revealed use cases I never designed for — scoring camogie matches in Ireland, counting beers, tracking vehicles on a road, and one user who created a tally called "little spoiled brats" to count every time a child annoyed them (227 reasons and counting).
+            </p>
+            <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+              These stories are my favorite proof that simplicity scales. When you build a tool that does one thing well and stays out of the way, people will find uses you never imagined.
+            </p>
+          </div>
         </div>
       </SectionAnimate>
 
-      {/* Questions callout */}
-      <SectionAnimate delay={0.36}>
-        <CalloutBox>
-          <p
-            className="text-muted-foreground tracking-wide uppercase"
-            style={{ fontSize: "0.75rem", lineHeight: 1.3 }}
-          >
-            For Roma to answer:
-          </p>
-          <ol className="flex flex-col gap-2 pl-5 list-decimal">
-            {questionsForRoma.map((q, i) => (
-              <li key={i} style={{ fontSize: "0.875rem", lineHeight: 1.6 }}>
-                {q}
-              </li>
-            ))}
-          </ol>
-        </CalloutBox>
-      </SectionAnimate>
-
-      {/* Case study images */}
-      <SectionAnimate delay={0.38}>
-        <div className="flex flex-col gap-4 -mx-4 sm:mx-0">
+      {/* Unexpected use cases image */}
+      <SectionAnimate delay={0.34}>
+        <div className="-mx-4 sm:mx-0">
           <ImageWithFallback
-            src="https://raw.githubusercontent.com/n-apps/romamakes.com/main/projects/images/sc03.jpg"
-            alt="Score Counter app showcase"
+            src={unexpectedUseCasesImage}
+            alt="Screenshot grid of real Play Store reviews showing unexpected use cases: scoring camogie matches in Ireland, counting beers, tracking children's annoyances, and keeping track of swearing in front of kids"
             className="w-full rounded-none sm:rounded-xl"
             loading="lazy"
           />
