@@ -233,26 +233,15 @@ export function Footer() {
         <div className="w-0.5 h-0.5 rounded-full bg-muted-foreground" />
       </div>
       <div className="grid grid-cols-3 items-end w-full">
-        <div className="flex flex-col items-start gap-1">
-          <span
-            className="text-muted-foreground"
-            style={{
-              fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)",
-              lineHeight: 1,
-            }}
-          >
-            {time || "00:00 XX"}
-          </span>
-          <span
-            className="whitespace-nowrap text-foreground"
-            style={{
-              fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)",
-              lineHeight: 1,
-            }}
-          >
-            Kyiv, Ukraine
-          </span>
-        </div>
+        <span
+          className="whitespace-nowrap text-muted-foreground"
+          style={{
+            fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)",
+            lineHeight: 1,
+          }}
+        >
+          It{"\u00a0"}is{"\u00a0"}{time || "00:00\u00a0XX"} in{"\u00a0"}Kyiv
+        </span>
         <div className="flex items-center justify-center gap-1">
           {weather ? (
             <>

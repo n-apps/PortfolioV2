@@ -149,7 +149,7 @@ export function HomePage() {
               Now
             </h3>
             <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-              {nbsp("Currently, I'm looking for my next adventure 🔭. In my spare time, I work on a side project: the most popular points-counting app, which helps over 180,000 people every month.")}
+              {nbsp("Currently, I'm looking for my next adventure 🔭 In my spare time, I work on a side project: the most popular points-counting app, which helps over 180,000 people every month.")}
             </p>
           </div>
         </section>
@@ -272,7 +272,7 @@ export function HomePage() {
             Skills & tools
           </h2>
           <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-            {nbsp("I work across the full design process \u2014 from research and wireframes to usability testing and analytics \u2014 with enough dev background to speak fluently with engineering.")}
+            {nbsp("I work across the full design process, from research and wireframes to usability testing and analytics. My dev background helps me speak fluently with engineering.")}
           </p>
         </section>
       </SectionAnimate>
@@ -280,11 +280,8 @@ export function HomePage() {
       {/* Connect */}
       <SectionAnimate delay={0.25}>
         <section className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)" }}>
-          <h2 style={{ fontSize: fluidBase, lineHeight: 1 }}>Connect</h2>
+          <h2 style={{ fontSize: fluidBase, lineHeight: 1 }}>Get in touch</h2>
           <div className="flex flex-col" style={{ gap: "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)" }}>
-            <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-              {nbsp("I'm always online \u2014 the fastest way to reach me is on Telegram ;)")}
-            </p>
             <ul className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)" }}>
               {connectLinks.map(({ label, href, display }) => (
                 <li

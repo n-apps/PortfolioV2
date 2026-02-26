@@ -4,6 +4,7 @@ import { HomePage } from "./components/home-page";
 import { NotFoundPage } from "./components/not-found-page";
 import { ScoreCounterPage } from "./components/score-counter-page";
 import { DesignSystemPage } from "./components/design-system-page";
+import { SupportPage } from "./components/support-page";
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ export const router = createBrowserRouter([
       { index: true, Component: HomePage },
       { path: "work/score-counter", Component: ScoreCounterPage },
       { path: "work/design-system", Component: DesignSystemPage },
+      { path: "support", Component: SupportPage },
       { path: "*", Component: NotFoundPage },
     ],
   },
