@@ -5,6 +5,7 @@ import { NotFoundPage } from "./components/not-found-page";
 import { ScoreCounterPage } from "./components/score-counter-page";
 import { DesignSystemPage } from "./components/design-system-page";
 import { SupportPage } from "./components/support-page";
+import { WorkInProgress } from "./components/work-in-progress";
 
 export const router = createBrowserRouter([
   {
@@ -13,7 +14,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: HomePage },
       { path: "work/score-counter", Component: ScoreCounterPage },
-      { path: "work/design-system", Component: DesignSystemPage },
+      { path: "work/design-system", Component: WorkInProgress },
       { path: "support", Component: SupportPage },
       { path: "*", Component: NotFoundPage },
     ],

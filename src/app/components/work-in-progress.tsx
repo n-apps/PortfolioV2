@@ -19,7 +19,7 @@ export function WorkInProgress() {
       <SectionAnimate delay={0.05}>
         <div className="flex flex-col items-center text-center" style={{ gap: "clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem)" }}>
           <img
-            src="https://blogfiles.wfmu.org/KF/2013/11/06/matthau_coffee_title.gif"
+            src="/public/images/coffee.gif"
             alt="Work in progress"
             className="rounded-xl w-full"
             style={{ maxWidth: "420px" }}
