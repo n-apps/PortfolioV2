@@ -138,7 +138,7 @@ function useCurrentTime() {
           hour: "2-digit",
           minute: "2-digit",
           timeZone: "Europe/Kiev",
-          hour12: true,
+          hour12: false,
         })
       );
     };
@@ -151,7 +151,7 @@ function useCurrentTime() {
 }
 
 // Original phrases from romamakes.com
-const phrases = ["Ship fast.", "Iterate.", "Repeat.", "Progress, not perfection."];
+const phrases = ["Ship fast.", "Iterate.", "Repeat."];
 
 function useTypewriter() {
   const [text, setText] = useState("");
@@ -240,7 +240,7 @@ export function Footer() {
             lineHeight: 1,
           }}
         >
-          It{"\u00a0"}is{"\u00a0"}{time || "00:00\u00a0XX"} in{"\u00a0"}Kyiv
+          It{"\u00a0"}is{"\u00a0"}{time || "00:00"} in{"\u00a0"}Kyiv
         </span>
         <div className="flex items-center justify-center gap-1">
           {weather ? (
