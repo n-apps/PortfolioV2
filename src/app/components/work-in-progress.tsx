@@ -8,6 +8,7 @@ export function WorkInProgress() {
       <SectionAnimate delay={0}>
         <Link
           to="/"
+          data-goatcounter-click="back-to-home-top"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors self-start w-full"
           style={{ fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)", lineHeight: 1 }}
         >

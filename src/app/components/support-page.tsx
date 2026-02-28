@@ -212,6 +212,7 @@ export function SupportPage() {
               <a
                 key={option.label}
                 href={option.href}
+                data-goatcounter-click={`support-${option.label.toLowerCase().replace(/\s+/g, '-')}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-foreground/20 transition-all duration-200"
@@ -260,6 +261,7 @@ export function SupportPage() {
           </p>
           <a
             href="mailto:scorekeeper.feedback@gmail.com"
+            data-goatcounter-click="support-email"
             className="text-accent no-underline hover:underline underline-offset-2 transition-opacity hover:opacity-80"
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >

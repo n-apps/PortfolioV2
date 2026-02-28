@@ -356,6 +356,7 @@ export function DesignSystemPage() {
       <SectionAnimate delay={0}>
         <Link
           to="/"
+          data-goatcounter-click="back-to-home-top"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           style={{ fontSize: fluidSmall, lineHeight: 1 }}
         >

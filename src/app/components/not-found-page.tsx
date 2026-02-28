@@ -30,6 +30,7 @@ export function NotFoundPage() {
       <SectionAnimate delay={0.15}>
         <Link
           to="/"
+          data-goatcounter-click="back-to-home-404"
           className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
           style={{ fontSize: fluidSmall, lineHeight: 1 }}
         >

@@ -208,6 +208,7 @@ export function ScoreCounterPage() {
       <SectionAnimate delay={0}>
         <Link
           to="/"
+          data-goatcounter-click="back-to-home-top"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           style={{ fontSize: fluidSmall, lineHeight: 1 }}
         >
@@ -227,8 +228,8 @@ export function ScoreCounterPage() {
               letterSpacing: "-0.025em",
             }}
           >
-            Score Counter — From Side Project to 600K Installs with Zero
-            Marketing
+            Score Counter — From side project to 600K installs with zero
+            marketing
           </h1>
           <p
             className="text-muted-foreground"
@@ -508,6 +509,7 @@ export function ScoreCounterPage() {
       <SectionAnimate delay={0.4}>
         <a
           href="https://play.google.com/store/apps/details?id=ua.napps.scorekeeper"
+          data-goatcounter-click="outbound-play-store"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background rounded-lg hover:opacity-90 transition-opacity"
@@ -522,6 +524,7 @@ export function ScoreCounterPage() {
       <SectionAnimate delay={0.42}>
         <Link
           to="/"
+          data-goatcounter-click="back-to-home-bottom"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
           style={{ fontSize: fluidSmall, lineHeight: 1 }}
         >

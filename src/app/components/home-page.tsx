@@ -24,6 +24,7 @@ function ArrowLink({
     return (
       <a
         href={href}
+        data-goatcounter-click={href}
         target="_blank"
         rel="noopener noreferrer"
         className={cls}
@@ -37,6 +38,7 @@ function ArrowLink({
   return (
     <Link
       to={href}
+      data-goatcounter-click={href}
       className={cls}
       style={{ fontSize: fluidSmall, lineHeight: 1 }}
     >
@@ -190,6 +192,7 @@ export function HomePage() {
                   {job.link && (
                     <a
                       href={job.link.href}
+                      data-goatcounter-click={`outbound-${job.link.label.toLowerCase().replace(/\s+/g, '-')}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-accent no-underline hover:underline underline-offset-2 hover:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1"
@@ -224,6 +227,7 @@ export function HomePage() {
               <Link
                 key={project.title}
                 to={project.caseStudy}
+                data-goatcounter-click={`case-study-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
                 className="group block rounded-xl overflow-hidden border border-border bg-card hover:border-foreground/20 transition-all duration-300"
               >
                 <div className="overflow-hidden">
@@ -302,6 +306,7 @@ export function HomePage() {
                   </span>
                   <a
                     href={href}
+                    data-goatcounter-click={label}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground no-underline hover:underline underline-offset-2 hover:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1"
