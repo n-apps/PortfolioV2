@@ -106,15 +106,15 @@ const priorityComponents = [
 ];
 
 const whatWorked = [
-  "Built a system that scales. Getting three products with distinct visual identities onto one shared library, without forking anything, was the hardest part. It held up.",
-  "Teams trusted the governance. Busy product teams participated because the process was easy and produced results after one quarter.",
-  "We treated documentation as a design artifact. Including the \u201cwhy\u201d in every component\u2019s documentation increased trust from the product team.",
+  "The anti-forking rule held up. Getting three products with distinct visual identities onto one shared library was the hardest part. The token model kept that from becoming three separate component sets.",
+  "Teams used the process because it was small. Busy product teams participated because requests were easy to make, priorities were visible, and the first migrations produced results after one quarter.",
+  "Documentation carried design intent. Including the \u201cwhy\u201d in component documentation made the system easier to trust. It showed when to use a pattern, not just what it looked like.",
 ];
 
 const whatIdChange = [
-  "Apply AI-powered tools from the start. Manual batch operations don\u2019t scale and allow errors to slip through.",
-  "Use metrics for adoption early on. Tracking component usage, override frequency, and contribution activity would have made the system\u2019s value visible to leadership.",
-  "Involve developers earlier. Some naming decisions that seemed logical in Figma caused problems in the code.",
+  "Use AI-powered tooling earlier. Manual batch operations were slow and left room for small mistakes.",
+  "Track adoption from the start. Component usage, override frequency, and contribution activity would have made the system\u2019s value visible sooner.",
+  "Involve developers earlier. Some naming decisions that seemed logical in Figma caused problems in code.",
 ];
 
 /* ── Local sub-components ──────────────────────────────── */
@@ -200,13 +200,13 @@ export function DesignSystemPage() {
               letterSpacing: "-0.025em",
             }}
           >
-            Building a scalable design system for three B2B products from scratch
+            Design system: One shared UI foundation for three B2B products
           </h1>
           <p
             className="text-muted-foreground"
             style={{ fontSize: fluidLead, lineHeight: 1.5 }}
           >
-            {nbsp("I designed a shared design system for 3 B2B products, reducing feature design time by up to 90% and cutting style-related QA issues by 30%.")}
+            {nbsp("I designed a shared design system for three B2B products that had grown in different directions. The goal was not just visual consistency. It was making product teams faster without creating a system that needed constant maintenance.")}
           </p>
         </div>
       </SectionAnimate>
@@ -240,23 +240,42 @@ export function DesignSystemPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 2. Context & Challenge ─────────────────────── */}
+      {/* ── 2. Context ─────────────────────────────────── */}
       <SectionAnimate delay={0.12}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>Context &amp; Challenge</SectionHeading>
+          <SectionHeading>Context</SectionHeading>
           <p
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            {nbsp("Yesim is a global eSIM platform with over 3\u00a0million customers and several B2B web products sharing the same tech stack. When I joined, three products were growing independently, each with its own UI patterns, colour schemes, and legacy implementations. Even small changes slowed things down, and design reviews became negotiations instead of quick reference checks.")}
+            {nbsp("Yesim is a global eSIM platform with over 3\u00a0million customers and several B2B web products sharing the same tech stack. When I joined, three products were growing independently, each with its own UI patterns, color schemes, and legacy implementations. Even small changes slowed things down, and design reviews became negotiations instead of quick reference checks.")}
+          </p>
+          <p
+            className="text-foreground/80"
+            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+          >
+            {nbsp("The products did not need a decorative refresh. They needed a shared way to build common B2B surfaces: tables, forms, filters, navigation, feedback states, and settings pages. The hard part was that each product still needed its own identity.")}
+          </p>
+        </div>
+      </SectionAnimate>
+
+      {/* ── 3. Problem ─────────────────────────────────── */}
+      <SectionAnimate delay={0.14}>
+        <div className="flex flex-col" style={{ gap: innerGap }}>
+          <SectionHeading>Problem</SectionHeading>
+          <p
+            className="text-foreground/80"
+            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+          >
+            {nbsp("The main product risk was fragmentation. If each product needed its own components, the system would collapse under maintenance. If the system forced every product to look the same, teams would work around it. Either outcome would slow the work down.")}
           </p>
           <PullQuote>
-            {nbsp("How do we build one design system that underpins three (and eventually more) products with different visual identities, without needing a dedicated person to keep it running?")}
+            {nbsp("How do we give three products one shared UI foundation without flattening the parts that need to feel distinct?")}
           </PullQuote>
         </div>
       </SectionAnimate>
 
-      <SectionAnimate delay={0.14}>
+      <SectionAnimate delay={0.16}>
         <div className="-mx-4 sm:mx-0">
           <ImageWithFallback
             src={beforeAfterImage}
@@ -266,20 +285,38 @@ export function DesignSystemPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 3. Key Decisions ───────────────────────────── */}
-      <SectionAnimate delay={0.16}>
+      {/* ── 4. Approach ────────────────────────────────── */}
+      <SectionAnimate delay={0.18}>
         <div className="flex flex-col" style={{ gap: sectionGap }}>
           {/* Decision 1: Token architecture */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <SectionHeading>Key Decisions</SectionHeading>
+            <SectionHeading>Approach</SectionHeading>
             <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              Three-layer token architecture
+              Prevent forks before they started
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("I chose a three-layer token architecture (raw values \u2192 primitives \u2192 semantic tokens) so products could re-skin without forking components. Swap a product\u2019s theme and you only override the semantic tokens. Primitives and component structure stay the same.")}
+              {nbsp("The main risk was forking. If each product needed its own buttons, inputs, tables, and dialogs, the library would become three libraries with the same name. So I used three token layers: raw values, primitives, and semantic tokens.")}
+            </p>
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            >
+              {nbsp("The product-specific work happens at the semantic layer. A product can change")}{" "}
+              <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
+                color-primary
+              </code>
+              {", "}
+              <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
+                font-heading
+              </code>
+              {", or "}
+              <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
+                radius-default
+              </code>{" "}
+              {nbsp("without changing the component itself. The component stays boring on purpose.")}
             </p>
             <DataTable
               headers={["Layer", "Purpose", "Example", "Themeable?"]}
@@ -304,13 +341,13 @@ export function DesignSystemPage() {
           {/* Decision 2: One library, three themes */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              One library, three themes
+              Let products look different without separate components
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("Each product gets a theme file that overrides semantic tokens. The component library doesn\u2019t care about the product. Switch themes by changing one configuration, not rebuilding components.")}
+              {nbsp("Each product gets a theme file that overrides semantic tokens. The component library does not need to know which product is using it. Switching themes changes the product expression, not the component implementation.")}
             </p>
             <DataTable
               headers={["Token", "Product A", "Product B", "Product C"]}
@@ -335,13 +372,13 @@ export function DesignSystemPage() {
           {/* Decision 3: B2B-first component priorities */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              B2B-first component priorities
+              Prioritize the surfaces teams touched every week
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("I audited every UI element across all three products \u2014 buttons in five styles, three table implementations, form fields that looked similar but behaved differently \u2014 then used the results to build a prioritized roadmap. Tables and forms came first because they appeared on every product\u2019s most-visited pages.")}
+              {nbsp("I audited every UI element across all three products: buttons in five styles, three table implementations, form fields that looked similar but behaved differently. Then I used the results to build a prioritized roadmap. Tables and forms came first because they appeared on every product\u2019s most-visited pages.")}
             </p>
             <DataTable
               headers={["Category", "Components", "Why first"]}
@@ -355,7 +392,7 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("Density is a system-level token \u2014 components respond to a density setting (default, compact, spacious) without separate variants. And tokens are named by function, not appearance:")}{" "}
+              {nbsp("Density is a system-level token. Components respond to a density setting (default, compact, spacious) without separate variants. Tokens are named by function, not appearance:")}{" "}
               <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
                 color-fg-secondary
               </code>{" "}
@@ -365,19 +402,8 @@ export function DesignSystemPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 4. The System in Action ────────────────────── */}
-      <SectionAnimate delay={0.2}>
+      <SectionAnimate delay={0.22}>
         <div className="flex flex-col" style={{ gap: sectionGap }}>
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <SectionHeading>The System in Action</SectionHeading>
-            <p
-              className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
-            >
-              {nbsp("Each component includes a live preview, prop/variant table, usage guidelines (when to use and when not to), accessibility notes, and a changelog.")}
-            </p>
-          </div>
-
           <div className="-mx-4 sm:mx-0">
             <ImageWithFallback
               src={specsImage}
@@ -387,11 +413,20 @@ export function DesignSystemPage() {
           </div>
 
           <div className="flex flex-col" style={{ gap: innerGap }}>
+            <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
+              Make adoption lighter than rebuilding
+            </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("Product managers could prototype with real components, so concepts looked like the actual product from day one \u2014 not a rough wireframe that needed to be redesigned later.")}
+              {nbsp("Each component includes a live preview, prop/variant table, usage guidelines (when to use and when not to), accessibility notes, and a changelog.")}
+            </p>
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            >
+              {nbsp("Product managers could prototype with real components, so concepts looked like the actual product from day one instead of a rough wireframe that needed to be redesigned later.")}
             </p>
           </div>
 
@@ -402,40 +437,62 @@ export function DesignSystemPage() {
               className="w-full rounded-none sm:rounded-xl"
             />
           </div>
+
+          <div className="flex flex-col" style={{ gap: innerGap }}>
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            >
+              {nbsp("Instead of mandating a full migration, I worked with each product team to migrate high-impact, low-risk surfaces first: settings pages and list views. Once teams saw the time savings, adoption became easier to justify.")}
+            </p>
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            >
+              {nbsp("To keep requests manageable, teams submitted component requests through Jira. I reviewed and ranked them weekly. New components went through design review with at least one consuming team, then were built, documented, versioned, and tested across all three product themes.")}
+            </p>
+          </div>
+
+          <div className="-mx-4 sm:mx-0">
+            <ImageWithFallback
+              src={governanceImage}
+              alt="Governance workflow diagram \u2014 one team submits requests, the design system team processes and ships components, and two product teams consume them"
+              className="w-full rounded-none sm:rounded-xl"
+            />
+          </div>
         </div>
       </SectionAnimate>
 
-      {/* ── 5. Adoption & Impact ───────────────────────── */}
-      <SectionAnimate delay={0.24}>
-        <div className="flex flex-col" style={{ gap: sectionGap }}>
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <SectionHeading>Adoption &amp; Impact</SectionHeading>
-            <div className="grid grid-cols-3 gap-3 sm:gap-4">
-              {impactStats.map((s) => (
-                <div
-                  key={s.label}
-                  className="rounded-xl bg-card card-shadow p-4 sm:p-5 flex flex-col gap-1 items-center text-center"
+      {/* ── 5. Result ──────────────────────────────────── */}
+      <SectionAnimate delay={0.26}>
+        <div className="flex flex-col" style={{ gap: innerGap }}>
+          <SectionHeading>Result</SectionHeading>
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+            {impactStats.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-xl bg-card card-shadow p-4 sm:p-5 flex flex-col gap-1 items-center text-center"
+              >
+                <span
+                  className="text-foreground"
+                  style={{
+                    fontFamily: "var(--font-serif)",
+                    fontSize: "clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)",
+                    lineHeight: 1.3,
+                  }}
                 >
-                  <span
-                    className="text-foreground"
-                    style={{
-                      fontFamily: "var(--font-serif)",
-                      fontSize: "clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)",
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {s.value}
-                  </span>
-                  <span
-                    className="text-muted-foreground"
-                    style={{ fontSize: "0.75rem", lineHeight: 1.3 }}
-                  >
-                    {s.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <ul className="flex flex-col gap-3 pl-5 list-disc">
+                  {s.value}
+                </span>
+                <span
+                  className="text-muted-foreground"
+                  style={{ fontSize: "0.75rem", lineHeight: 1.3 }}
+                >
+                  {s.label}
+                </span>
+              </div>
+            ))}
+          </div>
+          <ul className="flex flex-col gap-3 pl-5 list-disc">
             <li
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.7 }}
@@ -454,48 +511,15 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.7 }}
             >
-              <strong>Single source of truth:</strong>{" "}
-              {nbsp("the system became the reference for \u201chow we build things here.\u201d New team members read it instead of reverse-engineering decisions from code.")}
+              <strong>Clearer team reference:</strong>{" "}
+              {nbsp("new team members could read the documented decisions instead of reverse-engineering patterns from code and old screens")}
             </li>
-            </ul>
-          </div>
-
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              Migration strategy
-            </h3>
-            <p
-              className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
-            >
-              {nbsp("Instead of mandating a full migration, I worked with each product team to migrate high-impact, low-risk surfaces first \u2014 settings pages and list views. As teams saw the time savings, adoption accelerated organically.")}
-            </p>
-          </div>
-
-          <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              Governance
-            </h3>
-            <p
-              className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
-            >
-              {nbsp("To sustain adoption, I designed a lightweight governance process: teams submit component requests via Jira, I review and rank weekly, new components go through design review with at least one consuming team, then get built, documented, and shipped with semantic versioning. Every component was tested with all three product themes before release.")}
-            </p>
-          </div>
-
-          <div className="-mx-4 sm:mx-0">
-            <ImageWithFallback
-              src={governanceImage}
-              alt="Governance workflow diagram \u2014 one team submits requests, the design system team processes and ships components, and two product teams consume them"
-              className="w-full rounded-none sm:rounded-xl"
-            />
-          </div>
+          </ul>
         </div>
       </SectionAnimate>
 
       {/* ── 6. Reflection ──────────────────────────────── */}
-      <SectionAnimate delay={0.28}>
+      <SectionAnimate delay={0.3}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
@@ -534,7 +558,7 @@ export function DesignSystemPage() {
       </SectionAnimate>
 
       {/* Bottom back link */}
-      <SectionAnimate delay={0.32}>
+      <SectionAnimate delay={0.34}>
         <div className="flex items-center justify-between">
           <Link
             to="/"

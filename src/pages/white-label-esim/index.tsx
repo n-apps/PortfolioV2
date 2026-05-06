@@ -4,7 +4,7 @@ import { SectionAnimate } from "@/components/ui/section-animate";
 import { navigateWithTransition } from "@/lib/page-transition";
 import { nbsp } from "@/lib/nbsp";
 import { fluidLead, fluidBase, fluidSmall, fluidH1, fluidH3, sectionGap, innerGap } from "@/lib/typography";
-import { SectionHeading, ImagePlaceholder, PullQuote } from "@/components/case-study/case-study-components";
+import { SectionHeading, PullQuote } from "@/components/case-study/case-study-components";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 
 /* ── Data ─────────────────────────────────────────────── */
@@ -19,7 +19,7 @@ const metadata = [
 const statusQuoItems = [
   {
     label: "Color-dependent UI",
-    body: "an operator can pick almost any brand color. A mockup shows the one I chose. The product has to keep text readable on whatever they choose.",
+    body: "a partner can pick almost any brand color. A mockup shows the one I chose. The product has to keep text readable on whatever they choose.",
   },
   {
     label: "Conditional sections",
@@ -34,7 +34,7 @@ const statusQuoItems = [
 const prototypeFeatures = [
   {
     label: "Live form-to-preview binding",
-    body: "brand name, logo, color, banner, contact details, and policy links update the preview as the operator types",
+    body: "brand name, logo, color, banner, contact details, and policy links update the preview as the partner types",
   },
   {
     label: "Mobile and desktop preview modes",
@@ -92,7 +92,7 @@ const whatWorked = [
   },
   {
     label: "The prototype became the spec",
-    body: "There was no separate document explaining how the form and preview should interact. The prototype became the source of truth. The developer read the code, not a PDF.",
+    body: "There was no separate document explaining how the form and preview should interact. The developer could read the behavior in the code instead of translating a PDF.",
   },
 ];
 
@@ -164,13 +164,13 @@ export function WhiteLabelEsimPage() {
               letterSpacing: "-0.025em",
             }}
           >
-            Designing in code: an interactive prototype that replaced static mockups
+            White-label eSIM: Designing behavior instead of static mockups
           </h1>
           <p
             className="text-muted-foreground"
             style={{ fontSize: fluidLead, lineHeight: 1.5 }}
           >
-            {nbsp("I built a working prototype instead of another Figma file. It exposed the awkward parts that static screens tend to hide, and it landed much closer to production code. A live demo is available below.")}
+            {nbsp("I built a working prototype instead of another static Figma handoff. It exposed the states, edge cases, and interaction rules that mockups usually hide, and gave the team something closer to the final product.")}
           </p>
         </div>
       </SectionAnimate>
@@ -204,21 +204,34 @@ export function WhiteLabelEsimPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 2. Challenge ───────────────────────────────── */}
+      {/* ── 2. Context ─────────────────────────────────── */}
       <SectionAnimate delay={0.12}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>Challenge</SectionHeading>
+          <SectionHeading>Context</SectionHeading>
           <p
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            {nbsp("Yesim is a global eSIM platform with over 3\u00a0million customers. One B2B product lets telecom operators upload a logo, pick brand colors, add contact details, and preview the eSIM experience their customers will see.")}
+            {nbsp("Yesim is a global eSIM platform with over 3\u00a0million customers. One B2B product lets opted-in partners upload a logo, pick brand colors, add contact details, and preview the eSIM experience their customers will see.")}
           </p>
           <p
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            {nbsp("That kind of screen gets messy in static design. Brand colors change text contrast. Optional fields hide or reveal sections. File uploads can change the layout. A Figma mockup can show a snapshot, but the product is all response.")}
+            {nbsp("Before this work, the handoff pattern was familiar: design screens in Figma, annotate the edge cases, hand them to development, then spend review cycles catching things the static file could not express. That workflow was manageable for simple pages. It was much weaker for a product where the UI changes based on real partner input.")}
+          </p>
+        </div>
+      </SectionAnimate>
+
+      {/* ── 3. Problem ─────────────────────────────────── */}
+      <SectionAnimate delay={0.14}>
+        <div className="flex flex-col" style={{ gap: innerGap }}>
+          <SectionHeading>Problem</SectionHeading>
+          <p
+            className="text-foreground/80"
+            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+          >
+            {nbsp("This customization screen was all response. Brand colors changed text contrast. Optional fields hid or revealed sections. File uploads changed the layout. A Figma mockup could show one clean state, but the product had to survive many.")}
           </p>
           <p
             className="text-foreground/80"
@@ -229,25 +242,18 @@ export function WhiteLabelEsimPage() {
           <PullQuote>
             {nbsp("How do we design a B2B customization flow so the artifact captures the behavior, not only the pixels?")}
           </PullQuote>
-        </div>
-      </SectionAnimate>
-
-      {/* ── 3. Status Quo ──────────────────────────────── */}
-      <SectionAnimate delay={0.14}>
-        <div className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>Status quo</SectionHeading>
           <p
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            {nbsp("The usual workflow was simple enough: design screens in Figma, annotate the edge cases, hand off, then spend review cycles catching things the static file could not express. For brand customization, that meant:")}
+            {nbsp("For brand customization, the weak spots were predictable:")}
           </p>
           <LabeledList items={statusQuoItems} />
           <p
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            {nbsp("QA kept finding the same kind of issue: things that worked in the mockup but broke under real input.")}
+            {nbsp("The risk was not that the screen would look bad in Figma. The risk was that it would look right there and fail under real input.")}
           </p>
         </div>
       </SectionAnimate>
@@ -262,14 +268,14 @@ export function WhiteLabelEsimPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 4. Key Decisions ───────────────────────────── */}
+      {/* ── 4. Approach ────────────────────────────────── */}
       <SectionAnimate delay={0.18}>
         <div className="flex flex-col" style={{ gap: sectionGap }}>
           {/* Decision 1: Code, not Figma */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <SectionHeading>Key decisions</SectionHeading>
+            <SectionHeading>Approach</SectionHeading>
             <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              Building the prototype in code, not Figma
+              Build the artifact where behavior had to work
             </h3>
             <p
               className="text-foreground/80"
@@ -281,7 +287,7 @@ export function WhiteLabelEsimPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("In Figma, you can place white text on a blue background and move on. In code, the text is either readable or it isn\u2019t. If operators can pick their own colors, the logic has to handle that.")}
+              {nbsp("In Figma, you can place white text on a blue background and move on. In code, the text is either readable or it isn\u2019t. If partners can pick their own colors, the logic has to handle that.")}
             </p>
             <p
               className="text-foreground/80"
@@ -294,13 +300,13 @@ export function WhiteLabelEsimPage() {
           {/* Decision 2: Contrast at the system level */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              Solving contrast at the system level
+              Make contrast executable
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("The prototype computes foreground text color from the operator\u2019s brand color using WCAG relative-luminance calculations. Light brand colors get dark text. Dark brand colors get white text. It runs every time the color changes, so nobody has to hope the chosen color happens to work.")}
+              {nbsp("The prototype computes foreground text color from the partner\u2019s brand color using WCAG relative-luminance calculations. Light brand colors get dark text. Dark brand colors get white text. It runs every time the color changes, so nobody has to hope the chosen color happens to work.")}
             </p>
             <p
               className="text-foreground/80"
@@ -321,7 +327,7 @@ export function WhiteLabelEsimPage() {
           {/* Decision 3: Conditional rendering */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              Conditional rendering as a design decision
+              Treat optional content as product logic
             </h3>
             <p
               className="text-foreground/80"
@@ -348,13 +354,13 @@ export function WhiteLabelEsimPage() {
           {/* Decision 4: Real-time preview */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
-              Real-time preview as the primary feedback loop
+              Use the preview as the review surface
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("The screen is split between the form and the live preview. Every keystroke, color change, or file upload updates the preview instantly. Operators can see their brand inside a realistic mobile interface, with a desktop toggle, without saving or refreshing.")}
+              {nbsp("The screen is split between the form and the live preview. Every keystroke, color change, or file upload updates the preview instantly. Partners can see their brand inside a realistic mobile interface, with a desktop toggle, without saving or refreshing.")}
             </p>
             <p
               className="text-foreground/80"
@@ -366,10 +372,10 @@ export function WhiteLabelEsimPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 5. The Prototype in Action ─────────────────── */}
+      {/* ── 5. Result ──────────────────────────────────── */}
       <SectionAnimate delay={0.22}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>The prototype in action</SectionHeading>
+          <SectionHeading>Result</SectionHeading>
           <p
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
@@ -426,10 +432,9 @@ export function WhiteLabelEsimPage() {
         </Link>
       </SectionAnimate>
 
-      {/* ── 6. Impact ──────────────────────────────────── */}
+      {/* ── 6. Result details ──────────────────────────── */}
       <SectionAnimate delay={0.26}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>Impact</SectionHeading>
           <LabeledList items={impactItems} />
         </div>
       </SectionAnimate>

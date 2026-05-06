@@ -1,4 +1,5 @@
 import { SectionAnimate } from "@/components/ui/section-animate";
+import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { nbsp } from "@/lib/nbsp";
 import {
   RiExternalLinkLine,
@@ -72,11 +73,12 @@ export function SupportPage() {
 
       {/* Image */}
       <SectionAnimate delay={0.05}>
-        <div className="rounded-xl overflow-hidden border border-border">
-          <img
+        <div className="-mx-4 sm:mx-0">
+          <ImageWithFallback
             src={heroImage}
             alt="Board game pieces and cards"
-            className="w-full aspect-[16/9] object-cover"
+            className="w-full aspect-[16/9] object-cover rounded-none sm:rounded-xl"
+            loading="eager"
           />
         </div>
       </SectionAnimate>
@@ -96,7 +98,7 @@ export function SupportPage() {
             </p>
             <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                "Even through tough times \uD83C\uDDFA\uD83C\uDDE6, I keep improving this app for everyone who loves board games as much as I do."
+                "Despite tough times, I continue to improve this app for everyone who loves board games as much as I do."
               )}
             </p>
           </div>
@@ -106,7 +108,7 @@ export function SupportPage() {
       {/* Why players love it */}
       <SectionAnimate delay={0.15}>
         <section className="flex flex-col" style={{ gap: innerGap }}>
-          <SectionHeading>Why players love it</SectionHeading>
+          <SectionHeading>Why users love it</SectionHeading>
           <div
             className="flex flex-col"
             style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)" }}
@@ -125,7 +127,7 @@ export function SupportPage() {
                   style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
                 >
                   {nbsp(
-                    "No annoying ads or pop-ups. Just you and your game."
+                    "No annoying ads or pop-ups. Just straightforward scorekeeping."
                   )}
                 </p>
               </div>
@@ -163,7 +165,7 @@ export function SupportPage() {
                   style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
                 >
                   {nbsp(
-                    "Player feedback shapes every update. Your voice matters."
+                    "User feedback shapes every update. Your voice matters."
                   )}
                 </p>
               </div>
