@@ -3,8 +3,20 @@ import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
 import { SectionAnimate } from "@/components/ui/section-animate";
 import { nbsp } from "@/lib/nbsp";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
-import { fluidLead, fluidBase, fluidSmall, fluidH1, fluidH3, sectionGap, innerGap } from "@/lib/typography";
-import { SectionHeading, BoldLead, PullQuote } from "@/components/case-study/case-study-components";
+import {
+  fluidLead,
+  fluidBase,
+  fluidSmall,
+  fluidH1,
+  fluidH3,
+  sectionGap,
+  innerGap,
+} from "@/lib/typography";
+import {
+  SectionHeading,
+  BoldLead,
+  PullQuote,
+} from "@/components/case-study/case-study-components";
 
 const heroImage = "/images/design-system-hero.png";
 const beforeAfterImage = "/images/design-system-before-after.png";
@@ -19,8 +31,8 @@ const prototypeImage = "/images/design-system-prototype.png";
 const metadata = [
   { label: "Role", value: "Product Designer" },
   { label: "Timeframe", value: "Sep \u2013 Dec 2025" },
-  { label: "Platform", value: "Web (B2B products)" },
-  { label: "Team", value: "Developer, PM, UX/UI Designer (myself)" },
+  { label: "Platform", value: "Web (B2B)" },
+  { label: "Team", value: "PM · Engineers" },
 ];
 
 const impactStats = [
@@ -206,7 +218,9 @@ export function DesignSystemPage() {
             className="text-muted-foreground"
             style={{ fontSize: fluidLead, lineHeight: 1.5 }}
           >
-            {nbsp("I designed a shared design system for three B2B products that had grown in different directions. The goal was not just visual consistency. It was making product teams faster without creating a system that needed constant maintenance.")}
+            {nbsp(
+              "I designed a shared design system for three B2B products that had grown in different directions. The goal was not just visual consistency. It was making product teams faster without creating a system that needed constant maintenance.",
+            )}
           </p>
         </div>
       </SectionAnimate>
@@ -248,13 +262,17 @@ export function DesignSystemPage() {
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            {nbsp("Yesim is a global eSIM platform with over 3\u00a0million customers and several B2B web products sharing the same tech stack. When I joined, three products were growing independently, each with its own UI patterns, color schemes, and legacy implementations. Even small changes slowed things down, and design reviews became negotiations instead of quick reference checks.")}
+            {nbsp(
+              "Yesim is a global eSIM platform with over 3\u00a0million customers and several B2B web products sharing the same tech stack. When I joined, three products were growing independently, each with its own UI patterns, color schemes, and legacy implementations. Even small changes slowed things down, and design reviews became negotiations instead of quick reference checks.",
+            )}
           </p>
           <p
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            {nbsp("The products did not need a decorative refresh. They needed a shared way to build common B2B surfaces: tables, forms, filters, navigation, feedback states, and settings pages. The hard part was that each product still needed its own identity.")}
+            {nbsp(
+              "The products did not need a decorative refresh. They needed a shared way to build common B2B surfaces: tables, forms, filters, navigation, feedback states, and settings pages. The hard part was that each product still needed its own identity.",
+            )}
           </p>
         </div>
       </SectionAnimate>
@@ -267,10 +285,14 @@ export function DesignSystemPage() {
             className="text-foreground/80"
             style={{ fontSize: fluidBase, lineHeight: 1.75 }}
           >
-            {nbsp("The main product risk was fragmentation. If each product needed its own components, the system would collapse under maintenance. If the system forced every product to look the same, teams would work around it. Either outcome would slow the work down.")}
+            {nbsp(
+              "The main product risk was fragmentation. If each product needed its own components, the system would collapse under maintenance. If the system forced every product to look the same, teams would work around it. Either outcome would slow the work down.",
+            )}
           </p>
           <PullQuote>
-            {nbsp("How do we give three products one shared UI foundation without flattening the parts that need to feel distinct?")}
+            {nbsp(
+              "How do we give three products one shared UI foundation without flattening the parts that need to feel distinct?",
+            )}
           </PullQuote>
         </div>
       </SectionAnimate>
@@ -291,32 +313,54 @@ export function DesignSystemPage() {
           {/* Decision 1: Token architecture */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <SectionHeading>Approach</SectionHeading>
-            <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
+            <h3
+              style={{
+                fontSize: fluidH3,
+                fontWeight: 600,
+                lineHeight: 1.3,
+                letterSpacing: "-0.005em",
+              }}
+            >
               Prevent forks before they started
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("The main risk was forking. If each product needed its own buttons, inputs, tables, and dialogs, the library would become three libraries with the same name. So I used three token layers: raw values, primitives, and semantic tokens.")}
+              {nbsp(
+                "The main risk was forking. If each product needed its own buttons, inputs, tables, and dialogs, the library would become three libraries with the same name. So I used three token layers: raw values, primitives, and semantic tokens.",
+              )}
             </p>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("The product-specific work happens at the semantic layer. A product can change")}{" "}
-              <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
+              {nbsp(
+                "The product-specific work happens at the semantic layer. A product can change",
+              )}{" "}
+              <code
+                className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80"
+                style={{ fontSize: "0.75rem" }}
+              >
                 color-primary
               </code>
               {", "}
-              <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
+              <code
+                className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80"
+                style={{ fontSize: "0.75rem" }}
+              >
                 font-heading
               </code>
               {", or "}
-              <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
+              <code
+                className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80"
+                style={{ fontSize: "0.75rem" }}
+              >
                 radius-default
               </code>{" "}
-              {nbsp("without changing the component itself. The component stays boring on purpose.")}
+              {nbsp(
+                "without changing the component itself. The component stays boring on purpose.",
+              )}
             </p>
             <DataTable
               headers={["Layer", "Purpose", "Example", "Themeable?"]}
@@ -340,14 +384,23 @@ export function DesignSystemPage() {
 
           {/* Decision 2: One library, three themes */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
+            <h3
+              style={{
+                fontSize: fluidH3,
+                fontWeight: 600,
+                lineHeight: 1.3,
+                letterSpacing: "-0.005em",
+              }}
+            >
               Let products look different without separate components
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("Each product gets a theme file that overrides semantic tokens. The component library does not need to know which product is using it. Switching themes changes the product expression, not the component implementation.")}
+              {nbsp(
+                "Each product gets a theme file that overrides semantic tokens. The component library does not need to know which product is using it. Switching themes changes the product expression, not the component implementation.",
+              )}
             </p>
             <DataTable
               headers={["Token", "Product A", "Product B", "Product C"]}
@@ -371,14 +424,23 @@ export function DesignSystemPage() {
 
           {/* Decision 3: B2B-first component priorities */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
+            <h3
+              style={{
+                fontSize: fluidH3,
+                fontWeight: 600,
+                lineHeight: 1.3,
+                letterSpacing: "-0.005em",
+              }}
+            >
               Prioritize the surfaces teams touched every week
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("I audited every UI element across all three products: buttons in five styles, three table implementations, form fields that looked similar but behaved differently. Then I used the results to build a prioritized roadmap. Tables and forms came first because they appeared on every product\u2019s most-visited pages.")}
+              {nbsp(
+                "I audited every UI element across all three products: buttons in five styles, three table implementations, form fields that looked similar but behaved differently. Then I used the results to build a prioritized roadmap. Tables and forms came first because they appeared on every product\u2019s most-visited pages.",
+              )}
             </p>
             <DataTable
               headers={["Category", "Components", "Why first"]}
@@ -392,11 +454,18 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("Density is a system-level token. Components respond to a density setting (default, compact, spacious) without separate variants. Tokens are named by function, not appearance:")}{" "}
-              <code className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80" style={{ fontSize: "0.75rem" }}>
+              {nbsp(
+                "Density is a system-level token. Components respond to a density setting (default, compact, spacious) without separate variants. Tokens are named by function, not appearance:",
+              )}{" "}
+              <code
+                className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80"
+                style={{ fontSize: "0.75rem" }}
+              >
                 color-fg-secondary
               </code>{" "}
-              {nbsp("tells you it\u2019s a secondary foreground color without looking up the hex.")}
+              {nbsp(
+                "tells you it\u2019s a secondary foreground color without looking up the hex.",
+              )}
             </p>
           </div>
         </div>
@@ -413,20 +482,31 @@ export function DesignSystemPage() {
           </div>
 
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
+            <h3
+              style={{
+                fontSize: fluidH3,
+                fontWeight: 600,
+                lineHeight: 1.3,
+                letterSpacing: "-0.005em",
+              }}
+            >
               Make adoption lighter than rebuilding
             </h3>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("Each component includes a live preview, prop/variant table, usage guidelines (when to use and when not to), accessibility notes, and a changelog.")}
+              {nbsp(
+                "Each component includes a live preview, prop/variant table, usage guidelines (when to use and when not to), accessibility notes, and a changelog.",
+              )}
             </p>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("Product managers could prototype with real components, so concepts looked like the actual product from day one instead of a rough wireframe that needed to be redesigned later.")}
+              {nbsp(
+                "Product managers could prototype with real components, so concepts looked like the actual product from day one instead of a rough wireframe that needed to be redesigned later.",
+              )}
             </p>
           </div>
 
@@ -443,13 +523,17 @@ export function DesignSystemPage() {
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("Instead of mandating a full migration, I worked with each product team to migrate high-impact, low-risk surfaces first: settings pages and list views. Once teams saw the time savings, adoption became easier to justify.")}
+              {nbsp(
+                "Instead of mandating a full migration, I worked with each product team to migrate high-impact, low-risk surfaces first: settings pages and list views. Once teams saw the time savings, adoption became easier to justify.",
+              )}
             </p>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.75 }}
             >
-              {nbsp("To keep requests manageable, teams submitted component requests through Jira. I reviewed and ranked them weekly. New components went through design review with at least one consuming team, then were built, documented, versioned, and tested across all three product themes.")}
+              {nbsp(
+                "To keep requests manageable, teams submitted component requests through Jira. I reviewed and ranked them weekly. New components went through design review with at least one consuming team, then were built, documented, versioned, and tested across all three product themes.",
+              )}
             </p>
           </div>
 
@@ -498,21 +582,27 @@ export function DesignSystemPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.7 }}
             >
               <strong>Up to 90% faster feature design:</strong>{" "}
-              {nbsp("assembling from components instead of designing from scratch")}
+              {nbsp(
+                "assembling from components instead of designing from scratch",
+              )}
             </li>
             <li
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.7 }}
             >
               <strong>~30% less time on style-related QA:</strong>{" "}
-              {nbsp("inconsistencies caught at the design stage, not in review")}
+              {nbsp(
+                "inconsistencies caught at the design stage, not in review",
+              )}
             </li>
             <li
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.7 }}
             >
               <strong>Clearer team reference:</strong>{" "}
-              {nbsp("new team members could read the documented decisions instead of reverse-engineering patterns from code and old screens")}
+              {nbsp(
+                "new team members could read the documented decisions instead of reverse-engineering patterns from code and old screens",
+              )}
             </li>
           </ul>
         </div>

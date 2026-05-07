@@ -5,10 +5,22 @@ import { useInView, useSpring, useTransform, motion } from "motion/react";
 import { SectionAnimate } from "@/components/ui/section-animate";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { nbsp } from "@/lib/nbsp";
-import { fluidLead, fluidBase, fluidSmall, fluidH1, fluidH3, sectionGap, innerGap } from "@/lib/typography";
-import { SectionHeading, BoldLead, PullQuote } from "@/components/case-study/case-study-components";
+import {
+  fluidLead,
+  fluidBase,
+  fluidSmall,
+  fluidH1,
+  fluidH3,
+  sectionGap,
+  innerGap,
+} from "@/lib/typography";
+import {
+  SectionHeading,
+  BoldLead,
+  PullQuote,
+} from "@/components/case-study/case-study-components";
 
-const heroImage = "/images/score-counter-hero.png";
+const heroImage = "/images/score-counter-hero.jpg";
 const evolutionImage = "/images/score-counter-evolution.png";
 const flowImage = "/images/score-counter-flow.png";
 const testimonialsImage = "/images/score-counter-testimonials.png";
@@ -17,10 +29,10 @@ const unexpectedUseCasesImage = "/images/score-counter-bonus.png";
 /* ── Data ─────────────────────────────────────────────── */
 
 const metadata = [
-  { label: "Role", value: "Creator, Design & Development" },
+  { label: "Role", value: "Creator" },
   { label: "Timeframe", value: "2016 \u2013 Present" },
   { label: "Platform", value: "Android" },
-  { label: "Team", value: "Solo (with\u00a0community contributors)" },
+  { label: "Team", value: "Solo" },
 ];
 
 const impactStats = [
@@ -63,7 +75,8 @@ function parseStatValue(display: string): {
   decimals: number;
 } {
   const match = display.match(/^([^0-9]*)([0-9]+(?:\.[0-9]+)?)(.*)$/);
-  if (!match) return { prefix: "", numericValue: 0, suffix: display, decimals: 0 };
+  if (!match)
+    return { prefix: "", numericValue: 0, suffix: display, decimals: 0 };
   const prefix = match[1];
   const num = parseFloat(match[2]);
   const suffix = match[3];
@@ -79,12 +92,14 @@ function AnimatedStatValue({
   displayValue: string;
   isInView: boolean;
 }) {
-  const { prefix, numericValue, suffix, decimals } = parseStatValue(displayValue);
+  const { prefix, numericValue, suffix, decimals } =
+    parseStatValue(displayValue);
   const spring = useSpring(0, { mass: 0.8, stiffness: 75, damping: 15 });
   const display = useTransform(spring, (current) => {
-    const rounded = decimals > 0
-      ? current.toFixed(decimals)
-      : Math.round(current).toLocaleString();
+    const rounded =
+      decimals > 0
+        ? current.toFixed(decimals)
+        : Math.round(current).toLocaleString();
     return `${prefix}${rounded}${suffix}`;
   });
 
@@ -94,7 +109,11 @@ function AnimatedStatValue({
     }
   }, [isInView, spring, numericValue]);
 
-  return <motion.span style={{ fontVariantNumeric: "tabular-nums" }}>{display}</motion.span>;
+  return (
+    <motion.span style={{ fontVariantNumeric: "tabular-nums" }}>
+      {display}
+    </motion.span>
+  );
 }
 
 function ImpactStatsGrid() {
@@ -159,13 +178,17 @@ export function ScoreCounterPage() {
               letterSpacing: "-0.025em",
             }}
           >
-            {nbsp("Score Counter: Keeping a simple app simple for 900K installs")}
+            {nbsp(
+              "Score Counter: Keeping a simple app simple for 900K installs",
+            )}
           </h1>
           <p
             className="text-muted-foreground"
             style={{ fontSize: fluidLead, lineHeight: 1.5 }}
           >
-            {nbsp("I built Score Counter as a side project in 2016. Nine years later, it has 900K installs, 87.2K monthly active users, and a 4.9 rating on Google Play. The design challenge was not adding more. It was protecting the simple flow that made people trust it.")}
+            {nbsp(
+              "I built Score Counter as a side project in 2016. Nine years later, it has 900K installs, 87.2K monthly active users, and a 4.9 rating on Google Play. The design challenge was not adding more. It was protecting the simple flow that made people trust it.",
+            )}
           </p>
         </div>
       </SectionAnimate>
@@ -203,11 +226,21 @@ export function ScoreCounterPage() {
       <SectionAnimate delay={0.12}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Context</SectionHeading>
-          <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            {nbsp("Score Counter is an Android app for tracking scores during board games, card games, and any group activity that needs counting. It serves everyone from families at game night to tabletop groups and anyone replacing pen and paper.")}
+          <p
+            className="text-foreground/80"
+            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+          >
+            {nbsp(
+              "Score Counter is an Android app for tracking scores during board games, card games, and any group activity that needs counting. It serves everyone from families at game night to tabletop groups and anyone replacing pen and paper.",
+            )}
           </p>
-          <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            {nbsp("I built it as a solo side project, without ads or marketing spend. Over time, the app grew through search, recommendations, translations from volunteers, and people using it for things I never planned.")}
+          <p
+            className="text-foreground/80"
+            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+          >
+            {nbsp(
+              "I built it as a solo side project, without ads or marketing spend. Over time, the app grew through search, recommendations, translations from volunteers, and people using it for things I never planned.",
+            )}
           </p>
         </div>
       </SectionAnimate>
@@ -227,11 +260,18 @@ export function ScoreCounterPage() {
       <SectionAnimate delay={0.16}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Problem</SectionHeading>
-          <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            {nbsp("Score Counter looked simple, but simplicity became harder to protect as the app grew. Users kept asking for saved sessions, deeper customization, and game-specific features. Some of those requests were useful, but many would have turned the app into something slower and narrower. The design problem was deciding what not to build.")}
+          <p
+            className="text-foreground/80"
+            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+          >
+            {nbsp(
+              "Score Counter looked simple, but simplicity became harder to protect as the app grew. Users kept asking for saved sessions, deeper customization, and game-specific features. Some of those requests were useful, but many would have turned the app into something slower and narrower. The design problem was deciding what not to build.",
+            )}
           </p>
           <PullQuote>
-            {nbsp("How do you keep an app dead-simple when users keep asking for features that sound reasonable on their own?")}
+            {nbsp(
+              "How do you keep an app dead-simple when users keep asking for features that sound reasonable on their own?",
+            )}
           </PullQuote>
         </div>
       </SectionAnimate>
@@ -242,19 +282,43 @@ export function ScoreCounterPage() {
           <SectionHeading>Approach</SectionHeading>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
-              <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
+              <h3
+                style={{
+                  fontSize: fluidH3,
+                  fontWeight: 600,
+                  lineHeight: 1.3,
+                  letterSpacing: "-0.005em",
+                }}
+              >
                 Protect the three-step flow
               </h3>
-              <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-                {nbsp("The primary flow is sacred: open the app → add counters → start counting. Every feature request gets measured against that loop. If it adds a step or a decision to the core path, it doesn\u2019t ship. This single constraint is what kept Score Counter focused while competitors kept adding complexity. It is also why users describe the experience as \u2018does what it needs to do.\u2019")}
+              <p
+                className="text-foreground/80"
+                style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              >
+                {nbsp(
+                  "The primary flow is sacred: open the app → add counters → start counting. Every feature request gets measured against that loop. If it adds a step or a decision to the core path, it doesn\u2019t ship. This single constraint is what kept Score Counter focused while competitors kept adding complexity. It is also why users describe the experience as \u2018does what it needs to do.\u2019",
+                )}
               </p>
             </div>
             <div className="flex flex-col gap-1">
-              <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
+              <h3
+                style={{
+                  fontSize: fluidH3,
+                  fontWeight: 600,
+                  lineHeight: 1.3,
+                  letterSpacing: "-0.005em",
+                }}
+              >
                 Say no when a feature narrows the product
               </h3>
-              <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-                {nbsp("One of the most requested features was the ability to save an active game session and load it later. I said no. Shipping it would have fixed Score Counter conceptually as a board game companion, which is narrower than what it actually is. People use it to count anything, not just board game scores. Adding save/load would also mean extra steps before starting a quick session, breaking the three-step flow for a feature that serves only a subset of users.")}
+              <p
+                className="text-foreground/80"
+                style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              >
+                {nbsp(
+                  "One of the most requested features was the ability to save an active game session and load it later. I said no. Shipping it would have fixed Score Counter conceptually as a board game companion, which is narrower than what it actually is. People use it to count anything, not just board game scores. Adding save/load would also mean extra steps before starting a quick session, breaking the three-step flow for a feature that serves only a subset of users.",
+                )}
               </p>
             </div>
           </div>
@@ -277,10 +341,20 @@ export function ScoreCounterPage() {
           <div className="flex flex-col gap-4">
             {constraints.map((c) => (
               <div key={c.title} className="flex flex-col gap-1">
-                <h3 style={{ fontSize: fluidH3, fontWeight: 600, lineHeight: 1.3, letterSpacing: "-0.005em" }}>
+                <h3
+                  style={{
+                    fontSize: fluidH3,
+                    fontWeight: 600,
+                    lineHeight: 1.3,
+                    letterSpacing: "-0.005em",
+                  }}
+                >
                   {c.title}
                 </h3>
-                <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+                <p
+                  className="text-foreground/80"
+                  style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+                >
                   {c.text}
                 </p>
               </div>
@@ -294,8 +368,13 @@ export function ScoreCounterPage() {
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Result</SectionHeading>
           <ImpactStatsGrid />
-          <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            {nbsp("900K installs came through best UX and organic installs. The app still holds a 4.9 rating after nine years. The product lesson is simple: build something people trust enough to recommend.")}
+          <p
+            className="text-foreground/80"
+            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+          >
+            {nbsp(
+              "900K installs came through best UX and organic installs. The app still holds a 4.9 rating after nine years. The product lesson is simple: build something people trust enough to recommend.",
+            )}
           </p>
         </div>
       </SectionAnimate>
@@ -317,7 +396,9 @@ export function ScoreCounterPage() {
 
       <SectionAnimate delay={0.28}>
         <PullQuote>
-          {nbsp("One user created a tally called \"little spoiled brats\" to count every time a child annoyed them: 227 reasons and counting. When you build a tool that does one thing well and stays out of the way, people find uses you never imagined.")}
+          {nbsp(
+            'One user created a tally called "little spoiled brats" to count every time a child annoyed them: 227 reasons and counting. When you build a tool that does one thing well and stays out of the way, people find uses you never imagined.',
+          )}
         </PullQuote>
       </SectionAnimate>
 
