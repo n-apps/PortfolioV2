@@ -164,7 +164,7 @@ export function WhiteLabelEsimPage() {
               letterSpacing: "-0.025em",
             }}
           >
-            White-label eSIM: Designing behavior instead of static mockups
+            White-label eSIM configurator: working prototype in hours instead of static mockups
           </h1>
           <p
             className="text-muted-foreground"

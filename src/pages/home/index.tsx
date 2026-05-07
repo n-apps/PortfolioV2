@@ -36,7 +36,7 @@ const personalProjects = [
     title: "Score Counter",
     subtitle: "Android App",
     description:
-      "A side project I have maintained since 2016: 870K installs, 87.2K monthly active users, a 4.9 rating, and no marketing spend. The work has mostly been protecting the simple flow people trust.",
+      "A side project I have maintained since 2016: 900K installs, 87.2K monthly active users, a 4.9 rating, and no marketing spend. The work has mostly been protecting the simple flow people trust.",
     caseStudy: "/work/score-counter",
     cover: scoreCounterCover,
   },

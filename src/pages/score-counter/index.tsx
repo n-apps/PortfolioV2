@@ -24,7 +24,7 @@ const metadata = [
 ];
 
 const impactStats = [
-  { value: "870K", label: "Installs" },
+  { value: "900K", label: "Installs" },
   { value: "87.2K", label: "Monthly active users" },
   { value: "225K", label: "Avg. active devices" },
   { value: "4.9", label: "Google Play rating" },
@@ -55,7 +55,7 @@ const whatIdChange = [
 
 /* ── Local sub-components ──────────────────────────────── */
 
-/** Parse a display value like "870K", "4.9" into parts for animation */
+/** Parse a display value like "900K", "4.9" into parts for animation */
 function parseStatValue(display: string): {
   prefix: string;
   numericValue: number;
@@ -159,13 +159,13 @@ export function ScoreCounterPage() {
               letterSpacing: "-0.025em",
             }}
           >
-            {nbsp("Score Counter: Keeping a simple app simple for 870K installs")}
+            {nbsp("Score Counter: Keeping a simple app simple for 900K installs")}
           </h1>
           <p
             className="text-muted-foreground"
             style={{ fontSize: fluidLead, lineHeight: 1.5 }}
           >
-            {nbsp("I built Score Counter as a side project in 2016. Nine years later, it has 870K installs, 87.2K monthly active users, and a 4.9 rating on Google Play. The design challenge was not adding more. It was protecting the simple flow that made people trust it.")}
+            {nbsp("I built Score Counter as a side project in 2016. Nine years later, it has 900K installs, 87.2K monthly active users, and a 4.9 rating on Google Play. The design challenge was not adding more. It was protecting the simple flow that made people trust it.")}
           </p>
         </div>
       </SectionAnimate>
@@ -246,7 +246,7 @@ export function ScoreCounterPage() {
                 Protect the three-step flow
               </h3>
               <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-                {nbsp("The primary flow is sacred: open the app, add counters, start counting. Every feature request gets measured against that loop. If it adds a step or a decision to the core path, it doesn\u2019t ship. This single constraint is what kept Score Counter focused while competitors kept adding complexity. It is also why users describe the experience as \u2018does what it needs to do.\u2019")}
+                {nbsp("The primary flow is sacred: open the app → add counters → start counting. Every feature request gets measured against that loop. If it adds a step or a decision to the core path, it doesn\u2019t ship. This single constraint is what kept Score Counter focused while competitors kept adding complexity. It is also why users describe the experience as \u2018does what it needs to do.\u2019")}
               </p>
             </div>
             <div className="flex flex-col gap-1">
@@ -295,7 +295,7 @@ export function ScoreCounterPage() {
           <SectionHeading>Result</SectionHeading>
           <ImpactStatsGrid />
           <p className="text-foreground/80" style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
-            {nbsp("870K installs came through word-of-mouth alone, with no ads and no marketing spend. Volunteers have contributed translations, a developer built a fan web version, and the app still holds a 4.9 rating after nine years. The product lesson is simple: build something people trust enough to recommend.")}
+            {nbsp("900K installs came through best UX and organic installs. The app still holds a 4.9 rating after nine years. The product lesson is simple: build something people trust enough to recommend.")}
           </p>
         </div>
       </SectionAnimate>
