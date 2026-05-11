@@ -1,6 +1,6 @@
-import { RiDoubleQuotesL } from "@remixicon/react";
+import { RiDoubleQuotesL, RiInformationLine } from "@remixicon/react";
 import { nbsp } from "@/lib/nbsp";
-import { fluidBase, fluidH2 } from "@/lib/typography";
+import { fluidBase, fluidH2, fluidSmall } from "@/lib/typography";
 
 /** Section label used as a category heading above content blocks */
 export function SectionHeading({ children }: { children: React.ReactNode }) {
@@ -41,6 +41,27 @@ export function PullQuote({ children }: { children: React.ReactNode }) {
       >
         {children}
       </div>
+    </div>
+  );
+}
+
+/** Subtle footnote-style disclaimer for case studies covered by an NDA */
+export function ConfidentialityNote() {
+  return (
+    <div
+      className="flex items-start gap-2 text-muted-foreground italic"
+      style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
+    >
+      <RiInformationLine
+        className="shrink-0 mt-[0.15em]"
+        size={14}
+        aria-hidden
+      />
+      <p>
+        {nbsp(
+          "Note: images and some details have been modified per agreement with Yesim.",
+        )}
+      </p>
     </div>
   );
 }

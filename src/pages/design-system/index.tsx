@@ -16,6 +16,7 @@ import {
   SectionHeading,
   BoldLead,
   PullQuote,
+  ConfidentialityNote,
 } from "@/components/case-study/case-study-components";
 
 const heroImage = "/images/design-system-hero.png";
@@ -252,6 +253,10 @@ export function DesignSystemPage() {
             </div>
           ))}
         </div>
+      </SectionAnimate>
+
+      <SectionAnimate delay={0.11}>
+        <ConfidentialityNote />
       </SectionAnimate>
 
       {/* ── 2. Context ─────────────────────────────────── */}

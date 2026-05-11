@@ -1,6 +1,7 @@
 const scoreCounterCover = "/images/score-counter-cover.png";
 const designSystemCover = "/images/design-system-cover.png";
 const whiteLabelEsimCover = "/images/white-label-esim-cover.png";
+const saasOnboardingCover = "/images/saas-onboarding-cover.png";
 
 import { Link } from "react-router";
 import { SectionAnimate } from "@/components/ui/section-animate";
@@ -53,6 +54,13 @@ const personalProjects = [
     description: "A working prototype for a B2B customization flow where colors, uploads, optional fields, and preview states had to behave under real input. I built it using the production site’s tech stack so contrast, conditional rendering, and edge cases were part of the artifact.",
     caseStudy: "/work/white-label-esim",
     cover: whiteLabelEsimCover,
+  },
+  {
+    title: "Designing onboarding",
+    subtitle: "Yesim",
+    description: "A self-serve onboarding flow for companies buying eSIM plans for employees. The work focused on replacing sales-led setup with a product-led path to first value: add an employee, choose a plan, and activate the first eSIM.",
+    caseStudy: "/work/saas-onboarding",
+    cover: saasOnboardingCover,
   },
 ];
 

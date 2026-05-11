@@ -19,6 +19,7 @@ import {
 import {
   SectionHeading,
   PullQuote,
+  ConfidentialityNote,
 } from "@/components/case-study/case-study-components";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 
@@ -216,6 +217,10 @@ export function WhiteLabelEsimPage() {
             </div>
           ))}
         </div>
+      </SectionAnimate>
+
+      <SectionAnimate delay={0.11}>
+        <ConfidentialityNote />
       </SectionAnimate>
 
       {/* ── 2. Context ─────────────────────────────────── */}
