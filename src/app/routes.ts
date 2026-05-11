@@ -21,9 +21,6 @@ const SaasOnboardingPage = lazy(() =>
 const SupportPage = lazy(() =>
   import("@/pages/support").then((m) => ({ default: m.SupportPage }))
 );
-const WorkInProgress = lazy(() =>
-  import("@/pages/coming-soon").then((m) => ({ default: m.WorkInProgress }))
-);
 const ReviewsPage = lazy(() =>
   import("@/pages/score-counter/reviews").then((m) => ({ default: m.ReviewsPage }))
 );
@@ -47,7 +44,6 @@ export const router = createBrowserRouter([
       { path: "work/design-system", Component: DesignSystemPage },
       { path: "work/white-label-esim", Component: WhiteLabelEsimPage },
       { path: "work/saas-onboarding", Component: SaasOnboardingPage },
-      { path: "work/coming-soon", Component: WorkInProgress },
       { path: "support", Component: SupportPage },
       { path: "*", Component: NotFoundPage },
     ],
