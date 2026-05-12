@@ -4,6 +4,7 @@ import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
 import { useInView, useSpring, useTransform, motion } from "motion/react";
 import { SectionAnimate } from "@/components/ui/section-animate";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
+import { Magnetic } from "@/components/core/magnetic";
 import { nbsp } from "@/lib/nbsp";
 import {
   fluidLead,
@@ -454,17 +455,19 @@ export function ScoreCounterPage() {
 
       {/* ── CTA ── */}
       <SectionAnimate delay={0.34}>
-        <a
-          href="https://play.google.com/store/apps/details?id=ua.napps.scorekeeper"
-          data-goatcounter-click="outbound-play-store"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background rounded-lg hover:opacity-90 transition-opacity"
-          style={{ fontSize: fluidSmall, lineHeight: 1 }}
-        >
-          Get it on Google Play
-          <span aria-hidden>↗</span>
-        </a>
+        <Magnetic>
+          <a
+            href="https://play.google.com/store/apps/details?id=ua.napps.scorekeeper"
+            data-goatcounter-click="outbound-play-store"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background rounded-lg hover:opacity-90 transition-opacity"
+            style={{ fontSize: fluidSmall, lineHeight: 1 }}
+          >
+            Get it on Google Play
+            <span aria-hidden>↗</span>
+          </a>
+        </Magnetic>
       </SectionAnimate>
 
       {/* Bottom back link */}

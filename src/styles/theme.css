@@ -59,6 +59,8 @@
   --text-xl:  clamp(1.25rem, 1rem + 1vw, 1.5rem);
   --text-2xl: clamp(1.5rem, 1rem + 2vw, 2.25rem);
   --text-3xl: clamp(2rem, 1rem + 3.5vw, 3.25rem);
+
+  --content-media-max-width: 1100px;
 }
 
 .dark {
@@ -247,5 +249,19 @@
       0px 0px 0px 1px var(--shadow-border-hover-1),
       0px 1px 2px -1px var(--shadow-border-hover-2),
       0px 2px 4px 0px var(--shadow-border-hover-3);
+  }
+}
+
+.content-media {
+  display: block;
+}
+
+@media (min-width: 1024px) {
+  .content-media {
+    width: min(var(--content-media-max-width), calc(100vw - 2.5rem));
+    max-width: none;
+    margin-inline: calc(
+      (100% - min(var(--content-media-max-width), calc(100vw - 2.5rem))) / 2
+    );
   }
 }

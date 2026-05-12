@@ -11,10 +11,11 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
   }
 
   const { src, alt, style, className, ...rest } = props
+  const mediaClassName = `content-media ${className ?? ''}`
 
   return didError ? (
     <div
-      className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
+      className={`inline-block bg-gray-100 text-center align-middle ${mediaClassName}`}
       style={style}
     >
       <div className="flex items-center justify-center w-full h-full">
@@ -22,6 +23,6 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
       </div>
     </div>
   ) : (
-    <img src={src} alt={alt} className={className} style={style} {...rest} onError={handleError} />
+    <img src={src} alt={alt} className={mediaClassName} style={style} {...rest} onError={handleError} />
   )
 }
