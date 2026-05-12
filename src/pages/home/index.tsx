@@ -231,7 +231,7 @@ export function HomePage() {
                     className="text-muted-foreground"
                     style={{ fontSize: fluidBase, lineHeight: 1.5 }}
                   >
-                    {project.description}
+                    {nbsp(project.description)}
                   </p>
                 </div>
               </Link>
