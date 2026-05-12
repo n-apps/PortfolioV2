@@ -3,11 +3,19 @@ const designSystemCover = "/images/design-system-cover.png";
 const whiteLabelEsimCover = "/images/white-label-esim-cover.png";
 const saasOnboardingCover = "/images/saas-onboarding-cover.png";
 
+import { useState } from "react";
+import type { ComponentType, SVGProps } from "react";
 import { Link } from "react-router";
 import { SectionAnimate } from "@/components/ui/section-animate";
 import { nbsp } from "@/lib/nbsp";
 import { DashedDivider } from "@/components/ui/dashed-divider";
 import { fluidLead, fluidBase, fluidSmall } from "@/lib/typography";
+import {
+  EmailIcon,
+  LinkedInIcon,
+  PdfIcon,
+  TelegramIcon,
+} from "./connect-icons";
 
 const workExperience = [
   {
@@ -64,29 +72,91 @@ const personalProjects = [
   },
 ];
 
-const connectLinks = [
+type ConnectLink = {
+  label: string;
+  href: string;
+  display: string;
+  download?: boolean;
+  Icon: ComponentType<SVGProps<SVGSVGElement>>;
+};
+
+const connectLinks: ConnectLink[] = [
   {
     label: "LinkedIn",
     href: "https://linkedin.com/in/romashuliatiev",
     display: "in/romashuliatiev",
+    Icon: LinkedInIcon,
   },
   {
     label: "Email",
     href: [109, 97, 105, 108, 116, 111, 58, 104, 105, 64, 114, 111, 109, 97, 109, 97, 107, 101, 115, 46, 99, 111, 109].map(c => String.fromCharCode(c)).join(''),
     display: [104, 105, 64, 114, 111, 109, 97, 109, 97, 107, 101, 115, 46, 99, 111, 109].map(c => String.fromCharCode(c)).join(''),
+    Icon: EmailIcon,
   },
   {
     label: "Telegram",
     href: "https://t.me/artificially_busy",
     display: "@artificially_busy",
+    Icon: TelegramIcon,
   },
   {
     label: "CV",
     href: "/CV_Roma_Shuliatiev_Product_Designer.pdf",
     display: "download PDF",
     download: true,
+    Icon: PdfIcon,
   },
 ];
+
+function ConnectListItem({ label, href, display, download, Icon }: ConnectLink) {
+  const [active, setActive] = useState(false);
+  return (
+    <li
+      className="grid items-center sm:flex sm:flex-col sm:items-start"
+      style={{
+        gridTemplateColumns: "1fr 2fr",
+        gap: "clamp(0.375rem, 0.3rem + 0.25vw, 0.5rem)",
+      }}
+    >
+      <span
+        className="relative inline-grid items-center justify-items-start"
+        style={{ fontSize: fluidSmall, lineHeight: 1 }}
+      >
+        <span
+          className="col-start-1 row-start-1 transition-opacity duration-300 ease-out motion-reduce:transition-none"
+          style={{ opacity: active ? 0 : 1 }}
+        >
+          {label}
+        </span>
+        <span
+          aria-hidden
+          className="col-start-1 row-start-1 inline-flex items-center transition-opacity duration-300 ease-out motion-reduce:transition-none"
+          style={{ opacity: active ? 1 : 0 }}
+        >
+          <Icon />
+        </span>
+      </span>
+      <a
+        href={href}
+        data-goatcounter-click={label}
+        onMouseEnter={() => setActive(true)}
+        onMouseLeave={() => setActive(false)}
+        onFocus={() => setActive(true)}
+        onBlur={() => setActive(false)}
+        {...(download
+          ? { download: true }
+          : { target: "_blank", rel: "noopener noreferrer" })}
+        className="text-muted-foreground no-underline hover:underline underline-offset-2 hover:opacity-80 transition-opacity inline-flex items-center gap-1"
+        style={{
+          fontSize: fluidSmall,
+          lineHeight: 1,
+        }}
+      >
+        {display}
+      </a>
+    </li>
+  );
+}
 
 export function HomePage() {
   return (
@@ -283,38 +353,8 @@ export function HomePage() {
                 columnGap: "clamp(1rem, 0.75rem + 0.5vw, 1.5rem)",
               }}
             >
-              {connectLinks.map(({ label, href, display, download }) => (
-                <li
-                  key={label}
-                  className="grid items-center sm:flex sm:flex-col sm:items-start"
-                  style={{
-                    gridTemplateColumns: "1fr 2fr",
-                    gap: "clamp(0.375rem, 0.3rem + 0.25vw, 0.5rem)",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: fluidSmall,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {label}
-                  </span>
-                  <a
-                    href={href}
-                    data-goatcounter-click={label}
-                    {...(download
-                      ? { download: true }
-                      : { target: "_blank", rel: "noopener noreferrer" })}
-                    className="text-muted-foreground no-underline hover:underline underline-offset-2 hover:opacity-80 transition-opacity inline-flex items-center gap-1"
-                    style={{
-                      fontSize: fluidSmall,
-                      lineHeight: 1,
-                    }}
-                  >
-                    {display}
-                  </a>
-                </li>
+              {connectLinks.map((item) => (
+                <ConnectListItem key={item.label} {...item} />
               ))}
             </ul>
           </div>
