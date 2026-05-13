@@ -3,7 +3,7 @@ import { prepare, layout, type PreparedText } from "@chenglou/pretext";
 
 /* ── Config ───────────────────────────────────────────── */
 
-const font = "400 14px Inter, system-ui, -apple-system, sans-serif";
+const font = "400 14px OpenRunde, system-ui, -apple-system, sans-serif";
 const lineHeight = 21;
 const cardPadding = 16;
 const gap = 10;

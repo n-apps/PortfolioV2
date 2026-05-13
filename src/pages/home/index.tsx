@@ -182,13 +182,8 @@ export function HomePage() {
             </p>
           </div>
           <div className="flex flex-col" style={{ gap: "clamp(0.375rem, 0.35rem + 0.1vw, 0.5rem)" }}>
-            <h3
-              className="text-muted-foreground"
-              style={{ fontSize: fluidSmall, lineHeight: 1.2 }}
-            >
-              Now
-            </h3>
-            <p style={{ fontSize: fluidLead, lineHeight: 1.5 }}>
+            <p className="text-muted-foreground" style={{ fontSize: fluidLead, lineHeight: 1.5 }}>
+              <span className="pulsing-dot" aria-hidden="true" />
               {"Open to product designer roles, full-time."}
             </p>
           </div>
@@ -346,7 +341,7 @@ export function HomePage() {
             Get in touch
           </h2>
           <div className="flex flex-col" style={{ gap: "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)" }}>
-            <ul
+            <ol
               className="grid grid-cols-1 sm:grid-cols-4"
               style={{
                 rowGap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)",
@@ -356,7 +351,7 @@ export function HomePage() {
               {connectLinks.map((item) => (
                 <ConnectListItem key={item.label} {...item} />
               ))}
-            </ul>
+            </ol>
           </div>
         </section>
       </SectionAnimate>

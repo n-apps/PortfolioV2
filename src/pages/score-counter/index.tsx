@@ -11,7 +11,6 @@ import {
   fluidBase,
   fluidSmall,
   fluidH1,
-  fluidH3,
   sectionGap,
   innerGap,
 } from "@/lib/typography";
@@ -19,7 +18,10 @@ import {
   SectionHeading,
   BoldLead,
   PullQuote,
+  highlight,
 } from "@/components/case-study/case-study-components";
+
+const SUBJECT = "Score Counter";
 
 const heroImage = "/images/score-counter-hero.jpg";
 const evolutionImage = "/images/score-counter-evolution.png";
@@ -164,7 +166,7 @@ export function ScoreCounterPage() {
           style={{ fontSize: fluidSmall, lineHeight: 1 }}
         >
           <RiArrowLeftLine size={16} />
-          Back to Home Page
+          Home
         </Link>
       </SectionAnimate>
 
@@ -180,7 +182,7 @@ export function ScoreCounterPage() {
             }}
           >
             {nbsp(
-              "Score Counter: Keeping a simple app simple for 900K installs",
+              "Score Counter: Saying no at 900K installs",
             )}
           </h1>
           <p
@@ -188,7 +190,7 @@ export function ScoreCounterPage() {
             style={{ fontSize: fluidLead, lineHeight: 1.5 }}
           >
             {nbsp(
-              "I built Score Counter as a side project in 2016. Nine years later, it has 900K installs, 87.2K monthly active users, and a 4.9 rating on Google Play. The design challenge was not adding more. It was protecting the simple flow that made people trust it.",
+              "I built Score Counter to replace clunky, ad-heavy scorekeeping apps. As it grew to 900K installs, the challenge became less about adding features and more about keeping the app immediate, flexible, and easy to trust.",
             )}
           </p>
         </div>
@@ -229,18 +231,27 @@ export function ScoreCounterPage() {
           <SectionHeading>Context</SectionHeading>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
-            {nbsp(
+            {highlight(
               "Score Counter is an Android app for tracking scores during board games, card games, and any group activity that needs counting. It serves everyone from families at game night to tabletop groups and anyone replacing pen and paper.",
+              SUBJECT,
             )}
           </p>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
-              "I built it as a solo side project, without ads or marketing spend. Over time, the app grew through search, recommendations, translations from volunteers, and people using it for things I never planned.",
+              "The idea was personal. I wanted a clean way to keep score during board game nights, but every app I tried was clunky, ad-heavy, or buried the basics under settings. I had no development experience at the time — but I couldn’t settle for what was out there, so I taught myself enough Android to build, and eventually release, the version I actually wanted to use.",
+            )}
+          </p>
+          <p
+            className="text-foreground/80"
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
+          >
+            {nbsp(
+              "What started as a side project grew on its own — no ads, no marketing spend. Over time, search, word of mouth, volunteer translations, and people using it for things I never planned turned it into something much bigger.",
             )}
           </p>
         </div>
@@ -263,10 +274,11 @@ export function ScoreCounterPage() {
           <SectionHeading>Problem</SectionHeading>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
-            {nbsp(
+            {highlight(
               "Score Counter looked simple, but simplicity became harder to protect as the app grew. Users kept asking for saved sessions, deeper customization, and game-specific features. Some of those requests were useful, but many would have turned the app into something slower and narrower. The design problem was deciding what not to build.",
+              SUBJECT,
             )}
           </p>
           <PullQuote>
@@ -283,42 +295,30 @@ export function ScoreCounterPage() {
           <SectionHeading>Approach</SectionHeading>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
-              <h3
-                style={{
-                  fontSize: fluidH3,
-                  fontWeight: 600,
-                  lineHeight: 1.3,
-                  letterSpacing: "-0.005em",
-                }}
-              >
+              <strong>
                 Protect the three-step flow
-              </h3>
+              </strong>
               <p
                 className="text-foreground/80"
-                style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+                style={{ fontSize: fluidBase, lineHeight: 1.6 }}
               >
-                {nbsp(
+                {highlight(
                   "The primary flow is sacred: open the app → add counters → start counting. Every feature request gets measured against that loop. If it adds a step or a decision to the core path, it doesn\u2019t ship. This single constraint is what kept Score Counter focused while competitors kept adding complexity. It is also why users describe the experience as \u2018does what it needs to do.\u2019",
+                  SUBJECT,
                 )}
               </p>
             </div>
             <div className="flex flex-col gap-1">
-              <h3
-                style={{
-                  fontSize: fluidH3,
-                  fontWeight: 600,
-                  lineHeight: 1.3,
-                  letterSpacing: "-0.005em",
-                }}
-              >
+              <strong>
                 Say no when a feature narrows the product
-              </h3>
+              </strong>
               <p
                 className="text-foreground/80"
-                style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+                style={{ fontSize: fluidBase, lineHeight: 1.6 }}
               >
-                {nbsp(
+                {highlight(
                   "One of the most requested features was the ability to save an active game session and load it later. I said no. Shipping it would have fixed Score Counter conceptually as a board game companion, which is narrower than what it actually is. People use it to count anything, not just board game scores. Adding save/load would also mean extra steps before starting a quick session, breaking the three-step flow for a feature that serves only a subset of users.",
+                  SUBJECT,
                 )}
               </p>
             </div>
@@ -342,19 +342,10 @@ export function ScoreCounterPage() {
           <div className="flex flex-col gap-4">
             {constraints.map((c) => (
               <div key={c.title} className="flex flex-col gap-1">
-                <h3
-                  style={{
-                    fontSize: fluidH3,
-                    fontWeight: 600,
-                    lineHeight: 1.3,
-                    letterSpacing: "-0.005em",
-                  }}
-                >
-                  {c.title}
-                </h3>
+                <strong>{c.title}</strong>
                 <p
                   className="text-foreground/80"
-                  style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+                  style={{ fontSize: fluidBase, lineHeight: 1.6 }}
                 >
                   {c.text}
                 </p>
@@ -371,7 +362,7 @@ export function ScoreCounterPage() {
           <ImpactStatsGrid />
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "900K installs came through best UX and organic installs. The app still holds a 4.9 rating after nine years. The product lesson is simple: build something people trust enough to recommend.",
@@ -419,36 +410,36 @@ export function ScoreCounterPage() {
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               <strong>What worked:</strong>
             </p>
-            <ul className="flex flex-col gap-3 pl-5 list-disc">
+            <ol className="flex flex-col gap-2 pl-5 list-decimal">
               {whatWorked.map((item, i) => (
                 <li
                   key={i}
                   className="text-foreground/80"
-                  style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+                  style={{ fontSize: fluidBase, lineHeight: 1.6 }}
                 >
                   <BoldLead text={item} />
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               <strong>What I'd change:</strong>
             </p>
-            <ul className="flex flex-col gap-3 pl-5 list-disc">
+            <ol className="flex flex-col gap-2 pl-5 list-decimal">
               {whatIdChange.map((item, i) => (
                 <li
                   key={i}
                   className="text-foreground/80"
-                  style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+                  style={{ fontSize: fluidBase, lineHeight: 1.6 }}
                 >
-                  <BoldLead text={item} />
+                  <BoldLead text={item} highlightTerm={SUBJECT} />
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </div>
       </SectionAnimate>
@@ -480,7 +471,7 @@ export function ScoreCounterPage() {
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             <RiArrowLeftLine size={16} />
-            Back to Home Page
+            Home
           </Link>
           <Link
             to="/work/design-system"
@@ -488,7 +479,7 @@ export function ScoreCounterPage() {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
-            Next Case Study
+            Next work
             <RiArrowRightLine size={16} />
           </Link>
         </div>

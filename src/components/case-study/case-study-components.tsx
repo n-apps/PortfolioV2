@@ -1,13 +1,30 @@
-import { RiDoubleQuotesL, RiInformationLine } from "@remixicon/react";
+import { Fragment } from "react";
+import { RiDoubleQuotesL, RiEraserFill } from "@remixicon/react";
 import { nbsp } from "@/lib/nbsp";
-import { fluidBase, fluidH2, fluidSmall } from "@/lib/typography";
+import { fluidBase, fluidSmall } from "@/lib/typography";
+
+/** Renders `text` with `term` wrapped in <code>; applies nbsp to surrounding parts */
+export function highlight(text: string, term: string): React.ReactNode {
+  if (!text.includes(term)) return nbsp(text);
+  const parts = text.split(term);
+  return parts.map((part, i) => (
+    <Fragment key={i}>
+      {nbsp(part)}
+      {i < parts.length - 1 && <code>{term}</code>}
+    </Fragment>
+  ));
+}
 
 /** Section label used as a category heading above content blocks */
 export function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2
-      className="text-muted-foreground tracking-widest uppercase"
-      style={{ fontSize: fluidH2, lineHeight: 1.3, letterSpacing: "0.15em" }}
+      style={{
+        fontSize: fluidBase,
+        fontWeight: 500,
+        lineHeight: 1.2,
+        letterSpacing: "-0.01em",
+      }}
     >
       {children}
     </h2>
@@ -15,13 +32,20 @@ export function SectionHeading({ children }: { children: React.ReactNode }) {
 }
 
 /** Renders the first sentence in bold, rest as normal text */
-export function BoldLead({ text }: { text: string }) {
+export function BoldLead({
+  text,
+  highlightTerm,
+}: {
+  text: string;
+  highlightTerm?: string;
+}) {
+  const render = (slice: string) =>
+    highlightTerm ? highlight(slice, highlightTerm) : nbsp(slice);
   const i = text.indexOf(". ");
-  if (i === -1) return <>{nbsp(text)}</>;
+  if (i === -1) return <>{render(text)}</>;
   return (
     <>
-      <strong>{nbsp(text.slice(0, i + 1))}</strong>{" "}
-      {nbsp(text.slice(i + 2))}
+      <strong>{render(text.slice(0, i + 1))}</strong> {render(text.slice(i + 2))}
     </>
   );
 }
@@ -52,9 +76,10 @@ export function ConfidentialityNote() {
       className="flex items-start gap-2 text-muted-foreground italic"
       style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
     >
-      <RiInformationLine
-        className="shrink-0 mt-[0.15em]"
+      <RiEraserFill
+        className="shrink-0"
         size={14}
+        style={{ marginTop: "calc((1lh - 14px) / 2)" }}
         aria-hidden
       />
       <p>

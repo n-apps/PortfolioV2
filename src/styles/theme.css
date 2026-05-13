@@ -2,7 +2,7 @@
 
 :root {
   --font-size: 16px;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'OpenRunde', system-ui, -apple-system, sans-serif;
   --font-serif: 'Newsreader', Georgia, serif;
   --font-mono: 'IBM Plex Mono', monospace;
 
@@ -22,6 +22,7 @@
   --accent-foreground: #ffffff;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
+  --success: #16a34a;
   --border: rgba(0, 0, 0, 0.08);
   --image-outline: rgba(0, 0, 0, 0.1);
   --shadow-border-1: rgba(0, 0, 0, 0.06);
@@ -80,6 +81,7 @@
   --accent-foreground: #ffffff;
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
+  --success: #22c55e;
   --border: rgba(255, 255, 255, 0.08);
   --image-outline: rgba(255, 255, 255, 0.1);
   --shadow-border-1: rgba(255, 255, 255, 0.06);
@@ -205,6 +207,11 @@
     letter-spacing: -0.011em;
   }
 
+  b,
+  strong {
+    font-weight: var(--font-weight-medium);
+  }
+
   label {
     font-size: var(--text-base);
     font-weight: var(--font-weight-medium);
@@ -233,6 +240,14 @@
   .phone-preview img {
     outline: none;
   }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background-color: var(--secondary);
+    border-radius: 0.3em;
+    padding: 0.2em 0.4em;
+  }
 }
 
 @utility card-shadow {
@@ -249,6 +264,36 @@
       0px 0px 0px 1px var(--shadow-border-hover-1),
       0px 1px 2px -1px var(--shadow-border-hover-2),
       0px 2px 4px 0px var(--shadow-border-hover-3);
+  }
+}
+
+.pulsing-dot {
+  display: inline-block;
+  width: 0.375em;
+  height: 0.375em;
+  margin-right: 0.6em;
+  border-radius: 9999px;
+  background-color: var(--success);
+  vertical-align: 0.12em;
+  box-shadow: 0 0 0 0 var(--success);
+  animation: pulsing-dot 3s infinite;
+}
+
+@keyframes pulsing-dot {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 0.41em color-mix(in srgb, var(--success) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 0%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulsing-dot {
+    animation: none;
   }
 }
 

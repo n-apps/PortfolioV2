@@ -40,7 +40,7 @@ export function NotFoundPage() {
           style={{ fontSize: fluidSmall, lineHeight: 1.2 }}
         >
           <RiArrowLeftLine size={14} />
-          Back to Home
+          Home
         </Link>
       </SectionAnimate>
     </div>

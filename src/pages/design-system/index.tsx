@@ -8,7 +8,6 @@ import {
   fluidBase,
   fluidSmall,
   fluidH1,
-  fluidH3,
   sectionGap,
   innerGap,
 } from "@/lib/typography";
@@ -17,7 +16,10 @@ import {
   BoldLead,
   PullQuote,
   ConfidentialityNote,
+  highlight,
 } from "@/components/case-study/case-study-components";
+
+const SUBJECT = "Yesim";
 
 const heroImage = "/images/design-system-hero.png";
 const beforeAfterImage = "/images/design-system-before-after.png";
@@ -198,7 +200,7 @@ export function DesignSystemPage() {
           style={{ fontSize: fluidSmall, lineHeight: 1 }}
         >
           <RiArrowLeftLine size={16} />
-          Back to Home Page
+          Home
         </Link>
       </SectionAnimate>
 
@@ -265,15 +267,16 @@ export function DesignSystemPage() {
           <SectionHeading>Context</SectionHeading>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
-            {nbsp(
+            {highlight(
               "Yesim is a global eSIM platform with over 3\u00a0million customers and several B2B web products sharing the same tech stack. When I joined, three products were growing independently, each with its own UI patterns, color schemes, and legacy implementations. Even small changes slowed things down, and design reviews became negotiations instead of quick reference checks.",
+              SUBJECT,
             )}
           </p>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "The products did not need a decorative refresh. They needed a shared way to build common B2B surfaces: tables, forms, filters, navigation, feedback states, and settings pages. The hard part was that each product still needed its own identity.",
@@ -288,7 +291,7 @@ export function DesignSystemPage() {
           <SectionHeading>Problem</SectionHeading>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "The main product risk was fragmentation. If each product needed its own components, the system would collapse under maintenance. If the system forced every product to look the same, teams would work around it. Either outcome would slow the work down.",
@@ -318,19 +321,12 @@ export function DesignSystemPage() {
           {/* Decision 1: Token architecture */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <SectionHeading>Approach</SectionHeading>
-            <h3
-              style={{
-                fontSize: fluidH3,
-                fontWeight: 600,
-                lineHeight: 1.3,
-                letterSpacing: "-0.005em",
-              }}
-            >
+            <strong>
               Prevent forks before they started
-            </h3>
+            </strong>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "The main risk was forking. If each product needed its own buttons, inputs, tables, and dialogs, the library would become three libraries with the same name. So I used three token layers: raw values, primitives, and semantic tokens.",
@@ -338,31 +334,16 @@ export function DesignSystemPage() {
             </p>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "The product-specific work happens at the semantic layer. A product can change",
               )}{" "}
-              <code
-                className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80"
-                style={{ fontSize: "0.75rem" }}
-              >
-                color-primary
-              </code>
+              <code>color-primary</code>
               {", "}
-              <code
-                className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80"
-                style={{ fontSize: "0.75rem" }}
-              >
-                font-heading
-              </code>
+              <code>font-heading</code>
               {", or "}
-              <code
-                className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80"
-                style={{ fontSize: "0.75rem" }}
-              >
-                radius-default
-              </code>{" "}
+              <code>radius-default</code>{" "}
               {nbsp(
                 "without changing the component itself. The component stays boring on purpose.",
               )}
@@ -389,19 +370,12 @@ export function DesignSystemPage() {
 
           {/* Decision 2: One library, three themes */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3
-              style={{
-                fontSize: fluidH3,
-                fontWeight: 600,
-                lineHeight: 1.3,
-                letterSpacing: "-0.005em",
-              }}
-            >
+            <strong>
               Let products look different without separate components
-            </h3>
+            </strong>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "Each product gets a theme file that overrides semantic tokens. The component library does not need to know which product is using it. Switching themes changes the product expression, not the component implementation.",
@@ -429,19 +403,12 @@ export function DesignSystemPage() {
 
           {/* Decision 3: B2B-first component priorities */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3
-              style={{
-                fontSize: fluidH3,
-                fontWeight: 600,
-                lineHeight: 1.3,
-                letterSpacing: "-0.005em",
-              }}
-            >
+            <strong>
               Prioritize the surfaces teams touched every week
-            </h3>
+            </strong>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "I audited every UI element across all three products: buttons in five styles, three table implementations, form fields that looked similar but behaved differently. Then I used the results to build a prioritized roadmap. Tables and forms came first because they appeared on every product\u2019s most-visited pages.",
@@ -457,17 +424,12 @@ export function DesignSystemPage() {
             />
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "Density is a system-level token. Components respond to a density setting (default, compact, spacious) without separate variants. Tokens are named by function, not appearance:",
               )}{" "}
-              <code
-                className="px-1.5 py-0.5 rounded bg-secondary text-foreground/80"
-                style={{ fontSize: "0.75rem" }}
-              >
-                color-fg-secondary
-              </code>{" "}
+              <code>color-fg-secondary</code>{" "}
               {nbsp(
                 "tells you it\u2019s a secondary foreground color without looking up the hex.",
               )}
@@ -487,19 +449,12 @@ export function DesignSystemPage() {
           </div>
 
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3
-              style={{
-                fontSize: fluidH3,
-                fontWeight: 600,
-                lineHeight: 1.3,
-                letterSpacing: "-0.005em",
-              }}
-            >
+            <strong>
               Make adoption lighter than rebuilding
-            </h3>
+            </strong>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "Each component includes a live preview, prop/variant table, usage guidelines (when to use and when not to), accessibility notes, and a changelog.",
@@ -507,7 +462,7 @@ export function DesignSystemPage() {
             </p>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "Product managers could prototype with real components, so concepts looked like the actual product from day one instead of a rough wireframe that needed to be redesigned later.",
@@ -526,7 +481,7 @@ export function DesignSystemPage() {
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "Instead of mandating a full migration, I worked with each product team to migrate high-impact, low-risk surfaces first: settings pages and list views. Once teams saw the time savings, adoption became easier to justify.",
@@ -534,7 +489,7 @@ export function DesignSystemPage() {
             </p>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "To keep requests manageable, teams submitted component requests through Jira. I reviewed and ranked them weekly. New components went through design review with at least one consuming team, then were built, documented, versioned, and tested across all three product themes.",
@@ -581,7 +536,7 @@ export function DesignSystemPage() {
               </div>
             ))}
           </div>
-          <ul className="flex flex-col gap-3 pl-5 list-disc">
+          <ol className="flex flex-col gap-2 pl-5 list-decimal">
             <li
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.7 }}
@@ -609,7 +564,7 @@ export function DesignSystemPage() {
                 "new team members could read the documented decisions instead of reverse-engineering patterns from code and old screens",
               )}
             </li>
-          </ul>
+          </ol>
         </div>
       </SectionAnimate>
 
@@ -618,10 +573,10 @@ export function DesignSystemPage() {
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               <strong>What worked:</strong>
             </p>
-            <ul className="flex flex-col gap-3 pl-5 list-disc">
+            <ol className="flex flex-col gap-2 pl-5 list-decimal">
               {whatWorked.map((item, i) => (
                 <li
                   key={i}
@@ -631,13 +586,13 @@ export function DesignSystemPage() {
                   <BoldLead text={item} />
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               <strong>What I'd change:</strong>
             </p>
-            <ul className="flex flex-col gap-3 pl-5 list-disc">
+            <ol className="flex flex-col gap-2 pl-5 list-decimal">
               {whatIdChange.map((item, i) => (
                 <li
                   key={i}
@@ -647,7 +602,7 @@ export function DesignSystemPage() {
                   <BoldLead text={item} />
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         </div>
       </SectionAnimate>
@@ -662,7 +617,7 @@ export function DesignSystemPage() {
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             <RiArrowLeftLine size={16} />
-            Back to Home Page
+            Home
           </Link>
           <Link
             to="/work/white-label-esim"
@@ -670,7 +625,7 @@ export function DesignSystemPage() {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
-            Next Case Study
+            Next work
             <RiArrowRightLine size={16} />
           </Link>
         </div>

@@ -8,7 +8,6 @@ import {
   fluidBase,
   fluidSmall,
   fluidH1,
-  fluidH3,
   sectionGap,
   innerGap,
 } from "@/lib/typography";
@@ -16,7 +15,10 @@ import {
   SectionHeading,
   PullQuote,
   ConfidentialityNote,
+  highlight,
 } from "@/components/case-study/case-study-components";
+
+const SUBJECT = "Yesim";
 import { GlowEffect } from "@/components/motion-primitives/glow-effect";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 
@@ -128,7 +130,7 @@ const whatIdChange = [
 
 function LabeledList({ items }: { items: { label: string; body: string }[] }) {
   return (
-    <ul className="flex flex-col gap-3 pl-5 list-disc">
+    <ol className="flex flex-col gap-2 pl-5 list-decimal">
       {items.map((item, i) => (
         <li
           key={i}
@@ -140,7 +142,7 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
           {nbsp(item.body)}
         </li>
       ))}
-    </ul>
+    </ol>
   );
 }
 
@@ -213,7 +215,7 @@ export function WhiteLabelEsimPage() {
           style={{ fontSize: fluidSmall, lineHeight: 1 }}
         >
           <RiArrowLeftLine size={16} />
-          Back to home
+          Home
         </Link>
       </SectionAnimate>
 
@@ -281,15 +283,16 @@ export function WhiteLabelEsimPage() {
           <SectionHeading>Context</SectionHeading>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
-            {nbsp(
+            {highlight(
               "Yesim is a global eSIM platform with over 3\u00a0million customers. One B2B product lets opted-in partners upload a logo, pick brand colors, add contact details, and preview the eSIM experience their customers will see.",
+              SUBJECT,
             )}
           </p>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "Before this work, the handoff pattern was familiar: design screens in Figma, annotate the edge cases, hand them to development, then spend review cycles catching things the static file could not express. That workflow was manageable for simple pages. It was much weaker for a product where the UI changes based on real partner input.",
@@ -304,7 +307,7 @@ export function WhiteLabelEsimPage() {
           <SectionHeading>Problem</SectionHeading>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "This customization screen was all response. Brand colors changed text contrast. Optional fields hid or revealed sections. File uploads changed the layout. A Figma mockup could show one clean state, but the product had to survive many.",
@@ -312,7 +315,7 @@ export function WhiteLabelEsimPage() {
           </p>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "I had run into this before. I would hand off polished screens, then watch implementation surface the real problems: contrast failures on dark brand colors, empty states nobody designed, layout shifts when optional content appeared or disappeared. The mockup looked right. The built product did not behave right.",
@@ -325,14 +328,14 @@ export function WhiteLabelEsimPage() {
           </PullQuote>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp("For brand customization, the weak spots were predictable:")}
           </p>
           <LabeledList items={statusQuoItems} />
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "The risk was not that the screen would look bad in Figma. The risk was that it would look right there and fail under real input.",
@@ -357,19 +360,12 @@ export function WhiteLabelEsimPage() {
           {/* Decision 1: Code, not Figma */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <SectionHeading>Approach</SectionHeading>
-            <h3
-              style={{
-                fontSize: fluidH3,
-                fontWeight: 600,
-                lineHeight: 1.3,
-                letterSpacing: "-0.005em",
-              }}
-            >
+            <strong>
               Build the artifact where behavior had to work
-            </h3>
+            </strong>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "I designed directly in Next.js and Tailwind CSS instead of producing static screens. I wasn\u2019t skipping design. I was putting it somewhere the interaction constraints had to be dealt with.",
@@ -377,7 +373,7 @@ export function WhiteLabelEsimPage() {
             </p>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "In Figma, you can place white text on a blue background and move on. In code, the text is either readable or it isn\u2019t. If partners can pick their own colors, the logic has to handle that.",
@@ -385,7 +381,7 @@ export function WhiteLabelEsimPage() {
             </p>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "The trade-off was obvious: more effort upfront and a slower first pass. The upside was worth it. The awkward problems showed up while I was still designing.",
@@ -395,19 +391,12 @@ export function WhiteLabelEsimPage() {
 
           {/* Decision 2: Contrast at the system level */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3
-              style={{
-                fontSize: fluidH3,
-                fontWeight: 600,
-                lineHeight: 1.3,
-                letterSpacing: "-0.005em",
-              }}
-            >
+            <strong>
               Make contrast executable
-            </h3>
+            </strong>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "The prototype computes foreground text color from the partner\u2019s brand color using WCAG relative-luminance calculations. Light brand colors get dark text. Dark brand colors get white text. It runs every time the color changes, so nobody has to hope the chosen color happens to work.",
@@ -415,7 +404,7 @@ export function WhiteLabelEsimPage() {
             </p>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "In a static design, I would have left a comment saying \u201censure contrast.\u201d In the prototype, contrast is a function. It passes or it fails.",
@@ -433,19 +422,12 @@ export function WhiteLabelEsimPage() {
 
           {/* Decision 3: Conditional rendering */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3
-              style={{
-                fontSize: fluidH3,
-                fontWeight: 600,
-                lineHeight: 1.3,
-                letterSpacing: "-0.005em",
-              }}
-            >
+            <strong>
               Treat optional content as product logic
-            </h3>
+            </strong>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "Instead of creating a dozen Figma variants for toggles and optional fields, the prototype renders conditionally. The contact card appears when at least one contact field has content. The promotion badge follows its toggle. The footer appears only when it has something useful to show.",
@@ -453,7 +435,7 @@ export function WhiteLabelEsimPage() {
             </p>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "That made the combinations much harder to miss. The rendering logic handled them instead of relying on my memory of which variants to draw.",
@@ -471,19 +453,12 @@ export function WhiteLabelEsimPage() {
 
           {/* Decision 4: Real-time preview */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <h3
-              style={{
-                fontSize: fluidH3,
-                fontWeight: 600,
-                lineHeight: 1.3,
-                letterSpacing: "-0.005em",
-              }}
-            >
+            <strong>
               Use the preview as the review surface
-            </h3>
+            </strong>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "The screen is split between the form and the live preview. Every keystroke, color change, or file upload updates the preview instantly. Partners can see their brand inside a realistic mobile interface, with a desktop toggle, without saving or refreshing.",
@@ -491,7 +466,7 @@ export function WhiteLabelEsimPage() {
             </p>
             <p
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
                 "That made reviews faster. I did not have to walk people through annotations. I shared a URL, they typed into the form, and the product answered back.",
@@ -507,7 +482,7 @@ export function WhiteLabelEsimPage() {
           <SectionHeading>Result</SectionHeading>
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "The prototype covered the parts that usually get shoved into annotations:",
@@ -516,7 +491,7 @@ export function WhiteLabelEsimPage() {
           <LabeledList items={prototypeFeatures} />
           <p
             className="text-foreground/80"
-            style={{ fontSize: fluidBase, lineHeight: 1.75 }}
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
               "In a static handoff, most of that would have been comments. In the prototype, people could try the behavior themselves.",
@@ -588,13 +563,13 @@ export function WhiteLabelEsimPage() {
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               <strong>What worked:</strong>
             </p>
             <LabeledList items={whatWorked} />
           </div>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.75 }}>
+            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               <strong>What I'd change:</strong>
             </p>
             <LabeledList items={whatIdChange} />
@@ -612,7 +587,7 @@ export function WhiteLabelEsimPage() {
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             <RiArrowLeftLine size={16} />
-            Back to home
+            Home
           </Link>
           <Link
             to="/work/score-counter"
@@ -620,7 +595,7 @@ export function WhiteLabelEsimPage() {
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
-            Next case study
+            Next work
             <RiArrowRightLine size={16} />
           </Link>
         </div>
