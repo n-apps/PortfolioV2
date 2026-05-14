@@ -42,14 +42,14 @@ const statusQuoItems = [
   },
   {
     label: "File uploads",
-    body: "logos and banners reshape the preview. Aspect ratios vary, fallbacks matter, and the layout needs to survive real assets.",
+    body: "logos and banners reshape the preview. Aspect ratios vary, fallbacks matter and the layout needs to survive real assets.",
   },
 ];
 
 const prototypeFeatures = [
   {
     label: "Live form-to-preview binding",
-    body: "brand name, logo, color, banner, contact details, and policy links update the preview as the partner types",
+    body: "brand name, logo, color, banner, contact details and policy links update the preview as the partner types",
   },
   {
     label: "Mobile and desktop preview modes",
@@ -65,11 +65,11 @@ const prototypeFeatures = [
   },
   {
     label: "Validation",
-    body: "email format, URL structure, and brand alias cleanup happen inline, before save",
+    body: "email format, URL structure and brand alias cleanup happen inline, before save",
   },
   {
     label: "Dirty-state tracking",
-    body: "the form warns before navigation when changes are unsaved, and save/reset work per section",
+    body: "the form warns before navigation when changes are unsaved and save/reset work per section",
   },
   {
     label: "Loading states and transitions",
@@ -88,7 +88,7 @@ const impactItems = [
   },
   {
     label: "Less translation for development",
-    body: "the prototype used the same stack as production (Next.js, Tailwind), so the developer could extend it instead of rebuilding from a mockup",
+    body: "the prototype used the same stack as production (Flowbite + React), so the developer could extend it instead of rebuilding from a mockup",
   },
   {
     label: "Edge cases handled by default",
@@ -99,7 +99,7 @@ const impactItems = [
 const whatWorked = [
   {
     label: "The medium enforced rigor",
-    body: "Code doesn\u2019t let you hand-wave for long. Every state, color, and conditional is either handled or it breaks. That pressure made the design better.",
+    body: "Code doesn\u2019t let you hand-wave for long. Every state, color and conditional is either handled or it breaks. That pressure made the design better.",
   },
   {
     label: "Stakeholders engaged differently",
@@ -225,7 +225,7 @@ export function WhiteLabelEsimPage() {
             style={{ fontSize: fluidLead, lineHeight: 1.5 }}
           >
             {nbsp(
-              "I built a working prototype instead of another static Figma handoff. It exposed the states, edge cases, and interaction rules that mockups usually hide, and gave the team something closer to the final product.",
+              "I built a working prototype instead of another static Figma handoff. It exposed the states, edge cases and interaction rules that mockups usually hide and gave the team something closer to the final product.",
             )}
           </p>
         </div>
@@ -273,7 +273,7 @@ export function WhiteLabelEsimPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {highlight(
-              "Yesim is a global eSIM platform with over 3\u00a0million customers. One B2B product lets opted-in partners upload a logo, pick brand colors, add contact details, and preview the eSIM experience their customers will see.",
+              "Yesim is a global eSIM platform with over 3\u00a0million customers. One B2B product lets opted-in partners upload a logo, pick brand colors, add contact details and preview the eSIM experience their customers will see.",
               SUBJECT,
             )}
           </p>
@@ -297,7 +297,7 @@ export function WhiteLabelEsimPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
-              "This customization screen was all response. Brand colors changed text contrast. Optional fields hid or revealed sections. File uploads changed the layout. A Figma mockup could show one clean state, but the product had to survive many.",
+              "The white-label eSIM configurator had few states on the surface. Brand colors changed text contrast. Optional fields hid or revealed sections. File uploads changed the layout. A Figma mockup could show one clean state, but the product had to survive many.",
             )}
           </p>
           <p
@@ -355,7 +355,7 @@ export function WhiteLabelEsimPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
-                "I designed directly in Next.js and Tailwind CSS instead of producing static screens. I wasn\u2019t skipping design. I was putting it somewhere the interaction constraints had to be dealt with.",
+                "I designed directly in code instead of producing static screens. I wasn\u2019t skipping design. I was putting it somewhere the interaction constraints had to be dealt with.",
               )}
             </p>
             <p
@@ -363,7 +363,7 @@ export function WhiteLabelEsimPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
-                "In Figma, you can place white text on a blue background and move on. In code, the text is either readable or it isn\u2019t. If partners can pick their own colors, the logic has to handle that.",
+                "In a static mockup, you can place white text on a blue background and move on. In code, the text is either readable or it isn\u2019t. If partners can pick their own colors, the logic has to handle that.",
               )}
             </p>
             <p
@@ -456,7 +456,7 @@ export function WhiteLabelEsimPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
-                "That made reviews faster. I did not have to walk people through annotations. I shared a URL, they typed into the form, and the product answered back.",
+                "That made reviews faster. I did not have to walk people through annotations. I shared a URL, they typed into the form and the product answered back.",
               )}
             </p>
           </div>
@@ -550,14 +550,24 @@ export function WhiteLabelEsimPage() {
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              What worked
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
+            >
+              {nbsp(
+                "Building the prototype in code was the right call for this feature. It turned hidden product rules into visible behavior before the team had to commit to the final implementation.",
+              )}
             </p>
             <LabeledList items={whatWorked} />
           </div>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              What I'd change
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
+            >
+              {nbsp(
+                "The tradeoff is that code can make the first solid idea feel more final than it is. With more time, I would support the prototype with a little more shared exploration and decision history.",
+              )}
             </p>
             <LabeledList items={whatIdChange} />
           </div>

@@ -16,7 +16,6 @@ import {
 } from "@/lib/typography";
 import {
   SectionHeading,
-  BoldLead,
   PullQuote,
   highlight,
 } from "@/components/case-study/case-study-components";
@@ -57,15 +56,33 @@ const constraints = [
 ];
 
 const whatWorked = [
-  "The constraint stayed easy to explain. The app has one job, and the three-step flow made it clear which requests belonged and which ones did not.",
-  "Trust became distribution. No ads, low friction, and familiar Android patterns made the app easy to recommend.",
-  "Unexpected uses stayed possible. Because the app did not become a board-game-only tool, people used it for sports, habits, jokes, and household counting.",
+  {
+    label: "The constraint stayed easy to explain",
+    body: "the app has one job and the three-step flow made it clear which requests belonged and which ones did not.",
+  },
+  {
+    label: "Trust became distribution",
+    body: "no ads, low friction and familiar Android patterns made the app easy to recommend.",
+  },
+  {
+    label: "Unexpected uses stayed possible",
+    body: "because the app did not become a board-game-only tool, people used it for sports, habits, jokes and household counting.",
+  },
 ];
 
 const whatIdChange = [
-  "Document decisions as they happen. Building Score Counter taught me this the hard way. My ideation process now lives in Figma from day one, and the app has used git version control from the start.",
-  "Keep a hand on product health. I now use Crashlytics to monitor app stability and crash patterns. No plans for complex analytics, but enough to make informed decisions about what's working.",
-  "Follow cross-platform demand signals earlier. The fan-made web version proved there's demand beyond Android. I explored building an iOS version with AI tools, but SwiftUI code generation wasn't there yet in 2025. The project is on hold while I look for a human iOS developer to collaborate with.",
+  {
+    label: "Document decisions as they happen",
+    body: "building Score Counter taught me this the hard way. My ideation process now lives in Figma from day one and the app has used git version control from the start.",
+  },
+  {
+    label: "Keep a hand on product health",
+    body: "I now use Crashlytics to monitor app stability and crash patterns. No plans for complex analytics, but enough to make informed decisions about what's working.",
+  },
+  {
+    label: "Follow cross-platform demand signals earlier",
+    body: "the fan-made web version proved there's demand beyond Android. I explored building an iOS version with AI tools, but SwiftUI code generation wasn't there yet in 2025. The project is on hold while I look for a human iOS developer to collaborate with.",
+  },
 ];
 
 /* ── Local sub-components ──────────────────────────────── */
@@ -152,6 +169,24 @@ function ImpactStatsGrid() {
   );
 }
 
+function LabeledList({ items }: { items: { label: string; body: string }[] }) {
+  return (
+    <ol className="flex flex-col gap-2 pl-5 list-decimal">
+      {items.map((item, i) => (
+        <li
+          key={i}
+          className="text-foreground/80"
+          style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+        >
+          <strong>{nbsp(item.label)}</strong>
+          {": "}
+          {nbsp(item.body)}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 /* ── Page ─────────────────────────────────────────────── */
 
 export function ScoreCounterPage() {
@@ -177,7 +212,7 @@ export function ScoreCounterPage() {
             style={{ fontSize: fluidLead, lineHeight: 1.5 }}
           >
             {nbsp(
-              "I built Score Counter to replace clunky, ad-heavy scorekeeping apps. As it grew to 900K installs, the challenge became less about adding features and more about keeping the app immediate, flexible, and easy to trust.",
+              "I built Score Counter to replace clunky, ad-heavy scorekeeping apps. As it grew to 900K installs, the challenge became less about adding features and more about keeping the app immediate, flexible and easy to trust.",
             )}
           </p>
         </div>
@@ -187,7 +222,7 @@ export function ScoreCounterPage() {
         <div className="-mx-4 sm:mx-0">
           <ImageWithFallback
             src={heroImage}
-            alt="Five smartphone screens showcasing Score Counter app features: player scores, dice roller, calculator input, and timer"
+            alt="Five smartphone screens showcasing Score Counter app features: player scores, dice roller, calculator input and timer"
             className="w-full rounded-none sm:rounded-xl"
             loading="eager"
           />
@@ -221,7 +256,7 @@ export function ScoreCounterPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {highlight(
-              "Score Counter is an Android app for tracking scores during board games, card games, and any group activity that needs counting. It serves everyone from families at game night to tabletop groups and anyone replacing pen and paper.",
+              "Score Counter is an Android app for tracking scores during board games, card games and any group activity that needs counting. It serves everyone from families at game night to tabletop groups and anyone replacing pen and paper.",
               SUBJECT,
             )}
           </p>
@@ -230,7 +265,7 @@ export function ScoreCounterPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
-              "The idea was personal. I wanted a clean way to keep score during board game nights, but every app I tried was clunky, ad-heavy, or buried the basics under settings. I had no development experience at the time — but I couldn’t settle for what was out there, so I taught myself enough Android to build, and eventually release, the version I actually wanted to use.",
+              "The idea was personal. I wanted a clean way to keep score during board game nights, but every app I tried was clunky, ad-heavy, or buried the basics under settings. I had no development experience at the time — but I couldn’t settle for what was out there, so I taught myself enough Android to build and eventually release, the version I actually wanted to use.",
             )}
           </p>
           <p
@@ -238,7 +273,7 @@ export function ScoreCounterPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
-              "What started as a side project grew on its own — no ads, no marketing spend. Over time, search, word of mouth, volunteer translations, and people using it for things I never planned turned it into something much bigger.",
+              "What started as a side project grew on its own — no ads, no marketing spend. Over time, search, word of mouth, volunteer translations and people using it for things I never planned turned it into something much bigger.",
             )}
           </p>
         </div>
@@ -264,7 +299,7 @@ export function ScoreCounterPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {highlight(
-              "Score Counter looked simple, but simplicity became harder to protect as the app grew. Users kept asking for saved sessions, deeper customization, and game-specific features. Some of those requests were useful, but many would have turned the app into something slower and narrower. The design problem was deciding what not to build.",
+              "Score Counter looked simple, but simplicity became harder to protect as the app grew. Users kept asking for saved sessions, deeper customization and game-specific features. Some of those requests were useful, but many would have turned the app into something slower and narrower. The design problem was deciding what not to build.",
               SUBJECT,
             )}
           </p>
@@ -385,7 +420,7 @@ export function ScoreCounterPage() {
         <div className="-mx-4 sm:mx-0">
           <ImageWithFallback
             src={unexpectedUseCasesImage}
-            alt="Screenshot grid of real Play Store reviews showing unexpected use cases: scoring camogie matches in Ireland, counting beers, tracking children's annoyances, and keeping track of swearing in front of kids"
+            alt="Screenshot grid of real Play Store reviews showing unexpected use cases: scoring camogie matches in Ireland, counting beers, tracking children's annoyances and keeping track of swearing in front of kids"
             className="w-full rounded-none sm:rounded-xl"
             loading="lazy"
           />
@@ -397,36 +432,26 @@ export function ScoreCounterPage() {
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              What worked
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
+            >
+              {nbsp(
+                "A few choices still explain why Score Counter kept growing without becoming heavier. The best ones were not clever features; they were constraints I could repeat every time a new request arrived.",
+              )}
             </p>
-            <ol className="flex flex-col gap-2 pl-5 list-decimal">
-              {whatWorked.map((item, i) => (
-                <li
-                  key={i}
-                  className="text-foreground/80"
-                  style={{ fontSize: fluidBase, lineHeight: 1.6 }}
-                >
-                  <BoldLead text={item} />
-                </li>
-              ))}
-            </ol>
+            <LabeledList items={whatWorked} />
           </div>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              What I'd change
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
+            >
+              {nbsp(
+                "The parts I would revisit are mostly about operating the product with more discipline. The app survived because it stayed simple, but its history taught me to capture decisions, health signals and platform demand earlier.",
+              )}
             </p>
-            <ol className="flex flex-col gap-2 pl-5 list-decimal">
-              {whatIdChange.map((item, i) => (
-                <li
-                  key={i}
-                  className="text-foreground/80"
-                  style={{ fontSize: fluidBase, lineHeight: 1.6 }}
-                >
-                  <BoldLead text={item} highlightTerm={SUBJECT} />
-                </li>
-              ))}
-            </ol>
+            <LabeledList items={whatIdChange} />
           </div>
         </div>
       </SectionAnimate>

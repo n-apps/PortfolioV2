@@ -13,7 +13,6 @@ import {
 } from "@/lib/typography";
 import {
   SectionHeading,
-  BoldLead,
   PullQuote,
   ConfidentialityNote,
   highlight,
@@ -121,15 +120,33 @@ const priorityComponents = [
 ];
 
 const whatWorked = [
-  "The anti-forking rule held up. Getting three products with distinct visual identities onto one shared library was the hardest part. The token model kept that from becoming three separate component sets.",
-  "Teams used the process because it was small. Busy product teams participated because requests were easy to make, priorities were visible, and the first migrations produced results after one quarter.",
-  "Documentation carried design intent. Including the \u201cwhy\u201d in component documentation made the system easier to trust. It showed when to use a pattern, not just what it looked like.",
+  {
+    label: "The anti-forking rule held up",
+    body: "getting three products with distinct visual identities onto one shared library was the hardest part. The token model kept that from becoming three separate component sets.",
+  },
+  {
+    label: "Teams used the process because it was small",
+    body: "busy product teams participated because requests were easy to make, priorities were visible and the first migrations produced results after one quarter.",
+  },
+  {
+    label: "Documentation carried design intent",
+    body: "including the \u201cwhy\u201d in component documentation made the system easier to trust. It showed when to use a pattern, not just what it looked like.",
+  },
 ];
 
 const whatIdChange = [
-  "Use AI-powered tooling earlier. Manual batch operations were slow and left room for small mistakes.",
-  "Track adoption from the start. Component usage, override frequency, and contribution activity would have made the system\u2019s value visible sooner.",
-  "Involve developers earlier. Some naming decisions that seemed logical in Figma caused problems in code.",
+  {
+    label: "Use AI-powered tooling earlier",
+    body: "manual batch operations were slow and left room for small mistakes.",
+  },
+  {
+    label: "Track adoption from the start",
+    body: "component usage, override frequency and contribution activity would have made the system\u2019s value visible sooner.",
+  },
+  {
+    label: "Involve developers earlier",
+    body: "some naming decisions that seemed logical in Figma caused problems in code.",
+  },
 ];
 
 /* ── Local sub-components ──────────────────────────────── */
@@ -186,6 +203,24 @@ function DataTable({
   );
 }
 
+function LabeledList({ items }: { items: { label: string; body: string }[] }) {
+  return (
+    <ol className="flex flex-col gap-2 pl-5 list-decimal">
+      {items.map((item, i) => (
+        <li
+          key={i}
+          className="text-foreground/80"
+          style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+        >
+          <strong>{nbsp(item.label)}</strong>
+          {": "}
+          {nbsp(item.body)}
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 /* ── Page ─────────────────────────────────────────────── */
 
 export function DesignSystemPage() {
@@ -219,7 +254,7 @@ export function DesignSystemPage() {
         <div className="-mx-4 sm:mx-0">
           <ImageWithFallback
             src={heroImage}
-            alt="Design system overview \u2014 components, tokens, and theme variations side by side"
+            alt="Design system overview \u2014 components, tokens and theme variations side by side"
             className="w-full rounded-none sm:rounded-xl"
             loading="eager"
           />
@@ -257,7 +292,7 @@ export function DesignSystemPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {highlight(
-              "Yesim is a global eSIM platform with over 3\u00a0million customers and several B2B web products sharing the same tech stack. When I joined, three products were growing independently, each with its own UI patterns, color schemes, and legacy implementations. Even small changes slowed things down, and design reviews became negotiations instead of quick reference checks.",
+              "Yesim is a global eSIM platform with over 3\u00a0million customers and several B2B web products sharing the same tech stack. When I joined, three products were growing independently, each with its own UI patterns, color schemes and legacy implementations. Even small changes slowed things down and design reviews became negotiations instead of quick reference checks.",
               SUBJECT,
             )}
           </p>
@@ -266,7 +301,7 @@ export function DesignSystemPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
-              "The products did not need a decorative refresh. They needed a shared way to build common B2B surfaces: tables, forms, filters, navigation, feedback states, and settings pages. The hard part was that each product still needed its own identity.",
+              "The products did not need a decorative refresh. They needed a shared way to build common B2B surfaces: tables, forms, filters, navigation, feedback states and settings pages. The hard part was that each product still needed its own identity.",
             )}
           </p>
         </div>
@@ -316,7 +351,7 @@ export function DesignSystemPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
-                "The main risk was forking. If each product needed its own buttons, inputs, tables, and dialogs, the library would become three libraries with the same name. So I used three token layers: raw values, primitives, and semantic tokens.",
+                "The main risk was forking. If each product needed its own buttons, inputs, tables and dialogs, the library would become three libraries with the same name. So I used three token layers: raw values, primitives and semantic tokens.",
               )}
             </p>
             <p
@@ -444,7 +479,7 @@ export function DesignSystemPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
-                "Each component includes a live preview, prop/variant table, usage guidelines (when to use and when not to), accessibility notes, and a changelog.",
+                "Each component includes a live preview, prop/variant table, usage guidelines (when to use and when not to), accessibility notes and a changelog.",
               )}
             </p>
             <p
@@ -479,7 +514,7 @@ export function DesignSystemPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
-                "To keep requests manageable, teams submitted component requests through Jira. I reviewed and ranked them weekly. New components went through design review with at least one consuming team, then were built, documented, versioned, and tested across all three product themes.",
+                "To keep requests manageable, teams submitted component requests through Jira. I reviewed and ranked them weekly. New components went through design review with at least one consuming team, then were built, documented, versioned and tested across all three product themes.",
               )}
             </p>
           </div>
@@ -487,7 +522,7 @@ export function DesignSystemPage() {
           <div className="-mx-4 sm:mx-0">
             <ImageWithFallback
               src={governanceImage}
-              alt="Governance workflow diagram \u2014 one team submits requests, the design system team processes and ships components, and two product teams consume them"
+              alt="Governance workflow diagram \u2014 one team submits requests, the design system team processes and ships components and two product teams consume them"
               className="w-full rounded-none sm:rounded-xl"
             />
           </div>
@@ -560,36 +595,26 @@ export function DesignSystemPage() {
         <div className="flex flex-col" style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              What worked
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
+            >
+              {nbsp(
+                "The system worked best where the rules were small enough for product teams to remember. The useful decisions were less about polishing components and more about preventing the library from splitting apart.",
+              )}
             </p>
-            <ol className="flex flex-col gap-2 pl-5 list-decimal">
-              {whatWorked.map((item, i) => (
-                <li
-                  key={i}
-                  className="text-foreground/80"
-                  style={{ fontSize: fluidBase, lineHeight: 1.7 }}
-                >
-                  <BoldLead text={item} />
-                </li>
-              ))}
-            </ol>
+            <LabeledList items={whatWorked} />
           </div>
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              What I'd change
+            <p
+              className="text-foreground/80"
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}
+            >
+              {nbsp(
+                "The next pass would make the system easier to operate, not just easier to adopt. I would put more automation, measurement and engineering feedback into the foundation before migration work picked up speed.",
+              )}
             </p>
-            <ol className="flex flex-col gap-2 pl-5 list-decimal">
-              {whatIdChange.map((item, i) => (
-                <li
-                  key={i}
-                  className="text-foreground/80"
-                  style={{ fontSize: fluidBase, lineHeight: 1.7 }}
-                >
-                  <BoldLead text={item} />
-                </li>
-              ))}
-            </ol>
+            <LabeledList items={whatIdChange} />
           </div>
         </div>
       </SectionAnimate>

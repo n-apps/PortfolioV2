@@ -101,7 +101,7 @@ const whatWorked = [
   },
   {
     label: "The setup supported real admin behavior",
-    body: "users could start with one employee, skip what they did not know yet, and continue later without losing progress.",
+    body: "users could start with one employee, skip what they did not know yet and continue later without losing progress.",
   },
 ];
 
@@ -229,7 +229,7 @@ export function SaasOnboardingPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {highlight(
-              "Yesim is a global eSIM platform with over 3 million customers. Its B2B product helps companies buy and manage eSIM plans for employees who travel for work. Admins can create a company workspace, add employees, assign mobile data plans, and track plan status from one dashboard.",
+              "Yesim is a global eSIM platform with over 3 million customers. Its B2B product helps companies buy and manage eSIM plans for employees who travel for work. Admins can create a company workspace, add employees, assign mobile data plans and track plan status from one dashboard.",
               SUBJECT,
             )}
           </p>
@@ -238,7 +238,7 @@ export function SaasOnboardingPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
-              "Previously, onboarding happened outside the product. A sales or support team walked each company through setup, collected employee details, configured the account manually, and only then handed over access.",
+              "Previously, onboarding happened outside the product. A sales or support team walked each company through setup, collected employee details, configured the account manually and only then handed over access.",
             )}
           </p>
           <p
@@ -254,7 +254,7 @@ export function SaasOnboardingPage() {
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {nbsp(
-              "The problem was that the product was not ready for that moment. New admins landed in an empty dashboard with no employees, no active plans, and no clear indication of what to do next.",
+              "The problem was that the product was not ready for that moment. New admins landed in an empty dashboard with no employees, no active plans and no clear indication of what to do next.",
             )}
           </p>
           <PullQuote>
@@ -374,7 +374,7 @@ export function SaasOnboardingPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
-                "The original setup process required information that many admins might not have during their first session: billing details, full employee lists, company policies, cost centers, approval rules, and travel dates.",
+                "The original setup process required information that many admins might not have during their first session: billing details, full employee lists, company policies, cost centers, approval rules and travel dates.",
               )}
             </p>
             <p

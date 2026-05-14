@@ -28,9 +28,6 @@
   --shadow-border-1: rgba(0, 0, 0, 0.06);
   --shadow-border-2: rgba(0, 0, 0, 0.06);
   --shadow-border-3: rgba(0, 0, 0, 0.04);
-  --shadow-border-hover-1: rgba(0, 0, 0, 0.08);
-  --shadow-border-hover-2: rgba(0, 0, 0, 0.08);
-  --shadow-border-hover-3: rgba(0, 0, 0, 0.06);
   --input: transparent;
   --input-background: #f3f3f5;
   --switch-background: #cbced4;
@@ -87,9 +84,6 @@
   --shadow-border-1: rgba(255, 255, 255, 0.06);
   --shadow-border-2: rgba(255, 255, 255, 0.06);
   --shadow-border-3: rgba(255, 255, 255, 0.04);
-  --shadow-border-hover-1: rgba(255, 255, 255, 0.08);
-  --shadow-border-hover-2: rgba(255, 255, 255, 0.08);
-  --shadow-border-hover-3: rgba(255, 255, 255, 0.06);
   --input: #2a2a2a;
   --ring: #555555;
   --font-weight-medium: 500;
@@ -255,16 +249,6 @@
     0px 0px 0px 1px var(--shadow-border-1),
     0px 1px 2px -1px var(--shadow-border-2),
     0px 2px 4px 0px var(--shadow-border-3);
-  transition-property: box-shadow;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-
-  &:hover {
-    box-shadow:
-      0px 0px 0px 1px var(--shadow-border-hover-1),
-      0px 1px 2px -1px var(--shadow-border-hover-2),
-      0px 2px 4px 0px var(--shadow-border-hover-3);
-  }
 }
 
 .pulsing-dot {

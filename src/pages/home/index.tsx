@@ -49,33 +49,33 @@ const workExperience = [
   },
 ];
 
-const personalProjects = [
+const selectedWorks = [
   {
     title: "Score Counter",
     subtitle: "Android App",
     description:
-      "A side project I have maintained since 2016: 900K installs, 87.2K monthly active users, a 4.9 rating, and no marketing spend. The work has mostly been protecting the simple flow people trust.",
+      "A side project I have maintained since 2016: 900K installs, 87.2K monthly active users, a 4.9 rating and no marketing spend. The work has mostly been protecting the simple flow people trust.",
     caseStudy: "/work/score-counter",
     cover: scoreCounterCover,
   },
   {
     title: "Design system",
     subtitle: "Yesim",
-    description: "A shared UI foundation for three B2B products: 48 components, 140+ tokens, and 3 brand themes. The work was less about visual consistency than keeping teams from rebuilding the same UI three ways.",
+    description: "A shared UI foundation for three B2B products: 48 components, 140+ tokens and 3 brand themes. The work was less about visual consistency than keeping teams from rebuilding the same UI three ways.",
     caseStudy: "/work/design-system",
     cover: designSystemCover,
   },
   {
     title: "White-label eSIM",
     subtitle: "Yesim",
-    description: "A working prototype for a B2B customization flow where colors, uploads, optional fields, and preview states had to behave under real input. I built it using the production site’s tech stack so contrast, conditional rendering, and edge cases were part of the artifact.",
+    description: "A working prototype for a B2B customization flow where colors, uploads, optional fields and preview states had to behave under real input. I built it using the production site’s tech stack so contrast, conditional rendering and edge cases were part of the artifact.",
     caseStudy: "/work/white-label-esim",
     cover: whiteLabelEsimCover,
   },
   {
     title: "Designing onboarding",
     subtitle: "Yesim",
-    description: "A self-serve onboarding flow for companies buying eSIM plans for employees. The work focused on replacing sales-led setup with a product-led path to first value: add an employee, choose a plan, and activate the first eSIM.",
+    description: "A self-serve onboarding flow for companies buying eSIM plans for employees. The work focused on replacing sales-led setup with a product-led path to first value: add an employee, choose a plan and activate the first eSIM.",
     caseStudy: "/work/saas-onboarding",
     cover: saasOnboardingCover,
   },
@@ -284,12 +284,12 @@ export function HomePage() {
             Selected work
           </h2>
           <div className="flex flex-col" style={{ gap: "clamp(1.25rem, 1rem + 1vw, 2rem)" }}>
-            {personalProjects.map((project) => (
+            {selectedWorks.map((project) => (
               <Link
                 key={project.title}
                 to={project.caseStudy}
                 data-goatcounter-click={`case-study-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
-                className="work-card group block rounded-xl overflow-hidden bg-card hover:-translate-y-0.5 transition-all duration-300"
+                className="work-card group block rounded-xl overflow-hidden bg-card"
               >
                 <div className="overflow-hidden">
                   <img
@@ -344,7 +344,7 @@ export function HomePage() {
             Skills & tools
           </h2>
           <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-            {nbsp("I've led work across user research, systems design, and end-to-end shipping — from building products solo to leading a design team.")}
+            {nbsp("I've led work across user research, systems design and end-to-end shipping — from building products solo to leading a design team.")}
           </p>
           <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
             {nbsp("Strong proficiency with Figma. Familiarity with AI, analytics and A/B testing tools.")}
