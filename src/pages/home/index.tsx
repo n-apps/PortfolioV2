@@ -20,19 +20,28 @@ import {
 const workExperience = [
   {
     title: "Product designer at Yesim",
-    period: "Apr 2021 - Mar 2026",
-    context: " Web and mobile · B2B and B2C. eSIM platform with 3M+ customers",
+    period: "2021 - 2026",
+    context: " Web and mobile · B2B and B2C. eSIM platform with 3M users",
     link: { href: "https://yesim.app/", label: "Try Yesim" },
   },
   {
-    title: "Product designer at\u00a0SMBF",
-    period: "Aug 2020 - Apr 2021",
+    title: "Product designer at SMBF",
+    period: "2020 - 2021",
     context: "Online reputation SaaS platform · B2B",
   },
   {
-    title: "From Android dev to\u00a0product designer at\u00a0Eventssion",
-    period: "Jan 2016 - Apr 2020",
+    title: "Product designer at Eventssion",
+    period: "2018 - 2020",
     context: "Web and mobile · B2B and B2C. Event management and ticketing platform",
+    link: {
+      href: "https://betalist.com/startups/eventssion",
+      label: "View project",
+    },
+  },
+  {
+    title: "Android developer at Eventssion",
+    period: "2016 - 2018",
+    context: "Android app · B2B and B2C. Event management and ticketing platform",
     link: {
       href: "https://betalist.com/startups/eventssion",
       label: "View project",
@@ -182,9 +191,9 @@ export function HomePage() {
             </p>
           </div>
           <div className="flex flex-col" style={{ gap: "clamp(0.375rem, 0.35rem + 0.1vw, 0.5rem)" }}>
-            <p className="text-muted-foreground" style={{ fontSize: fluidLead, lineHeight: 1.5 }}>
+            <p className="text-muted-foreground" style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
               <span className="pulsing-dot" aria-hidden="true" />
-              {"Open to product designer roles, full-time."}
+              {"Open to product designer roles, full-time"}
             </p>
           </div>
         </section>
@@ -209,14 +218,30 @@ export function HomePage() {
             {workExperience.map((job, i) => (
               <div key={i}>
                 <div className="flex flex-col" style={{ gap: "clamp(0.125rem, 0.1rem + 0.1vw, 0.25rem)" }}>
-                  <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
-                    {job.title}
-                  </span>
+                  <div
+                    className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline"
+                    style={{ columnGap: "clamp(1rem, 0.8rem + 1vw, 2rem)" }}
+                  >
+                    <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
+                      {job.title}
+                    </span>
+                    <span
+                      className="text-muted-foreground text-right"
+                      style={{
+                        fontSize: fluidSmall,
+                        fontVariantNumeric: "tabular-nums",
+                        lineHeight: 1.4,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
+                      {job.period}
+                    </span>
+                  </div>
                   <span
                     className="text-muted-foreground"
                     style={{ fontSize: fluidSmall, lineHeight: 1.4 }}
                   >
-                    {job.period} · {job.context}
+                    {nbsp(job.context)}
                   </span>
                   {job.link && (
                     <a

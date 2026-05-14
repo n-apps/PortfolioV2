@@ -161,19 +161,6 @@ function PlainList({ items }: { items: string[] }) {
 export function SaasOnboardingPage() {
   return (
     <div className="flex flex-col" style={{ gap: sectionGap }}>
-      {/* Back link */}
-      <SectionAnimate delay={0}>
-        <Link
-          to="/"
-          data-goatcounter-click="saas-onboarding-back-home-top"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-          style={{ fontSize: fluidSmall, lineHeight: 1 }}
-        >
-          <RiArrowLeftLine size={16} />
-          Home
-        </Link>
-      </SectionAnimate>
-
       {/* ── 1. Hero + TL;DR ────────────────────────────── */}
       <SectionAnimate delay={0.05}>
         <div className="flex flex-col" style={{ gap: innerGap }}>

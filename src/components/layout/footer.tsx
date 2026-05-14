@@ -241,7 +241,7 @@ export function Footer() {
             fontVariantNumeric: "tabular-nums",
           }}
         >
-          It{"\u00a0"}is{"\u00a0"}{time || "00:00"} in{"\u00a0"}Kyiv
+          It{"  "}is{"  "}{time || "00:00"} in{"  "}Kyiv
         </span>
         <div className="flex items-center justify-center gap-1">
           {weather ? (

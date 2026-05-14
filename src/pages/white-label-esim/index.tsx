@@ -206,19 +206,6 @@ function PrototypeLaunchIcon() {
 export function WhiteLabelEsimPage() {
   return (
     <div className="flex flex-col" style={{ gap: sectionGap }}>
-      {/* Back link */}
-      <SectionAnimate delay={0}>
-        <Link
-          to="/"
-          data-goatcounter-click="back-to-home-top"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-          style={{ fontSize: fluidSmall, lineHeight: 1 }}
-        >
-          <RiArrowLeftLine size={16} />
-          Home
-        </Link>
-      </SectionAnimate>
-
       {/* ── 1. Hero + TL;DR ────────────────────────────── */}
       <SectionAnimate delay={0.05}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
@@ -564,13 +551,13 @@ export function WhiteLabelEsimPage() {
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
             <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              <strong>What worked:</strong>
+              What worked
             </p>
             <LabeledList items={whatWorked} />
           </div>
           <div className="flex flex-col gap-2">
             <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              <strong>What I'd change:</strong>
+              What I'd change
             </p>
             <LabeledList items={whatIdChange} />
           </div>
@@ -590,7 +577,7 @@ export function WhiteLabelEsimPage() {
             Home
           </Link>
           <Link
-            to="/work/score-counter"
+            to="/work/saas-onboarding"
             data-goatcounter-click="next-case-study"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}

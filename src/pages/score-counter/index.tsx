@@ -157,19 +157,6 @@ function ImpactStatsGrid() {
 export function ScoreCounterPage() {
   return (
     <div className="flex flex-col" style={{ gap: sectionGap }}>
-      {/* Back link */}
-      <SectionAnimate delay={0}>
-        <Link
-          to="/"
-          data-goatcounter-click="back-to-home-top"
-          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-          style={{ fontSize: fluidSmall, lineHeight: 1 }}
-        >
-          <RiArrowLeftLine size={16} />
-          Home
-        </Link>
-      </SectionAnimate>
-
       {/* ── Section 1: Hero ── */}
       <SectionAnimate delay={0.05}>
         <div className="flex flex-col" style={{ gap: innerGap }}>
@@ -411,7 +398,7 @@ export function ScoreCounterPage() {
           <SectionHeading>Reflection</SectionHeading>
           <div className="flex flex-col gap-2">
             <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              <strong>What worked:</strong>
+              What worked
             </p>
             <ol className="flex flex-col gap-2 pl-5 list-decimal">
               {whatWorked.map((item, i) => (
@@ -427,7 +414,7 @@ export function ScoreCounterPage() {
           </div>
           <div className="flex flex-col gap-2">
             <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              <strong>What I'd change:</strong>
+              What I'd change
             </p>
             <ol className="flex flex-col gap-2 pl-5 list-decimal">
               {whatIdChange.map((item, i) => (

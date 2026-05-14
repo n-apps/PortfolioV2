@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { RiDoubleQuotesL, RiEraserFill } from "@remixicon/react";
 import { nbsp } from "@/lib/nbsp";
-import { fluidBase, fluidSmall } from "@/lib/typography";
+import { fluidBase, fluidLead, fluidSmall } from "@/lib/typography";
 
 /** Renders `text` with `term` wrapped in <code>; applies nbsp to surrounding parts */
 export function highlight(text: string, term: string): React.ReactNode {
@@ -18,16 +18,17 @@ export function highlight(text: string, term: string): React.ReactNode {
 /** Section label used as a category heading above content blocks */
 export function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h2
+    <h3
       style={{
-        fontSize: fluidBase,
+        fontSize: fluidLead,
         fontWeight: 500,
+        fontFamily: "var(--font-serif)",
         lineHeight: 1.2,
         letterSpacing: "-0.01em",
       }}
     >
       {children}
-    </h2>
+    </h3>
   );
 }
 

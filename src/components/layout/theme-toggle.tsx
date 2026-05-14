@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { RiMoonLine, RiSunLine } from "@remixicon/react";
-import { AnimatePresence, motion } from "motion/react";
+import { RiContrast2Fill } from "@remixicon/react";
+import { motion } from "motion/react";
 
 function getInitialTheme() {
   if (typeof window === "undefined") return false;
@@ -39,21 +39,12 @@ export function ThemeToggle() {
   return (
     <motion.button
       onClick={handleToggle}
-      className="relative flex items-center justify-center w-8 h-8 rounded-full text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+      className="relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full"
+      style={{ color: "var(--foreground)" }}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       whileTap={{ scale: 0.96 }}
     >
-      <AnimatePresence initial={false} mode="wait">
-        <motion.div
-          key={isDark ? "moon" : "sun"}
-          initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-          animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-          exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-          transition={{ type: "spring", duration: 0.3, bounce: 0 }}
-        >
-          {isDark ? <RiSunLine size={16} /> : <RiMoonLine size={16} />}
-        </motion.div>
-      </AnimatePresence>
+      <RiContrast2Fill size={16} aria-hidden />
     </motion.button>
   );
 }
