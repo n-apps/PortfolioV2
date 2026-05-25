@@ -1,0 +1,118 @@
+/* Missing Tracks Watchlist — project tokens + scoped resets.
+ * Mirrors demo-theme.css: a uniquely-prefixed (mt-) @theme block imported from
+ * the main Tailwind chain (src/styles/index.css) so the Tailwind Vite plugin
+ * generates utilities like bg-mt-bg, text-mt-green, rounded-mt-card, etc.
+ * Names are prefixed so they never collide with the portfolio's own tokens
+ * (e.g. --color-border, used by `* { @apply border-border }`) or the eSIM
+ * demo's (--shadow-card).
+ *
+ * The page's global element styles (html/body resets, selection, focus,
+ * smoothing) are scoped to the .mt-root wrapper so they never leak into the
+ * rest of the portfolio. Don't merge this into theme.css.
+ */
+
+@theme {
+  /* "Neon data grid": neon-green accent on a green-tinted near-black. No pure
+     #000/#fff — every neutral is tinted toward the brand hue (~150). */
+  --color-mt-bg: oklch(0.17 0.006 150);
+  --color-mt-surface: oklch(0.215 0.008 150);
+  --color-mt-interactive: oklch(0.26 0.009 150);
+  --color-mt-text: oklch(0.96 0.012 150);
+  --color-mt-text-secondary: oklch(0.8 0.025 150);
+  --color-mt-green: oklch(0.86 0.21 138); /* #7fee64 Vivid Apple — primary accent + CTA */
+  --color-mt-green-dim: oklch(0.84 0.13 142); /* pale "maybe back" state */
+  --color-mt-border: oklch(0.43 0.02 150); /* #485346 Mist Border */
+  --color-mt-red: oklch(0.7 0.165 12); /* delete / unavailable / errors */
+
+  /* Shapes: buttons 4px, links/fields 8px, containers 16px, pills 9999px. */
+  --radius-mt-pill: 9999px;
+  --radius-mt-circle: 50%;
+  --radius-mt-card: 16px;
+  --radius-mt-link: 8px;
+  --radius-mt-button: 4px;
+
+  --shadow-mt-card: 0 2px 12px rgba(0, 0, 0, 0.35);
+  --shadow-mt-card-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-mt-elevated: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  /* Uppercase tracking scale — tightens as size grows. */
+  --tracking-mt-button: 0.12em;
+  --tracking-mt-eyebrow: 0.12em;
+  --tracking-mt-label: 0.1em;
+  --tracking-mt-heading: 0.06em;
+
+  --font-mt-sans: "Strichpunkt Sans", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mt-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo,
+    Consolas, monospace;
+}
+
+/* Everything below is scoped to the route wrapper so the dark green palette and
+   element resets apply only to the Missing Tracks page. */
+.mt-root {
+  color-scheme: dark;
+  background: var(--color-mt-bg);
+  color: var(--color-mt-text);
+  min-height: 100dvh;
+  font-family: var(--font-mt-sans);
+  /* Baseline rhythm: text without an explicit leading-* class gets a
+     comfortable 1.5; headlines/prose override locally. */
+  line-height: 1.5;
+  /* Strichpunkt Sans ships every weight 400–900 as real instances; never
+     fake-bold or fake-italic. */
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.mt-root ::selection {
+  background: var(--color-mt-green);
+  color: var(--color-mt-bg);
+}
+
+/* The portfolio's theme.css adds a global `img { outline: 1px solid ... }` that
+   the standalone app never had; outlines ignore border-radius, so it would box
+   the round CD covers. The app draws its own image borders — drop it here. */
+.mt-root img {
+  outline: none;
+}
+
+/* Accessible 2px green ring with 2px offset. */
+.mt-root :focus-visible {
+  outline: 2px solid var(--color-mt-green);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Reduced motion: collapse transitions/animations within the page only. */
+@media (prefers-reduced-motion: reduce) {
+  .mt-root *,
+  .mt-root *::before,
+  .mt-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Inverted (light) form surface — "Light Panel". Overrides dark tokens for all
+   descendants; --color-mt-bg is left dark so the primary button keeps its
+   dark-on-green label. */
+.mt-root .form-inverted {
+  --color-mt-surface: oklch(0.94 0.04 145);
+  --color-mt-interactive: oklch(0.975 0.015 145);
+  --color-mt-text: oklch(0.24 0.02 150);
+  --color-mt-text-secondary: oklch(0.46 0.03 150);
+  --color-mt-border: oklch(0.8 0.03 145);
+  --shadow-mt-card: 0 4px 24px rgba(20, 40, 20, 0.1);
+}
+
+/* Add-track panel only: drop the green glow ring on field focus, leaving the
+   border-color shift as the affordance. Restores the resting inset shadow so
+   focus matches rest. Keyboard accessibility is unaffected: the global
+   :focus-visible green outline above still paints for keyboard focus. */
+.mt-root .form-inverted input:focus,
+.mt-root .form-inverted textarea:focus {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}

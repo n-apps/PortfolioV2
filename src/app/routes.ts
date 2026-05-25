@@ -33,6 +33,9 @@ const CompanySettingsDemoPage = lazy(() =>
 const CustomizeEsimDemoPage = lazy(() =>
   import("@/pages/white-label-esim/demo/customize").then((m) => ({ default: m.CustomizeEsimDemoPage }))
 );
+// Standalone full-width app — renders outside the 700px Layout shell, with its
+// own nav/footer and a self-scoped dark theme (src/styles/missing-tracks-theme.css).
+const MissingTracksPage = lazy(() => import("@/pages/missing-tracks-project"));
 
 export const router = createBrowserRouter([
   {
@@ -60,5 +63,9 @@ export const router = createBrowserRouter([
       { index: true, Component: CompanySettingsDemoPage },
       { path: "customize", Component: CustomizeEsimDemoPage },
     ],
+  },
+  {
+    path: "/missing-tracks-project",
+    Component: MissingTracksPage,
   },
 ]);
