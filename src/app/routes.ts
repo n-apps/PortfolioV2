@@ -33,9 +33,17 @@ const CompanySettingsDemoPage = lazy(() =>
 const CustomizeEsimDemoPage = lazy(() =>
   import("@/pages/white-label-esim/demo/customize").then((m) => ({ default: m.CustomizeEsimDemoPage }))
 );
-// Standalone full-width app — renders outside the 700px Layout shell, with its
-// own nav/footer and a self-scoped dark theme (src/styles/missing-tracks-theme.css).
-const MissingTracksPage = lazy(() => import("@/pages/missing-tracks-project"));
+// Standalone full-width experience — renders outside the 700px Layout shell via
+// its own MissingTracksLayout (nav + self-scoped dark theme,
+// src/styles/missing-tracks-theme.css). The layout hosts the watchlist app at the
+// index and an About page.
+const MissingTracksLayout = lazy(() =>
+  import("@/pages/missing-tracks-project/layout").then((m) => ({ default: m.MissingTracksLayout }))
+);
+const MissingTracksApp = lazy(() => import("@/pages/missing-tracks-project"));
+const MissingTracksAboutPage = lazy(() =>
+  import("@/pages/missing-tracks-project/about").then((m) => ({ default: m.MissingTracksAboutPage }))
+);
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +74,10 @@ export const router = createBrowserRouter([
   },
   {
     path: "/missing-tracks-project",
-    Component: MissingTracksPage,
+    Component: MissingTracksLayout,
+    children: [
+      { index: true, Component: MissingTracksApp },
+      { path: "about", Component: MissingTracksAboutPage },
+    ],
   },
 ]);

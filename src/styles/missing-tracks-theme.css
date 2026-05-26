@@ -23,6 +23,7 @@
   --color-mt-green-dim: oklch(0.84 0.13 142); /* pale "maybe back" state */
   --color-mt-border: oklch(0.43 0.02 150); /* #485346 Mist Border */
   --color-mt-red: oklch(0.7 0.165 12); /* delete / unavailable / errors */
+  --color-mt-mint: oklch(0.94 0.066 145); /* #D5F6D1 Light Mint — About-page CTA panel */
 
   /* Shapes: buttons 4px, links/fields 8px, containers 16px, pills 9999px. */
   --radius-mt-pill: 9999px;
