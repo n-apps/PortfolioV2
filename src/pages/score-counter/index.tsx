@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
-import { useInView, useSpring, useTransform, motion } from "motion/react";
+import { useInView, useReducedMotion, useSpring, useTransform, motion } from "motion/react";
 import { SectionAnimate } from "@/components/ui/section-animate";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { Magnetic } from "@/components/core/magnetic";
@@ -16,6 +16,7 @@ import {
 } from "@/lib/typography";
 import {
   SectionHeading,
+  SubHeading,
   PullQuote,
   highlight,
 } from "@/components/case-study/case-study-components";
@@ -123,11 +124,15 @@ function AnimatedStatValue({
     return `${prefix}${rounded}${suffix}`;
   });
 
+  const prefersReducedMotion = useReducedMotion();
   useEffect(() => {
-    if (isInView) {
+    if (!isInView) return;
+    if (prefersReducedMotion) {
+      spring.jump(numericValue);
+    } else {
       spring.set(numericValue);
     }
-  }, [isInView, spring, numericValue]);
+  }, [isInView, prefersReducedMotion, spring, numericValue]);
 
   return (
     <motion.span style={{ fontVariantNumeric: "tabular-nums" }}>
@@ -176,7 +181,7 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
         <li
           key={i}
           className="text-foreground/80"
-          style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+          style={{ fontSize: fluidBase, lineHeight: 1.6, letterSpacing: "-0.011em" }}
         >
           <strong>{nbsp(item.label)}</strong>
           {": "}
@@ -317,9 +322,9 @@ export function ScoreCounterPage() {
           <SectionHeading>Approach</SectionHeading>
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
-              <strong>
+              <SubHeading>
                 Protect the three-step flow
-              </strong>
+              </SubHeading>
               <p
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -331,9 +336,9 @@ export function ScoreCounterPage() {
               </p>
             </div>
             <div className="flex flex-col gap-1">
-              <strong>
+              <SubHeading>
                 Say no when a feature narrows the product
-              </strong>
+              </SubHeading>
               <p
                 className="text-foreground/80"
                 style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -364,7 +369,7 @@ export function ScoreCounterPage() {
           <div className="flex flex-col gap-4">
             {constraints.map((c) => (
               <div key={c.title} className="flex flex-col gap-1">
-                <strong>{c.title}</strong>
+                <SubHeading>{c.title}</SubHeading>
                 <p
                   className="text-foreground/80"
                   style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -397,7 +402,7 @@ export function ScoreCounterPage() {
         <Link
           to="/work/score-counter/reviews"
           data-goatcounter-click="testimonials-see-all-reviews"
-          className="-mx-4 sm:mx-0 block group"
+          className="-mx-4 sm:mx-0 block group rounded-none sm:rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
         >
           <ImageWithFallback
             src={testimonialsImage}
@@ -464,7 +469,7 @@ export function ScoreCounterPage() {
             data-goatcounter-click="outbound-play-store"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background rounded-lg hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-foreground text-background rounded-lg hover:opacity-90 focus-visible:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             Get it on Google Play
@@ -479,7 +484,7 @@ export function ScoreCounterPage() {
           <Link
             to="/"
             data-goatcounter-click="back-to-home-bottom"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             <RiArrowLeftLine size={16} />
@@ -488,7 +493,7 @@ export function ScoreCounterPage() {
           <Link
             to="/work/design-system"
             data-goatcounter-click="next-case-study"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             Next work

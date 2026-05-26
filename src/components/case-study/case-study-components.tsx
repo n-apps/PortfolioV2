@@ -18,7 +18,7 @@ export function highlight(text: string, term: string): React.ReactNode {
 /** Section label used as a category heading above content blocks */
 export function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3
+    <h2
       style={{
         fontSize: fluidLead,
         fontWeight: 500,
@@ -27,6 +27,16 @@ export function SectionHeading({ children }: { children: React.ReactNode }) {
         letterSpacing: "-0.01em",
       }}
     >
+      {children}
+    </h2>
+  );
+}
+
+/** Sub-section heading inside a case-study section. Renders an <h3> so the
+ * document outline stays intact (h1 → h2 → h3), styled to read as a bold lead. */
+export function SubHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 style={{ fontSize: "1rem", fontWeight: 500, lineHeight: 1.4 }}>
       {children}
     </h3>
   );

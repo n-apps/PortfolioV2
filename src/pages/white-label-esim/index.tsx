@@ -13,6 +13,7 @@ import {
 } from "@/lib/typography";
 import {
   SectionHeading,
+  SubHeading,
   PullQuote,
   ConfidentialityNote,
   highlight,
@@ -135,7 +136,7 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
         <li
           key={i}
           className="text-foreground/80"
-          style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+          style={{ fontSize: fluidBase, lineHeight: 1.6, letterSpacing: "-0.011em" }}
         >
           <strong>{nbsp(item.label)}</strong>
           {": "}
@@ -347,9 +348,9 @@ export function WhiteLabelEsimPage() {
           {/* Decision 1: Code, not Figma */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <SectionHeading>Approach</SectionHeading>
-            <strong>
+            <SubHeading>
               Build the artifact where behavior had to work
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -378,9 +379,9 @@ export function WhiteLabelEsimPage() {
 
           {/* Decision 2: Contrast at the system level */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Make contrast executable
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -409,9 +410,9 @@ export function WhiteLabelEsimPage() {
 
           {/* Decision 3: Conditional rendering */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Treat optional content as product logic
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -440,9 +441,9 @@ export function WhiteLabelEsimPage() {
 
           {/* Decision 4: Real-time preview */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Use the preview as the review surface
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}

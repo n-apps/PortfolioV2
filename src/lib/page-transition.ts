@@ -33,12 +33,17 @@ export async function navigateWithTransition(
 ) {
   if (phase !== "idle") return;
 
-  const preloadPromise = preload?.() ?? Promise.resolve();
-  set("entering");
-  await Promise.all([wait(300), preloadPromise]);
-  await router.navigate(to);
-  await twoFrames();
-  set("exiting");
-  await wait(300);
-  set("idle");
+  try {
+    set("entering");
+    const enterPromise = wait(300);
+    await twoFrames();
+    const preloadPromise = preload?.() ?? Promise.resolve();
+    await Promise.all([enterPromise, preloadPromise]);
+    await router.navigate(to);
+    await twoFrames();
+    set("exiting");
+    await wait(300);
+  } finally {
+    set("idle");
+  }
 }

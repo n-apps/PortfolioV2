@@ -18,7 +18,7 @@ No lint or test scripts are configured.
 
 **Entry point flow:** `index.html` → `src/main.tsx` → `src/app/App.tsx` (GoatCounter analytics injected here; renders `PageTransitionOverlay` alongside the router) → `RouterProvider` → `Layout` + nested routes.
 
-**Routing:** Centralized in `src/app/routes.ts`. All pages except `HomePage` and `NotFoundPage` are loaded with `React.lazy()`; `Layout` wraps `<Outlet>` in `<Suspense fallback={null}>`, so new lazy routes work without extra wiring. Case studies live under `/work/`. Sub-routes (e.g. `/work/score-counter/reviews`, `/work/white-label-esim/demo`) use their own layout outside the main `Layout`. `Layout` auto-scrolls to top on route change.
+**Routing:** Centralized in `src/app/routes.ts`. All pages except `HomePage` and `NotFoundPage` are loaded with `React.lazy()`; `Layout` wraps `<Outlet>` in `<Suspense fallback={null}>`, so new lazy routes work without extra wiring. Case studies live under `/work/`. Sub-routes (e.g. `/work/score-counter/reviews`, `/work/white-label-esim/demo`) use their own layout outside the main `Layout`. A standalone full-bleed page like `/missing-tracks-project` is a top-level route that renders entirely outside `Layout` with its own nav/footer and a self-scoped theme (`src/styles/missing-tracks-theme.css`) — the pattern for pages that break the 700px shell. `Layout` auto-scrolls to top on route change.
 
 **Page transitions:** `src/lib/page-transition.ts` exposes `navigateWithTransition(to, preload?)` — an imperative store that drives `PageTransitionOverlay`. Use it (not `router.navigate`/`<Link>`) when a navigation should fade through the overlay; otherwise plain React Router links are fine.
 
@@ -39,9 +39,9 @@ Pages should compose sections/features; generic UI goes in `components/ui/`. Loc
 ## Styling
 
 - Tailwind v4 via `@tailwindcss/vite` plugin — PostCSS config is intentionally empty
-- CSS entry: `src/styles/index.css` imports `fonts.css` → `tailwind.css` → `theme.css` → `demo-theme.css`
+- CSS entry: `src/styles/index.css` imports `fonts.css` → `tailwind.css` → `theme.css` → `demo-theme.css` → `missing-tracks-theme.css`
 - `theme.css` defines 40+ CSS custom properties for colors, typography, spacing, and the `card-shadow` utility. All color/spacing tokens live here.
-- `demo-theme.css` is a separate token set scoped to the white-label eSIM demo — don't merge it into `theme.css`.
+- `demo-theme.css` (white-label eSIM demo) and `missing-tracks-theme.css` (the missing-tracks page) are separate token sets, each scoped to one surface — keep them out of `theme.css`.
 - Dark mode: `.dark` class on `<html>`. Theme toggled by `ThemeToggle` component and persisted in `localStorage` under key `"theme"`.
 - Fluid typography uses `clamp()` throughout; shared tokens live in `src/lib/typography.ts`. Content is constrained to ~700px max-width.
 

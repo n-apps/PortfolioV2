@@ -13,6 +13,7 @@ import {
 } from "@/lib/typography";
 import {
   SectionHeading,
+  SubHeading,
   PullQuote,
   ConfidentialityNote,
   highlight,
@@ -171,6 +172,7 @@ function DataTable({
             {headers.map((h) => (
               <th
                 key={h}
+                scope="col"
                 className="text-left text-muted-foreground tracking-wide uppercase py-3 pr-4 break-words whitespace-normal"
                 style={{ fontSize: "0.75rem" }}
               >
@@ -188,7 +190,7 @@ function DataTable({
                   className={`py-3 pr-4 ${j === 0 ? "text-foreground" : "text-foreground/80"} break-words whitespace-normal`}
                   style={
                     mono?.includes(j)
-                      ? { fontFamily: "monospace", fontSize: "0.75rem" }
+                      ? { fontFamily: "var(--font-mono)", fontSize: "0.75rem" }
                       : undefined
                   }
                 >
@@ -210,7 +212,7 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
         <li
           key={i}
           className="text-foreground/80"
-          style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+          style={{ fontSize: fluidBase, lineHeight: 1.6, letterSpacing: "-0.011em" }}
         >
           <strong>{nbsp(item.label)}</strong>
           {": "}
@@ -343,9 +345,9 @@ export function DesignSystemPage() {
           {/* Decision 1: Token architecture */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <SectionHeading>Approach</SectionHeading>
-            <strong>
+            <SubHeading>
               Prevent forks before they started
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -392,9 +394,9 @@ export function DesignSystemPage() {
 
           {/* Decision 2: One library, three themes */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Let products look different without separate components
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -425,9 +427,9 @@ export function DesignSystemPage() {
 
           {/* Decision 3: B2B-first component priorities */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Prioritize the surfaces teams touched every week
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -471,9 +473,9 @@ export function DesignSystemPage() {
           </div>
 
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Make adoption lighter than rebuilding
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -561,7 +563,7 @@ export function DesignSystemPage() {
           <ol className="flex flex-col gap-2 pl-5 list-decimal">
             <li
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6, letterSpacing: "-0.011em" }}
             >
               <strong>Up to 90% faster feature design:</strong>{" "}
               {nbsp(
@@ -570,7 +572,7 @@ export function DesignSystemPage() {
             </li>
             <li
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6, letterSpacing: "-0.011em" }}
             >
               <strong>~30% less time on style-related QA:</strong>{" "}
               {nbsp(
@@ -579,7 +581,7 @@ export function DesignSystemPage() {
             </li>
             <li
               className="text-foreground/80"
-              style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+              style={{ fontSize: fluidBase, lineHeight: 1.6, letterSpacing: "-0.011em" }}
             >
               <strong>Clearer team reference:</strong>{" "}
               {nbsp(
@@ -625,7 +627,7 @@ export function DesignSystemPage() {
           <Link
             to="/"
             data-goatcounter-click="back-to-home-bottom"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             <RiArrowLeftLine size={16} />
@@ -634,7 +636,7 @@ export function DesignSystemPage() {
           <Link
             to="/work/white-label-esim"
             data-goatcounter-click="next-case-study"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             Next work

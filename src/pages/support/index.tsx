@@ -1,12 +1,7 @@
 import { SectionAnimate } from "@/components/ui/section-animate";
 import { ImageWithFallback } from "@/components/ui/image-with-fallback";
 import { nbsp } from "@/lib/nbsp";
-import {
-  RiExternalLinkLine,
-  RiHeartLine,
-  RiEmotionHappyLine,
-  RiStarLine,
-} from "@remixicon/react";
+import { RiExternalLinkLine } from "@remixicon/react";
 import { DashedDivider } from "@/components/ui/dashed-divider";
 import { fluidLead, fluidBase, fluidSmall, fluidH1, sectionGap, innerGap } from "@/lib/typography";
 import { SectionHeading } from "@/components/case-study/case-study-components";
@@ -30,6 +25,21 @@ const supportOptions = [
     label: "Rate 5 stars on Google Play",
     href: "https://play.google.com/store/apps/details?id=ua.napps.scorekeeper",
     description: "A review helps more than you think",
+  },
+];
+
+const reasons = [
+  {
+    title: "Ad-free experience",
+    body: "No annoying ads or pop-ups. Just straightforward scorekeeping.",
+  },
+  {
+    title: "Built with heart",
+    body: "A passion project, not a corporate product. Every feature is made with care.",
+  },
+  {
+    title: "Community-driven",
+    body: "User feedback shapes every update. Your voice matters.",
   },
 ];
 
@@ -113,63 +123,26 @@ export function SupportPage() {
             className="flex flex-col"
             style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)" }}
           >
-            <div className="flex gap-3 items-start">
-              <RiStarLine
-                size={18}
-                className="text-accent mt-0.5 shrink-0"
-              />
-              <div>
-                <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
-                  Ad-free experience
-                </span>
-                <p
-                  className="text-muted-foreground"
-                  style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
-                >
-                  {nbsp(
-                    "No annoying ads or pop-ups. Just straightforward scorekeeping."
-                  )}
-                </p>
+            {reasons.map((reason, i) => (
+              <div key={reason.title}>
+                <div className="flex flex-col gap-1">
+                  <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
+                    {reason.title}
+                  </span>
+                  <p
+                    className="text-muted-foreground"
+                    style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
+                  >
+                    {nbsp(reason.body)}
+                  </p>
+                </div>
+                {i < reasons.length - 1 && (
+                  <div className="mt-4">
+                    <DashedDivider />
+                  </div>
+                )}
               </div>
-            </div>
-            <div className="flex gap-3 items-start">
-              <RiHeartLine
-                size={18}
-                className="text-accent mt-0.5 shrink-0"
-              />
-              <div>
-                <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
-                  Built with heart
-                </span>
-                <p
-                  className="text-muted-foreground"
-                  style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
-                >
-                  {nbsp(
-                    "A passion project, not a corporate product. Every feature is made with care."
-                  )}
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-3 items-start">
-              <RiEmotionHappyLine
-                size={18}
-                className="text-accent mt-0.5 shrink-0"
-              />
-              <div>
-                <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
-                  Community-driven
-                </span>
-                <p
-                  className="text-muted-foreground"
-                  style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
-                >
-                  {nbsp(
-                    "User feedback shapes every update. Your voice matters."
-                  )}
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
       </SectionAnimate>
@@ -184,51 +157,53 @@ export function SupportPage() {
           style={{ gap: "clamp(1rem, 0.9rem + 0.5vw, 1.5rem)" }}
         >
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <SectionHeading> How to support</SectionHeading>
+            <SectionHeading>How to support</SectionHeading>
             <p
               className="text-muted-foreground"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
             >
               {nbsp(
-                "Every donation, review, or kind message keeps the app alive. Pick whatever feels right"
+                "Every donation, review, or kind message keeps the app alive. Pick whatever feels right."
               )}
             </p>
           </div>
-          <div
+          <ul
             className="flex flex-col"
             style={{ gap: "clamp(0.5rem, 0.45rem + 0.25vw, 0.75rem)" }}
           >
             {supportOptions.map((option) => (
-              <a
-                key={option.label}
-                href={option.href}
-                data-goatcounter-click={`support-${option.label.toLowerCase().replace(/\s+/g, '-')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 p-4 rounded-xl card-shadow bg-card hover:border-foreground/20 transition-all duration-200"
-              >
-                <span className="text-xl shrink-0">{option.emoji}</span>
-                <div className="flex-1 min-w-0">
-                  <span
-                    className="group-hover:text-accent transition-colors"
-                    style={{ fontSize: fluidBase, lineHeight: 1.4 }}
-                  >
-                    {option.label}
-                  </span>
-                  <p
-                    className="text-muted-foreground"
-                    style={{ fontSize: fluidSmall, lineHeight: 1.4 }}
-                  >
-                    {option.description}
-                  </p>
-                </div>
-                <RiExternalLinkLine
-                  size={14}
-                  className="text-muted-foreground group-hover:text-foreground transition-colors shrink-0"
-                />
-              </a>
+              <li key={option.label}>
+                <a
+                  href={option.href}
+                  data-goatcounter-click={`support-${option.label.toLowerCase().replace(/\s+/g, '-')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-muted-foreground/30 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                >
+                  <span aria-hidden="true" className="text-xl shrink-0">{option.emoji}</span>
+                  <div className="flex-1 min-w-0">
+                    <span
+                      className="group-hover:text-accent transition-colors"
+                      style={{ fontSize: fluidBase, lineHeight: 1.4 }}
+                    >
+                      {option.label}
+                    </span>
+                    <p
+                      className="text-muted-foreground"
+                      style={{ fontSize: fluidSmall, lineHeight: 1.4 }}
+                    >
+                      {option.description}
+                    </p>
+                  </div>
+                  <RiExternalLinkLine
+                    size={14}
+                    aria-hidden
+                    className="text-muted-foreground group-hover:text-foreground transition-colors shrink-0"
+                  />
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </section>
       </SectionAnimate>
 
@@ -252,7 +227,7 @@ export function SupportPage() {
           <a
             href={[109, 97, 105, 108, 116, 111, 58, 115, 99, 111, 114, 101, 107, 101, 101, 112, 101, 114, 46, 102, 101, 101, 100, 98, 97, 99, 107, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109].map(c => String.fromCharCode(c)).join('')}
             data-goatcounter-click="support-email"
-            className="text-accent no-underline hover:underline underline-offset-2 transition-opacity hover:opacity-80"
+            className="text-accent no-underline hover:underline focus-visible:underline underline-offset-2 transition-opacity hover:opacity-80 focus-visible:opacity-80"
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {[115, 99, 111, 114, 101, 107, 101, 101, 112, 101, 114, 46, 102, 101, 101, 100, 98, 97, 99, 107, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109].map(c => String.fromCharCode(c)).join('')}

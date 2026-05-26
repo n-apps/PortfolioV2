@@ -13,6 +13,7 @@ import {
 } from "@/lib/typography";
 import {
   SectionHeading,
+  SubHeading,
   PullQuote,
   ConfidentialityNote,
   highlight,
@@ -129,7 +130,7 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
         <li
           key={i}
           className="text-foreground/80"
-          style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+          style={{ fontSize: fluidBase, lineHeight: 1.6, letterSpacing: "-0.011em" }}
         >
           <strong>{nbsp(item.label)}</strong>
           {": "}
@@ -147,7 +148,7 @@ function PlainList({ items }: { items: string[] }) {
         <li
           key={i}
           className="text-foreground/80"
-          style={{ fontSize: fluidBase, lineHeight: 1.7 }}
+          style={{ fontSize: fluidBase, lineHeight: 1.6, letterSpacing: "-0.011em" }}
         >
           {nbsp(item)}
         </li>
@@ -328,9 +329,9 @@ export function SaasOnboardingPage() {
           {/* Decision 1: Start with the first valuable action */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
             <SectionHeading>Approach</SectionHeading>
-            <strong>
+            <SubHeading>
               Start with the first valuable action
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -366,9 +367,9 @@ export function SaasOnboardingPage() {
 
           {/* Decision 2: Reduce setup to the essentials */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Reduce setup to the essentials
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -404,9 +405,9 @@ export function SaasOnboardingPage() {
 
           {/* Decision 3: Design for incomplete information */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Design for incomplete information
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -444,9 +445,9 @@ export function SaasOnboardingPage() {
 
           {/* Decision 4: Extend onboarding into the dashboard */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Extend onboarding into the dashboard
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -498,9 +499,9 @@ export function SaasOnboardingPage() {
 
           {/* Decision 5: Make progress visible */}
           <div className="flex flex-col" style={{ gap: innerGap }}>
-            <strong>
+            <SubHeading>
               Make progress visible
-            </strong>
+            </SubHeading>
             <p
               className="text-foreground/80"
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}
@@ -592,7 +593,7 @@ export function SaasOnboardingPage() {
           <Link
             to="/"
             data-goatcounter-click="saas-onboarding-back-home-bottom"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             <RiArrowLeftLine size={16} />
@@ -601,7 +602,7 @@ export function SaasOnboardingPage() {
           <Link
             to="/work/score-counter"
             data-goatcounter-click="saas-onboarding-next-case-study"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:text-foreground transition-colors"
             style={{ fontSize: fluidSmall, lineHeight: 1 }}
           >
             Next work

@@ -155,7 +155,7 @@ function ConnectListItem({ label, href, display, download, Icon }: ConnectLink) 
         {...(download
           ? { download: true }
           : { target: "_blank", rel: "noopener noreferrer" })}
-        className="text-muted-foreground no-underline hover:underline underline-offset-2 hover:opacity-80 transition-opacity inline-flex items-center gap-1"
+        className="text-muted-foreground no-underline hover:underline focus-visible:underline underline-offset-2 hover:opacity-80 focus-visible:opacity-80 transition-opacity inline-flex items-center gap-1"
         style={{
           fontSize: fluidSmall,
           lineHeight: 1,
@@ -174,7 +174,7 @@ export function HomePage() {
       <SectionAnimate delay={0}>
         <section className="flex flex-col" style={{ gap: "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)" }}>
           <div className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)" }}>
-            <h2
+            <h1
               style={{
                 fontFamily: "var(--font-serif)",
                 fontStyle: "italic",
@@ -182,20 +182,17 @@ export function HomePage() {
                 lineHeight: 1.2,
                 letterSpacing: "-0.02em",
               }}
-              aria-label="Who is Roma Shuliatiev"
             >
               Roma Shuliatiev
-            </h2>
+            </h1>
             <p style={{ fontSize: fluidLead, lineHeight: 1.5 }}>
               {nbsp("Product designer with a dev background. I close the gap between design and what engineers actually build.")}
             </p>
           </div>
-          <div className="flex flex-col" style={{ gap: "clamp(0.375rem, 0.35rem + 0.1vw, 0.5rem)" }}>
-            <p className="text-muted-foreground" style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-              <span className="pulsing-dot" aria-hidden="true" />
-              {"Open to product designer roles, full-time"}
-            </p>
-          </div>
+          <p className="text-muted-foreground" style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
+            <span className="pulsing-dot" aria-hidden="true" />
+            {"Open to product designer roles, full-time"}
+          </p>
         </section>
       </SectionAnimate>
 
@@ -249,7 +246,7 @@ export function HomePage() {
                       data-goatcounter-click={`outbound-${job.link.label.toLowerCase().replace(/\s+/g, '-')}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-accent no-underline hover:underline underline-offset-2 hover:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1"
+                      className="text-accent no-underline hover:underline focus-visible:underline underline-offset-2 hover:opacity-80 focus-visible:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1"
                       style={{ fontSize: fluidSmall, lineHeight: 1.2 }}
                     >
                       {job.link.label}{" "}
@@ -289,12 +286,14 @@ export function HomePage() {
                 key={project.title}
                 to={project.caseStudy}
                 data-goatcounter-click={`case-study-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
-                className="work-card group block rounded-xl overflow-hidden bg-card"
+                className="work-card group block rounded-xl overflow-hidden bg-card border border-border transition-colors hover:border-muted-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <div className="overflow-hidden">
                   <img
                     src={project.cover}
                     alt={project.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full aspect-[16/9] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
                   />
                 </div>
@@ -366,7 +365,7 @@ export function HomePage() {
             Get in touch
           </h2>
           <div className="flex flex-col" style={{ gap: "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)" }}>
-            <ol
+            <ul
               className="grid grid-cols-1 sm:grid-cols-4"
               style={{
                 rowGap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)",
@@ -376,7 +375,7 @@ export function HomePage() {
               {connectLinks.map((item) => (
                 <ConnectListItem key={item.label} {...item} />
               ))}
-            </ol>
+            </ul>
           </div>
         </section>
       </SectionAnimate>
