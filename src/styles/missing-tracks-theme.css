@@ -52,7 +52,9 @@
    element resets apply only to the Missing Tracks page. */
 .mt-root {
   color-scheme: dark;
-  background: var(--color-mt-bg);
+  background:
+    radial-gradient(ellipse 120% 60% at 18% 0%, color-mix(in oklab, var(--color-mt-green) 30%, transparent), transparent 55%),
+    var(--color-mt-bg);
   color: var(--color-mt-text);
   min-height: 100dvh;
   font-family: var(--font-mt-sans);

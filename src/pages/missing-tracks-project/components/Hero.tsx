@@ -41,7 +41,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.42, delay: 0.05, ease }}
           className='text-balance text-4xl font-extrabold leading-[1.08] tracking-tight text-mt-text md:text-5xl lg:text-5xl'>
-          The songs the labels quietly pulled from your library.
+          The songs the labels quietly pulled from <span className='text-mt-green'>your library.</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}

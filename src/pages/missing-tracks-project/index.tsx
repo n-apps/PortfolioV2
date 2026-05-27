@@ -37,31 +37,19 @@ export default function MissingTracksApp() {
 
   return (
     <>
-      {/* isolate keeps the decorative top glow behind the content without leaking a
-          stacking context to the rest of the page. */}
-      <div className='relative isolate'>
-        <div
-          aria-hidden='true'
-          className='pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px]'
-          style={{
-            background:
-              'radial-gradient(ellipse 120% 60% at 18% 0%, color-mix(in oklab, var(--color-mt-green) 6%, transparent), transparent 55%)',
-          }}
-        />
-        <main className='mx-auto flex w-full max-w-[1024px] flex-col gap-[clamp(4rem,8vw,8rem)] px-6 pb-16 md:px-8'>
-          <Hero />
-          <div className='flex flex-col gap-10'>
-            <AddTrackForm onAdd={addTrack} />
-            <Watchlist
-              tracks={tracks}
-              onMarkChecked={markChecked}
-              onEdit={setEditing}
-              onDelete={setConfirming}
-            />
-          </div>
-          <Footer />
-        </main>
-      </div>
+      <main className='mx-auto flex w-full max-w-[1024px] flex-col gap-[clamp(4rem,8vw,8rem)] px-6 pb-16 md:px-8'>
+        <Hero />
+        <div className='flex flex-col gap-10'>
+          <AddTrackForm onAdd={addTrack} />
+          <Watchlist
+            tracks={tracks}
+            onMarkChecked={markChecked}
+            onEdit={setEditing}
+            onDelete={setConfirming}
+          />
+        </div>
+        <Footer />
+      </main>
 
       <EditTrackDialog
         track={editing}

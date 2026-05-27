@@ -39,17 +39,14 @@ const STEPS: Step[] = [
   {
     n: '04',
     tone: 'green',
-    title: 'Recheck when you want',
+    title: 'Recheck later',
     desc: 'Re-run it later. Licensing shifts, and often the song is quietly back.',
   },
 ];
 
-// Status coins borrow the app's own availability language: green reads as
-// "playable", red as "unavailable" — so the lone red coin (step 02) is the dead
-// end the headline names. The bloom mirrors the primary button's green glow.
-const toneCoin: Record<Step['tone'], string> = {
-  green: 'bg-mt-green text-mt-bg shadow-[0_0_24px_-4px_rgba(127,238,100,0.5)]',
-  red: 'bg-mt-red text-mt-bg shadow-[0_0_24px_-4px_rgba(232,99,99,0.5)]',
+const toneSlash: Record<Step['tone'], string> = {
+  green: 'text-mt-green',
+  red: 'text-mt-red',
 };
 
 function AboutHero() {
@@ -82,71 +79,49 @@ function AboutHero() {
 
 function HowItWorks() {
   return (
-    <section
+    <motion.section
       aria-labelledby='how-it-works-heading'
-      className='flex flex-col gap-10 md:gap-12'>
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.42, ease }}
+      className='rounded-mt-card bg-mt-surface px-6 py-8 text-mt-text shadow-mt-card ring-1 ring-mt-border sm:px-9 sm:py-10 lg:px-12 lg:py-12'>
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.6 }}
         transition={{ duration: 0.42, ease }}
-        className='flex flex-col gap-4'>
-        <span className='font-mt-mono text-[11px] uppercase tracking-mt-eyebrow text-mt-text-secondary'>
-          How it works
-        </span>
+        className='flex max-w-3xl flex-col gap-4'>
         <h2
           id='how-it-works-heading'
-          className='text-balance text-3xl font-extrabold leading-[1.08] tracking-tight text-mt-text sm:text-4xl lg:text-[2.75rem]'>
-          From a dead end to a song you can play again.
+          className='text-balance text-4xl font-black uppercase leading-[0.96] tracking-normal text-mt-text sm:text-5xl lg:text-6xl'>
+          How it works
         </h2>
+        <p className='max-w-2xl text-pretty text-lg font-bold leading-snug text-mt-text-secondary sm:text-xl'>
+          From a dead end to a song you can play again.
+        </p>
       </motion.div>
 
-      <ol className='flex flex-col'>
+      <ol className='mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-9'>
         {STEPS.map((step, i) => {
-          const isLast = i === STEPS.length - 1;
           return (
             <li
               key={step.n}
-              className={cn(
-                'grid grid-cols-[auto_1fr] gap-x-5 sm:gap-x-7',
-                !isLast && 'pb-11 md:pb-14',
-              )}>
-              {/* Rail: the numbered status coin, then the connector that draws
-                  down toward the next step as this row scrolls into view. */}
-              <div className='flex flex-col items-center' aria-hidden='true'>
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, amount: 0.8 }}
-                  transition={{ duration: 0.4, ease }}
-                  className={cn(
-                    'flex size-10 shrink-0 items-center justify-center rounded-mt-circle font-mt-mono text-[13px] font-bold leading-none',
-                    toneCoin[step.tone],
-                  )}>
-                  {step.n}
-                </motion.span>
-                {!isLast && (
-                  <motion.span
-                    initial={{ scaleY: 0 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.5, delay: 0.12, ease }}
-                    style={{ transformOrigin: 'top' }}
-                    className='mt-3 w-px flex-1 bg-gradient-to-b from-mt-border to-mt-border/20'
-                  />
-                )}
-              </div>
-
+              className='min-w-0'>
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.6 }}
-                transition={{ duration: 0.42, delay: 0.08, ease }}
-                className='flex flex-col gap-2 pt-1.5'>
-                <h3 className='text-xl font-bold leading-snug tracking-tight text-mt-text md:text-2xl'>
+                transition={{ duration: 0.42, delay: 0.08 + i * 0.04, ease }}
+                className='flex flex-col gap-4'>
+                <div className='flex items-baseline gap-3 text-sm font-bold leading-none tracking-normal'>
+                  <span className={cn('text-lg', toneSlash[step.tone])}>/</span>
+                  <span>{step.n}</span>
+                </div>
+                <h3 className='text-balance text-base font-extrabold leading-tight tracking-normal sm:text-lg'>
                   {step.title}
                 </h3>
-                <p className='text-[15px] leading-relaxed text-mt-text-secondary md:text-base'>
+                <p className='text-pretty text-[15px] font-medium leading-relaxed text-mt-text-secondary sm:text-base lg:text-[15px] xl:text-base'>
                   {step.desc}
                 </p>
               </motion.div>
@@ -154,7 +129,7 @@ function HowItWorks() {
           );
         })}
       </ol>
-    </section>
+    </motion.section>
   );
 }
 
@@ -189,23 +164,11 @@ function ClosingCta() {
 
 export function MissingTracksAboutPage() {
   return (
-    // isolate keeps the decorative top glow behind the content without leaking a
-    // stacking context to the rest of the page.
-    <div className='relative isolate'>
-      <div
-        aria-hidden='true'
-        className='pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px]'
-        style={{
-          background:
-            'radial-gradient(ellipse 120% 60% at 18% 0%, color-mix(in oklab, var(--color-mt-green) 6%, transparent), transparent 55%)',
-        }}
-      />
-      <main className='mx-auto flex w-full max-w-[1024px] flex-col gap-[clamp(4rem,8vw,8rem)] px-6 pb-16 md:px-8'>
-        <AboutHero />
-        <HowItWorks />
-        <ClosingCta />
-        <Footer />
-      </main>
-    </div>
+    <main className='mx-auto flex w-full max-w-[1024px] flex-col gap-[clamp(4rem,8vw,8rem)] px-6 pb-16 md:px-8'>
+      <AboutHero />
+      <HowItWorks />
+      <ClosingCta />
+      <Footer />
+    </main>
   );
 }
