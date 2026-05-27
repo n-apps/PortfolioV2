@@ -4,6 +4,7 @@ import { Layout } from "@/components/layout/layout";
 import { ReviewsLayout } from "@/pages/score-counter/reviews/layout";
 import { HomePage } from "@/pages/home";
 import { NotFoundPage } from "@/pages/not-found";
+import { AnalyticsTracker } from "@/lib/use-analytics";
 
 // These pages are only loaded when the user navigates to them
 const ScoreCounterPage = lazy(() =>
@@ -47,37 +48,43 @@ const MissingTracksAboutPage = lazy(() =>
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    Component: Layout,
+    Component: AnalyticsTracker,
     children: [
-      { index: true, Component: HomePage },
-      { path: "work/score-counter", Component: ScoreCounterPage },
-      { path: "work/design-system", Component: DesignSystemPage },
-      { path: "work/white-label-esim", Component: WhiteLabelEsimPage },
-      { path: "work/saas-onboarding", Component: SaasOnboardingPage },
-      { path: "support", Component: SupportPage },
-      { path: "*", Component: NotFoundPage },
-    ],
-  },
-  {
-    path: "/work/score-counter/reviews",
-    Component: ReviewsLayout,
-    children: [{ index: true, Component: ReviewsPage }],
-  },
-  {
-    path: "/work/white-label-esim/demo",
-    Component: WhiteLabelDemoLayout,
-    children: [
-      { index: true, Component: CompanySettingsDemoPage },
-      { path: "customize", Component: CustomizeEsimDemoPage },
-    ],
-  },
-  {
-    path: "/missing-tracks-project",
-    Component: MissingTracksLayout,
-    children: [
-      { index: true, Component: MissingTracksApp },
-      { path: "about", Component: MissingTracksAboutPage },
+      {
+        path: "/",
+        Component: Layout,
+        children: [
+          { index: true, Component: HomePage },
+          { path: "work/score-counter", Component: ScoreCounterPage },
+          { path: "work/design-system", Component: DesignSystemPage },
+          { path: "work/white-label-esim", Component: WhiteLabelEsimPage },
+          { path: "work/saas-onboarding", Component: SaasOnboardingPage },
+          { path: "support", Component: SupportPage },
+          { path: "*", Component: NotFoundPage },
+        ],
+      },
+      {
+        path: "/work/score-counter/reviews",
+        Component: ReviewsLayout,
+        children: [{ index: true, Component: ReviewsPage }],
+      },
+      {
+        path: "/work/white-label-esim/demo",
+        Component: WhiteLabelDemoLayout,
+        children: [
+          { index: true, Component: CompanySettingsDemoPage },
+          { path: "customize", Component: CustomizeEsimDemoPage },
+        ],
+      },
+      {
+        path: "/missing-tracks-project",
+        Component: MissingTracksLayout,
+        children: [
+          { index: true, Component: MissingTracksApp },
+          { path: "about", Component: MissingTracksAboutPage },
+        ],
+      },
     ],
   },
 ]);
+

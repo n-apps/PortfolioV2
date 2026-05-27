@@ -2,6 +2,7 @@ import { useEffect, Suspense } from 'react';
 import { MotionConfig } from 'motion/react';
 import { Outlet, useLocation } from 'react-router';
 import { TopNav } from './components/TopNav';
+import { useDocumentMetadata } from './hooks/useDocumentMetadata';
 
 // Strichpunkt Sans (the .mt-root body font) and Madimi One (the wordmark) are
 // used only on this route, so load their stylesheet on mount instead of site-wide
@@ -33,6 +34,13 @@ export function MissingTracksLayout() {
   const { pathname } = useLocation();
   useMissingTracksFonts();
 
+  useDocumentMetadata({
+    title: 'Missing Tracks Watchlist',
+    description: 'A watchlist for Spotify tracks that go temporarily unavailable when licensing lapses. Save them, check back when they return, and find them elsewhere meanwhile.',
+    themeColor: '#141b16', // Matches --color-mt-bg
+    favicon: '/favicon-mt.svg',
+  });
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -48,3 +56,4 @@ export function MissingTracksLayout() {
     </MotionConfig>
   );
 }
+
