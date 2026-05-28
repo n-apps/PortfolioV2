@@ -37,7 +37,7 @@ export default function MissingTracksApp() {
 
   return (
     <>
-      <main className='mx-auto flex w-full max-w-[1024px] flex-col gap-[clamp(4rem,8vw,8rem)] px-6 pb-16 md:px-8'>
+      <main className='relative z-10 mx-auto flex w-full max-w-[1024px] flex-col gap-[clamp(4rem,8vw,8rem)] px-6 pb-16 md:px-8'>
         <Hero />
         <div className='flex flex-col gap-10'>
           <AddTrackForm onAdd={addTrack} />

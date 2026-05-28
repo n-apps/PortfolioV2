@@ -52,9 +52,9 @@
    element resets apply only to the Missing Tracks page. */
 .mt-root {
   color-scheme: dark;
-  background:
-    radial-gradient(ellipse 120% 60% at 18% 0%, color-mix(in oklab, var(--color-mt-green) 30%, transparent), transparent 55%),
-    var(--color-mt-bg);
+  position: relative;
+  isolation: isolate;
+  background: var(--color-mt-bg);
   color: var(--color-mt-text);
   min-height: 100dvh;
   font-family: var(--font-mt-sans);
@@ -67,6 +67,31 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+.mt-shader-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--color-mt-bg);
+}
+
+.mt-shader-canvas,
+.mt-shader-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.mt-shader-canvas canvas {
+  opacity: 0.82;
+  filter: saturate(0.95) contrast(1.08);
+}
+
+.mt-root > :not(.mt-shader-background) {
+  position: relative;
+  z-index: 1;
 }
 
 .mt-root ::selection {

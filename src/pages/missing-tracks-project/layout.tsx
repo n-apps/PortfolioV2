@@ -1,6 +1,7 @@
 import { useEffect, Suspense } from 'react';
 import { MotionConfig } from 'motion/react';
 import { Outlet, useLocation } from 'react-router';
+import { MissingTracksShaderBackground } from './components/MissingTracksShaderBackground';
 import { TopNav } from './components/TopNav';
 import { useDocumentMetadata } from './hooks/useDocumentMetadata';
 
@@ -48,6 +49,7 @@ export function MissingTracksLayout() {
   return (
     <MotionConfig reducedMotion='user'>
       <div id='top' className='mt-root min-h-[100dvh]'>
+        <MissingTracksShaderBackground />
         <TopNav />
         <Suspense fallback={null}>
           <Outlet />
@@ -56,4 +58,3 @@ export function MissingTracksLayout() {
     </MotionConfig>
   );
 }
-
