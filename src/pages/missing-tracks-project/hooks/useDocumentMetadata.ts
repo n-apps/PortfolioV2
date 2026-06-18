@@ -21,20 +21,34 @@ export function useDocumentMetadata({
     // 1. Capture original values from index.html to restore later
     const originalTitle = document.title;
 
-    const faviconLink = document.querySelector('link[rel="icon"]') as HTMLLinkElement;
-    const originalFavicon = faviconLink ? faviconLink.getAttribute('href') || '/favicon.png' : '/favicon.png';
+    const faviconLink = document.querySelector(
+      'link[rel="icon"]',
+    ) as HTMLLinkElement;
+    const originalFavicon =
+      faviconLink ?
+        faviconLink.getAttribute('href') || '/favicon.png'
+      : '/favicon.png';
 
-    const descMeta = document.querySelector('meta[name="description"]') as HTMLMetaElement;
+    const descMeta = document.querySelector(
+      'meta[name="description"]',
+    ) as HTMLMetaElement;
     const originalDesc = descMeta ? descMeta.content : '';
 
-    const ogDescMeta = document.querySelector('meta[property="og:description"]') as HTMLMetaElement;
+    const ogDescMeta = document.querySelector(
+      'meta[property="og:description"]',
+    ) as HTMLMetaElement;
     const originalOgDesc = ogDescMeta ? ogDescMeta.content : '';
 
-    const twitterDescMeta = document.querySelector('meta[name="twitter:description"]') as HTMLMetaElement;
+    const twitterDescMeta = document.querySelector(
+      'meta[name="twitter:description"]',
+    ) as HTMLMetaElement;
     const originalTwitterDesc = twitterDescMeta ? twitterDescMeta.content : '';
 
-    const themeColorMeta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement;
-    const originalThemeColor = themeColorMeta ? themeColorMeta.content : '#FF4552';
+    const themeColorMeta = document.querySelector(
+      'meta[name="theme-color"]',
+    ) as HTMLMetaElement;
+    const originalThemeColor =
+      themeColorMeta ? themeColorMeta.content : '#F55817';
 
     // 2. Apply new metadata
     if (title) {
