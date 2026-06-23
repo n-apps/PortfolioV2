@@ -51,33 +51,32 @@ const workExperience = [
 
 const selectedWorks = [
   {
-    title: "Score Counter",
-    subtitle: "Android App",
-    description:
-      "A side project I have maintained since 2016: 920K installs, 90K monthly active users, a 4.9 rating and no marketing spend. The work has mostly been protecting the simple flow people trust.",
-    caseStudy: "/work/score-counter",
-    cover: scoreCounterCover,
-  },
-  {
     title: "Design system",
     subtitle: "Yesim",
-    description: "A shared UI foundation for three B2B products: 48 components, 140+ tokens and 3 brand themes. The work was less about visual consistency than keeping teams from rebuilding the same UI three ways.",
+    description: "A shared component library built to scale across three B2B products: 48 components, 140+ tokens and 3 brand themes. The core challenge was abstraction — designing a system flexible enough for multi-product theming without letting teams diverge into parallel implementations.",
     caseStudy: "/work/design-system",
     cover: designSystemCover,
   },
   {
     title: "White-label eSIM",
     subtitle: "Yesim",
-    description: "A working prototype for a B2B customization flow where colors, uploads, optional fields and preview states had to behave under real input. I built it using the production site’s tech stack so contrast, conditional rendering and edge cases were part of the artifact.",
+    description: "A technical prototype for a B2B customization platform where partner branding, conditional fields and live preview had to hold up under real input. Built on the production stack so contrast ratios, edge cases and conditional rendering were validated in the artifact, not deferred to QA.",
     caseStudy: "/work/white-label-esim",
     cover: whiteLabelEsimCover,
   },
   {
     title: "Designing onboarding",
     subtitle: "Yesim",
-    description: "A self-serve onboarding flow for companies buying eSIM plans for employees. The work focused on replacing sales-led setup with a product-led path to first value: add an employee, choose a plan and activate the first eSIM.",
+    description: "A self-serve B2B onboarding flow designed with product and engineering across iterative releases. The goal was reducing cognitive load at each step — replacing a sales-assisted setup with a product-led path where companies could add employees, pick plans and activate eSIMs without hand-holding.",
     caseStudy: "/work/saas-onboarding",
     cover: saasOnboardingCover,
+  },
+  {
+    title: "Score Counter",
+    subtitle: "Android App",
+    description: "A side project I have owned end-to-end since 2016: 920K installs, 90K monthly active users and a 4.9 rating with no marketing spend. It shows what long-term product stewardship and independent technical ownership look like in practice.",
+    caseStudy: "/work/score-counter",
+    cover: scoreCounterCover,
   },
 ];
 
