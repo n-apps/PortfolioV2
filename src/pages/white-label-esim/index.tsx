@@ -144,10 +144,10 @@ export function WhiteLabelEsimPage() {
         <ConfidentialityNote />
       </SectionAnimate>
 
-      {/* ── 2. Context ─────────────────────────────────── */}
+      {/* ── 2. Problem & Context ───────────────────────── */}
       <SectionAnimate delay={0.12}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Context</SectionHeading>
+          <SectionHeading>Problem &amp; Context</SectionHeading>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -163,13 +163,6 @@ export function WhiteLabelEsimPage() {
               'Before this work, the handoff pattern was familiar: design screens in Figma, annotate the edge cases, hand them to development, then spend review cycles catching things the static file could not express. That workflow was manageable for simple pages. It was much weaker for a product where the UI changes based on real partner input.',
             )}
           </p>
-        </div>
-      </SectionAnimate>
-
-      {/* ── 3. Problem ─────────────────────────────────── */}
-      <SectionAnimate delay={0.14}>
-        <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Problem</SectionHeading>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -193,14 +186,28 @@ export function WhiteLabelEsimPage() {
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
-              'For brand customization, the problems were concrete. A partner can pick almost any brand color; the product has to keep text readable on whatever they choose, not just the clean swatch in the mockup. The contact card, promotion badge, and footer each appear or disappear based on real content, so a static screen can only show one combination. Logos and banners reshape the preview when uploaded, aspect ratios vary, and the layout has to survive real assets.',
+              'The risk was not that the screen would look bad in Figma. The risk was that it would look right there and fail under real input.',
+            )}
+          </p>
+        </div>
+      </SectionAnimate>
+
+      {/* ── 3. Hypothesis & Constraints ────────────────── */}
+      <SectionAnimate delay={0.14}>
+        <div className='flex flex-col' style={{ gap: innerGap }}>
+          <SectionHeading>Hypothesis &amp; Constraints</SectionHeading>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'My hypothesis was that a working prototype would reveal contrast, layout, conditional-content and validation issues earlier than static mockups could.',
             )}
           </p>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
-              'The risk was not that the screen would look bad in Figma. The risk was that it would look right there and fail under real input.',
+              'The constraints were concrete: partners could choose arbitrary brand colors, upload logos and banners with different aspect ratios, turn optional sections on or off, and review a mobile experience that had to survive real input.',
             )}
           </p>
         </div>
@@ -216,14 +223,13 @@ export function WhiteLabelEsimPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 4. Approach ────────────────────────────────── */}
+      {/* ── 4. Exploration ─────────────────────────────── */}
       <SectionAnimate delay={0.18}>
         <div className='flex flex-col' style={{ gap: sectionGap }}>
-          {/* Decision 1: Code, not Figma */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SectionHeading>Approach</SectionHeading>
+            <SectionHeading>Exploration</SectionHeading>
             <SubHeading>
-              Build the artifact where behavior had to work
+              Use code where behavior had to be resolved
             </SubHeading>
             <p
               className='text-foreground/80'
@@ -236,7 +242,7 @@ export function WhiteLabelEsimPage() {
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'In a static mockup, you can place white text on a blue background and move on. In code, the text is either readable or it isn\u2019t. If partners can pick their own colors, the logic has to handle that.',
+                'Static mockups were useful for direction, but weak for this problem. They could show one clean combination, not what happened when a partner entered a hard-to-read color, skipped optional content, or uploaded a banner with an awkward crop.',
               )}
             </p>
             <p
@@ -248,21 +254,21 @@ export function WhiteLabelEsimPage() {
             </p>
           </div>
 
-          {/* Decision 2: Contrast at the system level */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
+            <SectionHeading>Final Solution</SectionHeading>
             <SubHeading>Make contrast executable</SubHeading>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'The prototype computes foreground text color from the partner\u2019s brand color using WCAG relative-luminance calculations. Light brand colors get dark text. Dark brand colors get white text. It runs every time the color changes, so nobody has to hope the chosen color happens to work.',
+                'The prototype computes foreground text color from the partner\u2019s brand color using WCAG relative-luminance calculations. Light brand colors get dark text. Dark brand colors get white text. Contrast became a rule in the product, not a comment in Figma.',
               )}
             </p>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'In a static design, I would have left a comment saying \u201censure contrast.\u201d In the prototype, contrast is a function. It passes or it fails.',
+                'Because the rule runs every time the color changes, the preview does not depend on someone remembering to check a clean swatch by hand.',
               )}
             </p>
           </div>
@@ -275,21 +281,20 @@ export function WhiteLabelEsimPage() {
             />
           </div>
 
-          {/* Decision 3: Conditional rendering */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
             <SubHeading>Treat optional content as product logic</SubHeading>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'Instead of creating a dozen Figma variants for toggles and optional fields, the prototype renders conditionally. The contact card appears when at least one contact field has content. The promotion badge follows its toggle. The footer appears only when it has something useful to show.',
+                'Instead of creating a dozen Figma variants for toggles and optional fields, the prototype renders conditionally. Contact details, promotions and footer content appear only when they have useful input. Logo and banner states update when files are uploaded or replaced.',
               )}
             </p>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'That made the combinations much harder to miss. The rendering logic handled them instead of relying on my memory of which variants to draw.',
+                'That reduced the chance of missed combinations. The rendering logic handled blank, partial and filled states instead of relying on my memory of which variants to draw.',
               )}
             </p>
           </div>
@@ -302,7 +307,6 @@ export function WhiteLabelEsimPage() {
             />
           </div>
 
-          {/* Decision 4: Real-time preview */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
             <SubHeading>Use the preview as the review surface</SubHeading>
             <p
@@ -316,7 +320,7 @@ export function WhiteLabelEsimPage() {
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'That made reviews faster. I did not have to walk people through annotations. I shared a URL, they typed into the form and the product answered back.',
+                'Inline validation, file-upload behavior, save and reset controls, dirty-state warnings and skeleton transitions lived in the prototype too. The artifact described the interaction rules by letting people try them.',
               )}
             </p>
           </div>
@@ -427,14 +431,14 @@ export function WhiteLabelEsimPage() {
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
-              'When people could type into the prototype and see the result, feedback got more concrete. Instead of debating a static screen, they asked what happens when a field is blank. The interaction rules living in code also meant there was no separate spec to maintain; the developer could read the behavior directly.',
+              'The tradeoff is that code makes the first solid idea feel more final than it is. Figma would still be better for the earliest exploratory phase, before the direction has earned that level of commitment.',
             )}
           </p>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
-              'The tradeoff with code is that the first solid idea starts to feel more final than it is. I built this solo, which worked for this feature, but a developer in the room earlier would have caught structural choices I made like a designer rather than an engineer. Figma would have been better for the early exploratory phase; code commits you to a direction before it is clear. Short decision notes alongside the code would also have helped: the prototype shows what happens but not why, and future teammates need the intent, not just the behavior to read.',
+              'I would also add short decision notes alongside the code next time. The prototype shows what happens, but future teammates still need the intent behind the behavior.',
             )}
           </p>
         </div>

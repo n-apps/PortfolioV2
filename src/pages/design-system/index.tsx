@@ -144,10 +144,6 @@ const whatWorked = [
     label: 'Teams used the process because it was small',
     body: 'Busy product teams participated because requests were easy to make, priorities were visible and the first migrations produced results after one quarter.',
   },
-  {
-    label: 'Documentation carried design intent',
-    body: 'Including the \u201cwhy\u201d in component documentation made the system easier to trust. It showed when to use a pattern, not just what it looked like.',
-  },
 ];
 
 const whatIdChange = [
@@ -295,10 +291,10 @@ export function DesignSystemPage() {
         <ConfidentialityNote />
       </SectionAnimate>
 
-      {/* ── 2. Context ─────────────────────────────────── */}
+      {/* ── 2. Problem & Context ───────────────────────── */}
       <SectionAnimate delay={0.12}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Context</SectionHeading>
+          <SectionHeading>Problem &amp; Context</SectionHeading>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -314,13 +310,6 @@ export function DesignSystemPage() {
               'The products did not need a decorative refresh. They needed a shared way to build common B2B surfaces: tables, forms, filters, navigation, feedback states and settings pages. The hard part was that each product still needed its own identity.',
             )}
           </p>
-        </div>
-      </SectionAnimate>
-
-      {/* ── 3. Problem ─────────────────────────────────── */}
-      <SectionAnimate delay={0.14}>
-        <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Problem</SectionHeading>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -336,6 +325,27 @@ export function DesignSystemPage() {
         </div>
       </SectionAnimate>
 
+      {/* ── 3. Hypothesis & Constraints ────────────────── */}
+      <SectionAnimate delay={0.14}>
+        <div className='flex flex-col' style={{ gap: innerGap }}>
+          <SectionHeading>Hypothesis &amp; Constraints</SectionHeading>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'My working hypothesis was that one shared component library could support all three products if product-specific differences lived in semantic tokens instead of separate component forks.',
+            )}
+          </p>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'The constraints shaped the system: three products had different visual identities, legacy UI patterns and existing implementations. Teams also needed faster day-to-day work without adopting a library that required constant maintenance.',
+            )}
+          </p>
+        </div>
+      </SectionAnimate>
+
       <SectionAnimate delay={0.16}>
         <div className='-mx-4 sm:mx-0'>
           <ImageWithFallback
@@ -346,25 +356,58 @@ export function DesignSystemPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 4. Approach ────────────────────────────────── */}
+      {/* ── 4. Exploration ─────────────────────────────── */}
       <SectionAnimate delay={0.18}>
         <div className='flex flex-col' style={{ gap: sectionGap }}>
-          {/* Decision 1: Token architecture */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SectionHeading>Approach</SectionHeading>
-            <SubHeading>Prevent forks before they started</SubHeading>
+            <SectionHeading>Exploration</SectionHeading>
+            <SubHeading>
+              Prioritize the surfaces teams touched every week
+            </SubHeading>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'The main risk was forking. If each product needed its own buttons, inputs, tables and dialogs, the library would become three libraries with the same name. So I used three token layers: raw values, primitives and semantic tokens.',
+                'I audited every UI element across all three products: buttons in five styles, three table implementations, form fields that looked similar but behaved differently. The audit made the repeated work visible and helped separate high-impact patterns from one-off cleanup.',
               )}
             </p>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'The product-specific work happens at the semantic layer. A product can change',
+                'Tables and forms came first because teams touched them constantly and they appeared on each product\u2019s most important B2B surfaces. Starting there reduced adoption risk: teams could migrate useful, visible areas without waiting for a big-bang redesign.',
+              )}
+            </p>
+            <DataTable
+              headers={['Category', 'Components', 'Why first']}
+              rows={priorityComponents.map((p) => [
+                p.category,
+                p.components,
+                p.why,
+              ])}
+            />
+          </div>
+        </div>
+      </SectionAnimate>
+
+      {/* ── 5. Final Solution ──────────────────────────── */}
+      <SectionAnimate delay={0.22}>
+        <div className='flex flex-col' style={{ gap: sectionGap }}>
+          <div className='flex flex-col' style={{ gap: innerGap }}>
+            <SectionHeading>Final Solution</SectionHeading>
+            <SubHeading>Prevent forks before they started</SubHeading>
+            <p
+              className='text-foreground/80'
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+              {nbsp(
+                'The system used three token layers: raw values, primitives and semantic tokens. Raw values and primitives kept the shared palette organized. Semantic tokens carried product meaning, which is where each brand could safely differ.',
+              )}
+            </p>
+            <p
+              className='text-foreground/80'
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+              {nbsp(
+                'That mattered because the component implementation stayed shared. A product could change',
               )}{' '}
               <code>color-primary</code>
               {', '}
@@ -372,7 +415,7 @@ export function DesignSystemPage() {
               {', or '}
               <code>radius-default</code>{' '}
               {nbsp(
-                'without changing the component itself. The component stays boring on purpose.',
+                'without creating a product-specific button, input or table. Identity lived in tokens; behavior and structure stayed in one library.',
               )}
             </p>
             <DataTable
@@ -395,7 +438,6 @@ export function DesignSystemPage() {
             />
           </div>
 
-          {/* Decision 2: One library, three themes */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
             <SubHeading>
               Let products look different without separate components
@@ -404,7 +446,7 @@ export function DesignSystemPage() {
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'Each product gets a theme file that overrides semantic tokens. The component library does not need to know which product is using it. Switching themes changes the product expression, not the component implementation.',
+                'Each product gets a theme file that overrides semantic tokens. The component library does not need to know which product is using it. Switching themes changes the product expression while preserving the same implementation underneath.',
               )}
             </p>
             <DataTable
@@ -427,31 +469,13 @@ export function DesignSystemPage() {
             />
           </div>
 
-          {/* Decision 3: B2B-first component priorities */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SubHeading>
-              Prioritize the surfaces teams touched every week
-            </SubHeading>
+            <SubHeading>Make density and usage rules explicit</SubHeading>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'I audited every UI element across all three products: buttons in five styles, three table implementations, form fields that looked similar but behaved differently. Then I used the results to build a prioritized roadmap. Tables and forms came first because they appeared on every product\u2019s most-visited pages.',
-              )}
-            </p>
-            <DataTable
-              headers={['Category', 'Components', 'Why first']}
-              rows={priorityComponents.map((p) => [
-                p.category,
-                p.components,
-                p.why,
-              ])}
-            />
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'Density is a system-level token. Components respond to a density setting (default, compact, spacious) without separate variants. Tokens are named by function, not appearance:',
+                'Density became a system-level token. Components respond to a density setting (default, compact, spacious) without separate variants. Tokens are named by function, not appearance:',
               )}{' '}
               <code>color-fg-secondary</code>{' '}
               {nbsp(
@@ -459,11 +483,7 @@ export function DesignSystemPage() {
               )}
             </p>
           </div>
-        </div>
-      </SectionAnimate>
 
-      <SectionAnimate delay={0.22}>
-        <div className='flex flex-col' style={{ gap: sectionGap }}>
           <div className='-mx-4 sm:mx-0'>
             <ImageWithFallback
               src={specsImage}
@@ -503,7 +523,7 @@ export function DesignSystemPage() {
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'Instead of mandating a full migration, I worked with each product team to migrate high-impact, low-risk surfaces first: settings pages and list views. Once teams saw the time savings, adoption became easier to justify.',
+                'Instead of mandating a full migration, I worked with each product team to migrate high-impact, low-risk surfaces first: settings pages and list views. The adoption path matched the prioritization work: useful surfaces first, broad cleanup later.',
               )}
             </p>
             <p
@@ -525,8 +545,37 @@ export function DesignSystemPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 5. Result ──────────────────────────────────── */}
+      {/* ── 6. Before / After ──────────────────────────── */}
       <SectionAnimate delay={0.26}>
+        <div className='flex flex-col' style={{ gap: innerGap }}>
+          <SectionHeading>Before / After</SectionHeading>
+          <div className='grid gap-4 sm:grid-cols-2'>
+            <div className='rounded-xl bg-card card-shadow p-5'>
+              <SubHeading>Before: repeated decisions</SubHeading>
+              <p
+                className='text-foreground/80'
+                style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+                {nbsp(
+                  'Products used separate patterns, reviews slowed down on style questions, and teams kept re-deciding common B2B UI details.',
+                )}
+              </p>
+            </div>
+            <div className='rounded-xl bg-card card-shadow p-5'>
+              <SubHeading>After: shared rules</SubHeading>
+              <p
+                className='text-foreground/80'
+                style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+                {nbsp(
+                  'Teams had shared components, token-based theming and documented usage rules that preserved product identity without forking the library.',
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </SectionAnimate>
+
+      {/* ── 7. Result ──────────────────────────────────── */}
+      <SectionAnimate delay={0.28}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
           <SectionHeading>Result</SectionHeading>
           <div className='grid grid-cols-3 gap-3 sm:gap-4'>
@@ -555,8 +604,8 @@ export function DesignSystemPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 6. Reflection ──────────────────────────────── */}
-      <SectionAnimate delay={0.3}>
+      {/* ── 8. Reflection ──────────────────────────────── */}
+      <SectionAnimate delay={0.32}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
           <div className='flex flex-col gap-2'>
@@ -583,7 +632,7 @@ export function DesignSystemPage() {
       </SectionAnimate>
 
       {/* Bottom back link */}
-      <SectionAnimate delay={0.34}>
+      <SectionAnimate delay={0.36}>
         <div className='flex items-center justify-between'>
           <Link
             to='/'

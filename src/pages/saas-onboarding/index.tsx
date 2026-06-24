@@ -84,11 +84,26 @@ const dashboardStates = [
 const progressSteps = ['Company', 'Employee', 'Plan', 'Activate'];
 
 const outcomeItems = [
-  'Reduced confusion after signup by replacing the empty dashboard with guided setup',
-  'Shortened time-to-first-value by surfacing employee and eSIM assignment immediately',
-  'Enabled freemium users to activate without manual sales or support assistance',
-  'Made incomplete setup recoverable through draft states and dashboard guidance',
-  'Created a reusable onboarding pattern for future B2B setup flows',
+  {
+    label: 'Reduced confusion after signup',
+    body: 'Replacing the empty dashboard with guided setup gave admins an immediate path forward.',
+  },
+  {
+    label: 'Shortened time-to-first-value',
+    body: 'Surfacing employee and eSIM assignment immediately removed the delay between signup and activation.',
+  },
+  {
+    label: 'Enabled freemium self-activation',
+    body: 'Freemium users could complete setup without manual sales or support assistance.',
+  },
+  {
+    label: 'Made incomplete setup recoverable',
+    body: 'Draft states and dashboard guidance let admins return and finish setup without starting over.',
+  },
+  {
+    label: 'Created a reusable onboarding pattern',
+    body: 'The flow established a foundation for future B2B setup experiences across the product.',
+  },
 ];
 
 const whatWorked = [
@@ -125,7 +140,7 @@ const whatIdChange = [
 
 function LabeledList({ items }: { items: { label: string; body: string }[] }) {
   return (
-    <ol className='flex flex-col gap-4 pl-6 my-4 list-decimal'>
+    <ul className='flex flex-col gap-4 pl-5 my-4 list-disc'>
       {items.map((item, i) => (
         <li
           key={i}
@@ -140,26 +155,31 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
           {nbsp(item.body)}
         </li>
       ))}
-    </ol>
+    </ul>
   );
 }
 
-function PlainList({ items }: { items: string[] }) {
+function InlineFlow({ items }: { items: string[] }) {
   return (
-    <ol className='flex flex-col gap-2 pl-5 list-decimal'>
+    <p
+      className='text-foreground/80'
+      style={{
+        fontSize: fluidBase,
+        lineHeight: 1.7,
+        letterSpacing: '-0.011em',
+      }}>
       {items.map((item, i) => (
-        <li
-          key={i}
-          className='text-foreground/80'
-          style={{
-            fontSize: fluidBase,
-            lineHeight: 1.6,
-            letterSpacing: '-0.011em',
-          }}>
+        <span key={item}>
+          {i > 0 && (
+            <span className='text-muted-foreground' aria-hidden='true'>
+              {' '}
+              →{' '}
+            </span>
+          )}
           {nbsp(item)}
-        </li>
+        </span>
       ))}
-    </ol>
+    </p>
   );
 }
 
@@ -222,10 +242,10 @@ export function SaasOnboardingPage() {
         <ConfidentialityNote />
       </SectionAnimate>
 
-      {/* ── 2. Context ─────────────────────────────────── */}
+      {/* ── 2. Problem & Context ───────────────────────── */}
       <SectionAnimate delay={0.12}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Context</SectionHeading>
+          <SectionHeading>Problem &amp; Context</SectionHeading>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -255,6 +275,12 @@ export function SaasOnboardingPage() {
               'The problem was that the product was not ready for that moment. New admins landed in an empty dashboard with no employees, no active plans and no clear indication of what to do next.',
             )}
           </p>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp('The main issues were:')}
+          </p>
+          <LabeledList items={problemItems} />
           <PullQuote>
             {nbsp(
               'How do we help a company admin go from signup to their first assigned eSIM plan without relying on manual support?',
@@ -263,35 +289,10 @@ export function SaasOnboardingPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 3. Problem ─────────────────────────────────── */}
+      {/* ── 3. Hypothesis & Constraints ────────────────── */}
       <SectionAnimate delay={0.14}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Problem</SectionHeading>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {nbsp(
-              'The old flow assumed that setup had already happened before the user entered the product. In a self-serve model, that assumption broke.',
-            )}
-          </p>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {nbsp(
-              'New users arrived in the product before anything existed: no company profile, no employees, no plans, no usage data. The dashboard loaded, but there was nothing on it to act on.',
-            )}
-          </p>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {nbsp('The main issues were:')}
-          </p>
-          <LabeledList items={problemItems} />
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {nbsp('The key insight was simple:')}
-          </p>
+          <SectionHeading>Hypothesis &amp; Constraints</SectionHeading>
           <PullQuote>
             {nbsp('No assigned eSIM plan = no product value.')}
           </PullQuote>
@@ -299,49 +300,59 @@ export function SaasOnboardingPage() {
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
-              'The onboarding flow needed to make that first assignment the obvious next step.',
+              'My hypothesis was that onboarding would be more useful if it guided admins toward the first valuable action: assigning an eSIM plan to an employee. The product did not need to explain the whole dashboard first. It needed to help users create the first thing that made the dashboard matter.',
+            )}
+          </p>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'The constraints were practical: new users arrived with incomplete company data, no employees, no plans, no usage history and no salesperson or support person in the room.',
             )}
           </p>
         </div>
       </SectionAnimate>
 
       <SectionAnimate delay={0.16}>
-        <div className='-mx-4 sm:mx-0'>
-          <ImageWithFallback
-            src='/images/saas-onboarding-before.png'
-            alt='Empty dashboard new admins saw before the onboarding redesign'
-            className='w-full rounded-none sm:rounded-xl'
-          />
+        <div className='flex flex-col' style={{ gap: innerGap }}>
+          <SectionHeading>Before</SectionHeading>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'The old dashboard loaded successfully, but it behaved like a product shell. With no employees, no assigned plans and no usage history, there was almost nothing meaningful for a new admin to act on.',
+            )}
+          </p>
+          <div className='-mx-4 sm:mx-0'>
+            <ImageWithFallback
+              src='/images/saas-onboarding-before.png'
+              alt='Empty dashboard new admins saw before the onboarding redesign'
+              className='w-full rounded-none sm:rounded-xl'
+            />
+          </div>
         </div>
       </SectionAnimate>
 
-      {/* ── 4. Approach ────────────────────────────────── */}
+      {/* ── 5. Exploration ─────────────────────────────── */}
       <SectionAnimate delay={0.18}>
         <div className='flex flex-col' style={{ gap: sectionGap }}>
-          {/* Decision 1: Start with the first valuable action */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SectionHeading>Approach</SectionHeading>
-            <SubHeading>Start with the first valuable action</SubHeading>
+            <SectionHeading>Exploration</SectionHeading>
+            <SubHeading>
+              Reframe onboarding around value, not education
+            </SubHeading>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'I replaced passive onboarding with a guided setup. Instead of explaining the dashboard, the product walks admins toward the first useful outcome: assigning an eSIM plan to an employee.',
+                'The important shift was from “teach users the product” to “help users create the first useful thing.” A tour of every dashboard feature would not solve the empty-account problem. The flow needed to create an employee, choose a plan and make the first assignment visible.',
               )}
             </p>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'The first-time flow focuses on the minimum path to value:',
-              )}
-            </p>
-            <PlainList items={minimumPathSteps} />
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'This changed onboarding from “learn the product” to “create the first useful thing.”',
+                'That reframing kept the work focused. Every screen had to either move the admin closer to the first assigned eSIM or help them recover when they did not have all the information yet.',
               )}
             </p>
           </div>
@@ -354,7 +365,27 @@ export function SaasOnboardingPage() {
             />
           </div>
 
-          {/* Decision 2: Reduce setup to the essentials */}
+          {/* ── 6. Final Solution ───────────────────────── */}
+          <div className='flex flex-col' style={{ gap: innerGap }}>
+            <SectionHeading>Final Solution</SectionHeading>
+            <SubHeading>
+              Make the first assignment the spine of the flow
+            </SubHeading>
+            <p
+              className='text-foreground/80'
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+              {nbsp(
+                'I replaced passive onboarding with a guided setup. The signup flow captures only what is needed now, then the dashboard continues onboarding after signup.',
+              )}
+            </p>
+            <p
+              className='text-foreground/80'
+              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+              {nbsp('The minimum path to value became:')}
+            </p>
+            <InlineFlow items={minimumPathSteps} />
+          </div>
+
           <div className='flex flex-col' style={{ gap: innerGap }}>
             <SubHeading>Reduce setup to the essentials</SubHeading>
             <p
@@ -368,17 +399,10 @@ export function SaasOnboardingPage() {
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'I separated what was required now from what could come later.',
+                'I separated what was required now from what could come later. For the first version of onboarding, the flow only asks for:',
               )}
             </p>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'For the first version of onboarding, the flow only asks for:',
-              )}
-            </p>
-            <PlainList items={requiredFields} />
+            <InlineFlow items={requiredFields} />
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -405,7 +429,7 @@ export function SaasOnboardingPage() {
                 'To support real user constraints, I designed the flow to be flexible and non-blocking:',
               )}
             </p>
-            <PlainList items={flexibilityRules} />
+            <InlineFlow items={flexibilityRules} />
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -445,7 +469,7 @@ export function SaasOnboardingPage() {
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp('Possible states include:')}
             </p>
-            <PlainList items={dashboardStates} />
+            <InlineFlow items={dashboardStates} />
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -481,7 +505,7 @@ export function SaasOnboardingPage() {
                 'The flow needed to feel lightweight, but users still needed to understand where they were. I used a simple step structure with clear progress labels:',
               )}
             </p>
-            <PlainList items={progressSteps} />
+            <InlineFlow items={progressSteps} />
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -498,10 +522,10 @@ export function SaasOnboardingPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 5. Result ──────────────────────────────────── */}
+      {/* ── 7. Expected / Observed Result ──────────────── */}
       <SectionAnimate delay={0.22}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Result</SectionHeading>
+          <SectionHeading>Expected / Observed Result</SectionHeading>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -509,12 +533,7 @@ export function SaasOnboardingPage() {
               'The redesigned onboarding moved the product from a sales-led setup to something a company admin could finish on their own.',
             )}
           </p>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {nbsp('Expected or measured outcomes:')}
-          </p>
-          <PlainList items={outcomeItems} />
+          <LabeledList items={outcomeItems} />
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -525,7 +544,7 @@ export function SaasOnboardingPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 6. Reflection ──────────────────────────────── */}
+      {/* ── 8. Reflection ──────────────────────────────── */}
       <SectionAnimate delay={0.26}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
@@ -534,7 +553,7 @@ export function SaasOnboardingPage() {
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
               {nbsp(
-                'A few decisions held up well after launch. Most of them came from treating onboarding as part of the product, not a step before it.',
+                'The strongest lessons came from treating onboarding as part of the product, not a step before it.',
               )}
             </p>
             <LabeledList items={whatWorked} />
