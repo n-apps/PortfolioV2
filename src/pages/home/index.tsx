@@ -371,12 +371,12 @@ export function HomePage() {
           </h2>
           <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
             {nbsp(
-              "I've led work across user research, systems design and end-to-end shipping — from building products solo to leading a design team.",
+              'I work across product discovery, UX systems and end-to-end delivery — from complex B2B flows to solo-shipped mobile products.',
             )}
           </p>
           <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
             {nbsp(
-              'Strong proficiency with Figma. Familiarity with AI, analytics and A/B testing tools.',
+              'Strong in Figma, design systems, UX logic, prototyping, analytics and A/B testing. I also use AI coding tools to turn concepts into realistic product prototypes.',
             )}
           </p>
         </section>
