@@ -29,126 +29,8 @@ const metadata = [
   { label: 'Role', value: 'Product Designer' },
   { label: 'Timeframe', value: 'Jan 2026' },
   { label: 'Platform', value: 'Web (B2B)' },
-  { label: 'Team', value: 'PM · Engineers' },
+  { label: 'Team', value: 'PM · Engineering' },
 ];
-
-const statusQuoItems = [
-  {
-    label: 'Color-dependent UI',
-    body: 'a partner can pick almost any brand color. A mockup shows the one I chose. The product has to keep text readable on whatever they choose.',
-  },
-  {
-    label: 'Conditional sections',
-    body: 'the contact card appears only when there is contact info. The promotion badge has a toggle. The footer comes and goes. Static screens turn that into a pile of variants.',
-  },
-  {
-    label: 'File uploads',
-    body: 'logos and banners reshape the preview. Aspect ratios vary, fallbacks matter and the layout needs to survive real assets.',
-  },
-];
-
-const prototypeFeatures = [
-  {
-    label: 'Live form-to-preview binding',
-    body: 'brand name, logo, color, banner, contact details and policy links update the preview as the partner types',
-  },
-  {
-    label: 'Mobile and desktop preview modes',
-    body: 'the preview switches between an iPhone shell and a desktop browser frame',
-  },
-  {
-    label: 'Automatic contrast handling',
-    body: 'text color on brand backgrounds comes from a luminance function instead of a hardcoded choice',
-  },
-  {
-    label: 'File handling',
-    body: 'logo and banner uploads render immediately in the preview, with clear and replace controls',
-  },
-  {
-    label: 'Validation',
-    body: 'email format, URL structure and brand alias cleanup happen inline, before save',
-  },
-  {
-    label: 'Dirty-state tracking',
-    body: 'the form warns before navigation when changes are unsaved and save/reset work per section',
-  },
-  {
-    label: 'Loading states and transitions',
-    body: 'skeleton screens and CSS transitions make the preview feel closer to the product',
-  },
-];
-
-const impactItems = [
-  {
-    label: 'Zero contrast-related QA issues',
-    body: 'the luminance logic was tested in the prototype instead of being discovered during review',
-  },
-  {
-    label: 'Stakeholder alignment in one session',
-    body: 'PMs and partners tested the prototype directly instead of reviewing annotated screens for another round',
-  },
-  {
-    label: 'Less translation for development',
-    body: 'the prototype used the same stack as production (Flowbite + React), so the developer could extend it instead of rebuilding from a mockup',
-  },
-  {
-    label: 'Edge cases handled by default',
-    body: 'conditional rendering and validation logic covered the state combinations inside the prototype itself',
-  },
-];
-
-const whatWorked = [
-  {
-    label: 'The medium enforced rigor',
-    body: 'Code doesn\u2019t let you hand-wave for long. Every state, color and conditional is either handled or it breaks. That pressure made the design better.',
-  },
-  {
-    label: 'Stakeholders engaged differently',
-    body: 'When people can type into a prototype and see the result, the feedback shifts to behavior. People ask what happens when a field is blank instead of debating a static screen.',
-  },
-  {
-    label: 'The prototype became the spec',
-    body: 'There was no separate document explaining how the form and preview should interact. The developer could read the behavior in the code instead of translating a PDF.',
-  },
-];
-
-const whatIdChange = [
-  {
-    label: 'Pair with a developer from day one',
-    body: 'I built this solo, which worked for a focused feature but would not scale well. A developer in the room earlier would have caught a few structural choices I made like a designer.',
-  },
-  {
-    label: 'Keep a lightweight Figma file for visual exploration',
-    body: 'Code is a clumsy place for early divergent thinking. I should have sketched in Figma first, then moved to code once the direction was clearer.',
-  },
-  {
-    label: 'Document the \u201cwhy\u201d alongside the code',
-    body: 'The prototype shows what happens, but not always why. Short decision notes would have helped future teammates understand the intent behind the implementation.',
-  },
-];
-
-/* ── Local sub-components ──────────────────────────────── */
-
-function LabeledList({ items }: { items: { label: string; body: string }[] }) {
-  return (
-    <ol className='flex flex-col gap-2 pl-5 list-decimal'>
-      {items.map((item, i) => (
-        <li
-          key={i}
-          className='text-foreground/80'
-          style={{
-            fontSize: fluidBase,
-            lineHeight: 1.6,
-            letterSpacing: '-0.011em',
-          }}>
-          <strong>{nbsp(item.label)}</strong>
-          {': '}
-          {nbsp(item.body)}
-        </li>
-      ))}
-    </ol>
-  );
-}
 
 function PrototypeLaunchIcon() {
   return (
@@ -222,9 +104,7 @@ export function WhiteLabelEsimPage() {
             White-label eSIM configurator: working prototype in hours instead of
             static mockups
           </h1>
-          <p
-            className='text-muted-foreground'
-            style={{ fontSize: fluidLead, lineHeight: 1.5 }}>
+          <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
               'I built a working prototype instead of another static Figma handoff. It exposed the states, edge cases and interaction rules that mockups usually hide and gave the team something closer to the final product.',
             )}
@@ -312,9 +192,10 @@ export function WhiteLabelEsimPage() {
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {nbsp('For brand customization, the weak spots were predictable:')}
+            {nbsp(
+              'For brand customization, the problems were concrete. A partner can pick almost any brand color; the product has to keep text readable on whatever they choose, not just the clean swatch in the mockup. The contact card, promotion badge, and footer each appear or disappear based on real content, so a static screen can only show one combination. Logos and banners reshape the preview when uploaded, aspect ratios vary, and the layout has to survive real assets.',
+            )}
           </p>
-          <LabeledList items={statusQuoItems} />
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -450,15 +331,14 @@ export function WhiteLabelEsimPage() {
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
-              'The prototype covered the parts that usually get shoved into annotations:',
+              'The prototype handled the full configurator in a single shareable URL. As the partner typed, brand name, logo, color, banner, contact details, and policy links all updated the live preview. A toggle switched between mobile and desktop frames. Foreground text color adapted from a luminance function automatically, and file uploads rendered immediately with clear-and-replace controls.',
             )}
           </p>
-          <LabeledList items={prototypeFeatures} />
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
-              'In a static handoff, most of that would have been comments. In the prototype, people could try the behavior themselves.',
+              'It also covered the friction that usually surfaces late: inline validation for email format, URL structure, and brand alias cleanup; dirty-state warnings before navigation; save and reset controls per section; and skeleton transitions to make the preview feel close to the finished product. In a static handoff, most of that would have been comments. In the prototype, people could try the behavior themselves.',
             )}
           </p>
         </div>
@@ -515,7 +395,20 @@ export function WhiteLabelEsimPage() {
       {/* ── 6. Result details ──────────────────────────── */}
       <SectionAnimate delay={0.26}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <LabeledList items={impactItems} />
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'No contrast QA issues surfaced after handoff; the luminance logic had already been tested inside the prototype. PMs and partners reviewed in one session by typing into the form and seeing the result directly, rather than working through annotated screens.',
+            )}
+          </p>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'The developer extended the prototype rather than rebuilding from a mockup; both used the same stack. Conditional rendering and validation logic already lived in the prototype, so edge cases got handled there before production development started.',
+            )}
+          </p>
         </div>
       </SectionAnimate>
 
@@ -523,26 +416,27 @@ export function WhiteLabelEsimPage() {
       <SectionAnimate delay={0.3}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
           <SectionHeading>Reflection</SectionHeading>
-          <div className='flex flex-col gap-2'>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'Building the prototype in code was the right call for this feature. It turned hidden product rules into visible behavior before the team had to commit to the final implementation.',
-              )}
-            </p>
-            <LabeledList items={whatWorked} />
-          </div>
-          <div className='flex flex-col gap-2'>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'The tradeoff is that code can make the first solid idea feel more final than it is. With more time, I would support the prototype with a little more shared exploration and decision history.',
-              )}
-            </p>
-            <LabeledList items={whatIdChange} />
-          </div>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'Building the prototype in code was right for this feature. Code doesn\u2019t let you hand-wave: every state and conditional is either handled or it breaks. That pressure surfaced the awkward problems while I was still designing, before the team had to commit.',
+            )}
+          </p>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'When people could type into the prototype and see the result, feedback got more concrete. Instead of debating a static screen, they asked what happens when a field is blank. The interaction rules living in code also meant there was no separate spec to maintain; the developer could read the behavior directly.',
+            )}
+          </p>
+          <p
+            className='text-foreground/80'
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+            {nbsp(
+              'The tradeoff with code is that the first solid idea starts to feel more final than it is. I built this solo, which worked for this feature, but a developer in the room earlier would have caught structural choices I made like a designer rather than an engineer. Figma would have been better for the early exploratory phase; code commits you to a direction before it is clear. Short decision notes alongside the code would also have helped: the prototype shows what happens but not why, and future teammates need the intent, not just the behavior to read.',
+            )}
+          </p>
         </div>
       </SectionAnimate>
 

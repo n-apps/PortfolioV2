@@ -195,8 +195,70 @@ export function HomePage() {
         </section>
       </SectionAnimate>
 
-      {/* Work Experience */}
+      {/* Selected Work */}
       <SectionAnimate delay={0.1}>
+        <section className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)" }}>
+          <h2
+            style={{
+              fontSize: fluidBase,
+              fontWeight: 500,
+              lineHeight: 1.2,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Selected work
+          </h2>
+          <div className="flex flex-col" style={{ gap: "clamp(1.25rem, 1rem + 1vw, 2rem)" }}>
+            {selectedWorks.map((project) => (
+              <Link
+                key={project.title}
+                to={project.caseStudy}
+                data-goatcounter-click={`case-study-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
+                className="work-card group block rounded-xl overflow-hidden bg-card border border-border transition-colors hover:border-muted-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <div className="overflow-hidden">
+                  <img
+                    src={project.cover}
+                    alt={project.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full aspect-[16/9] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                  />
+                </div>
+                <div className="p-4 sm:p-5 flex flex-col" style={{ gap: "clamp(0.25rem, 0.2rem + 0.15vw, 0.375rem)" }}>
+                  <div className="flex items-baseline gap-2">
+                    <span
+                      className="group-hover:text-accent transition-colors"
+                      style={{ fontSize: fluidBase, lineHeight: 1.3 }}
+                    >
+                      {project.title}
+                    </span>
+                    <span
+                      className="text-muted-foreground"
+                      style={{
+                        fontFamily: "var(--font-serif)",
+                        fontStyle: "italic",
+                        fontSize: fluidSmall,
+                      }}
+                    >
+                      {project.subtitle}
+                    </span>
+                  </div>
+                  <p
+                    className="text-muted-foreground"
+                    style={{ fontSize: fluidBase, lineHeight: 1.5 }}
+                  >
+                    {nbsp(project.description)}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      </SectionAnimate>
+
+      {/* Work Experience */}
+      <SectionAnimate delay={0.15}>
         <section className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)" }}>
           <div className="flex justify-between items-center">
             <h2
@@ -261,68 +323,6 @@ export function HomePage() {
                   </div>
                 )}
               </div>
-            ))}
-          </div>
-        </section>
-      </SectionAnimate>
-
-      {/* Selected Work */}
-      <SectionAnimate delay={0.15}>
-        <section className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)" }}>
-          <h2
-            style={{
-              fontSize: fluidBase,
-              fontWeight: 500,
-              lineHeight: 1.2,
-              letterSpacing: "-0.01em",
-            }}
-          >
-            Selected work
-          </h2>
-          <div className="flex flex-col" style={{ gap: "clamp(1.25rem, 1rem + 1vw, 2rem)" }}>
-            {selectedWorks.map((project) => (
-              <Link
-                key={project.title}
-                to={project.caseStudy}
-                data-goatcounter-click={`case-study-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
-                className="work-card group block rounded-xl overflow-hidden bg-card border border-border transition-colors hover:border-muted-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                <div className="overflow-hidden">
-                  <img
-                    src={project.cover}
-                    alt={project.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full aspect-[16/9] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
-                  />
-                </div>
-                <div className="p-4 sm:p-5 flex flex-col" style={{ gap: "clamp(0.25rem, 0.2rem + 0.15vw, 0.375rem)" }}>
-                  <div className="flex items-baseline gap-2">
-                    <span
-                      className="group-hover:text-accent transition-colors"
-                      style={{ fontSize: fluidBase, lineHeight: 1.3 }}
-                    >
-                      {project.title}
-                    </span>
-                    <span
-                      className="text-muted-foreground"
-                      style={{
-                        fontFamily: "var(--font-serif)",
-                        fontStyle: "italic",
-                        fontSize: fluidSmall,
-                      }}
-                    >
-                      {project.subtitle}
-                    </span>
-                  </div>
-                  <p
-                    className="text-muted-foreground"
-                    style={{ fontSize: fluidBase, lineHeight: 1.5 }}
-                  >
-                    {nbsp(project.description)}
-                  </p>
-                </div>
-              </Link>
             ))}
           </div>
         </section>

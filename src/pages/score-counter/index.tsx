@@ -65,22 +65,22 @@ const constraints = [
 const whatWorked = [
   {
     label: 'The constraint stayed easy to explain',
-    body: 'the app has one job and the three-step flow made it clear which requests belonged and which ones did not.',
+    body: 'The app has one job and the three-step flow made it clear which requests belonged and which ones did not.',
   },
   {
     label: 'Trust became distribution',
-    body: 'no ads, low friction and familiar Android patterns made the app easy to recommend.',
+    body: 'No ads, low friction and familiar Android patterns made the app easy to recommend.',
   },
   {
     label: 'Unexpected uses stayed possible',
-    body: 'because the app did not become a board-game-only tool, people used it for sports, habits, jokes and household counting.',
+    body: 'Because the app did not become a board-game-only tool, people used it for sports, habits, jokes and household counting.',
   },
 ];
 
 const whatIdChange = [
   {
     label: 'Document decisions as they happen',
-    body: 'building Score Counter taught me this the hard way. My ideation process now lives in Figma from day one and the app has used git version control from the start.',
+    body: 'Building Score Counter taught me this the hard way. My ideation process now lives in Figma from day one and the app has used git version control from the start.',
   },
   {
     label: 'Keep a hand on product health',
@@ -88,7 +88,7 @@ const whatIdChange = [
   },
   {
     label: 'Follow cross-platform demand signals earlier',
-    body: "the fan-made web version proved there's demand beyond Android. I explored building an iOS version with AI tools, but SwiftUI code generation wasn't there yet in 2025. The project is on hold while I look for a human iOS developer to collaborate with.",
+    body: "The fan-made web version proved there's demand beyond Android. I explored building an iOS version with AI tools, but SwiftUI code generation wasn't there yet in 2025. The project is on hold while I look for a human iOS developer to collaborate with.",
   },
 ];
 
@@ -179,18 +179,18 @@ function ImpactStatsGrid() {
 
 function LabeledList({ items }: { items: { label: string; body: string }[] }) {
   return (
-    <ol className='flex flex-col gap-2 pl-5 list-decimal'>
+    <ol className='flex flex-col gap-4 pl-6 my-4 list-decimal'>
       {items.map((item, i) => (
         <li
           key={i}
           className='text-foreground/80'
           style={{
-            fontSize: fluidBase,
+            fontSize: fluidSmall,
             lineHeight: 1.6,
             letterSpacing: '-0.011em',
           }}>
-          <strong>{nbsp(item.label)}</strong>
-          {': '}
+          <strong>{nbsp(item.label)}:</strong>
+          <br />
           {nbsp(item.body)}
         </li>
       ))}
@@ -216,8 +216,7 @@ export function ScoreCounterPage() {
             {nbsp('Score Counter: Saying no at 920K installs')}
           </h1>
           <p
-            className='text-muted-foreground'
-            style={{ fontSize: fluidLead, lineHeight: 1.5 }}>
+            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
               'I built Score Counter to replace clunky, ad-heavy scorekeeping apps. As it grew to 920K installs, the challenge became less about adding features and more about keeping the app immediate, flexible and easy to trust.',
             )}
