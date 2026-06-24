@@ -1,81 +1,87 @@
-const scoreCounterCover = "/images/score-counter-cover.png";
-const designSystemCover = "/images/design-system-cover.png";
-const whiteLabelEsimCover = "/images/white-label-esim-cover.png";
-const saasOnboardingCover = "/images/saas-onboarding-cover.png";
+const scoreCounterCover = '/images/score-counter-cover.png';
+const designSystemCover = '/images/design-system-cover.png';
+const whiteLabelEsimCover = '/images/white-label-esim-cover.png';
+const saasOnboardingCover = '/images/saas-onboarding-cover.png';
 
-import { useState } from "react";
-import type { ComponentType, SVGProps } from "react";
-import { Link } from "react-router";
-import { SectionAnimate } from "@/components/ui/section-animate";
-import { nbsp } from "@/lib/nbsp";
-import { DashedDivider } from "@/components/ui/dashed-divider";
-import { fluidLead, fluidBase, fluidSmall } from "@/lib/typography";
+import { useState } from 'react';
+import type { ComponentType, SVGProps } from 'react';
+import { Link } from 'react-router';
+import { SectionAnimate } from '@/components/ui/section-animate';
+import { nbsp } from '@/lib/nbsp';
+import { DashedDivider } from '@/components/ui/dashed-divider';
+import { fluidLead, fluidBase, fluidSmall } from '@/lib/typography';
 import {
   EmailIcon,
   LinkedInIcon,
   PdfIcon,
   TelegramIcon,
-} from "./connect-icons";
+} from './connect-icons';
 
 const workExperience = [
   {
-    title: "Product designer at Yesim",
-    period: "2021 - 2026",
-    context: " Web and mobile · B2B and B2C. eSIM platform with 3M users",
-    link: { href: "https://yesim.app/", label: "Try Yesim" },
+    title: 'Product designer at Yesim',
+    period: '2021 - 2026',
+    context: ' Web and mobile · B2B and B2C. eSIM platform with 3M users',
+    link: { href: 'https://yesim.app/', label: 'Try Yesim' },
   },
   {
-    title: "Product designer at SMBF",
-    period: "2020 - 2021",
-    context: "Online reputation SaaS platform · B2B",
+    title: 'Product designer at SMBF',
+    period: '2020 - 2021',
+    context: 'Online reputation SaaS platform · B2B',
   },
   {
-    title: "Product designer at Eventssion",
-    period: "2018 - 2020",
-    context: "Web and mobile · B2B and B2C. Event management and ticketing platform",
+    title: 'Product designer at Eventssion',
+    period: '2018 - 2020',
+    context:
+      'Web and mobile · B2B and B2C. Event management and ticketing platform',
     link: {
-      href: "https://betalist.com/startups/eventssion",
-      label: "View project",
+      href: 'https://betalist.com/startups/eventssion',
+      label: 'View project',
     },
   },
   {
-    title: "Android developer at Eventssion",
-    period: "2016 - 2018",
-    context: "Android app · B2B and B2C. Event management and ticketing platform",
+    title: 'Android developer at Eventssion',
+    period: '2016 - 2018',
+    context:
+      'Android app · B2B and B2C. Event management and ticketing platform',
     link: {
-      href: "https://betalist.com/startups/eventssion",
-      label: "View project",
+      href: 'https://betalist.com/startups/eventssion',
+      label: 'View project',
     },
   },
 ];
 
 const selectedWorks = [
   {
-    title: "Design system",
-    subtitle: "Yesim",
-    description: "A shared component library built to scale across three B2B products: 48 components, 140+ tokens and 3 brand themes. The core challenge was abstraction — designing a system flexible enough for multi-product theming without letting teams diverge into parallel implementations.",
-    caseStudy: "/work/design-system",
+    title: 'Design system',
+    subtitle: 'Yesim',
+    description:
+      'Built a token-based system for 3 B2B products with 48 components and 140+ tokens.',
+    caseStudy: '/work/design-system',
     cover: designSystemCover,
   },
   {
-    title: "White-label eSIM",
-    subtitle: "Yesim",
-    description: "A technical prototype for a B2B customization platform where partner branding, conditional fields and live preview had to hold up under real input. Built on the production stack so contrast ratios, edge cases and conditional rendering were validated in the artifact, not deferred to QA.",
-    caseStudy: "/work/white-label-esim",
+    title: 'White-label eSIM',
+    subtitle: 'Yesim',
+    description:
+      'Validated white-label eSIM customization through a production-stack prototype.',
+    caseStudy: '/work/white-label-esim',
     cover: whiteLabelEsimCover,
   },
   {
-    title: "Designing onboarding",
-    subtitle: "Yesim",
-    description: "A self-serve B2B onboarding flow designed with product and engineering across iterative releases. The goal was reducing cognitive load at each step — replacing a sales-assisted setup with a product-led path where companies could add employees, pick plans and activate eSIMs without hand-holding.",
-    caseStudy: "/work/saas-onboarding",
+    title: 'Designing onboarding',
+    subtitle: 'Yesim',
+    description:
+      'Turned sales-assisted B2B onboarding into a self-serve activation flow.',
+    caseStudy: '/work/saas-onboarding',
     cover: saasOnboardingCover,
   },
   {
-    title: "Score Counter",
-    subtitle: "Android App",
-    description: "A side project I have owned end-to-end since 2016: 920K installs, 90K monthly active users and a 4.9 rating with no marketing spend. It shows what long-term product stewardship and independent technical ownership look like in practice.",
-    caseStudy: "/work/score-counter",
+    title: 'Score Counter',
+    subtitle: 'Android App',
+    description:
+      'Owned a solo Android app from 0 to 920K installs and 90K MAU.',
+    caseStudy: '/work/score-counter',
     cover: scoreCounterCover,
   },
 ];
@@ -90,57 +96,68 @@ type ConnectLink = {
 
 const connectLinks: ConnectLink[] = [
   {
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/romashuliatiev",
-    display: "in/romashuliatiev",
+    label: 'LinkedIn',
+    href: 'https://linkedin.com/in/romashuliatiev',
+    display: 'in/romashuliatiev',
     Icon: LinkedInIcon,
   },
   {
-    label: "Email",
-    href: [109, 97, 105, 108, 116, 111, 58, 104, 105, 64, 114, 111, 109, 97, 109, 97, 107, 101, 115, 46, 99, 111, 109].map(c => String.fromCharCode(c)).join(''),
-    display: [104, 105, 64, 114, 111, 109, 97, 109, 97, 107, 101, 115, 46, 99, 111, 109].map(c => String.fromCharCode(c)).join(''),
+    label: 'Email',
+    href: [
+      109, 97, 105, 108, 116, 111, 58, 104, 105, 64, 114, 111, 109, 97, 109, 97,
+      107, 101, 115, 46, 99, 111, 109,
+    ]
+      .map((c) => String.fromCharCode(c))
+      .join(''),
+    display: [
+      104, 105, 64, 114, 111, 109, 97, 109, 97, 107, 101, 115, 46, 99, 111, 109,
+    ]
+      .map((c) => String.fromCharCode(c))
+      .join(''),
     Icon: EmailIcon,
   },
   {
-    label: "Telegram",
-    href: "https://t.me/artificially_busy",
-    display: "@artificially_busy",
+    label: 'Telegram',
+    href: 'https://t.me/artificially_busy',
+    display: '@artificially_busy',
     Icon: TelegramIcon,
   },
   {
-    label: "CV",
-    href: "/CV_Roma_Shuliatiev_Product_Designer.pdf",
-    display: "download PDF",
+    label: 'CV',
+    href: '/CV_Roma_Shuliatiev_Product_Designer.pdf',
+    display: 'download PDF',
     download: true,
     Icon: PdfIcon,
   },
 ];
 
-function ConnectListItem({ label, href, display, download, Icon }: ConnectLink) {
+function ConnectListItem({
+  label,
+  href,
+  display,
+  download,
+  Icon,
+}: ConnectLink) {
   const [active, setActive] = useState(false);
   return (
     <li
-      className="grid items-center sm:flex sm:flex-col sm:items-start"
+      className='grid items-center sm:flex sm:flex-col sm:items-start'
       style={{
-        gridTemplateColumns: "1fr 2fr",
-        gap: "clamp(0.375rem, 0.3rem + 0.25vw, 0.5rem)",
-      }}
-    >
+        gridTemplateColumns: '1fr 2fr',
+        gap: 'clamp(0.375rem, 0.3rem + 0.25vw, 0.5rem)',
+      }}>
       <span
-        className="relative inline-grid items-center justify-items-start"
-        style={{ fontSize: fluidSmall, lineHeight: 1 }}
-      >
+        className='relative inline-grid items-center justify-items-start'
+        style={{ fontSize: fluidSmall, lineHeight: 1 }}>
         <span
-          className="col-start-1 row-start-1 transition-opacity duration-300 ease-out motion-reduce:transition-none"
-          style={{ opacity: active ? 0 : 1 }}
-        >
+          className='col-start-1 row-start-1 transition-opacity duration-300 ease-out motion-reduce:transition-none'
+          style={{ opacity: active ? 0 : 1 }}>
           {label}
         </span>
         <span
           aria-hidden
-          className="col-start-1 row-start-1 inline-flex items-center transition-opacity duration-300 ease-out motion-reduce:transition-none"
-          style={{ opacity: active ? 1 : 0 }}
-        >
+          className='col-start-1 row-start-1 inline-flex items-center transition-opacity duration-300 ease-out motion-reduce:transition-none'
+          style={{ opacity: active ? 1 : 0 }}>
           <Icon />
         </span>
       </span>
@@ -151,15 +168,14 @@ function ConnectListItem({ label, href, display, download, Icon }: ConnectLink) 
         onMouseLeave={() => setActive(false)}
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
-        {...(download
-          ? { download: true }
-          : { target: "_blank", rel: "noopener noreferrer" })}
-        className="text-muted-foreground no-underline hover:underline focus-visible:underline underline-offset-2 hover:opacity-80 focus-visible:opacity-80 transition-opacity inline-flex items-center gap-1"
+        {...(download ?
+          { download: true }
+        : { target: '_blank', rel: 'noopener noreferrer' })}
+        className='text-muted-foreground no-underline hover:underline focus-visible:underline underline-offset-2 hover:opacity-80 focus-visible:opacity-80 transition-opacity inline-flex items-center gap-1'
         style={{
           fontSize: fluidSmall,
           lineHeight: 1,
-        }}
-      >
+        }}>
         {display}
       </a>
     </li>
@@ -168,86 +184,96 @@ function ConnectListItem({ label, href, display, download, Icon }: ConnectLink) 
 
 export function HomePage() {
   return (
-    <div className="flex flex-col" style={{ gap: "clamp(3rem, 2.5rem + 2.5vw, 5rem)" }}>
+    <div
+      className='flex flex-col'
+      style={{ gap: 'clamp(3rem, 2.5rem + 2.5vw, 5rem)' }}>
       {/* Introduction */}
       <SectionAnimate delay={0}>
-        <section className="flex flex-col" style={{ gap: "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)" }}>
-          <div className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)" }}>
+        <section
+          className='flex flex-col'
+          style={{ gap: 'clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)' }}>
+          <div
+            className='flex flex-col'
+            style={{ gap: 'clamp(0.75rem, 0.7rem + 0.25vw, 1rem)' }}>
             <h1
               style={{
-                fontFamily: "var(--font-serif)",
-                fontStyle: "italic",
-                fontSize: "clamp(1.5rem, 1.3rem + 1vw, 2rem)",
+                fontFamily: 'var(--font-serif)',
+                fontStyle: 'italic',
+                fontSize: 'clamp(1.5rem, 1.3rem + 1vw, 2rem)',
                 lineHeight: 1.2,
-                letterSpacing: "-0.02em",
-              }}
-            >
+                letterSpacing: '-0.02em',
+              }}>
               Roma Shuliatiev
             </h1>
             <p style={{ fontSize: fluidLead, lineHeight: 1.5 }}>
-              {nbsp("Product designer with a dev background. I close the gap between design and what engineers actually build.")}
+              {nbsp(
+                'Product designer with a dev background. I close the gap between design and what engineers actually build.',
+              )}
             </p>
           </div>
-          <p className="text-muted-foreground" style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-            <span className="pulsing-dot" aria-hidden="true" />
-            {"Open to product designer roles, full-time"}
+          <p
+            className='text-muted-foreground'
+            style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
+            <span className='pulsing-dot' aria-hidden='true' />
+            {'Open to product designer roles, full-time'}
           </p>
         </section>
       </SectionAnimate>
 
       {/* Selected Work */}
       <SectionAnimate delay={0.1}>
-        <section className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)" }}>
+        <section
+          className='flex flex-col'
+          style={{ gap: 'clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)' }}>
           <h2
             style={{
               fontSize: fluidBase,
               fontWeight: 500,
               lineHeight: 1.2,
-              letterSpacing: "-0.01em",
-            }}
-          >
+              letterSpacing: '-0.01em',
+            }}>
             Selected work
           </h2>
-          <div className="flex flex-col" style={{ gap: "clamp(1.25rem, 1rem + 1vw, 2rem)" }}>
+          <div
+            className='flex flex-col'
+            style={{ gap: 'clamp(1.25rem, 1rem + 1vw, 2rem)' }}>
             {selectedWorks.map((project) => (
               <Link
                 key={project.title}
                 to={project.caseStudy}
                 data-goatcounter-click={`case-study-${project.title.toLowerCase().replace(/\s+/g, '-')}`}
-                className="work-card group block rounded-xl overflow-hidden bg-card border border-border transition-colors hover:border-muted-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                <div className="overflow-hidden">
+                className='work-card group block rounded-xl overflow-hidden bg-card border border-border transition-colors hover:border-muted-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background'>
+                <div className='overflow-hidden'>
                   <img
                     src={project.cover}
                     alt={project.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full aspect-[16/9] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+                    loading='lazy'
+                    decoding='async'
+                    className='w-full aspect-[16/9] object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out'
                   />
                 </div>
-                <div className="p-4 sm:p-5 flex flex-col" style={{ gap: "clamp(0.25rem, 0.2rem + 0.15vw, 0.375rem)" }}>
-                  <div className="flex items-baseline gap-2">
+                <div
+                  className='p-4 sm:p-5 flex flex-col'
+                  style={{ gap: 'clamp(0.25rem, 0.2rem + 0.15vw, 0.375rem)' }}>
+                  <div className='flex items-baseline gap-2'>
                     <span
-                      className="group-hover:text-accent transition-colors"
-                      style={{ fontSize: fluidBase, lineHeight: 1.3 }}
-                    >
+                      className='group-hover:text-accent transition-colors'
+                      style={{ fontSize: fluidBase, lineHeight: 1.3 }}>
                       {project.title}
                     </span>
                     <span
-                      className="text-muted-foreground"
+                      className='text-muted-foreground'
                       style={{
-                        fontFamily: "var(--font-serif)",
-                        fontStyle: "italic",
+                        fontFamily: 'var(--font-serif)',
+                        fontStyle: 'italic',
                         fontSize: fluidSmall,
-                      }}
-                    >
+                      }}>
                       {project.subtitle}
                     </span>
                   </div>
                   <p
-                    className="text-muted-foreground"
-                    style={{ fontSize: fluidBase, lineHeight: 1.5 }}
-                  >
+                    className='text-muted-foreground'
+                    style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
                     {nbsp(project.description)}
                   </p>
                 </div>
@@ -259,66 +285,67 @@ export function HomePage() {
 
       {/* Work Experience */}
       <SectionAnimate delay={0.15}>
-        <section className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)" }}>
-          <div className="flex justify-between items-center">
+        <section
+          className='flex flex-col'
+          style={{ gap: 'clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)' }}>
+          <div className='flex justify-between items-center'>
             <h2
               style={{
                 fontSize: fluidBase,
                 fontWeight: 500,
                 lineHeight: 1.2,
-                letterSpacing: "-0.01em",
-              }}
-            >
+                letterSpacing: '-0.01em',
+              }}>
               Work experience
             </h2>
           </div>
-          <div className="flex flex-col" style={{ gap: "clamp(1rem, 0.9rem + 0.5vw, 1.5rem)" }}>
+          <div
+            className='flex flex-col'
+            style={{ gap: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)' }}>
             {workExperience.map((job, i) => (
               <div key={i}>
-                <div className="flex flex-col" style={{ gap: "clamp(0.125rem, 0.1rem + 0.1vw, 0.25rem)" }}>
+                <div
+                  className='flex flex-col'
+                  style={{ gap: 'clamp(0.125rem, 0.1rem + 0.1vw, 0.25rem)' }}>
                   <div
-                    className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline"
-                    style={{ columnGap: "clamp(1rem, 0.8rem + 1vw, 2rem)" }}
-                  >
+                    className='grid grid-cols-[minmax(0,1fr)_auto] items-baseline'
+                    style={{ columnGap: 'clamp(1rem, 0.8rem + 1vw, 2rem)' }}>
                     <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
                       {job.title}
                     </span>
                     <span
-                      className="text-muted-foreground text-right"
+                      className='text-muted-foreground text-right'
                       style={{
                         fontSize: fluidSmall,
-                        fontVariantNumeric: "tabular-nums",
+                        fontVariantNumeric: 'tabular-nums',
                         lineHeight: 1.4,
-                        whiteSpace: "nowrap",
-                      }}
-                    >
+                        whiteSpace: 'nowrap',
+                      }}>
                       {job.period}
                     </span>
                   </div>
                   <span
-                    className="text-muted-foreground"
-                    style={{ fontSize: fluidSmall, lineHeight: 1.4 }}
-                  >
+                    className='text-muted-foreground'
+                    style={{ fontSize: fluidSmall, lineHeight: 1.4 }}>
                     {nbsp(job.context)}
                   </span>
                   {job.link && (
                     <a
                       href={job.link.href}
                       data-goatcounter-click={`outbound-${job.link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent no-underline hover:underline focus-visible:underline underline-offset-2 hover:opacity-80 focus-visible:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1"
-                      style={{ fontSize: fluidSmall, lineHeight: 1.2 }}
-                    >
-                      {job.link.label}{" "}
-                      <span aria-hidden className="text-xs">
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='text-accent no-underline hover:underline focus-visible:underline underline-offset-2 hover:opacity-80 focus-visible:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1'
+                      style={{ fontSize: fluidSmall, lineHeight: 1.2 }}>
+                      {job.link.label}{' '}
+                      <span aria-hidden className='text-xs'>
                         ↗
                       </span>
                     </a>
                   )}
                 </div>
                 {i < workExperience.length - 1 && (
-                  <div className="mt-4">
+                  <div className='mt-4'>
                     <DashedDivider />
                   </div>
                 )}
@@ -330,47 +357,54 @@ export function HomePage() {
 
       {/* Skills */}
       <SectionAnimate delay={0.2}>
-        <section className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)" }}>
+        <section
+          className='flex flex-col'
+          style={{ gap: 'clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)' }}>
           <h2
             style={{
               fontSize: fluidBase,
               fontWeight: 500,
               lineHeight: 1.2,
-              letterSpacing: "-0.01em",
-            }}
-          >
+              letterSpacing: '-0.01em',
+            }}>
             Skills & tools
           </h2>
           <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-            {nbsp("I've led work across user research, systems design and end-to-end shipping — from building products solo to leading a design team.")}
+            {nbsp(
+              "I've led work across user research, systems design and end-to-end shipping — from building products solo to leading a design team.",
+            )}
           </p>
           <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
-            {nbsp("Strong proficiency with Figma. Familiarity with AI, analytics and A/B testing tools.")}
+            {nbsp(
+              'Strong proficiency with Figma. Familiarity with AI, analytics and A/B testing tools.',
+            )}
           </p>
         </section>
       </SectionAnimate>
 
       {/* Connect */}
       <SectionAnimate delay={0.25}>
-        <section className="flex flex-col" style={{ gap: "clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)" }}>
+        <section
+          className='flex flex-col'
+          style={{ gap: 'clamp(0.75rem, 0.7rem + 0.25vw, 1.25rem)' }}>
           <h2
             style={{
               fontSize: fluidBase,
               fontWeight: 500,
               lineHeight: 1.2,
-              letterSpacing: "-0.01em",
-            }}
-          >
+              letterSpacing: '-0.01em',
+            }}>
             Get in touch
           </h2>
-          <div className="flex flex-col" style={{ gap: "clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)" }}>
+          <div
+            className='flex flex-col'
+            style={{ gap: 'clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)' }}>
             <ul
-              className="grid grid-cols-1 sm:grid-cols-4"
+              className='grid grid-cols-1 sm:grid-cols-4'
               style={{
-                rowGap: "clamp(0.75rem, 0.7rem + 0.25vw, 1rem)",
-                columnGap: "clamp(1rem, 0.75rem + 0.5vw, 1.5rem)",
-              }}
-            >
+                rowGap: 'clamp(0.75rem, 0.7rem + 0.25vw, 1rem)',
+                columnGap: 'clamp(1rem, 0.75rem + 0.5vw, 1.5rem)',
+              }}>
               {connectLinks.map((item) => (
                 <ConnectListItem key={item.label} {...item} />
               ))}
