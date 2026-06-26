@@ -31,7 +31,7 @@ const SUBJECT = 'Score Counter';
 
 const heroImage = '/images/score-counter-hero.jpg';
 const evolutionImage = '/images/score-counter-evolution.png';
-const flowImage = '/images/score-counter-flow.png';
+const flowVideo = '/videos/sc.mp4';
 const testimonialsImage = '/images/score-counter-testimonials.png';
 const unexpectedUseCasesImage = '/images/score-counter-bonus.png';
 
@@ -345,11 +345,13 @@ export function ScoreCounterPage() {
 
       <SectionAnimate delay={0.2}>
         <div className='-mx-4 sm:mx-0'>
-          <ImageWithFallback
-            src={flowImage}
-            alt='Hand-drawn primary flow diagram: 1. Open, 2. Add Counters, 3. Count'
+          <video
+            src={flowVideo}
             className='w-full rounded-none sm:rounded-xl'
-            loading='lazy'
+            autoPlay
+            loop
+            muted
+            playsInline
           />
         </div>
       </SectionAnimate>
