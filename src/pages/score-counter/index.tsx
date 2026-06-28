@@ -33,7 +33,7 @@ const heroImage = '/images/score-counter-hero.jpg';
 const evolutionImage = '/images/score-counter-evolution.png';
 const flowVideo = '/videos/sc.mp4';
 const testimonialsImage = '/images/score-counter-testimonials.png';
-const unexpectedUseCasesImage = '/images/score-counter-bonus.png';
+const unexpectedUseCasesVideo = '/videos/score-counter-bonus.mp4';
 
 /* ── Data ─────────────────────────────────────────────── */
 
@@ -412,11 +412,13 @@ export function ScoreCounterPage() {
 
       <SectionAnimate delay={0.3}>
         <div className='-mx-4 sm:mx-0'>
-          <ImageWithFallback
-            src={unexpectedUseCasesImage}
-            alt="Screenshot grid of real Play Store reviews showing unexpected use cases: scoring camogie matches in Ireland, counting beers, tracking children's annoyances and keeping track of swearing in front of kids"
+          <video
+            src={unexpectedUseCasesVideo}
             className='w-full rounded-none sm:rounded-xl'
-            loading='lazy'
+            autoPlay
+            loop
+            muted
+            playsInline
           />
         </div>
       </SectionAnimate>
