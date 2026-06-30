@@ -213,6 +213,64 @@ function DataTable({
   );
 }
 
+function MobileDataCards({
+  headers,
+  rows,
+  mono,
+}: {
+  headers: string[];
+  rows: string[][];
+  mono?: number[];
+}) {
+  return (
+    <div className='grid gap-3 sm:hidden'>
+      {rows.map((row, rowIndex) => (
+        <div
+          key={rowIndex}
+          className='rounded-xl bg-card card-shadow p-4'>
+          <p
+            className='text-foreground'
+            style={
+              mono?.includes(0) ?
+                { fontFamily: 'var(--font-mono)', fontSize: '0.8125rem' }
+              : { fontSize: '0.9375rem', lineHeight: 1.4 }
+            }>
+            {row[0]}
+          </p>
+          <dl className='mt-3 grid gap-3'>
+            {row.slice(1).map((cell, cellIndex) => {
+              const columnIndex = cellIndex + 1;
+
+              return (
+                <div key={headers[columnIndex]} className='grid gap-1'>
+                  <dt
+                    className='text-muted-foreground tracking-wide uppercase'
+                    style={{ fontSize: '0.6875rem', lineHeight: 1.3 }}>
+                    {headers[columnIndex]}
+                  </dt>
+                  <dd
+                    className='text-foreground/80 text-pretty'
+                    style={
+                      mono?.includes(columnIndex) ?
+                        {
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.75rem',
+                          lineHeight: 1.5,
+                        }
+                      : { fontSize: '0.875rem', lineHeight: 1.5 }
+                    }>
+                    {cell}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function LabeledList({ items }: { items: { label: string; body: string }[] }) {
   return (
     <ol className='flex flex-col gap-4 pl-6 my-4 list-decimal'>
@@ -378,7 +436,7 @@ export function DesignSystemPage() {
                 'Tables and forms came first because teams touched them constantly and they appeared on each product\u2019s most important B2B surfaces. Starting there reduced adoption risk: teams could migrate useful, visible areas without waiting for a big-bang redesign.',
               )}
             </p>
-            <DataTable
+            <MobileDataCards
               headers={['Category', 'Components', 'Why first']}
               rows={priorityComponents.map((p) => [
                 p.category,
@@ -386,6 +444,16 @@ export function DesignSystemPage() {
                 p.why,
               ])}
             />
+            <div className='hidden sm:block'>
+              <DataTable
+                headers={['Category', 'Components', 'Why first']}
+                rows={priorityComponents.map((p) => [
+                  p.category,
+                  p.components,
+                  p.why,
+                ])}
+              />
+            </div>
           </div>
         </div>
       </SectionAnimate>
@@ -418,7 +486,7 @@ export function DesignSystemPage() {
                 'without creating a product-specific button, input or table. Identity lived in tokens; behavior and structure stayed in one library.',
               )}
             </p>
-            <DataTable
+            <MobileDataCards
               headers={['Layer', 'Purpose', 'Example', 'Themeable?']}
               rows={tokenLayers.map((t) => [
                 t.layer,
@@ -428,6 +496,18 @@ export function DesignSystemPage() {
               ])}
               mono={[2]}
             />
+            <div className='hidden sm:block'>
+              <DataTable
+                headers={['Layer', 'Purpose', 'Example', 'Themeable?']}
+                rows={tokenLayers.map((t) => [
+                  t.layer,
+                  t.purpose,
+                  t.example,
+                  t.themeable,
+                ])}
+                mono={[2]}
+              />
+            </div>
           </div>
 
           <div className='-mx-4 sm:mx-0'>
@@ -449,7 +529,7 @@ export function DesignSystemPage() {
                 'Each product gets a theme file that overrides semantic tokens. The component library does not need to know which product is using it. Switching themes changes the product expression while preserving the same implementation underneath.',
               )}
             </p>
-            <DataTable
+            <MobileDataCards
               headers={['Token', 'Product A', 'Product B', 'Product C']}
               rows={subBrandThemes.map((t) => [
                 t.token,
@@ -459,6 +539,18 @@ export function DesignSystemPage() {
               ])}
               mono={[0]}
             />
+            <div className='hidden sm:block'>
+              <DataTable
+                headers={['Token', 'Product A', 'Product B', 'Product C']}
+                rows={subBrandThemes.map((t) => [
+                  t.token,
+                  t.productA,
+                  t.productB,
+                  t.productC,
+                ])}
+                mono={[0]}
+              />
+            </div>
           </div>
 
           <div className='-mx-4 sm:mx-0'>
