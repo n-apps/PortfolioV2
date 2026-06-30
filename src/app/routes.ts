@@ -5,6 +5,7 @@ import { ReviewsLayout } from "@/pages/score-counter/reviews/layout";
 import { HomePage } from "@/pages/home";
 import { NotFoundPage } from "@/pages/not-found";
 import { AnalyticsTracker } from "@/lib/use-analytics";
+import { RouteLoadError } from "@/components/ui/route-status";
 
 // These pages are only loaded when the user navigates to them
 const ScoreCounterPage = lazy(() =>
@@ -55,10 +56,26 @@ export const router = createBrowserRouter([
         Component: Layout,
         children: [
           { index: true, Component: HomePage },
-          { path: "work/score-counter", Component: ScoreCounterPage },
-          { path: "work/design-system", Component: DesignSystemPage },
-          { path: "work/white-label-esim", Component: WhiteLabelEsimPage },
-          { path: "work/saas-onboarding", Component: SaasOnboardingPage },
+          {
+            path: "work/score-counter",
+            Component: ScoreCounterPage,
+            ErrorBoundary: RouteLoadError,
+          },
+          {
+            path: "work/design-system",
+            Component: DesignSystemPage,
+            ErrorBoundary: RouteLoadError,
+          },
+          {
+            path: "work/white-label-esim",
+            Component: WhiteLabelEsimPage,
+            ErrorBoundary: RouteLoadError,
+          },
+          {
+            path: "work/saas-onboarding",
+            Component: SaasOnboardingPage,
+            ErrorBoundary: RouteLoadError,
+          },
           { path: "support", Component: SupportPage },
           { path: "*", Component: NotFoundPage },
         ],
@@ -87,4 +104,3 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-
