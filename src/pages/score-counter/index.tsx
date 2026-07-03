@@ -31,7 +31,7 @@ const SUBJECT = 'Score Counter';
 
 const heroImage = '/images/score-counter-hero.jpg';
 const evolutionImage = '/images/score-counter-evolution.png';
-const flowVideo = '/videos/sc.mp4';
+const flowVideo = '/videos/score-counter-flow.mp4';
 const testimonialsImage = '/images/score-counter-testimonials.png';
 const unexpectedUseCasesVideo = '/videos/score-counter-bonus.mp4';
 
@@ -215,8 +215,7 @@ export function ScoreCounterPage() {
             }}>
             {nbsp('Score Counter: Saying no at 920K installs')}
           </h1>
-          <p
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+          <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
               'I built Score Counter to replace clunky, ad-heavy scorekeeping apps. As it grew to 920K installs, the challenge became less about adding features and more about keeping the app immediate, flexible and easy to trust.',
             )}
