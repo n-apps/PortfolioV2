@@ -3,8 +3,11 @@ import { useLocation } from 'react-router';
 import { AnimatePresence, motion } from 'motion/react';
 import { playPopSound } from '@/lib/ui-sounds';
 
-const REVEAL_THRESHOLD = 600;
+const WHEEL_REVEAL_THRESHOLD = 600;
+const TOUCH_REVEAL_THRESHOLD = 140;
 const MIN_DELTA = 3;
+const BOTTOM_TOLERANCE = 24;
+const TOUCH_PROGRESS_TIMEOUT_MS = 1600;
 const BORKS = [
   '(bork.)',
   '(woof.)',
@@ -22,6 +25,7 @@ export function EasterEggFooter() {
   const [bork, setBork] = useState<{ msg: string; key: number } | null>(null);
   const overshootRef = useRef(0);
   const lastTouchYRef = useRef<number | null>(null);
+  const touchProgressTimerRef = useRef<number | null>(null);
   const borkIndexRef = useRef(-1);
   const borkTimerRef = useRef<number | null>(null);
 
@@ -30,6 +34,10 @@ export function EasterEggFooter() {
     setBork(null);
     overshootRef.current = 0;
     lastTouchYRef.current = null;
+    if (touchProgressTimerRef.current) {
+      window.clearTimeout(touchProgressTimerRef.current);
+      touchProgressTimerRef.current = null;
+    }
     if (borkTimerRef.current) {
       window.clearTimeout(borkTimerRef.current);
       borkTimerRef.current = null;
@@ -39,6 +47,9 @@ export function EasterEggFooter() {
   useEffect(
     () => () => {
       if (borkTimerRef.current) window.clearTimeout(borkTimerRef.current);
+      if (touchProgressTimerRef.current) {
+        window.clearTimeout(touchProgressTimerRef.current);
+      }
     },
     [],
   );
@@ -61,24 +72,32 @@ export function EasterEggFooter() {
 
     const isAtBottom = () => {
       const doc = document.documentElement;
-      return window.innerHeight + window.scrollY >= doc.scrollHeight - 2;
+      return (
+        window.innerHeight + window.scrollY >=
+        doc.scrollHeight - BOTTOM_TOLERANCE
+      );
     };
 
-    const push = (delta: number) => {
+    const push = (delta: number, threshold: number) => {
       if (delta <= 0 || !isAtBottom()) {
         overshootRef.current = 0;
         return;
       }
       if (delta < MIN_DELTA) return;
       overshootRef.current += delta;
-      if (overshootRef.current >= REVEAL_THRESHOLD) {
+      if (overshootRef.current >= threshold) {
         setRevealed(true);
       }
     };
 
-    const onWheel = (e: WheelEvent) => push(e.deltaY);
+    const onWheel = (e: WheelEvent) =>
+      push(e.deltaY, WHEEL_REVEAL_THRESHOLD);
 
     const onTouchStart = (e: TouchEvent) => {
+      if (touchProgressTimerRef.current) {
+        window.clearTimeout(touchProgressTimerRef.current);
+        touchProgressTimerRef.current = null;
+      }
       lastTouchYRef.current = e.touches[0]?.clientY ?? null;
     };
 
@@ -86,25 +105,30 @@ export function EasterEggFooter() {
       const prev = lastTouchYRef.current;
       const current = e.touches[0]?.clientY;
       if (prev == null || current == null) return;
-      push(prev - current);
+      push(prev - current, TOUCH_REVEAL_THRESHOLD);
       lastTouchYRef.current = current;
     };
 
     const onTouchEnd = () => {
       lastTouchYRef.current = null;
-      overshootRef.current = 0;
+      touchProgressTimerRef.current = window.setTimeout(() => {
+        overshootRef.current = 0;
+        touchProgressTimerRef.current = null;
+      }, TOUCH_PROGRESS_TIMEOUT_MS);
     };
 
     window.addEventListener('wheel', onWheel, { passive: true });
     window.addEventListener('touchstart', onTouchStart, { passive: true });
     window.addEventListener('touchmove', onTouchMove, { passive: true });
     window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchEnd, { passive: true });
 
     return () => {
       window.removeEventListener('wheel', onWheel);
       window.removeEventListener('touchstart', onTouchStart);
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchEnd);
     };
   }, [revealed]);
 
