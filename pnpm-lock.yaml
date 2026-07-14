@@ -23,6 +23,9 @@ importers:
       '@remixicon/react':
         specifier: ^4.9.0
         version: 4.9.0(react@18.3.1)
+      '@rexa-developer/tiks':
+        specifier: ^0.3.0
+        version: 0.3.0(react@18.3.1)
       '@shadergradient/react':
         specifier: ^2.4.20
         version: 2.4.20(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -198,6 +201,17 @@ packages:
     resolution: {integrity: sha512-5/jLDD4DtKxH2B4QVXTobvV1C2uL8ab9D5yAYNtFt+w80O0Ys1xFOrspqROL3fjrZi+7ElFUWE37hBfaAl6U+Q==}
     peerDependencies:
       react: '>=18.2.0'
+
+  '@rexa-developer/tiks@0.3.0':
+    resolution: {integrity: sha512-7tW/lb53Nr8U0dn9ZlWOvDXtsZ7fK3dZN90Xvp/S4AkjruopuP8992+3KhFCrIQ7bXFEsaVFUZsm/+NC3ufA1w==}
+    peerDependencies:
+      react: '>=18.0.0'
+      vue: '>=3.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+      vue:
+        optional: true
 
   '@rolldown/binding-android-arm64@1.0.3':
     resolution: {integrity: sha512-454rs7jHngixp/NMxd5srYD57OnzSlZ/eFTETjORQHLwJG1lRtmNOJcBerZlfu4GjKqeq8aCCIQrMdHyhI51Hw==}
@@ -908,6 +922,10 @@ snapshots:
 
   '@remixicon/react@4.9.0(react@18.3.1)':
     dependencies:
+      react: 18.3.1
+
+  '@rexa-developer/tiks@0.3.0(react@18.3.1)':
+    optionalDependencies:
       react: 18.3.1
 
   '@rolldown/binding-android-arm64@1.0.3':

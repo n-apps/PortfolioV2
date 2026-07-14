@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { RiContrast2Fill } from "@remixicon/react";
 import { motion } from "motion/react";
+import { playToggleSound } from "@/lib/ui-sounds";
 
 function getInitialTheme() {
   if (typeof window === "undefined") return false;
@@ -29,11 +30,10 @@ export function ThemeToggle() {
   }, []);
 
   const handleToggle = () => {
-    setIsDark((prev) => {
-      const next = !prev;
-      localStorage.setItem("theme", next ? "dark" : "light");
-      return next;
-    });
+    const next = !isDark;
+    playToggleSound(next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+    setIsDark(next);
   };
 
   return (

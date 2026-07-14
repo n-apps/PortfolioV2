@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { AnimatePresence, motion } from 'motion/react';
+import { playPopSound } from '@/lib/ui-sounds';
 
 const REVEAL_THRESHOLD = 600;
 const MIN_DELTA = 3;
@@ -43,6 +44,7 @@ export function EasterEggFooter() {
   );
 
   const handleDogClick = () => {
+    playPopSound();
     if (borkTimerRef.current) window.clearTimeout(borkTimerRef.current);
     let next = Math.floor(Math.random() * BORKS.length);
     if (next === borkIndexRef.current) next = (next + 1) % BORKS.length;

@@ -1,4 +1,5 @@
 import { router } from "@/app/routes";
+import { playTransitionSound } from "@/lib/ui-sounds";
 
 export type TransitionPhase = "idle" | "entering" | "exiting";
 
@@ -34,6 +35,7 @@ export async function navigateWithTransition(
   if (phase !== "idle") return;
 
   try {
+    playTransitionSound();
     set("entering");
     const enterPromise = wait(300);
     await twoFrames();

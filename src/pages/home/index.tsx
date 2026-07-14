@@ -10,6 +10,7 @@ import { SectionAnimate } from '@/components/ui/section-animate';
 import { nbsp } from '@/lib/nbsp';
 import { DashedDivider } from '@/components/ui/dashed-divider';
 import { fluidLead, fluidBase, fluidSmall } from '@/lib/typography';
+import { playHoverSound } from '@/lib/ui-sounds';
 import {
   EmailIcon,
   LinkedInIcon,
@@ -164,7 +165,10 @@ function ConnectListItem({
       <a
         href={href}
         data-goatcounter-click={label}
-        onMouseEnter={() => setActive(true)}
+        onMouseEnter={() => {
+          setActive(true);
+          playHoverSound();
+        }}
         onMouseLeave={() => setActive(false)}
         onFocus={() => setActive(true)}
         onBlur={() => setActive(false)}
