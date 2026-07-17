@@ -29,7 +29,7 @@ function useMissingTracksFonts() {
 // its About page). .mt-root scopes the dark-green palette + element resets to
 // these pages (see src/styles/missing-tracks-theme.css); MotionConfig honors the
 // OS reduced-motion preference for every motion/react animation below. These
-// routes render outside the portfolio's 700px Layout, so the top nav stays
+// routes render outside the portfolio's 576px Layout, so the top nav stays
 // mounted here and scroll-to-top on navigation is handled here too.
 export function MissingTracksLayout() {
   const { pathname } = useLocation();

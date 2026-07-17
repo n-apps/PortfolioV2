@@ -26,7 +26,7 @@ import { ImageWithFallback } from '@/components/ui/image-with-fallback';
 /* ── Data ─────────────────────────────────────────────── */
 
 const metadata = [
-  { label: 'Role', value: 'Product Designer' },
+  { label: 'Role', value: 'Product designer' },
   { label: 'Timeframe', value: 'Jan 2026' },
   { label: 'Platform', value: 'Web (B2B)' },
   { label: 'Team', value: 'PM · Engineering' },
@@ -98,15 +98,14 @@ export function WhiteLabelEsimPage() {
             style={{
               fontFamily: 'var(--font-serif)',
               fontSize: fluidH1,
-              lineHeight: 1.25,
+              lineHeight: 1.15,
               letterSpacing: '-0.025em',
             }}>
-            White-label eSIM configurator: working prototype in hours instead of
-            static mockups
+            Interactive eSIM configurator in hours
           </h1>
-          <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+          <p style={{ fontSize: fluidLead, lineHeight: 1.6 }}>
             {nbsp(
-              'I built a working prototype instead of another static Figma handoff. It exposed the states, edge cases and interaction rules that mockups usually hide and gave the team something closer to the final product.',
+              'Built an interactive prototype of white-label eSIM configurator in 2 days. It gave the team a closer look of the final product and helped identify potential issues early on.',
             )}
           </p>
         </div>
@@ -124,20 +123,16 @@ export function WhiteLabelEsimPage() {
       </SectionAnimate>
 
       <SectionAnimate delay={0.1}>
-        <div className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
+        <dl className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
           {metadata.map((m) => (
             <div key={m.label} className='flex flex-col gap-1'>
-              <span
-                className='text-muted-foreground tracking-wide uppercase'
-                style={{ fontSize: '0.75rem', lineHeight: 1.3 }}>
+              <dt className='text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase'>
                 {m.label}
-              </span>
-              <span style={{ fontSize: '0.875rem', lineHeight: 1.4 }}>
-                {m.value}
-              </span>
+              </dt>
+              <dd className='text-sm leading-[1.4]'>{m.value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </SectionAnimate>
 
       <SectionAnimate delay={0.11}>
@@ -228,9 +223,7 @@ export function WhiteLabelEsimPage() {
         <div className='flex flex-col' style={{ gap: sectionGap }}>
           <div className='flex flex-col' style={{ gap: innerGap }}>
             <SectionHeading>Exploration</SectionHeading>
-            <SubHeading>
-              Use code where behavior had to be resolved
-            </SubHeading>
+            <SubHeading>Use code where behavior had to be resolved</SubHeading>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -380,11 +373,11 @@ export function WhiteLabelEsimPage() {
             }}
             className='relative z-10 flex items-center gap-4 rounded-xl bg-foreground p-4 text-background sm:gap-5 sm:p-5'>
             <div className='flex min-w-0 flex-1 flex-col gap-1'>
-              <span
+              <h3
                 className='font-medium'
                 style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
                 Launch the interactive prototype
-              </span>
+              </h3>
               <span
                 className='text-background/70'
                 style={{ fontSize: fluidSmall, lineHeight: 1.5 }}>

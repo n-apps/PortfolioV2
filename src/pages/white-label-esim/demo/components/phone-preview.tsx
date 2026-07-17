@@ -167,10 +167,10 @@ function DeviceToggle({
   onChange: (v: "mobile" | "desktop") => void;
 }) {
   return (
-    <div className="relative flex rounded-[10px] bg-[#e8e8e8] p-[3px]">
+    <div className="relative flex rounded-[10px] bg-[oklch(0.931_0_0)] p-[3px]">
       {/* Sliding highlight */}
       <div
-        className="pointer-events-none absolute top-[3px] h-[calc(100%-6px)] w-[calc(50%-3px)] rounded-[8px] bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] transition-[left] duration-200 ease-in-out"
+        className="pointer-events-none absolute top-[3px] h-[calc(100%-6px)] w-[calc(50%-3px)] rounded-[8px] bg-white shadow-[0_1px_3px_oklch(0_0_0/0.08)] transition-[left] duration-200 ease-in-out"
         style={{ left: value === "desktop" ? "3px" : "50%" }}
       />
       <button
@@ -201,13 +201,13 @@ function DesktopShell({
   isLoading,
 }: Props & { scrollAreaRef?: React.RefObject<HTMLDivElement>; isLoading?: boolean }) {
   return (
-    <div className="w-[640px] overflow-hidden rounded-[12px] bg-[#c8c8c8] shadow-phone">
+    <div className="w-[640px] overflow-hidden rounded-[12px] bg-[oklch(0.833_0_0)] shadow-phone">
       {/* Browser chrome */}
-      <div className="flex h-[32px] items-center gap-2 bg-[#e0e0e0] px-3">
+      <div className="flex h-[32px] items-center gap-2 bg-[oklch(0.907_0_0)] px-3">
         <div className="flex gap-[5px]">
-          <span className="h-[10px] w-[10px] rounded-full bg-[#ff5f57]" />
-          <span className="h-[10px] w-[10px] rounded-full bg-[#febc2e]" />
-          <span className="h-[10px] w-[10px] rounded-full bg-[#28c840]" />
+          <span className="h-[10px] w-[10px] rounded-full bg-[oklch(0.694_0.196_26.364)]" />
+          <span className="h-[10px] w-[10px] rounded-full bg-[oklch(0.835_0.161_80.911)]" />
+          <span className="h-[10px] w-[10px] rounded-full bg-[oklch(0.728_0.217_144.712)]" />
         </div>
         <div className="mx-auto flex h-[20px] w-[260px] items-center justify-center rounded-[4px] bg-white/70 text-[9px] text-ink-500">
           {settings.brandName ? settings.brandName + ".cloud-esim.me" : "cloud-esim.me"}
@@ -216,7 +216,7 @@ function DesktopShell({
       {/* Page content */}
       <div
         ref={scrollAreaRef}
-        className="relative flex max-h-[580px] justify-center overflow-y-auto bg-[#c8c8c8] p-6"
+        className="relative flex max-h-[580px] justify-center overflow-y-auto bg-[oklch(0.833_0_0)] p-6"
       >
         <div
           className={`pointer-events-none absolute inset-0 z-10 flex justify-center p-6 transition-opacity duration-500 ease-out ${isLoading ? "opacity-100" : "opacity-0"
@@ -352,7 +352,7 @@ function PhoneScreen({
               <div
                 className="rounded-full border border-white/20 px-[10px] py-1 text-center text-[8px] font-medium leading-[1.33]"
                 style={{
-                  backgroundColor: "rgba(255,255,255,0.2)",
+                  backgroundColor: "oklch(1 0 0 / 0.2)",
                   color: textOnAccent,
                 }}
               >
@@ -376,12 +376,12 @@ function ShimmerStyle() {
         100% { background-position:  200% 0; }
       }
       .skeleton-shimmer {
-        background: #e5e7eb;
+        background: oklch(0.928 0.006 264.531);
         background-image: linear-gradient(
           90deg,
-          #e5e7eb 0%,
-          #f3f4f6 45%,
-          #e5e7eb 90%
+          oklch(0.928 0.006 264.531) 0%,
+          oklch(0.967 0.003 264.542) 45%,
+          oklch(0.928 0.006 264.531) 90%
         );
         background-size: 200% 100%;
         animation: skeleton-sweep 1.5s infinite linear;
@@ -394,7 +394,7 @@ function PhoneScreenSkeleton() {
   return (
     <>
       <ShimmerStyle />
-      <div className="flex h-full w-full flex-col bg-[#d1d5db]">
+      <div className="flex h-full w-full flex-col bg-[oklch(0.872_0.009_258.338)]">
         {/* Status bar */}
         <div className="flex h-9 shrink-0 items-end justify-between px-6 pb-1 pt-2">
           <div className="skeleton-shimmer h-2.5 w-6 rounded" />
@@ -425,7 +425,7 @@ function DesktopSkeleton() {
         {/* Top accent strip */}
         <div className="skeleton-shimmer h-[52px] rounded-t-[11px]" />
         {/* Cards */}
-        <div className="flex flex-col gap-3 bg-[#d1d5db] p-3">
+        <div className="flex flex-col gap-3 bg-[oklch(0.872_0.009_258.338)] p-3">
           <div className="skeleton-shimmer h-[120px] rounded-[11px]" style={{ animationDelay: "0.05s" }} />
           <div className="skeleton-shimmer h-[72px] rounded-[11px]" style={{ animationDelay: "0.12s" }} />
           <div className="skeleton-shimmer h-[144px] rounded-[11px]" style={{ animationDelay: "0.20s" }} />
@@ -468,12 +468,12 @@ function StatusCard({ accent }: { accent: string }) {
         eSIM status
       </p>
       <div className="flex items-center gap-[5px]">
-        <span className="grid h-[11px] w-[11px] place-items-center rounded-full bg-[#007a55]">
+        <span className="grid h-[11px] w-[11px] place-items-center rounded-full bg-demo-success">
           <svg
             viewBox="0 0 12 12"
             className="h-[7px] w-[7px]"
             fill="none"
-            stroke="#ffffff"
+            stroke="oklch(1 0 0)"
             strokeWidth={2.2}
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -481,7 +481,7 @@ function StatusCard({ accent }: { accent: string }) {
             <path d="M2.5 6.5 5 9l4.5-5" />
           </svg>
         </span>
-        <span className="text-[10px] font-bold text-[#007a55]">Installed</span>
+        <span className="text-[10px] font-bold text-demo-success">Installed</span>
       </div>
     </section>
   );
@@ -500,10 +500,10 @@ function DataUsageCard() {
         </span>
         <span className="text-[8px] text-ink-500">out of 5 GB</span>
       </div>
-      <div className="h-[9px] w-full rounded-full bg-gradient-to-r from-[#28a745] to-[#11998e]" />
+      <div className="h-[9px] w-full rounded-full bg-gradient-to-r from-[oklch(0.64_0.175_146.743)] to-[oklch(0.616_0.105_185.755)]" />
       <button
         type="button"
-        className="mt-2 w-full rounded-[12px] bg-[#1e2939] px-4 py-[10px] text-[11px] font-medium leading-none text-white shadow-[0_1px_4px_rgba(29,41,61,0.12)]"
+        className="mt-2 w-full rounded-[12px] bg-ink-800 px-4 py-[10px] text-[11px] font-medium leading-none text-white shadow-[0_1px_4px_oklch(0.279_0.033_258.368/0.12)]"
       >
         Top up eSIM
       </button>
@@ -523,9 +523,9 @@ function InstallationCard() {
     /* Pencil source: 61YI3 / S–INSTALL */
     <section className="flex flex-col gap-2 rounded-[11px] bg-white px-[14px] py-[12px]">
       <p className="text-[10px] font-medium text-ink-500">Installation</p>
-      <div className="flex flex-col gap-5 rounded-[8px] bg-[#0821251f] px-4 py-5">
+      <div className="flex flex-col gap-5 rounded-[8px] bg-[oklch(0.23_0.031_209.528/0.122)] px-4 py-5">
         <div className="flex items-start gap-2">
-          <div className="grid h-7 w-7 shrink-0 place-items-center rounded-[6px] bg-[#f3f4f6]">
+          <div className="grid h-7 w-7 shrink-0 place-items-center rounded-[6px] bg-surface-field">
             <QrIcon />
           </div>
           <div className="flex min-w-0 flex-1 flex-col gap-0.5">
@@ -537,7 +537,7 @@ function InstallationCard() {
         </div>
         <button
           type="button"
-          className="w-full rounded-[12px] bg-[#1e2939] px-4 py-[10px] text-[9px] font-medium leading-none text-white shadow-[0_1px_4px_rgba(29,41,61,0.12)]"
+          className="w-full rounded-[12px] bg-ink-800 px-4 py-[10px] text-[9px] font-medium leading-none text-white shadow-[0_1px_4px_oklch(0.279_0.033_258.368/0.12)]"
         >
           View installation instructions
         </button>
@@ -583,7 +583,7 @@ function ContactCard({
         {email && (
           <a
             href={`mailto:${email}`}
-            className="block truncate text-[#1e3a8a] hover:underline"
+            className="block truncate text-demo-link hover:underline"
           >
             {email}
           </a>
@@ -593,7 +593,7 @@ function ContactCard({
             href={privacy}
             target="_blank"
             rel="noreferrer"
-            className="block truncate text-[#1e3a8a] hover:underline"
+            className="block truncate text-demo-link hover:underline"
           >
             Privacy policy
           </a>
@@ -603,7 +603,7 @@ function ContactCard({
             href={terms}
             target="_blank"
             rel="noreferrer"
-            className="block truncate text-[#1e3a8a] hover:underline"
+            className="block truncate text-demo-link hover:underline"
           >
             Terms of usage
           </a>
@@ -802,7 +802,7 @@ function InfoIcon() {
   return (
     <svg
       viewBox="0 0 14 14"
-      className="h-[14px] w-[14px] shrink-0 text-[#1e2939]"
+      className="h-[14px] w-[14px] shrink-0 text-ink-800"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.4}

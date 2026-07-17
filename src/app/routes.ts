@@ -35,7 +35,7 @@ const CompanySettingsDemoPage = lazy(() =>
 const CustomizeEsimDemoPage = lazy(() =>
   import("@/pages/white-label-esim/demo/customize").then((m) => ({ default: m.CustomizeEsimDemoPage }))
 );
-// Standalone full-width experience — renders outside the 700px Layout shell via
+// Standalone full-width experience — renders outside the 576px Layout shell via
 // its own MissingTracksLayout (nav + self-scoped dark theme,
 // src/styles/missing-tracks-theme.css). The layout hosts the watchlist app at the
 // index and an About page.

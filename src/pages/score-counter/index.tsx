@@ -16,6 +16,7 @@ import {
   fluidLead,
   fluidBase,
   fluidSmall,
+  fluidStat,
   fluidH1,
   sectionGap,
   innerGap,
@@ -39,7 +40,7 @@ const unexpectedUseCasesVideo = '/videos/score-counter-bonus.mp4';
 
 const metadata = [
   { label: 'Role', value: 'Creator' },
-  { label: 'Timeframe', value: '2016 \u2013 Present' },
+  { label: 'Timeframe', value: '2016\u2013present' },
   { label: 'Platform', value: 'Android' },
   { label: 'Team', value: 'Solo' },
 ];
@@ -161,14 +162,12 @@ function ImpactStatsGrid() {
             className='text-foreground'
             style={{
               fontFamily: 'var(--font-serif)',
-              fontSize: 'clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)',
+              fontSize: fluidStat,
               lineHeight: 1.3,
             }}>
             <AnimatedStatValue displayValue={s.value} isInView={isInView} />
           </span>
-          <span
-            className='text-muted-foreground'
-            style={{ fontSize: '0.75rem', lineHeight: 1.3 }}>
+          <span className='text-xs leading-[1.3] text-muted-foreground'>
             {s.label}
           </span>
         </div>
@@ -185,13 +184,13 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
           key={i}
           className='text-foreground/80'
           style={{
-            fontSize: fluidSmall,
+            fontSize: fluidBase,
             lineHeight: 1.6,
             letterSpacing: '-0.011em',
           }}>
           <strong>{nbsp(item.label)}:</strong>
           <br />
-          {nbsp(item.body)}
+          {highlight(item.body, SUBJECT)}
         </li>
       ))}
     </ol>
@@ -210,14 +209,14 @@ export function ScoreCounterPage() {
             style={{
               fontFamily: 'var(--font-serif)',
               fontSize: fluidH1,
-              lineHeight: 1.25,
+              lineHeight: 1.15,
               letterSpacing: '-0.025em',
             }}>
-            {nbsp('Score Counter: Saying no at 920K installs')}
+            {nbsp('The most loved counter app on Android')}
           </h1>
-          <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+          <p style={{ fontSize: fluidLead, lineHeight: 1.6 }}>
             {nbsp(
-              'I built Score Counter to replace clunky, ad-heavy scorekeeping apps. As it grew to 920K installs, the challenge became less about adding features and more about keeping the app immediate, flexible and easy to trust.',
+              'Built a simple utility app for mobile devices. It grew to 920K installs mostly thanks to the best UX in its category.',
             )}
           </p>
         </div>
@@ -236,20 +235,16 @@ export function ScoreCounterPage() {
 
       {/* ── Section 2: Context ── */}
       <SectionAnimate delay={0.1}>
-        <div className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
+        <dl className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
           {metadata.map((m) => (
             <div key={m.label} className='flex flex-col gap-1'>
-              <span
-                className='text-muted-foreground tracking-wide uppercase'
-                style={{ fontSize: '0.75rem', lineHeight: 1.3 }}>
+              <dt className='text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase'>
                 {m.label}
-              </span>
-              <span style={{ fontSize: '0.875rem', lineHeight: 1.4 }}>
-                {m.value}
-              </span>
+              </dt>
+              <dd className='text-sm leading-[1.4]'>{m.value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </SectionAnimate>
 
       <SectionAnimate delay={0.12}>
@@ -430,8 +425,9 @@ export function ScoreCounterPage() {
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
+              {highlight(
                 'A few choices still explain why Score Counter kept growing without becoming heavier. The best ones were not clever features; they were constraints I could repeat every time a new request arrived.',
+                SUBJECT,
               )}
             </p>
             <LabeledList items={whatWorked} />

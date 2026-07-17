@@ -7,6 +7,7 @@ import {
   fluidLead,
   fluidBase,
   fluidSmall,
+  fluidStat,
   fluidH1,
   sectionGap,
   innerGap,
@@ -32,7 +33,7 @@ const prototypeImage = '/images/design-system-prototype.png';
 /* ── Data ─────────────────────────────────────────────── */
 
 const metadata = [
-  { label: 'Role', value: 'Product Designer' },
+  { label: 'Role', value: 'Product designer' },
   { label: 'Timeframe', value: 'Sep \u2013 Dec 2025' },
   { label: 'Platform', value: 'Web (B2B)' },
   { label: 'Team', value: 'PM · Engineering' },
@@ -174,17 +175,14 @@ function DataTable({
 }) {
   return (
     <div className='overflow-x-hidden sm:overflow-x-auto -mx-4 sm:mx-0'>
-      <table
-        className='w-full min-w-0 table-fixed'
-        style={{ fontSize: '0.875rem', lineHeight: 1.4 }}>
+      <table className='w-full min-w-0 table-fixed text-sm leading-[1.4]'>
         <thead>
           <tr className='border-b border-border/60'>
             {headers.map((h) => (
               <th
                 key={h}
                 scope='col'
-                className='text-left text-muted-foreground tracking-wide uppercase py-3 pr-4 break-words whitespace-normal'
-                style={{ fontSize: '0.75rem' }}>
+                className='text-left text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase py-3 pr-4 break-words whitespace-normal'>
                 {h}
               </th>
             ))}
@@ -196,12 +194,7 @@ function DataTable({
               {row.map((cell, j) => (
                 <td
                   key={j}
-                  className={`py-3 pr-4 ${j === 0 ? 'text-foreground' : 'text-foreground/80'} break-words whitespace-normal`}
-                  style={
-                    mono?.includes(j) ?
-                      { fontFamily: 'var(--font-mono)', fontSize: '0.75rem' }
-                    : undefined
-                  }>
+                  className={`py-3 pr-4 ${j === 0 ? 'text-foreground' : 'text-foreground/80'} ${mono?.includes(j) ? 'font-mono text-xs' : ''} break-words whitespace-normal`}>
                   {cell}
                 </td>
               ))}
@@ -225,16 +218,9 @@ function MobileDataCards({
   return (
     <div className='grid gap-3 sm:hidden'>
       {rows.map((row, rowIndex) => (
-        <div
-          key={rowIndex}
-          className='rounded-xl bg-card card-shadow p-4'>
+        <div key={rowIndex} className='rounded-xl bg-card card-shadow p-4'>
           <p
-            className='text-foreground'
-            style={
-              mono?.includes(0) ?
-                { fontFamily: 'var(--font-mono)', fontSize: '0.8125rem' }
-              : { fontSize: '0.9375rem', lineHeight: 1.4 }
-            }>
+            className={`text-foreground text-sm leading-[1.4] ${mono?.includes(0) ? 'font-mono' : ''}`}>
             {row[0]}
           </p>
           <dl className='mt-3 grid gap-3'>
@@ -243,22 +229,11 @@ function MobileDataCards({
 
               return (
                 <div key={headers[columnIndex]} className='grid gap-1'>
-                  <dt
-                    className='text-muted-foreground tracking-wide uppercase'
-                    style={{ fontSize: '0.6875rem', lineHeight: 1.3 }}>
+                  <dt className='text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase'>
                     {headers[columnIndex]}
                   </dt>
                   <dd
-                    className='text-foreground/80 text-pretty'
-                    style={
-                      mono?.includes(columnIndex) ?
-                        {
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.75rem',
-                          lineHeight: 1.5,
-                        }
-                      : { fontSize: '0.875rem', lineHeight: 1.5 }
-                    }>
+                    className={`text-foreground/80 text-pretty text-sm leading-[1.5] ${mono?.includes(columnIndex) ? 'font-mono' : ''}`}>
                     {cell}
                   </dd>
                 </div>
@@ -279,7 +254,7 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
           key={i}
           className='text-foreground/80'
           style={{
-            fontSize: fluidSmall,
+            fontSize: fluidBase,
             lineHeight: 1.6,
             letterSpacing: '-0.011em',
           }}>
@@ -304,14 +279,14 @@ export function DesignSystemPage() {
             style={{
               fontFamily: 'var(--font-serif)',
               fontSize: fluidH1,
-              lineHeight: 1.25,
+              lineHeight: 1.15,
               letterSpacing: '-0.025em',
             }}>
-            Design system: One shared UI foundation for three B2B products
+            Multibrand design system
           </h1>
-          <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+          <p style={{ fontSize: fluidLead, lineHeight: 1.6 }}>
             {nbsp(
-              'I designed a shared design system for three B2B products that had grown in different directions. The goal was not just visual consistency. It was making product teams faster without creating a system that needed constant maintenance.',
+              'Designed and launched a scalable multibrand design system. Reorganised the Figma library structure, saved significant setup time for designers, engineers and QA team.',
             )}
           </p>
         </div>
@@ -329,20 +304,16 @@ export function DesignSystemPage() {
       </SectionAnimate>
 
       <SectionAnimate delay={0.1}>
-        <div className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
+        <dl className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
           {metadata.map((m) => (
             <div key={m.label} className='flex flex-col gap-1'>
-              <span
-                className='text-muted-foreground tracking-wide uppercase'
-                style={{ fontSize: '0.75rem', lineHeight: 1.3 }}>
+              <dt className='text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase'>
                 {m.label}
-              </span>
-              <span style={{ fontSize: '0.875rem', lineHeight: 1.4 }}>
-                {m.value}
-              </span>
+              </dt>
+              <dd className='text-sm leading-[1.4]'>{m.value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </SectionAnimate>
 
       <SectionAnimate delay={0.11}>
@@ -679,14 +650,12 @@ export function DesignSystemPage() {
                   className='text-foreground'
                   style={{
                     fontFamily: 'var(--font-serif)',
-                    fontSize: 'clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem)',
+                    fontSize: fluidStat,
                     lineHeight: 1.3,
                   }}>
                   {s.value}
                 </span>
-                <span
-                  className='text-muted-foreground'
-                  style={{ fontSize: '0.75rem', lineHeight: 1.3 }}>
+                <span className='text-xs leading-[1.3] text-muted-foreground'>
                   {s.label}
                 </span>
               </div>

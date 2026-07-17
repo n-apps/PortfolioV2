@@ -58,13 +58,13 @@ export function SupportPage() {
               lineHeight: 1.4,
             }}
           >
-            Score Counter App
+            Score Counter app
           </span>
           <h1
             style={{
               fontFamily: "var(--font-serif)",
               fontSize: fluidH1,
-              lineHeight: 1.2,
+              lineHeight: 1.15,
               letterSpacing: "-0.025em",
             }}
           >
@@ -126,9 +126,9 @@ export function SupportPage() {
             {reasons.map((reason, i) => (
               <div key={reason.title}>
                 <div className="flex flex-col gap-1">
-                  <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
+                  <h3 style={{ fontSize: fluidBase, fontWeight: 500, lineHeight: 1.4 }}>
                     {reason.title}
-                  </span>
+                  </h3>
                   <p
                     className="text-muted-foreground"
                     style={{ fontSize: fluidSmall, lineHeight: 1.5 }}
@@ -182,12 +182,12 @@ export function SupportPage() {
                 >
                   <span aria-hidden="true" className="text-xl shrink-0">{option.emoji}</span>
                   <div className="flex-1 min-w-0">
-                    <span
+                    <h3
                       className="group-hover:text-accent transition-colors"
-                      style={{ fontSize: fluidBase, lineHeight: 1.4 }}
+                      style={{ fontSize: fluidBase, fontWeight: 500, lineHeight: 1.4 }}
                     >
                       {option.label}
-                    </span>
+                    </h3>
                     <p
                       className="text-muted-foreground"
                       style={{ fontSize: fluidSmall, lineHeight: 1.4 }}
@@ -227,7 +227,7 @@ export function SupportPage() {
           <a
             href={[109, 97, 105, 108, 116, 111, 58, 115, 99, 111, 114, 101, 107, 101, 101, 112, 101, 114, 46, 102, 101, 101, 100, 98, 97, 99, 107, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109].map(c => String.fromCharCode(c)).join('')}
             data-goatcounter-click="support-email"
-            className="text-accent no-underline hover:underline focus-visible:underline underline-offset-2 transition-opacity hover:opacity-80 focus-visible:opacity-80"
+            className="text-accent no-underline hover:underline focus-visible:underline decoration-from-font [text-underline-position:from-font] [text-decoration-skip-ink:auto]"
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}
           >
             {[115, 99, 111, 114, 101, 107, 101, 101, 112, 101, 114, 46, 102, 101, 101, 100, 98, 97, 99, 107, 64, 103, 109, 97, 105, 108, 46, 99, 111, 109].map(c => String.fromCharCode(c)).join('')}

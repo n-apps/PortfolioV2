@@ -24,7 +24,7 @@ const SUBJECT = 'Yesim';
 /* ── Data ─────────────────────────────────────────────── */
 
 const metadata = [
-  { label: 'Role', value: 'Product Designer' },
+  { label: 'Role', value: 'Product designer' },
   { label: 'Timeframe', value: '2025' },
   { label: 'Platform', value: 'Web (B2B SaaS)' },
   { label: 'Team', value: 'PM · Engineering' },
@@ -146,7 +146,7 @@ function LabeledList({ items }: { items: { label: string; body: string }[] }) {
           key={i}
           className='text-foreground/80'
           style={{
-            fontSize: fluidSmall,
+            fontSize: fluidBase,
             lineHeight: 1.6,
             letterSpacing: '-0.011em',
           }}>
@@ -165,7 +165,7 @@ function InlineFlow({ items }: { items: string[] }) {
       className='text-foreground/80'
       style={{
         fontSize: fluidBase,
-        lineHeight: 1.7,
+        lineHeight: 1.6,
         letterSpacing: '-0.011em',
       }}>
       {items.map((item, i) => (
@@ -195,16 +195,14 @@ export function SaasOnboardingPage() {
             style={{
               fontFamily: 'var(--font-serif)',
               fontSize: fluidH1,
-              lineHeight: 1.25,
+              lineHeight: 1.15,
               letterSpacing: '-0.025em',
             }}>
-            {nbsp(
-              'Designing onboarding: helping companies reduce roaming bills',
-            )}
+            {nbsp('Design of onboarding flow')}
           </h1>
-          <p style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+          <p style={{ fontSize: fluidLead, lineHeight: 1.6 }}>
             {nbsp(
-              'I designed a self-serve onboarding flow for companies buying eSIM plans for employees. New admins were arriving at an empty dashboard with no clear starting point. The flow had to do the work sales used to do in person, so users could activate on their own.',
+              'Designed a self-serve onboarding flow for companies buying eSIM plans for employees. The goal was to move from sales-led to product-led onboarding.',
             )}
           </p>
         </div>
@@ -222,20 +220,16 @@ export function SaasOnboardingPage() {
       </SectionAnimate>
 
       <SectionAnimate delay={0.1}>
-        <div className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
+        <dl className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
           {metadata.map((m) => (
             <div key={m.label} className='flex flex-col gap-1'>
-              <span
-                className='text-muted-foreground tracking-wide uppercase'
-                style={{ fontSize: '0.75rem', lineHeight: 1.3 }}>
+              <dt className='text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase'>
                 {m.label}
-              </span>
-              <span style={{ fontSize: '0.875rem', lineHeight: 1.4 }}>
-                {m.value}
-              </span>
+              </dt>
+              <dd className='text-sm leading-[1.4]'>{m.value}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </SectionAnimate>
 
       <SectionAnimate delay={0.11}>

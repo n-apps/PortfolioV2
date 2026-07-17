@@ -18,11 +18,11 @@ No lint or test scripts are configured.
 
 **Entry point flow:** `index.html` → `src/main.tsx` → `src/app/App.tsx` (GoatCounter analytics injected here; renders `PageTransitionOverlay` alongside the router) → `RouterProvider` → `Layout` + nested routes.
 
-**Routing:** Centralized in `src/app/routes.ts`. All pages except `HomePage` and `NotFoundPage` are loaded with `React.lazy()`; `Layout` wraps `<Outlet>` in `<Suspense fallback={null}>`, so new lazy routes work without extra wiring. Case studies live under `/work/`. Sub-routes (e.g. `/work/score-counter/reviews`, `/work/white-label-esim/demo`) use their own layout outside the main `Layout`. A standalone full-bleed experience like `/missing-tracks-project` renders entirely outside `Layout` via its own `MissingTracksLayout` (shared nav + self-scoped theme `src/styles/missing-tracks-theme.css`), hosting child routes for the watchlist app (index) and an About page (`/missing-tracks-project/about`) — the pattern for pages that break the 700px shell. `Layout` auto-scrolls to top on route change.
+**Routing:** Centralized in `src/app/routes.ts`. All pages except `HomePage` and `NotFoundPage` are loaded with `React.lazy()`; `Layout` wraps `<Outlet>` in `<Suspense fallback={null}>`, so new lazy routes work without extra wiring. Case studies live under `/work/`. Sub-routes (e.g. `/work/score-counter/reviews`, `/work/white-label-esim/demo`) use their own layout outside the main `Layout`. A standalone full-bleed experience like `/missing-tracks-project` renders entirely outside `Layout` via its own `MissingTracksLayout` (shared nav + self-scoped theme `src/styles/missing-tracks-theme.css`), hosting child routes for the watchlist app (index) and an About page (`/missing-tracks-project/about`) — the pattern for pages that break the 576px shell. `Layout` auto-scrolls to top on route change.
 
 **Page transitions:** `src/lib/page-transition.ts` exposes `navigateWithTransition(to, preload?)` — an imperative store that drives `PageTransitionOverlay`. Use it (not `router.navigate`/`<Link>`) when a navigation should fade through the overlay; otherwise plain React Router links are fine.
 
-**Layout shell:** `Layout` renders a single 700px-max-width CSS grid (`nav` / `main` / `footer`) centered on the page.
+**Layout shell:** `Layout` renders a single 576px-max-width CSS grid (`nav` / `main` / `footer`) centered on the page.
 
 **Folders:**
 - `src/app/` — app shell (`App.tsx`, `routes.ts`)
@@ -43,7 +43,7 @@ Pages should compose sections/features; generic UI goes in `components/ui/`. Loc
 - `theme.css` defines 40+ CSS custom properties for colors, typography, spacing, and the `card-shadow` utility. All color/spacing tokens live here.
 - `demo-theme.css` (white-label eSIM demo) and `missing-tracks-theme.css` (the missing-tracks page) are separate token sets, each scoped to one surface — keep them out of `theme.css`.
 - Dark mode: `.dark` class on `<html>`. Theme toggled by `ThemeToggle` component and persisted in `localStorage` under key `"theme"`.
-- Fluid typography uses `clamp()` throughout; shared tokens live in `src/lib/typography.ts`. Content is constrained to ~700px max-width.
+- Fluid typography uses `clamp()` throughout; shared tokens live in `src/lib/typography.ts`. Content is constrained to 576px max-width.
 
 ## Analytics
 

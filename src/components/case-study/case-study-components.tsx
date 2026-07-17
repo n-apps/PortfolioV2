@@ -36,7 +36,7 @@ export function SectionHeading({ children }: { children: React.ReactNode }) {
  * document outline stays intact (h1 → h2 → h3), styled to read as a bold lead. */
 export function SubHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 style={{ fontSize: "1rem", fontWeight: 500, lineHeight: 1.4 }}>
+    <h3 style={{ fontSize: fluidBase, fontWeight: 500, lineHeight: 1.4 }}>
       {children}
     </h3>
   );

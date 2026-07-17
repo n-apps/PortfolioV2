@@ -436,7 +436,7 @@ function FieldLabel({
       className="block text-[13px] font-medium text-ink-900"
     >
       {children}
-      {required && <span className="ml-0.5 text-[#c70036]">*</span>}
+      {required && <span className="ml-0.5 text-demo-danger">*</span>}
     </label>
   );
 }
@@ -478,12 +478,12 @@ function TextField({
         className={
           "block h-10 w-full rounded-lg border bg-white px-3 text-sm text-ink-900 placeholder:text-ink-500/70 focus:outline-none " +
           (error
-            ? "border-[#c70036] ring-1 ring-[#c70036] focus:border-[#c70036] focus:ring-[#c70036]/15"
-            : "border-line focus:border-[#0088ff] focus:ring-2 focus:ring-[#0088ff]/15")
+            ? "border-demo-danger ring-1 ring-demo-danger focus:border-demo-danger focus:ring-demo-danger/15"
+            : "border-line focus:border-demo-accent focus:ring-2 focus:ring-demo-accent/15")
         }
       />
       {helper && <p className="text-[12px] text-ink-500">{helper}</p>}
-      {error && <p className="text-[12px] text-[#c70036]">{error}</p>}
+      {error && <p className="text-[12px] text-demo-danger">{error}</p>}
     </div>
   );
 }
@@ -507,8 +507,8 @@ function AliasField({
         className={
           "flex h-10 w-full items-center overflow-hidden rounded-lg border bg-white focus-within:ring-2 " +
           (error
-            ? "border-[#c70036] ring-1 ring-[#c70036] focus-within:border-[#c70036] focus-within:ring-[#c70036]/15"
-            : "border-line focus-within:border-[#0088ff] focus-within:ring-[#0088ff]/15")
+            ? "border-demo-danger ring-1 ring-demo-danger focus-within:border-demo-danger focus-within:ring-demo-danger/15"
+            : "border-line focus-within:border-demo-accent focus-within:ring-2 focus-within:ring-demo-accent/15")
         }
       >
         <input
@@ -534,7 +534,7 @@ function AliasField({
         Used for the customer subdomain and the partner API. Lowercase letters,
         numbers and hyphens only.
       </p>
-      {error && <p className="text-[12px] text-[#c70036]">{error}</p>}
+      {error && <p className="text-[12px] text-demo-danger">{error}</p>}
     </div>
   );
 }
@@ -657,7 +657,7 @@ function ColorField({
         <div
           className={
             "flex h-10 w-full items-center overflow-hidden rounded-lg border bg-white " +
-            (error ? "border-[#c70036] ring-1 ring-[#c70036]" : "border-line")
+            (error ? "border-demo-danger ring-1 ring-demo-danger" : "border-line")
           }
         >
           <button
@@ -695,7 +695,7 @@ function ColorField({
           </div>
         )}
       </div>
-      {error && <p className="text-[12px] text-[#c70036]">{error}</p>}
+      {error && <p className="text-[12px] text-demo-danger">{error}</p>}
     </div>
   );
 }

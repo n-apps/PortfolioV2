@@ -3,36 +3,27 @@ const designSystemCover = '/images/design-system-cover.png';
 const whiteLabelEsimCover = '/images/white-label-esim-cover.png';
 const saasOnboardingCover = '/images/saas-onboarding-cover.png';
 
-import { useState } from 'react';
-import type { ComponentType, SVGProps } from 'react';
 import { Link } from 'react-router';
 import { SectionAnimate } from '@/components/ui/section-animate';
 import { nbsp } from '@/lib/nbsp';
 import { DashedDivider } from '@/components/ui/dashed-divider';
-import { fluidLead, fluidBase, fluidSmall } from '@/lib/typography';
-import { playHoverSound } from '@/lib/ui-sounds';
-import {
-  EmailIcon,
-  LinkedInIcon,
-  PdfIcon,
-  TelegramIcon,
-} from './connect-icons';
+import { fluidBase, fluidH1, fluidSmall } from '@/lib/typography';
 
 const workExperience = [
   {
     title: 'Product designer at Yesim',
-    period: '2021 - 2026',
-    context: ' Web and mobile · B2B and B2C. eSIM platform with 3M users',
+    period: '2021–2026',
+    context: 'Web and mobile · B2B and B2C. eSIM platform with 3M users',
     link: { href: 'https://yesim.app/', label: 'Try Yesim' },
   },
   {
     title: 'Product designer at SMBF',
-    period: '2020 - 2021',
+    period: '2020–2021',
     context: 'Online reputation SaaS platform · B2B',
   },
   {
     title: 'Product designer at Eventssion',
-    period: '2018 - 2020',
+    period: '2018–2020',
     context:
       'Web and mobile · B2B and B2C. Event management and ticketing platform',
     link: {
@@ -42,7 +33,7 @@ const workExperience = [
   },
   {
     title: 'Android developer at Eventssion',
-    period: '2016 - 2018',
+    period: '2016–2018',
     context:
       'Android app · B2B and B2C. Event management and ticketing platform',
     link: {
@@ -79,7 +70,7 @@ const selectedWorks = [
   },
   {
     title: 'Score Counter',
-    subtitle: 'Android App',
+    subtitle: 'Android app',
     description:
       'Owned a solo Android app from 0 to 920K installs and 90K MAU.',
     caseStudy: '/work/score-counter',
@@ -90,17 +81,13 @@ const selectedWorks = [
 type ConnectLink = {
   label: string;
   href: string;
-  display: string;
   download?: boolean;
-  Icon: ComponentType<SVGProps<SVGSVGElement>>;
 };
 
 const connectLinks: ConnectLink[] = [
   {
     label: 'LinkedIn',
     href: 'https://linkedin.com/in/romashuliatiev',
-    display: 'in/romashuliatiev',
-    Icon: LinkedInIcon,
   },
   {
     label: 'Email',
@@ -110,77 +97,35 @@ const connectLinks: ConnectLink[] = [
     ]
       .map((c) => String.fromCharCode(c))
       .join(''),
-    display: [
-      104, 105, 64, 114, 111, 109, 97, 109, 97, 107, 101, 115, 46, 99, 111, 109,
-    ]
-      .map((c) => String.fromCharCode(c))
-      .join(''),
-    Icon: EmailIcon,
   },
   {
     label: 'Telegram',
     href: 'https://t.me/artificially_busy',
-    display: '@artificially_busy',
-    Icon: TelegramIcon,
   },
   {
     label: 'CV',
     href: '/CV_Roma_Shuliatiev_Product_Designer.pdf',
-    display: 'download PDF',
     download: true,
-    Icon: PdfIcon,
   },
 ];
 
-function ConnectListItem({
-  label,
-  href,
-  display,
-  download,
-  Icon,
-}: ConnectLink) {
-  const [active, setActive] = useState(false);
+function ConnectListItem({ label, href, download }: ConnectLink) {
   return (
-    <li
-      className='grid items-center sm:flex sm:flex-col sm:items-start'
-      style={{
-        gridTemplateColumns: '1fr 2fr',
-        gap: 'clamp(0.375rem, 0.3rem + 0.25vw, 0.5rem)',
-      }}>
-      <span
-        className='relative inline-grid items-center justify-items-start'
-        style={{ fontSize: fluidSmall, lineHeight: 1 }}>
-        <span
-          className='col-start-1 row-start-1 transition-opacity duration-300 ease-out motion-reduce:transition-none'
-          style={{ opacity: active ? 0 : 1 }}>
-          {label}
-        </span>
-        <span
-          aria-hidden
-          className='col-start-1 row-start-1 inline-flex items-center transition-opacity duration-300 ease-out motion-reduce:transition-none'
-          style={{ opacity: active ? 1 : 0 }}>
-          <Icon />
-        </span>
-      </span>
+    <li>
       <a
         href={href}
         data-goatcounter-click={label}
-        onMouseEnter={() => {
-          setActive(true);
-          playHoverSound();
-        }}
-        onMouseLeave={() => setActive(false)}
-        onFocus={() => setActive(true)}
-        onBlur={() => setActive(false)}
         {...(download ?
           { download: true }
         : { target: '_blank', rel: 'noopener noreferrer' })}
-        className='text-muted-foreground no-underline hover:underline focus-visible:underline underline-offset-2 hover:opacity-80 focus-visible:opacity-80 transition-opacity inline-flex items-center gap-1'
-        style={{
-          fontSize: fluidSmall,
-          lineHeight: 1,
-        }}>
-        {display}
+        className='group text-accent no-underline inline-flex items-center gap-1'
+        style={{ fontSize: fluidSmall, lineHeight: 1.2 }}>
+        <span className='group-hover:underline group-focus-visible:underline decoration-from-font [text-underline-position:from-font] [text-decoration-skip-ink:auto]'>
+          {label}
+        </span>{' '}
+        <span aria-hidden className='text-xs'>
+          ↗
+        </span>
       </a>
     </li>
   );
@@ -203,13 +148,13 @@ export function HomePage() {
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontStyle: 'italic',
-                fontSize: 'clamp(1.5rem, 1.3rem + 1vw, 2rem)',
+                fontSize: fluidH1,
                 lineHeight: 1.2,
                 letterSpacing: '-0.02em',
               }}>
               Roma Shuliatiev
             </h1>
-            <p style={{ fontSize: fluidLead, lineHeight: 1.5 }}>
+            <p style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
               {nbsp(
                 'Product designer with a dev background. I close the gap between design and what engineers actually build.',
               )}
@@ -219,7 +164,7 @@ export function HomePage() {
             className='text-muted-foreground'
             style={{ fontSize: fluidBase, lineHeight: 1.5 }}>
             <span className='pulsing-dot' aria-hidden='true' />
-            {'Open to product designer roles, full-time'}
+            {'Currently open for full-time roles'}
           </p>
         </section>
       </SectionAnimate>
@@ -260,11 +205,11 @@ export function HomePage() {
                   className='p-4 sm:p-5 flex flex-col'
                   style={{ gap: 'clamp(0.25rem, 0.2rem + 0.15vw, 0.375rem)' }}>
                   <div className='flex items-baseline gap-2'>
-                    <span
+                    <h3
                       className='group-hover:text-accent transition-colors'
                       style={{ fontSize: fluidBase, lineHeight: 1.3 }}>
                       {project.title}
-                    </span>
+                    </h3>
                     <span
                       className='text-muted-foreground'
                       style={{
@@ -328,20 +273,22 @@ export function HomePage() {
                       {job.period}
                     </span>
                   </div>
-                  <span
+                  <p
                     className='text-muted-foreground'
                     style={{ fontSize: fluidSmall, lineHeight: 1.4 }}>
                     {nbsp(job.context)}
-                  </span>
+                  </p>
                   {job.link && (
                     <a
                       href={job.link.href}
                       data-goatcounter-click={`outbound-${job.link.label.toLowerCase().replace(/\s+/g, '-')}`}
                       target='_blank'
                       rel='noopener noreferrer'
-                      className='text-accent no-underline hover:underline focus-visible:underline underline-offset-2 hover:opacity-80 focus-visible:opacity-80 transition-opacity mt-1 inline-flex items-center gap-1'
+                      className='group text-accent no-underline mt-1 inline-flex items-center gap-1'
                       style={{ fontSize: fluidSmall, lineHeight: 1.2 }}>
-                      {job.link.label}{' '}
+                      <span className='group-hover:underline group-focus-visible:underline decoration-from-font [text-underline-position:from-font] [text-decoration-skip-ink:auto]'>
+                        {job.link.label}
+                      </span>{' '}
                       <span aria-hidden className='text-xs'>
                         ↗
                       </span>

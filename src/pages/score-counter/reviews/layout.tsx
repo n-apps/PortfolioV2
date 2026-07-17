@@ -14,7 +14,7 @@ export function ReviewsLayout() {
     <div className="w-full min-h-screen flex flex-col">
       {/* Nav — constrained */}
       <div className="w-full flex justify-center px-4 sm:px-5">
-        <div className="w-full max-w-[700px]">
+        <div className="w-full max-w-xl">
           <Navigation />
         </div>
       </div>
@@ -28,7 +28,7 @@ export function ReviewsLayout() {
 
       {/* Footer — constrained */}
       <div className="w-full flex justify-center px-4 sm:px-5">
-        <div className="w-full max-w-[700px]">
+        <div className="w-full max-w-xl">
           <Footer />
         </div>
       </div>

@@ -15,7 +15,7 @@ export function Layout() {
   return (
     <>
       <div className="w-full min-h-screen flex items-center flex-col px-4 sm:px-5">
-        <div className="grid w-full max-w-[700px] min-h-screen relative" style={{ gridTemplateAreas: "'nav' 'main' 'footer'", gridTemplateColumns: "minmax(0, 1fr)", gridTemplateRows: "auto 1fr auto" }}>
+        <div className="grid w-full max-w-xl min-h-screen relative" style={{ gridTemplateAreas: "'nav' 'main' 'footer'", gridTemplateColumns: "minmax(0, 1fr)", gridTemplateRows: "auto 1fr auto" }}>
           <div style={{ gridArea: "nav" }}>
             <Navigation />
           </div>

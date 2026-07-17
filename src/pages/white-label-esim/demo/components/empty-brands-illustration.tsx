@@ -11,7 +11,7 @@ export function EmptyBrandsIllustration({
       aria-hidden="true"
     >
       {/* Soft background disc */}
-      <circle cx="80" cy="80" r="72" fill="#f3f4f6" />
+      <circle cx="80" cy="80" r="72" fill="var(--color-surface-field)" />
 
       {/* Back card (offset, lighter) */}
       <rect
@@ -20,12 +20,12 @@ export function EmptyBrandsIllustration({
         width="80"
         height="56"
         rx="8"
-        fill="#ffffff"
-        stroke="#e5e7eb"
+        fill="var(--color-surface-page)"
+        stroke="var(--color-line)"
         strokeWidth="1.5"
       />
-      <rect x="50" y="58" width="34" height="6" rx="3" fill="#e5e7eb" />
-      <rect x="50" y="72" width="22" height="4" rx="2" fill="#e5e7eb" />
+      <rect x="50" y="58" width="34" height="6" rx="3" fill="var(--color-line)" />
+      <rect x="50" y="72" width="22" height="4" rx="2" fill="var(--color-line)" />
 
       {/* Front card */}
       <rect
@@ -34,32 +34,32 @@ export function EmptyBrandsIllustration({
         width="100"
         height="62"
         rx="10"
-        fill="#ffffff"
-        stroke="#e5e7eb"
+        fill="var(--color-surface-page)"
+        stroke="var(--color-line)"
         strokeWidth="1.5"
       />
 
       {/* Color swatch */}
-      <rect x="42" y="78" width="28" height="28" rx="6" fill="#0088ff" />
-      <circle cx="56" cy="92" r="6" fill="#ffffff" fillOpacity="0.9" />
+      <rect x="42" y="78" width="28" height="28" rx="6" fill="var(--color-demo-accent)" />
+      <circle cx="56" cy="92" r="6" fill="var(--color-surface-page)" fillOpacity="0.9" />
 
       {/* Text lines */}
-      <rect x="78" y="80" width="44" height="6" rx="3" fill="#101828" />
-      <rect x="78" y="92" width="34" height="4" rx="2" fill="#e5e7eb" />
-      <rect x="78" y="102" width="28" height="4" rx="2" fill="#e5e7eb" />
+      <rect x="78" y="80" width="44" height="6" rx="3" fill="var(--color-ink-900)" />
+      <rect x="78" y="92" width="34" height="4" rx="2" fill="var(--color-line)" />
+      <rect x="78" y="102" width="28" height="4" rx="2" fill="var(--color-line)" />
 
       {/* Plus badge */}
       <circle
         cx="120"
         cy="50"
         r="13"
-        fill="#0088ff"
-        stroke="#ffffff"
+        fill="var(--color-demo-accent)"
+        stroke="var(--color-surface-page)"
         strokeWidth="3"
       />
       <path
         d="M120 44.5v11M114.5 50h11"
-        stroke="#ffffff"
+        stroke="var(--color-surface-page)"
         strokeWidth="2.2"
         strokeLinecap="round"
       />

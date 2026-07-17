@@ -17,7 +17,7 @@ export function Checkbox({ checked, onChange, label, id }: Props) {
           type="checkbox"
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          className="peer absolute inset-0 h-4 w-4 cursor-pointer appearance-none rounded-[4px] border border-line bg-white checked:border-[#0088ff] checked:bg-[#0088ff]"
+          className="peer absolute inset-0 h-4 w-4 cursor-pointer appearance-none rounded-[4px] border border-line bg-white checked:border-demo-accent checked:bg-demo-accent"
         />
         <svg
           viewBox="0 0 16 16"
