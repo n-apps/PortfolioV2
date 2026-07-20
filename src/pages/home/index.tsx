@@ -3,43 +3,54 @@ const designSystemCover = '/images/design-system-cover.png';
 const whiteLabelEsimCover = '/images/white-label-esim-cover.png';
 const saasOnboardingCover = '/images/saas-onboarding-cover.png';
 
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from 'motion/react';
 import { SectionAnimate } from '@/components/ui/section-animate';
 import { nbsp } from '@/lib/nbsp';
 import { DashedDivider } from '@/components/ui/dashed-divider';
 import { fluidBase, fluidH1, fluidSmall } from '@/lib/typography';
 
+const DESKTOP_HOVER_QUERY =
+  '(min-width: 768px) and (hover: hover) and (pointer: fine)';
+const EXPERIENCE_POPOVER_WIDTH = 224;
+const EXPERIENCE_POPOVER_HEIGHT = 280;
+
 const workExperience = [
   {
-    title: 'Product designer at Yesim',
-    period: '2021–2026',
-    context: 'Web and mobile · B2B and B2C. eSIM platform with 3M users',
-    link: { href: 'https://yesim.app/', label: 'Try Yesim' },
-  },
-  {
-    title: 'Product designer at SMBF',
-    period: '2020–2021',
-    context: 'Online reputation SaaS platform · B2B',
-  },
-  {
-    title: 'Product designer at Eventssion',
-    period: '2018–2020',
+    title: 'Yesim',
+    period: '2021–26',
+    image: '/images/exp_04.png',
     context:
-      'Web and mobile · B2B and B2C. Event management and ticketing platform',
-    link: {
-      href: 'https://betalist.com/startups/eventssion',
-      label: 'View project',
-    },
+      'Designed the B2C web experience for an eSIM platform with 3M users. Led the design of Yesim’s B2B platform, design systems, and self-service onboarding.',
   },
   {
-    title: 'Android developer at Eventssion',
-    period: '2016–2018',
+    title: 'SMBF',
+    period: '2020–21',
+    image: '/images/exp_03.png',
     context:
-      'Android app · B2B and B2C. Event management and ticketing platform',
-    link: {
-      href: 'https://betalist.com/startups/eventssion',
-      label: 'View project',
-    },
+      'Designed 0→1 B2B SaaS product that helped businesses manage their online reputation.',
+  },
+  {
+    title: 'Eventssion',
+    period: '2018–20',
+    image: '/images/exp_02.png',
+    context:
+      'Designed B2B and B2C web and mobile products for event management, community management, time booking and ticketing. Led a team of 2 designers.',
+  },
+  {
+    title: 'Eventssion',
+    period: '2016–18',
+    image: '/images/exp_01.png',
+    context:
+      'Worked as an Android developer on Eventssion’s early-stage B2C app, building features for event and community management, time booking, and ticketing.',
   },
 ];
 
@@ -109,6 +120,168 @@ const connectLinks: ConnectLink[] = [
   },
 ];
 
+function useDesktopHover() {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(DESKTOP_HOVER_QUERY);
+    const updateMatches = () => setMatches(mediaQuery.matches);
+
+    updateMatches();
+    mediaQuery.addEventListener('change', updateMatches);
+
+    return () => mediaQuery.removeEventListener('change', updateMatches);
+  }, []);
+
+  return matches;
+}
+
+function WorkExperienceList() {
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+  const isDesktopHover = useDesktopHover();
+  const reduceMotion = useReducedMotion();
+  const hasPosition = useRef(false);
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const popoverX = useSpring(pointerX, { stiffness: 200, damping: 30 });
+  const popoverY = useSpring(pointerY, { stiffness: 200, damping: 30 });
+
+  useEffect(() => {
+    if (!isDesktopHover) {
+      setActiveImage(null);
+      hasPosition.current = false;
+      return;
+    }
+
+    workExperience.forEach(({ image }) => {
+      const preloader = new Image();
+      preloader.src = image;
+    });
+  }, [isDesktopHover]);
+
+  const positionPopover = (event: MouseEvent<HTMLDivElement>) => {
+    if (!isDesktopHover) return;
+
+    const edgePadding = 16;
+    const cursorGap = 20;
+    const fitsToRight =
+      event.clientX + cursorGap + EXPERIENCE_POPOVER_WIDTH <=
+      window.innerWidth - edgePadding;
+    const nextX =
+      event.clientX +
+      (fitsToRight ? cursorGap : -cursorGap - EXPERIENCE_POPOVER_WIDTH);
+    const maxY = Math.max(
+      edgePadding,
+      window.innerHeight - EXPERIENCE_POPOVER_HEIGHT - edgePadding,
+    );
+    const nextY = Math.min(
+      Math.max(event.clientY - EXPERIENCE_POPOVER_HEIGHT / 2, edgePadding),
+      maxY,
+    );
+
+    pointerX.set(nextX);
+    pointerY.set(nextY);
+
+    if (!hasPosition.current || reduceMotion) {
+      popoverX.jump(nextX);
+      popoverY.jump(nextY);
+      hasPosition.current = true;
+    }
+  };
+
+  return (
+    <>
+      <div
+        className='flex flex-col'
+        style={{ gap: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)' }}>
+        {workExperience.map((job, i) => (
+          <div
+            key={`${job.title}-${job.period}`}
+            onMouseEnter={(event) => {
+              positionPopover(event);
+              if (isDesktopHover) setActiveImage(job.image);
+            }}
+            onMouseMove={positionPopover}
+            onMouseLeave={() => {
+              setActiveImage(null);
+              hasPosition.current = false;
+            }}>
+            <div
+              className='flex flex-col'
+              style={{ gap: 'clamp(0.125rem, 0.1rem + 0.1vw, 0.25rem)' }}>
+              <div
+                className='grid grid-cols-[minmax(0,1fr)_auto] items-baseline'
+                style={{ columnGap: 'clamp(1rem, 0.8rem + 1vw, 2rem)' }}>
+                <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
+                  {job.title}
+                </span>
+                <span
+                  className='text-muted-foreground text-right'
+                  style={{
+                    fontSize: fluidSmall,
+                    fontFamily: 'var(--font-mono)',
+                    fontVariantNumeric: 'tabular-nums',
+                    lineHeight: 1.4,
+                    whiteSpace: 'nowrap',
+                  }}>
+                  {job.period}
+                </span>
+              </div>
+              <p
+                className='text-muted-foreground'
+                style={{ fontSize: fluidSmall, lineHeight: 1.4 }}>
+                {nbsp(job.context)}
+              </p>
+            </div>
+            {i < workExperience.length - 1 && (
+              <div className='mt-4'>
+                <DashedDivider />
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {isDesktopHover &&
+        createPortal(
+          <AnimatePresence initial={false}>
+            {activeImage && (
+              <motion.div
+                key={activeImage}
+                initial={
+                  reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96 }
+                }
+                animate={{ opacity: 1, scale: 1 }}
+                exit={
+                  reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.98 }
+                }
+                transition={{
+                  duration: reduceMotion ? 0 : 0.18,
+                  ease: 'easeOut',
+                }}
+                className='pointer-events-none fixed left-0 top-0 z-50 overflow-hidden rounded-xl shadow-[0_12px_32px_oklch(0_0_0_/_0.18)] dark:shadow-[0_12px_32px_oklch(0_0_0_/_0.4)]'
+                style={{
+                  x: popoverX,
+                  y: popoverY,
+                  width: EXPERIENCE_POPOVER_WIDTH,
+                  height: EXPERIENCE_POPOVER_HEIGHT,
+                }}>
+                <img
+                  src={activeImage}
+                  alt=''
+                  aria-hidden='true'
+                  decoding='async'
+                  className='size-full object-cover outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10'
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
+        )}
+    </>
+  );
+}
+
 function ConnectListItem({ label, href, download }: ConnectLink) {
   return (
     <li>
@@ -118,13 +291,13 @@ function ConnectListItem({ label, href, download }: ConnectLink) {
         {...(download ?
           { download: true }
         : { target: '_blank', rel: 'noopener noreferrer' })}
-        className='group text-accent no-underline inline-flex items-center gap-1'
+        className='group inline-flex min-h-11 items-center gap-1.5 rounded-full bg-secondary px-4 py-2 text-foreground no-underline transition-[background-color,color,transform] duration-200 ease-out hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:scale-[0.96]'
         style={{ fontSize: fluidSmall, lineHeight: 1.2 }}>
-        <span className='group-hover:underline group-focus-visible:underline decoration-from-font [text-underline-position:from-font] [text-decoration-skip-ink:auto]'>
-          {label}
-        </span>{' '}
-        <span aria-hidden className='text-xs'>
-          ↗
+        <span>{label}</span>
+        <span
+          aria-hidden
+          className='text-xs leading-none transition-transform duration-200 ease-out group-hover:-translate-y-px group-hover:translate-x-px group-focus-visible:-translate-y-px group-focus-visible:translate-x-px'>
+          {download ? '↓' : '↗'}
         </span>
       </a>
     </li>
@@ -248,61 +421,7 @@ export function HomePage() {
               Work experience
             </h2>
           </div>
-          <div
-            className='flex flex-col'
-            style={{ gap: 'clamp(1rem, 0.9rem + 0.5vw, 1.5rem)' }}>
-            {workExperience.map((job, i) => (
-              <div key={i}>
-                <div
-                  className='flex flex-col'
-                  style={{ gap: 'clamp(0.125rem, 0.1rem + 0.1vw, 0.25rem)' }}>
-                  <div
-                    className='grid grid-cols-[minmax(0,1fr)_auto] items-baseline'
-                    style={{ columnGap: 'clamp(1rem, 0.8rem + 1vw, 2rem)' }}>
-                    <span style={{ fontSize: fluidBase, lineHeight: 1.4 }}>
-                      {job.title}
-                    </span>
-                    <span
-                      className='text-muted-foreground text-right'
-                      style={{
-                        fontSize: fluidSmall,
-                        fontVariantNumeric: 'tabular-nums',
-                        lineHeight: 1.4,
-                        whiteSpace: 'nowrap',
-                      }}>
-                      {job.period}
-                    </span>
-                  </div>
-                  <p
-                    className='text-muted-foreground'
-                    style={{ fontSize: fluidSmall, lineHeight: 1.4 }}>
-                    {nbsp(job.context)}
-                  </p>
-                  {job.link && (
-                    <a
-                      href={job.link.href}
-                      data-goatcounter-click={`outbound-${job.link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                      target='_blank'
-                      rel='noopener noreferrer'
-                      className='group text-accent no-underline mt-1 inline-flex items-center gap-1'
-                      style={{ fontSize: fluidSmall, lineHeight: 1.2 }}>
-                      <span className='group-hover:underline group-focus-visible:underline decoration-from-font [text-underline-position:from-font] [text-decoration-skip-ink:auto]'>
-                        {job.link.label}
-                      </span>{' '}
-                      <span aria-hidden className='text-xs'>
-                        ↗
-                      </span>
-                    </a>
-                  )}
-                </div>
-                {i < workExperience.length - 1 && (
-                  <div className='mt-4'>
-                    <DashedDivider />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          <WorkExperienceList />
         </section>
       </SectionAnimate>
 
@@ -351,7 +470,7 @@ export function HomePage() {
             className='flex flex-col'
             style={{ gap: 'clamp(1.5rem, 1.25rem + 1.25vw, 2.5rem)' }}>
             <ul
-              className='grid grid-cols-1 sm:grid-cols-4'
+              className='flex flex-wrap'
               style={{
                 rowGap: 'clamp(0.75rem, 0.7rem + 0.25vw, 1rem)',
                 columnGap: 'clamp(1rem, 0.75rem + 0.5vw, 1.5rem)',
