@@ -85,10 +85,22 @@ function readableTextColor(hex: string) {
 
 /* ──────────────  phone shell  ────────────── */
 
+const BRANDED_DEFAULT_ACCENT = "#0BBCD6";
 const YESIM_DEFAULT_ACCENT = "#0088ff";
+
+function resolvePreviewAccent(settings: BrandSettings) {
+  if (!settings.brandedEsimEnabled) return YESIM_DEFAULT_ACCENT;
+  return HEX6_RE.test(settings.brandColor.replace("#", ""))
+    ? settings.brandColor
+    : BRANDED_DEFAULT_ACCENT;
+}
 
 export function PhonePreview({ settings, onRegisterScroll }: Props) {
   const branded = settings.brandedEsimEnabled;
+  const accent = resolvePreviewAccent(settings);
+  const previewName = branded
+    ? settings.brandName || "Branded"
+    : "Unbranded";
   const [mode, setMode] = useState<"mobile" | "desktop">("mobile");
   const [isLoading, setIsLoading] = useState(true);
   const mobileScrollRef = useRef<HTMLDivElement>(null);
@@ -121,10 +133,22 @@ export function PhonePreview({ settings, onRegisterScroll }: Props) {
   }, [onRegisterScroll]);
 
   return (
-    <aside className="phone-preview flex w-[704px] flex-col items-center justify-center gap-4 rounded-2xl bg-surface-muted p-8">
-      <span className="text-[12px] uppercase tracking-[0.08em] text-ink-500">
-        Live preview {branded ? (settings.brandName ? `· ${settings.brandName}` : "· branded") : "· unbranded"}
-      </span>
+    <aside
+      className="phone-preview flex w-[704px] flex-col items-center justify-center gap-4 rounded-2xl bg-surface-muted p-8 transition-colors duration-200 ease-out"
+      style={{
+        backgroundColor: `color-mix(in oklab, var(--color-surface-muted) 92%, ${accent} 8%)`,
+      }}
+    >
+      <h2 className="flex max-w-full items-baseline gap-1 text-xs text-ink-500">
+        <span className="whitespace-nowrap uppercase tracking-wider">Live preview</span>
+        <span aria-hidden="true">·</span>
+        <span
+          className="max-w-[24ch] truncate font-medium normal-case tracking-normal"
+          title={previewName}
+        >
+          {previewName}
+        </span>
+      </h2>
 
       {/* Device toggle */}
       <DeviceToggle value={mode} onChange={setMode} />
@@ -132,7 +156,7 @@ export function PhonePreview({ settings, onRegisterScroll }: Props) {
       {mode === "mobile" ? (
         <div className="relative h-[612px] w-[284px] rounded-[40px] bg-black p-2 shadow-phone">
           {/* Notch */}
-          <div className="pointer-events-none absolute left-1/2 top-1.5 z-10 h-[22px] w-[96px] -translate-x-1/2 rounded-b-[14px] rounded-t-[10px] bg-black" />
+          <div className="pointer-events-none absolute left-1/2 top-1.5 z-10 h-[22px] w-[96px] -translate-x-1/2 rounded-b-[14px] bg-black" />
 
           {/* Screen */}
           <div className="relative h-full w-full overflow-hidden rounded-[32px] bg-white">
@@ -209,7 +233,7 @@ function DesktopShell({
           <span className="h-[10px] w-[10px] rounded-full bg-[oklch(0.835_0.161_80.911)]" />
           <span className="h-[10px] w-[10px] rounded-full bg-[oklch(0.728_0.217_144.712)]" />
         </div>
-        <div className="mx-auto flex h-[20px] w-[260px] items-center justify-center rounded-[4px] bg-white/70 text-[9px] text-ink-500">
+        <div className="mx-auto flex h-[20px] w-[260px] items-center justify-center rounded-[4px] bg-white/70 text-preview-micro text-ink-500">
           {settings.brandName ? settings.brandName + ".cloud-esim.me" : "cloud-esim.me"}
         </div>
       </div>
@@ -251,10 +275,7 @@ function PhoneScreen({
   // When the brand toggle is off, fall back to the Yesim default look so
   // operators can preview exactly what unbranded customers will see.
   const accent = useMemo(
-    () =>
-      branded
-        ? settings.brandColor || "#0BBCD6"
-        : YESIM_DEFAULT_ACCENT,
+    () => resolvePreviewAccent(settings),
     [branded, settings.brandColor]
   );
   const textOnAccent = useMemo(() => readableTextColor(accent), [accent]);
@@ -273,12 +294,12 @@ function PhoneScreen({
 
   return (
     <div
-      className={`flex w-full flex-col${constrainHeight ? " h-full" : ""}`}
+      className={`flex w-full flex-col font-display${constrainHeight ? " h-full" : ""}`}
       style={{ backgroundColor: accent }}
     >
       {/* Status bar */}
       <div
-        className="flex h-9 shrink-0 items-end justify-between px-6 pb-1 pt-2 text-[11px] font-semibold"
+        className="flex h-9 shrink-0 items-end justify-between px-6 pb-1 pt-2 text-xs font-semibold tabular-nums"
         style={{ color: textOnAccent }}
       >
         <span>9:41</span>
@@ -309,7 +330,7 @@ function PhoneScreen({
             ) : (
               <div className="flex h-[27px] w-[55px] items-center justify-center">
                 <span
-                  className="font-display text-[13px] font-bold tracking-tight"
+                  className="text-sm font-bold tracking-tight"
                   style={{ color: textOnAccent }}
                 >
                   {branded ? (settings.brandName || "eSIM") : "yesim"}
@@ -350,7 +371,7 @@ function PhoneScreen({
           {includePromotion && (
             <div className="flex h-[38px] items-center justify-center border-t border-white/20">
               <div
-                className="rounded-full border border-white/20 px-[10px] py-1 text-center text-[8px] font-medium leading-[1.33]"
+                className="rounded-full border border-white/20 px-[10px] py-1 text-center text-preview-micro font-medium leading-snug"
                 style={{
                   backgroundColor: "oklch(1 0 0 / 0.2)",
                   color: textOnAccent,
@@ -444,12 +465,12 @@ function PackageInfoCard() {
     /* Pencil source: TprOc / S-PKGINF */
     <section className="overflow-hidden rounded-[11px] bg-white">
       <div className="flex items-start justify-between gap-2 px-[14px] pb-[10px] pt-[14px]">
-        <h3 className="text-[15px] font-bold leading-[1.05] text-ink-900">
+        <h3 className="text-balance text-base font-bold leading-tight text-ink-900">
           Global eSIM
         </h3>
       </div>
       <div className="flex flex-col gap-2 px-[14px] pb-[14px] pt-0">
-        <p className="text-[10px] font-medium text-ink-500">Package info</p>
+        <p className="text-preview-micro font-medium text-ink-500">Package info</p>
         <div className="flex flex-col gap-1">
           <InfoListItem value="5 GB" label="Data amount" />
           <InfoListItem value="3 days" label="Validity" />
@@ -464,7 +485,7 @@ function StatusCard({ accent }: { accent: string }) {
   return (
     /* Pencil source: FDnmP / S-STS */
     <section className="flex flex-col gap-[5px] rounded-[11px] bg-white px-[14px] py-[12px]">
-      <p className="text-[10px] font-medium text-ink-500">
+      <p className="text-preview-micro font-medium text-ink-500">
         eSIM status
       </p>
       <div className="flex items-center gap-[5px]">
@@ -481,7 +502,7 @@ function StatusCard({ accent }: { accent: string }) {
             <path d="M2.5 6.5 5 9l4.5-5" />
           </svg>
         </span>
-        <span className="text-[10px] font-bold text-demo-success">Installed</span>
+        <span className="text-preview-micro font-bold text-demo-success">Installed</span>
       </div>
     </section>
   );
@@ -491,26 +512,26 @@ function DataUsageCard() {
   return (
     /* Pencil source: Uwxve / S–DUSAGE */
     <section className="flex flex-col gap-[6px] rounded-[11px] bg-white px-[14px] py-[12px]">
-      <p className="text-[10px] font-medium text-ink-500">
-        data usage
+      <p className="text-preview-micro font-medium text-ink-500">
+        Data usage
       </p>
       <div className="flex items-end justify-between">
-        <span className="text-[14px] font-bold text-ink-900">
+        <span className="text-sm font-bold text-ink-900 tabular-nums">
           5 GB data left
         </span>
-        <span className="text-[8px] text-ink-500">out of 5 GB</span>
+        <span className="text-preview-micro text-ink-500 tabular-nums">out of 5 GB</span>
       </div>
       <div className="h-[9px] w-full rounded-full bg-gradient-to-r from-[oklch(0.64_0.175_146.743)] to-[oklch(0.616_0.105_185.755)]" />
       <button
         type="button"
-        className="mt-2 w-full rounded-[12px] bg-ink-800 px-4 py-[10px] text-[11px] font-medium leading-none text-white shadow-[0_1px_4px_oklch(0.279_0.033_258.368/0.12)]"
+        className="mt-2 w-full select-none rounded-[12px] bg-ink-800 px-4 py-[10px] text-xs font-medium leading-normal text-white shadow-[0_1px_4px_oklch(0.279_0.033_258.368/0.12)]"
       >
         Top up eSIM
       </button>
       <div className="mt-1 flex items-center justify-between gap-2">
         <div className="flex flex-col gap-px">
-          <span className="text-[9px] text-ink-600">Expires in 6 days, 23 hours</span>
-          <p className="text-[8px] text-ink-600">25 Oct 2025 00:34 UTC</p>
+          <span className="text-preview-micro text-ink-600 tabular-nums">Expires in 6 days, 23 hours</span>
+          <p className="text-preview-micro text-ink-600 tabular-nums">25 Oct 2025 00:34 UTC</p>
         </div>
         <InfoIcon />
       </div>
@@ -522,14 +543,14 @@ function InstallationCard() {
   return (
     /* Pencil source: 61YI3 / S–INSTALL */
     <section className="flex flex-col gap-2 rounded-[11px] bg-white px-[14px] py-[12px]">
-      <p className="text-[10px] font-medium text-ink-500">Installation</p>
+      <p className="text-preview-micro font-medium text-ink-500">Installation</p>
       <div className="flex flex-col gap-5 rounded-[8px] bg-[oklch(0.23_0.031_209.528/0.122)] px-4 py-5">
         <div className="flex items-start gap-2">
           <div className="grid h-7 w-7 shrink-0 place-items-center rounded-[6px] bg-surface-field">
             <QrIcon />
           </div>
           <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-            <p className="text-[8px] leading-[1.25] text-ink-600">
+            <p className="text-pretty text-preview-micro leading-normal text-ink-600">
               Follow the step-by-step guide below to install and activate your
               eSIM
             </p>
@@ -537,14 +558,14 @@ function InstallationCard() {
         </div>
         <button
           type="button"
-          className="w-full rounded-[12px] bg-ink-800 px-4 py-[10px] text-[9px] font-medium leading-none text-white shadow-[0_1px_4px_oklch(0.279_0.033_258.368/0.12)]"
+          className="w-full select-none rounded-[12px] bg-ink-800 px-4 py-[10px] text-preview-micro font-medium leading-normal text-white shadow-[0_1px_4px_oklch(0.279_0.033_258.368/0.12)]"
         >
           View installation instructions
         </button>
       </div>
       <div className="flex flex-col gap-px">
-        <p className="font-mono text-[8px] text-ink-900">8937204017187875409</p>
-        <p className="text-[8px] text-ink-600">ICCID number</p>
+        <p className="font-mono text-preview-micro text-ink-900 tabular-nums slashed-zero">8937204017187875409</p>
+        <p className="text-preview-micro text-ink-600">ICCID number</p>
       </div>
     </section>
   );
@@ -576,14 +597,15 @@ function ContactCard({
   return (
     /* Pencil source: bCEs1 / S-LNK */
     <section className="flex flex-col gap-2 rounded-[11px] bg-white px-[14px] py-[12px]">
-      <p className="text-[10px] font-medium text-ink-500">
+      <p className="text-preview-micro font-medium text-ink-500">
         Contact us
       </p>
-      <div className="flex flex-col gap-2 text-[9px] leading-[1.15]">
+      <div className="flex flex-col gap-2 text-preview-micro leading-normal">
         {email && (
           <a
             href={`mailto:${email}`}
-            className="block truncate text-demo-link hover:underline"
+            className="block truncate text-demo-link decoration-from-font underline-offset-2 hover:underline [text-decoration-skip-ink:auto] [text-underline-position:from-font]"
+            title={email}
           >
             {email}
           </a>
@@ -593,7 +615,7 @@ function ContactCard({
             href={privacy}
             target="_blank"
             rel="noreferrer"
-            className="block truncate text-demo-link hover:underline"
+            className="block text-demo-link decoration-from-font underline-offset-2 hover:underline [text-decoration-skip-ink:auto] [text-underline-position:from-font]"
           >
             Privacy policy
           </a>
@@ -603,7 +625,7 @@ function ContactCard({
             href={terms}
             target="_blank"
             rel="noreferrer"
-            className="block truncate text-demo-link hover:underline"
+            className="block text-demo-link decoration-from-font underline-offset-2 hover:underline [text-decoration-skip-ink:auto] [text-underline-position:from-font]"
           >
             Terms of usage
           </a>
@@ -654,8 +676,8 @@ function MobileIcon({ active }: { active: boolean }) {
 function InfoListItem({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <span className="text-[14px] font-bold leading-none text-ink-900">{value}</span>
-      <span className="text-[8px] leading-none text-ink-500">{label}</span>
+      <span className="text-sm font-bold leading-none text-ink-900 tabular-nums">{value}</span>
+      <span className="text-preview-micro leading-normal text-ink-500">{label}</span>
     </div>
   );
 }
@@ -721,9 +743,9 @@ function QrIcon() {
         <path
           d="M9 3H4.0001C3.44782 3 3.00011 3.4477 3.0001 3.99998L3 9M15.0001 3H20.0001C20.5524 3 21.0001 3.44772 21.0001 4V9M3.00006 15L3.00011 20C3.00012 20.5523 3.44783 21 4.00011 21H9M15.0001 21H20.0001C20.5524 21 21.0001 20.5523 21.0001 20V15"
           stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <rect
           x="7"
@@ -731,8 +753,8 @@ function QrIcon() {
           width="3"
           height="3"
           stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
         />
         <rect
           x="14"
@@ -740,8 +762,8 @@ function QrIcon() {
           width="3"
           height="3"
           stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
         />
         <rect
           x="7"
@@ -749,8 +771,8 @@ function QrIcon() {
           width="3"
           height="3"
           stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linejoin="round"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
         />
         <rect
           x="14"
@@ -758,7 +780,7 @@ function QrIcon() {
           width="0.1"
           height="0.1"
           stroke="currentColor"
-          stroke-width="1.50"
+          strokeWidth="1.50"
         />
         <rect
           className="oi-mini-squre"
@@ -767,7 +789,7 @@ function QrIcon() {
           width="0.1"
           height="0.1"
           stroke="currentColor"
-          stroke-width="1.50"
+          strokeWidth="1.50"
         />
         <rect
           x="17"
@@ -775,7 +797,7 @@ function QrIcon() {
           width="0.1"
           height="0.1"
           stroke="currentColor"
-          stroke-width="1.50"
+          strokeWidth="1.50"
         />
         <rect
           x="17"
@@ -783,7 +805,7 @@ function QrIcon() {
           width="0.1"
           height="0.1"
           stroke="currentColor"
-          stroke-width="1.50"
+          strokeWidth="1.50"
         />
         <rect
           x="15.45"
@@ -791,7 +813,7 @@ function QrIcon() {
           width="0.1"
           height="0.1"
           stroke="currentColor"
-          stroke-width="1.50"
+          strokeWidth="1.50"
         />
       </g>
     </svg>

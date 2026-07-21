@@ -8,6 +8,7 @@ const HexColorPicker = lazy(() =>
 );
 
 const ALIAS_INVALID_RE = /[^a-z0-9-]/g;
+const RESET_CONFIRMATION_MS = 3000;
 
 type SectionProps = {
   settings: BrandSettings;
@@ -21,6 +22,15 @@ type SectionProps = {
   dirty: boolean;
   onScrollPreviewToTop?: () => void;
   onScrollPreviewToBottom?: () => void;
+};
+
+type BrandDetailsCardProps = SectionProps & {
+  validationRequest: number;
+  continueToStyling: boolean;
+};
+
+type BrandStylingCardProps = SectionProps & {
+  brandCreated: boolean;
 };
 
 /* ─────────────────────────────  Section shell  ───────────────────────────── */
@@ -40,18 +50,20 @@ function SectionShell({
 }) {
   return (
     <section className="rounded-2xl bg-surface-muted p-7 sm:p-8">
-      <div className="flex items-start gap-3">
+      <div className="flex flex-col items-start gap-4 sm:flex-row sm:gap-3">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <h2 className="text-lg font-semibold text-ink-900">{title}</h2>
+            <h2 className="text-balance font-display text-lg font-semibold leading-snug text-ink-900">
+              {title}
+            </h2>
             {titleBadge}
           </div>
-          <p className="mt-1.5 max-w-xl text-[13px] leading-5 text-ink-600">
+          <p className="mt-1.5 max-w-xl text-pretty text-sm leading-relaxed text-ink-600">
             {description}
           </p>
         </div>
         {headerActions && (
-          <div className="ml-auto shrink-0 pt-0.5">{headerActions}</div>
+          <div className="shrink-0 sm:ms-auto sm:pt-0.5">{headerActions}</div>
         )}
       </div>
       <div className="mt-7">{children}</div>
@@ -67,30 +79,98 @@ function SectionActions({
   saved,
   dirty,
   saveLabel,
+  prerequisiteMessage,
 }: {
   onSave: () => void;
   onReset: () => void;
   saved: boolean;
   dirty: boolean;
   saveLabel: string;
+  prerequisiteMessage?: string;
 }) {
+  const [confirmingReset, setConfirmingReset] = useState(false);
+  const [resetSecondsLeft, setResetSecondsLeft] = useState(
+    RESET_CONFIRMATION_MS / 1000
+  );
+
+  useEffect(() => {
+    if (!confirmingReset) return;
+
+    const startedAt = Date.now();
+    const countdownInterval = window.setInterval(() => {
+      const elapsed = Date.now() - startedAt;
+      const secondsLeft = Math.max(
+        0,
+        Math.ceil((RESET_CONFIRMATION_MS - elapsed) / 1000)
+      );
+
+      if (secondsLeft === 0) {
+        setConfirmingReset(false);
+        return;
+      }
+
+      setResetSecondsLeft(secondsLeft);
+    }, 250);
+    const confirmationTimeout = window.setTimeout(
+      () => setConfirmingReset(false),
+      RESET_CONFIRMATION_MS
+    );
+
+    return () => {
+      window.clearInterval(countdownInterval);
+      window.clearTimeout(confirmationTimeout);
+    };
+  }, [confirmingReset]);
+
+  useEffect(() => {
+    if (!dirty) setConfirmingReset(false);
+  }, [dirty]);
+
+  const handleResetClick = () => {
+    if (confirmingReset) {
+      setConfirmingReset(false);
+      onReset();
+      return;
+    }
+
+    setResetSecondsLeft(RESET_CONFIRMATION_MS / 1000);
+    setConfirmingReset(true);
+  };
+
   return (
-    <div className="mt-7 flex items-center gap-3 border-t border-line pt-6">
-      <button
-        type="button"
-        onClick={onSave}
-        className="rounded-lg bg-ink-900 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-ink-800 active:scale-[0.99]"
-      >
-        {saved ? "Saved ✓" : saveLabel}
-      </button>
-      <button
-        type="button"
-        onClick={onReset}
-        disabled={!dirty}
-        className="rounded-lg px-3 py-2.5 text-sm font-medium text-ink-600 transition hover:text-ink-900 disabled:cursor-not-allowed disabled:opacity-40"
-      >
-        Reset
-      </button>
+    <div className="mt-7 border-t border-line pt-6">
+      {prerequisiteMessage && (
+        <p className="mb-3 text-pretty text-sm leading-relaxed text-ink-600">
+          {prerequisiteMessage}
+        </p>
+      )}
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={onSave}
+          className="min-h-11 select-none rounded-lg bg-ink-900 px-4 text-sm font-medium text-white shadow-sm transition-[background-color,scale] duration-150 ease-out hover:bg-ink-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-demo-accent/30 active:scale-[0.96]"
+        >
+          {saved ? "Saved ✓" : saveLabel}
+        </button>
+        <button
+          type="button"
+          onClick={handleResetClick}
+          disabled={!dirty}
+          aria-label={
+            confirmingReset
+              ? `Confirm reset, ${resetSecondsLeft} seconds remaining`
+              : "Reset"
+          }
+          className={
+            "min-h-11 select-none rounded-lg px-3 text-sm font-medium transition-[background-color,color,opacity,scale] duration-150 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-demo-accent/30 active:not-disabled:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-40 " +
+            (confirmingReset
+              ? "bg-demo-danger text-white shadow-sm hover:bg-demo-danger/90"
+              : "text-ink-600 hover:bg-white/70 hover:text-ink-900")
+          }
+        >
+          {confirmingReset ? `Confirm reset · ${resetSecondsLeft}` : "Reset"}
+        </button>
+      </div>
     </div>
   );
 }
@@ -115,15 +195,49 @@ export function BrandDetailsCard({
   onReset,
   saved,
   dirty,
-}: SectionProps) {
+  validationRequest,
+  continueToStyling,
+}: BrandDetailsCardProps) {
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const handledValidationRequest = useRef(0);
+
+  const revealErrors = useCallback((errs: Record<string, string>) => {
+    setErrors(errs);
+    if (errs.supportEmail) setAdvancedOpen(true);
+
+    const firstInvalidField = ["brandName", "brandAlias", "supportEmail"].find(
+      (field) => errs[field]
+    );
+    const fieldIds: Record<string, string> = {
+      brandName: "brand-name",
+      brandAlias: "brand-alias",
+      supportEmail: "customer-support-email",
+    };
+
+    if (firstInvalidField) {
+      window.requestAnimationFrame(() => {
+        document.getElementById(fieldIds[firstInvalidField])?.focus();
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (
+      !continueToStyling ||
+      validationRequest === 0 ||
+      handledValidationRequest.current === validationRequest
+    )
+      return;
+
+    handledValidationRequest.current = validationRequest;
+    revealErrors(validateDetails(settings));
+  }, [continueToStyling, validationRequest, revealErrors, settings]);
 
   const handleSave = () => {
     const errs = validateDetails(settings);
     if (Object.keys(errs).length > 0) {
-      setErrors(errs);
-      if (errs.supportEmail) setAdvancedOpen(true);
+      revealErrors(errs);
       return;
     }
     setErrors({});
@@ -148,6 +262,16 @@ export function BrandDetailsCard({
         />
       }
     >
+      {continueToStyling && (
+        <div
+          role="status"
+          className="mb-6 rounded-xl bg-white p-4 text-sm leading-relaxed text-ink-700 shadow-card"
+        >
+          Brand details must be saved before you can save styling. Complete the
+          required fields, then continue.
+        </div>
+      )}
+
       <div className="space-y-5">
         <TextField
           label="Brand name"
@@ -177,7 +301,7 @@ export function BrandDetailsCard({
           type="button"
           onClick={() => setAdvancedOpen((v) => !v)}
           aria-expanded={advancedOpen}
-          className="flex w-full items-center justify-between text-[13px] font-medium text-ink-900"
+          className="flex min-h-11 w-full select-none items-center justify-between rounded-lg text-sm font-medium text-ink-900 transition-[background-color,scale] duration-150 ease-out hover:bg-white/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-demo-accent/30 active:scale-[0.96]"
         >
           <span className="flex items-center gap-1.5">
             Advanced settings
@@ -225,7 +349,11 @@ export function BrandDetailsCard({
         onReset={handleReset}
         saved={saved}
         dirty={dirty}
-        saveLabel="Save brand details"
+        saveLabel={
+          continueToStyling
+            ? "Save and continue to styling"
+            : "Save brand details"
+        }
       />
     </SectionShell>
   );
@@ -253,14 +381,21 @@ export function BrandStylingCard({
   onReset,
   saved,
   dirty,
+  brandCreated,
   onScrollPreviewToTop,
   onScrollPreviewToBottom,
-}: SectionProps) {
+}: BrandStylingCardProps) {
   const branded = settings.brandedEsimEnabled;
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSave = () => {
+    if (!brandCreated) {
+      setErrors({});
+      onSave();
+      return;
+    }
+
     const errs = validateStyling(settings);
     if (Object.keys(errs).length > 0) {
       setErrors(errs);
@@ -280,18 +415,15 @@ export function BrandStylingCard({
       title="Brand styling"
       description="These assets help customers recognize your brand and reflect its personality in the eSIM interface and related communications."
       titleBadge={
-        <span className="inline-flex items-center gap-1.5 text-[11px] tracking-wide text-ink-500 uppercase">
+        <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-surface-field px-2.5 py-1 text-xs text-ink-500 shadow-card">
           <svg
+            xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
-            viewBox="0 0 16 16"
+            viewBox="0 0 24 24"
             fill="currentColor"
             className="h-3.5 w-3.5 text-emerald-600"
           >
-            <path
-              fillRule="evenodd"
-              d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm3.22-9.72a.75.75 0 0 0-1.06-1.06L6.75 7.63 5.84 6.72a.75.75 0 0 0-1.06 1.06l1.44 1.44a.75.75 0 0 0 1.06 0l3.94-3.94Z"
-              clipRule="evenodd"
-            />
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22ZM17.4571 9.45711L11 15.9142L6.79289 11.7071L8.20711 10.2929L11 13.0858L16.0429 8.04289L17.4571 9.45711Z" />
           </svg>
           Included in your plan
         </span>
@@ -299,7 +431,7 @@ export function BrandStylingCard({
     >
       {/* eSIM toggle */}
       <div className="flex items-center justify-between gap-4">
-        <span className="text-[13px] font-medium text-ink-900">
+        <span className="text-sm font-medium text-ink-900">
           Branded eSIM details
         </span>
         <ToggleSwitch
@@ -412,7 +544,12 @@ export function BrandStylingCard({
         onReset={handleReset}
         saved={saved}
         dirty={dirty}
-        saveLabel="Save brand styling"
+        saveLabel={brandCreated ? "Save brand styling" : "Complete brand details"}
+        prerequisiteMessage={
+          brandCreated
+            ? undefined
+            : "Brand details must be saved before you can save styling."
+        }
       />
     </SectionShell>
   );
@@ -433,10 +570,10 @@ function FieldLabel({
   return (
     <label
       htmlFor={htmlFor}
-      className="block text-[13px] font-medium text-ink-900"
+      className="block text-sm font-medium leading-normal text-ink-900"
     >
       {children}
-      {required && <span className="ml-0.5 text-demo-danger">*</span>}
+      {required && <span className="ms-0.5 text-demo-danger">*</span>}
     </label>
   );
 }
@@ -476,14 +613,14 @@ function TextField({
         onChange={(e) => onChange(e.target.value)}
         onFocus={onFocus}
         className={
-          "block h-10 w-full rounded-lg border bg-white px-3 text-sm text-ink-900 placeholder:text-ink-500/70 focus:outline-none " +
+          "block h-10 w-full rounded-lg border bg-white px-3 text-base text-ink-900 caret-demo-accent placeholder:text-ink-500/70 focus:outline-none sm:text-sm " +
           (error
             ? "border-demo-danger ring-1 ring-demo-danger focus:border-demo-danger focus:ring-demo-danger/15"
             : "border-line focus:border-demo-accent focus:ring-2 focus:ring-demo-accent/15")
         }
       />
-      {helper && <p className="text-[12px] text-ink-500">{helper}</p>}
-      {error && <p className="text-[12px] text-demo-danger">{error}</p>}
+      {helper && <p className="text-pretty text-xs leading-normal text-ink-500">{helper}</p>}
+      {error && <p className="text-pretty text-xs leading-normal text-demo-danger">{error}</p>}
     </div>
   );
 }
@@ -524,17 +661,17 @@ function AliasField({
                 .slice(0, 32)
             )
           }
-          className="h-full flex-1 bg-white px-3 text-sm text-ink-900 placeholder:text-ink-500/70 focus:outline-none"
+          className="h-full min-w-0 flex-1 bg-white px-3 text-base text-ink-900 caret-demo-accent placeholder:text-ink-500/70 focus:outline-none sm:text-sm"
         />
-        <span className="flex h-full items-center border-l border-line bg-surface-field px-3 font-mono text-[12px] text-ink-600">
+        <span className="flex h-full items-center whitespace-nowrap border-s border-line bg-surface-field px-3 font-mono text-xs text-ink-600">
           .cloud-esim.me
         </span>
       </div>
-      <p className="text-[12px] text-ink-500">
+      <p className="break-words text-pretty text-xs leading-normal text-ink-500">
         Used for the customer subdomain and the partner API. Lowercase letters,
         numbers and hyphens only.
       </p>
-      {error && <p className="text-[12px] text-demo-danger">{error}</p>}
+      {error && <p className="text-pretty text-xs leading-normal text-demo-danger">{error}</p>}
     </div>
   );
 }
@@ -575,11 +712,14 @@ function FileField({
         <button
           type="button"
           onClick={() => inputRef.current?.click()}
-          className="flex h-full w-24 shrink-0 items-center justify-center border-r border-line bg-surface-field px-3 text-[13px] font-medium text-ink-900 transition hover:bg-line/60"
+          className="flex h-full w-24 shrink-0 select-none items-center justify-center whitespace-nowrap border-e border-line bg-surface-field px-3 text-sm font-medium text-ink-900 transition-colors duration-150 ease-out hover:bg-line/60"
         >
           Choose file
         </button>
-        <span className="flex-1 truncate px-3 text-[13px] text-ink-500">
+        <span
+          className="flex-1 truncate px-3 text-sm text-ink-500"
+          title={fileName || "No file chosen"}
+        >
           {fileName || "No file chosen"}
         </span>
         {fileName && (
@@ -587,7 +727,7 @@ function FileField({
             type="button"
             aria-label="Remove file"
             onClick={onClear}
-            className="mr-2 grid h-6 w-6 place-items-center rounded text-ink-500 hover:bg-surface-field hover:text-ink-900"
+            className="me-2 grid h-6 w-6 place-items-center rounded text-ink-500 hover:bg-surface-field hover:text-ink-900"
           >
             <svg
               viewBox="0 0 16 16"
@@ -610,7 +750,7 @@ function FileField({
           onChange={handleChange}
         />
       </div>
-      <p className="text-[12px] text-ink-500">{helper}</p>
+      <p className="text-pretty text-xs leading-normal text-ink-500">{helper}</p>
     </div>
   );
 }
@@ -663,7 +803,7 @@ function ColorField({
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="h-10 w-24 shrink-0 border-r border-line"
+            className="h-10 w-24 shrink-0 border-e border-line"
             style={{ backgroundColor: value }}
             aria-label="Open color picker"
           />
@@ -678,11 +818,11 @@ function ColorField({
                 onScrollToTop?.();
               }
             }}
-            className="h-full flex-1 bg-white px-3 font-mono text-[13px] text-ink-900 focus:outline-none"
+            className="h-full min-w-0 flex-1 bg-white px-3 font-mono text-base text-ink-900 caret-demo-accent tabular-nums slashed-zero focus:outline-none sm:text-sm"
           />
         </div>
         {open && (
-          <div className="absolute left-0 top-full z-50 mt-2 rounded-xl border border-line bg-white p-3 shadow-card">
+          <div className="absolute start-0 top-full z-50 mt-2 rounded-xl border border-line bg-white p-3 shadow-card">
             <Suspense fallback={<div className="h-[200px] w-[200px]" aria-hidden />}>
               <HexColorPicker
                 color={value}
@@ -695,7 +835,7 @@ function ColorField({
           </div>
         )}
       </div>
-      {error && <p className="text-[12px] text-demo-danger">{error}</p>}
+      {error && <p className="text-pretty text-xs leading-normal text-demo-danger">{error}</p>}
     </div>
   );
 }

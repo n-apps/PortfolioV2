@@ -13,7 +13,7 @@ export function DemoNavbar() {
           <Link
             key={item}
             to="#"
-            className="rounded-lg px-4 py-2 text-[14px] font-medium text-white/70 transition hover:text-white"
+            className="select-none rounded-lg px-4 py-2 text-sm font-medium text-white/70 transition hover:text-white"
           >
             {item}
           </Link>
@@ -22,7 +22,7 @@ export function DemoNavbar() {
 
       <Link
         to="#"
-        className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2 text-[14px] font-semibold text-ink-900 transition hover:bg-white/90"
+        className="inline-flex select-none items-center gap-2 whitespace-nowrap rounded-full bg-white px-5 py-2 text-sm font-medium text-ink-900 transition hover:bg-white/90"
       >
         Go to dashboard
         <svg
