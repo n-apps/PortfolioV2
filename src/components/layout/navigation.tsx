@@ -1,6 +1,7 @@
 import { Link, useLocation } from "react-router";
 import { ThemeToggle } from "./theme-toggle";
 import { motion } from "motion/react";
+import { fluidSmall } from "@/lib/typography";
 
 export function Navigation() {
   const location = useLocation();
@@ -21,7 +22,7 @@ export function Navigation() {
         >
           <span
             className="inline-block tracking-normal transition-[letter-spacing] duration-[420ms] ease-[cubic-bezier(.2,.7,.2,1)] group-hover:tracking-[0.12em] group-focus-visible:tracking-[0.12em] motion-reduce:transition-none"
-            style={{ fontFamily: "var(--font-sans)", fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)", lineHeight: 1 }}
+            style={{ fontFamily: "var(--font-sans)", fontSize: fluidSmall, lineHeight: 1 }}
           >
             R
             <span

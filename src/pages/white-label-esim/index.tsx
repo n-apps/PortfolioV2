@@ -248,7 +248,7 @@ export function WhiteLabelEsimPage() {
           </div>
 
           <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SectionHeading>Final Solution</SectionHeading>
+            <SectionHeading>Final solution</SectionHeading>
             <SubHeading>Make contrast executable</SubHeading>
             <p
               className='text-foreground/80'

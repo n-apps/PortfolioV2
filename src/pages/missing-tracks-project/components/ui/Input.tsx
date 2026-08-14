@@ -39,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           'border border-mt-border/60 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]',
           'transition-[border-color,box-shadow] duration-150 ease-out',
           'hover:border-mt-text-secondary/60 focus:outline-none focus:border-mt-green focus:shadow-[0_0_0_2px_rgba(127,238,100,0.35)]',
-          error && 'border-mt-red focus:border-mt-red focus:shadow-[0_0_0_2px_rgba(243,114,127,0.35)]',
+          Boolean(error) && 'border-mt-red focus:border-mt-red focus:shadow-[0_0_0_2px_rgba(243,114,127,0.35)]',
           className,
         )}
         {...rest}

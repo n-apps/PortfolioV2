@@ -12,7 +12,7 @@ export function NotFoundPage() {
           style={{
             fontFamily: "var(--font-serif)",
             fontStyle: "italic",
-            fontSize: "clamp(1.25rem, 1.1rem + 0.75vw, 1.9375rem)",
+            fontSize: "clamp(1.103rem, 0.97rem + 0.66vw, 1.71rem)",
             lineHeight: 1.3,
             fontWeight: 400,
           }}

@@ -287,9 +287,6 @@ export function SaasOnboardingPage() {
       <SectionAnimate delay={0.14}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
           <SectionHeading>Hypothesis &amp; Constraints</SectionHeading>
-          <PullQuote>
-            {nbsp('No assigned eSIM plan = no product value.')}
-          </PullQuote>
           <p
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -359,9 +356,9 @@ export function SaasOnboardingPage() {
             />
           </div>
 
-          {/* ── 6. Final Solution ───────────────────────── */}
+          {/* ── 6. Final solution ───────────────────────── */}
           <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SectionHeading>Final Solution</SectionHeading>
+            <SectionHeading>Final solution</SectionHeading>
             <SubHeading>
               Make the first assignment the spine of the flow
             </SubHeading>

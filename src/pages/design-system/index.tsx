@@ -26,8 +26,6 @@ const heroImage = '/images/design-system-hero.png';
 const beforeAfterImage = '/images/design-system-before-after.png';
 const semanticsImage = '/images/design-system-semantics.png';
 const subBrandsImage = '/images/design-system-sub-brands.png';
-const specsImage = '/images/design-system-specs.png';
-const governanceImage = '/images/design-system-governance.png';
 const prototypeImage = '/images/design-system-prototype.png';
 
 /* ── Data ─────────────────────────────────────────────── */
@@ -429,11 +427,11 @@ export function DesignSystemPage() {
         </div>
       </SectionAnimate>
 
-      {/* ── 5. Final Solution ──────────────────────────── */}
+      {/* ── 5. Final solution ──────────────────────────── */}
       <SectionAnimate delay={0.22}>
         <div className='flex flex-col' style={{ gap: sectionGap }}>
           <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SectionHeading>Final Solution</SectionHeading>
+            <SectionHeading>Final solution</SectionHeading>
             <SubHeading>Prevent forks before they started</SubHeading>
             <p
               className='text-foreground/80'
@@ -547,14 +545,6 @@ export function DesignSystemPage() {
             </p>
           </div>
 
-          <div className='-mx-4 sm:mx-0'>
-            <ImageWithFallback
-              src={specsImage}
-              alt='Component anatomy \u2014 button dissected with token labels mapped to visual properties'
-              className='w-full rounded-none sm:rounded-xl'
-            />
-          </div>
-
           <div className='flex flex-col' style={{ gap: innerGap }}>
             <SubHeading>Make adoption lighter than rebuilding</SubHeading>
             <p
@@ -571,17 +561,6 @@ export function DesignSystemPage() {
                 'Product managers could prototype with real components, so concepts looked like the actual product from day one instead of a rough wireframe that needed to be redesigned later.',
               )}
             </p>
-          </div>
-
-          <div className='-mx-4 sm:mx-0'>
-            <ImageWithFallback
-              src={prototypeImage}
-              alt='Figma library connected to an AI-powered prototype tool \u2014 design system enabling rapid prototyping'
-              className='w-full rounded-none sm:rounded-xl'
-            />
-          </div>
-
-          <div className='flex flex-col' style={{ gap: innerGap }}>
             <p
               className='text-foreground/80'
               style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
@@ -597,14 +576,6 @@ export function DesignSystemPage() {
               )}
             </p>
           </div>
-
-          <div className='-mx-4 sm:mx-0'>
-            <ImageWithFallback
-              src={governanceImage}
-              alt='Governance workflow diagram \u2014 one team submits requests, the design system team processes and ships components and two product teams consume them'
-              className='w-full rounded-none sm:rounded-xl'
-            />
-          </div>
         </div>
       </SectionAnimate>
 
@@ -612,8 +583,8 @@ export function DesignSystemPage() {
       <SectionAnimate delay={0.26}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
           <SectionHeading>Before / After</SectionHeading>
-          <div className='grid gap-4 sm:grid-cols-2'>
-            <div className='rounded-xl bg-card card-shadow p-5'>
+          <div className='flex flex-col gap-3 sm:gap-4'>
+            <div className='rounded-xl bg-card card-shadow p-5 sm:p-6 flex flex-col gap-2'>
               <SubHeading>Before: repeated decisions</SubHeading>
               <p
                 className='text-foreground/80'
@@ -623,7 +594,7 @@ export function DesignSystemPage() {
                 )}
               </p>
             </div>
-            <div className='rounded-xl bg-card card-shadow p-5'>
+            <div className='rounded-xl bg-card card-shadow p-5 sm:p-6 flex flex-col gap-2'>
               <SubHeading>After: shared rules</SubHeading>
               <p
                 className='text-foreground/80'

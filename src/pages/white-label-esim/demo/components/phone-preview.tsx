@@ -223,7 +223,7 @@ function DesktopShell({
   settings,
   scrollAreaRef,
   isLoading,
-}: Props & { scrollAreaRef?: React.RefObject<HTMLDivElement>; isLoading?: boolean }) {
+}: Props & { scrollAreaRef?: React.RefObject<HTMLDivElement | null>; isLoading?: boolean }) {
   return (
     <div className="w-[640px] overflow-hidden rounded-[12px] bg-[oklch(0.833_0_0)] shadow-phone">
       {/* Browser chrome */}
@@ -268,7 +268,7 @@ function PhoneScreen({
   scrollAreaRef,
   constrainHeight = true,
 }: Props & {
-  scrollAreaRef?: React.RefObject<HTMLDivElement>;
+  scrollAreaRef?: React.RefObject<HTMLDivElement | null>;
   constrainHeight?: boolean;
 }) {
   const branded = settings.brandedEsimEnabled;

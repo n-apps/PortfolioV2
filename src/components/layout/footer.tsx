@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useCallback } from "react";
+import { fluidSmall } from "@/lib/typography";
 
 const WEATHER_API_URL =
   "https://api.openweathermap.org/data/2.5/weather?q=Kyiv&units=metric&lang=us&appid=063c51f5bd4cc4f176c67724ff4cd230";
@@ -236,7 +237,7 @@ export function Footer() {
         <span
           className="whitespace-nowrap text-muted-foreground"
           style={{
-            fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)",
+            fontSize: fluidSmall,
             lineHeight: 1,
             fontVariantNumeric: "tabular-nums",
           }}
@@ -252,7 +253,7 @@ export function Footer() {
               <span
                 className="text-muted-foreground"
                 style={{
-                  fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)",
+                  fontSize: fluidSmall,
                   lineHeight: 1,
                 }}
               >
@@ -263,7 +264,7 @@ export function Footer() {
             <span
               className="text-foreground"
               style={{
-                fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)",
+                fontSize: fluidSmall,
                 lineHeight: 1,
               }}
             >
@@ -274,7 +275,7 @@ export function Footer() {
         <span
           className="text-muted-foreground text-right"
           style={{
-            fontSize: "clamp(0.8125rem, 0.78rem + 0.15vw, 1rem)",
+            fontSize: fluidSmall,
             lineHeight: 1,
           }}
         >

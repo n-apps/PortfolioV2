@@ -51,14 +51,14 @@
   --sidebar-border: oklch(0.934 0 0);
   --sidebar-ring: oklch(0.672 0 0);
 
-  --text-2: clamp(1rem, 0.94rem + 0.3vw, 1.25rem);
-  --text-serif: clamp(1rem, 0.94rem + 0.3vw, 1.25rem);
+  --text-2: clamp(0.8825rem, 0.83rem + 0.26vw, 1.103rem);
+  --text-serif: clamp(0.8825rem, 0.83rem + 0.26vw, 1.103rem);
 
   /* Fluid heading scale */
-  --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
-  --text-xl: clamp(1.25rem, 1rem + 1vw, 1.5rem);
-  --text-2xl: clamp(1.5rem, 1rem + 2vw, 2.25rem);
-  --text-3xl: clamp(2rem, 1rem + 3.5vw, 3.25rem);
+  --text-lg: clamp(0.993rem, 0.88rem + 0.44vw, 1.103rem);
+  --text-xl: clamp(1.103rem, 0.88rem + 0.88vw, 1.3235rem);
+  --text-2xl: clamp(1.3235rem, 0.88rem + 1.76vw, 1.985rem);
+  --text-3xl: clamp(1.765rem, 0.88rem + 3.09vw, 2.868rem);
 
   --content-media-max-width: 1100px;
 }

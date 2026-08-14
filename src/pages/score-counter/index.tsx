@@ -46,8 +46,8 @@ const metadata = [
 ];
 
 const impactStats = [
-  { value: '920K', label: 'Installs' },
-  { value: '90K', label: 'Monthly active users' },
+  { value: '1M+', label: 'Installs' },
+  { value: '100K', label: 'Monthly active users' },
   { value: '225K', label: 'Avg. active devices' },
   { value: '4.9', label: 'Google Play rating' },
 ];
@@ -216,7 +216,7 @@ export function ScoreCounterPage() {
           </h1>
           <p style={{ fontSize: fluidLead, lineHeight: 1.6 }}>
             {nbsp(
-              'Built a simple utility app for mobile devices. It grew to 920K installs mostly thanks to the best UX in its category.',
+              'Built a simple utility app for mobile devices. It grew to 1M+ installs mostly thanks to the best UX in its category.',
             )}
           </p>
         </div>
@@ -376,7 +376,7 @@ export function ScoreCounterPage() {
             className='text-foreground/80'
             style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
             {nbsp(
-              '920K installs came through best UX and organic installs. The app still holds a 4.9 rating after nine years. The product lesson is simple: build something people trust enough to recommend.',
+              '1M+ installs came through best UX and organic installs. The app still holds a 4.9 rating after nine years. The product lesson is simple: build something people trust enough to recommend.',
             )}
           </p>
         </div>

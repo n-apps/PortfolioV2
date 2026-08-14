@@ -56,18 +56,10 @@ const workExperience = [
 
 const selectedWorks = [
   {
-    title: 'Design system',
-    subtitle: 'Yesim',
-    description:
-      'Built a token-based system for 3 B2B products with 48 components and 140+ tokens.',
-    caseStudy: '/work/design-system',
-    cover: designSystemCover,
-  },
-  {
     title: 'White-label eSIM',
     subtitle: 'Yesim',
     description:
-      'Validated white-label eSIM customization through a production-stack prototype.',
+      'Validated white-label eSIM customization through a production-stack prototype',
     caseStudy: '/work/white-label-esim',
     cover: whiteLabelEsimCover,
   },
@@ -75,15 +67,22 @@ const selectedWorks = [
     title: 'Designing onboarding',
     subtitle: 'Yesim',
     description:
-      'Turned sales-assisted B2B onboarding into a self-serve activation flow.',
+      'Turned sales-assisted B2B onboarding into a self-serve activation flow',
     caseStudy: '/work/saas-onboarding',
     cover: saasOnboardingCover,
   },
   {
+    title: 'Design system',
+    subtitle: 'Yesim',
+    description:
+      'Built a token-based system for 3 B2B products with 48 components and 140+ tokens',
+    caseStudy: '/work/design-system',
+    cover: designSystemCover,
+  },
+  {
     title: 'Score Counter',
     subtitle: 'Android app',
-    description:
-      'Owned a solo Android app from 0 to 920K installs and 90K MAU.',
+    description: 'Owned a solo Android app from 0 to 1M+ installs and 100K MAU',
     caseStudy: '/work/score-counter',
     cover: scoreCounterCover,
   },
