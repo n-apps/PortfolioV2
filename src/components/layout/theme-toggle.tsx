@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RiContrast2Fill } from "@remixicon/react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { playToggleSound } from "@/lib/ui-sounds";
 
 function getInitialTheme() {
@@ -13,6 +13,7 @@ function getInitialTheme() {
 
 export function ThemeToggle() {
   const [isDark, setIsDark] = useState(getInitialTheme);
+  const reduceMotion = useReducedMotion() === true;
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
@@ -39,10 +40,10 @@ export function ThemeToggle() {
   return (
     <motion.button
       onClick={handleToggle}
-      className="relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full"
+      className="relative -my-1.5 -mr-1.5 flex size-11 cursor-pointer items-center justify-center rounded-full"
       style={{ color: "var(--foreground)" }}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-      whileTap={{ scale: 0.96 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.96 }}
     >
       <RiContrast2Fill size={16} aria-hidden />
     </motion.button>

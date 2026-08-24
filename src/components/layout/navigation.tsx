@@ -1,23 +1,28 @@
 import { Link, useLocation } from "react-router";
 import { ThemeToggle } from "./theme-toggle";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { fluidSmall } from "@/lib/typography";
 
 export function Navigation() {
   const location = useLocation();
+  const reduceMotion = useReducedMotion() === true;
 
   return (
     <motion.nav
       className="pt-6 pb-12 sm:pt-10 sm:pb-16 flex items-center justify-between w-full"
-      initial={{ opacity: 0, y: -10 }}
+      initial={reduceMotion ? false : { opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+      transition={
+        reduceMotion
+          ? { duration: 0 }
+          : { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+      }
     >
       {location.pathname !== "/support" && (
         <Link
           to="/"
           data-goatcounter-click="nav-home-logo"
-          className="group inline-block select-none text-foreground"
+          className="group -my-1.5 inline-flex min-h-11 items-center pr-4 select-none text-foreground"
           aria-label="R—S"
         >
           <span

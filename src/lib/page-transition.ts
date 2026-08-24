@@ -36,6 +36,16 @@ export async function navigateWithTransition(
 
   try {
     playTransitionSound();
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion) {
+      await (preload?.() ?? Promise.resolve());
+      await router.navigate(to);
+      return;
+    }
+
     set("entering");
     const enterPromise = wait(300);
     await twoFrames();

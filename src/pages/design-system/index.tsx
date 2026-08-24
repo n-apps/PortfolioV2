@@ -1,688 +1,225 @@
-import { Link } from 'react-router';
-import { RiArrowLeftLine, RiArrowRightLine } from '@remixicon/react';
 import { SectionAnimate } from '@/components/ui/section-animate';
 import { nbsp } from '@/lib/nbsp';
-import { ImageWithFallback } from '@/components/ui/image-with-fallback';
 import {
-  fluidLead,
   fluidBase,
-  fluidSmall,
-  fluidStat,
-  fluidH1,
-  sectionGap,
   innerGap,
+  sectionGap,
 } from '@/lib/typography';
 import {
+  CaseFacts,
+  CaseFigure,
+  CaseHero,
+  CaseNavigation,
+  ConfidentialityNote,
+  OutcomeGrid,
   SectionHeading,
   SubHeading,
-  PullQuote,
-  ConfidentialityNote,
-  highlight,
 } from '@/components/case-study/case-study-components';
 
-const SUBJECT = 'Yesim';
-
-const heroImage = '/images/design-system-hero.png';
-const beforeAfterImage = '/images/design-system-before-after.png';
-const semanticsImage = '/images/design-system-semantics.png';
-const subBrandsImage = '/images/design-system-sub-brands.png';
-const prototypeImage = '/images/design-system-prototype.png';
-
-/* ── Data ─────────────────────────────────────────────── */
-
-const metadata = [
+const facts = [
   { label: 'Role', value: 'Product designer' },
-  { label: 'Timeframe', value: 'Sep \u2013 Dec 2025' },
-  { label: 'Platform', value: 'Web (B2B)' },
+  { label: 'Timeframe', value: 'Sep–Dec 2025' },
+  { label: 'Scope', value: 'Three B2B products' },
   { label: 'Team', value: 'PM · Engineering' },
 ];
 
-const impactStats = [
-  { value: '48', label: 'Components' },
-  { value: '140+', label: 'Design tokens' },
-  { value: '3', label: 'Brand themes' },
+const outcomes = [
+  { value: '≈4×', label: 'faster Figma preparation · operational estimate' },
+  { value: '≈30%', label: 'fewer recurring style QA issues · operational estimate' },
+  { value: '48', label: 'components in the mature library' },
+  { value: '140+', label: 'tokens in the mature library' },
 ];
 
-const tokenLayers = [
-  {
-    layer: 'Raw values',
-    purpose: 'Hardcoded (legacy)',
-    example: '#3B82F6',
-    themeable: 'No (shared)',
-  },
-  {
-    layer: 'Primitive',
-    purpose: 'The full palette',
-    example: 'blue-500: #3B82F6',
-    themeable: 'No (shared)',
-  },
-  {
-    layer: 'Semantic',
-    purpose: 'Role-based meanings',
-    example: 'color-primary: {blue-500}',
-    themeable: 'Yes (per product)',
-  },
-];
-
-const subBrandThemes = [
-  {
-    token: 'color-primary',
-    productA: 'Blue (#3B82F6)',
-    productB: 'Teal (#0D9488)',
-    productC: 'Purple (#7C3AED)',
-  },
-  {
-    token: 'font-heading',
-    productA: 'Inter',
-    productB: 'Plus Jakarta Sans',
-    productC: 'Inter',
-  },
-  {
-    token: 'radius-default',
-    productA: '8px',
-    productB: '4px',
-    productC: '12px',
-  },
-  {
-    token: 'density',
-    productA: 'Default',
-    productB: 'Compact',
-    productC: 'Default',
-  },
-];
-
-const priorityComponents = [
-  {
-    category: 'Data display',
-    components: 'Tables, data cards, stat blocks, badges',
-    why: 'Every B2B product has a data table on its most-visited page',
-  },
-  {
-    category: 'Forms',
-    components: 'Inputs, selects, date pickers, form layouts, validation',
-    why: 'Forms are 40%+ of B2B surfaces',
-  },
-  {
-    category: 'Filters & search',
-    components: 'Filter bars, chips, search inputs, sort controls',
-    why: 'Paired with tables in nearly every list view',
-  },
-  {
-    category: 'Feedback & states',
-    components: 'Empty states, loading skeletons, toasts, error states',
-    why: 'Most-neglected category; huge impact on perceived quality',
-  },
-  {
-    category: 'Navigation',
-    components: 'Sidebar, breadcrumbs, tabs, page headers',
-    why: 'Structural: everything else lives inside navigation',
-  },
-];
-
-const impactItems = [
-  {
-    label: 'Up to 90% faster feature design',
-    body: 'Assembling from components instead of designing from scratch',
-  },
-  {
-    label: '~30% less time on style-related QA',
-    body: 'Inconsistencies caught at the design stage, not in review',
-  },
-  {
-    label: 'Clearer team reference',
-    body: 'New team members could read the documented decisions instead of reverse-engineering patterns from code and old screens',
-  },
-];
-
-const whatWorked = [
-  {
-    label: 'The anti-forking rule held up',
-    body: 'Getting three products with distinct visual identities onto one shared library was the hardest part. The token model kept that from becoming three separate component sets.',
-  },
-  {
-    label: 'Teams used the process because it was small',
-    body: 'Busy product teams participated because requests were easy to make, priorities were visible and the first migrations produced results after one quarter.',
-  },
-];
-
-const whatIdChange = [
-  {
-    label: 'Use AI-powered tooling earlier',
-    body: 'Manual batch operations were slow and left room for small mistakes.',
-  },
-  {
-    label: 'Track adoption from the start',
-    body: 'Component usage, override frequency and contribution activity would have made the system\u2019s value visible sooner.',
-  },
-  {
-    label: 'Involve developers earlier',
-    body: 'Some naming decisions that seemed logical in Figma caused problems in code.',
-  },
-];
-
-/* ── Local sub-components ──────────────────────────────── */
-
-function DataTable({
-  headers,
-  rows,
-  mono,
-}: {
-  headers: string[];
-  rows: string[][];
-  mono?: number[];
-}) {
+function Body({ children }: { children: React.ReactNode }) {
   return (
-    <div className='overflow-x-hidden sm:overflow-x-auto -mx-4 sm:mx-0'>
-      <table className='w-full min-w-0 table-fixed text-sm leading-[1.4]'>
-        <thead>
-          <tr className='border-b border-border/60'>
-            {headers.map((h) => (
-              <th
-                key={h}
-                scope='col'
-                className='text-left text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase py-3 pr-4 break-words whitespace-normal'>
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr key={i} className='border-b border-border'>
-              {row.map((cell, j) => (
-                <td
-                  key={j}
-                  className={`py-3 pr-4 ${j === 0 ? 'text-foreground' : 'text-foreground/80'} ${mono?.includes(j) ? 'font-mono text-xs' : ''} break-words whitespace-normal`}>
-                  {cell}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <p
+      className='text-pretty text-foreground/80'
+      style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+      {children}
+    </p>
   );
 }
-
-function MobileDataCards({
-  headers,
-  rows,
-  mono,
-}: {
-  headers: string[];
-  rows: string[][];
-  mono?: number[];
-}) {
-  return (
-    <div className='grid gap-3 sm:hidden'>
-      {rows.map((row, rowIndex) => (
-        <div key={rowIndex} className='rounded-xl bg-card card-shadow p-4'>
-          <p
-            className={`text-foreground text-sm leading-[1.4] ${mono?.includes(0) ? 'font-mono' : ''}`}>
-            {row[0]}
-          </p>
-          <dl className='mt-3 grid gap-3'>
-            {row.slice(1).map((cell, cellIndex) => {
-              const columnIndex = cellIndex + 1;
-
-              return (
-                <div key={headers[columnIndex]} className='grid gap-1'>
-                  <dt className='text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase'>
-                    {headers[columnIndex]}
-                  </dt>
-                  <dd
-                    className={`text-foreground/80 text-pretty text-sm leading-[1.5] ${mono?.includes(columnIndex) ? 'font-mono' : ''}`}>
-                    {cell}
-                  </dd>
-                </div>
-              );
-            })}
-          </dl>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function LabeledList({ items }: { items: { label: string; body: string }[] }) {
-  return (
-    <ol className='flex flex-col gap-4 pl-6 my-4 list-decimal'>
-      {items.map((item, i) => (
-        <li
-          key={i}
-          className='text-foreground/80'
-          style={{
-            fontSize: fluidBase,
-            lineHeight: 1.6,
-            letterSpacing: '-0.011em',
-          }}>
-          <strong>{nbsp(item.label)}:</strong>
-          <br />
-          {nbsp(item.body)}
-        </li>
-      ))}
-    </ol>
-  );
-}
-
-/* ── Page ─────────────────────────────────────────────── */
 
 export function DesignSystemPage() {
   return (
     <div className='flex flex-col' style={{ gap: sectionGap }}>
-      {/* ── 1. Hero + TL;DR ────────────────────────────── */}
       <SectionAnimate delay={0.05}>
-        <div className='flex flex-col' style={{ gap: innerGap }}>
-          <h1
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontSize: fluidH1,
-              lineHeight: 1.15,
-              letterSpacing: '-0.025em',
-            }}>
-            Multibrand design system
-          </h1>
-          <p style={{ fontSize: fluidLead, lineHeight: 1.6 }}>
-            {nbsp(
-              'Designed and launched a scalable multibrand design system. Reorganised the Figma library structure, saved significant setup time for designers, engineers and QA team.',
-            )}
-          </p>
-        </div>
+        <CaseHero
+          title='One design system for three B2B products'
+          lede='I replaced three drifting UI libraries with one shared foundation. Similar Figma setup work took about one quarter of the previous effort, and we saw around 30% fewer recurring style issues during design QA.'
+        />
       </SectionAnimate>
 
       <SectionAnimate delay={0.08}>
-        <div className='-mx-4 sm:mx-0'>
-          <ImageWithFallback
-            src={heroImage}
-            alt='Design system overview \u2014 components, tokens and theme variations side by side'
-            className='w-full rounded-none sm:rounded-xl'
-            loading='eager'
-          />
-        </div>
+        <CaseFigure
+          src='/images/design-system-hero.png'
+          alt='Shared values and semantic tokens feed one component library, which supports three product themes'
+          caption="One structural library; semantic themes preserve each product's identity without component forks."
+          eager
+        />
       </SectionAnimate>
 
       <SectionAnimate delay={0.1}>
-        <dl className='grid grid-cols-2 sm:grid-cols-4 gap-6 rounded-xl bg-card card-shadow p-5 sm:p-6'>
-          {metadata.map((m) => (
-            <div key={m.label} className='flex flex-col gap-1'>
-              <dt className='text-xs leading-[1.3] font-medium text-muted-foreground tracking-wide uppercase'>
-                {m.label}
-              </dt>
-              <dd className='text-sm leading-[1.4]'>{m.value}</dd>
-            </div>
-          ))}
-        </dl>
+        <OutcomeGrid items={outcomes} />
       </SectionAnimate>
 
       <SectionAnimate delay={0.11}>
+        <CaseFacts items={facts} />
+      </SectionAnimate>
+
+      <SectionAnimate delay={0.12}>
         <ConfidentialityNote />
       </SectionAnimate>
 
-      {/* ── 2. Problem & Context ───────────────────────── */}
-      <SectionAnimate delay={0.12}>
-        <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Problem &amp; Context</SectionHeading>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {highlight(
-              'Yesim is a global eSIM platform with over 3\u00a0million customers and several B2B web products sharing the same tech stack. When I joined, three products were growing independently, each with its own UI patterns, color schemes and legacy implementations. Even small changes slowed things down and design reviews became negotiations instead of quick reference checks.',
-              SUBJECT,
-            )}
-          </p>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {nbsp(
-              'The products did not need a decorative refresh. They needed a shared way to build common B2B surfaces: tables, forms, filters, navigation, feedback states and settings pages. The hard part was that each product still needed its own identity.',
-            )}
-          </p>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-            {nbsp(
-              'The main product risk was fragmentation. If each product needed its own components, the system would collapse under maintenance. If the system forced every product to look the same, teams would work around it. Either outcome would slow the work down.',
-            )}
-          </p>
-          <PullQuote>
-            {nbsp(
-              'How do we give three products one shared UI foundation without flattening the parts that need to feel distinct?',
-            )}
-          </PullQuote>
-        </div>
-      </SectionAnimate>
-
-      {/* ── 3. Hypothesis & Constraints ────────────────── */}
       <SectionAnimate delay={0.14}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Hypothesis &amp; Constraints</SectionHeading>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+          <SectionHeading>Three products kept solving the same UI problems</SectionHeading>
+          <Body>
             {nbsp(
-              'My working hypothesis was that one shared component library could support all three products if product-specific differences lived in semantic tokens instead of separate component forks.',
+              'Yesim’s B2B products shared workflows and engineering foundations, but their interfaces had grown independently. Similar tables, fields, filters, and status patterns used different structures and visual rules. A small change could trigger the same design discussion three times.',
             )}
-          </p>
-          <p
-            className='text-foreground/80'
-            style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
+          </Body>
+          <Body>
             {nbsp(
-              'The constraints shaped the system: three products had different visual identities, legacy UI patterns and existing implementations. Teams also needed faster day-to-day work without adopting a library that required constant maintenance.',
+              'The products needed the same component structure without being forced into the same visual theme. I kept identity in semantic tokens, where it could change without duplicating the library.',
             )}
-          </p>
+          </Body>
         </div>
       </SectionAnimate>
 
       <SectionAnimate delay={0.16}>
-        <div className='-mx-4 sm:mx-0'>
-          <ImageWithFallback
-            src={beforeAfterImage}
-            alt='Before/after UI audit \u2014 three products with inconsistent components vs. unified system output'
-            className='w-full rounded-none sm:rounded-xl'
-          />
-        </div>
+        <CaseFigure
+          src='/images/design-system-before-after.png'
+          alt='Audit of recurring interface patterns across three Yesim B2B products'
+          caption='The audit grouped repeated patterns and exposed where teams were paying for the same decision more than once. High-use tables, forms, and feedback states became the first migration targets.'
+        />
       </SectionAnimate>
 
-      {/* ── 4. Exploration ─────────────────────────────── */}
       <SectionAnimate delay={0.18}>
-        <div className='flex flex-col' style={{ gap: sectionGap }}>
-          <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SectionHeading>Exploration</SectionHeading>
-            <SubHeading>
-              Prioritize the surfaces teams touched every week
-            </SubHeading>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'I audited every UI element across all three products: buttons in five styles, three table implementations, form fields that looked similar but behaved differently. The audit made the repeated work visible and helped separate high-impact patterns from one-off cleanup.',
-              )}
-            </p>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'Tables and forms came first because teams touched them constantly and they appeared on each product\u2019s most important B2B surfaces. Starting there reduced adoption risk: teams could migrate useful, visible areas without waiting for a big-bang redesign.',
-              )}
-            </p>
-            <MobileDataCards
-              headers={['Category', 'Components', 'Why first']}
-              rows={priorityComponents.map((p) => [
-                p.category,
-                p.components,
-                p.why,
-              ])}
-            />
-            <div className='hidden sm:block'>
-              <DataTable
-                headers={['Category', 'Components', 'Why first']}
-                rows={priorityComponents.map((p) => [
-                  p.category,
-                  p.components,
-                  p.why,
-                ])}
-              />
-            </div>
-          </div>
-        </div>
-      </SectionAnimate>
-
-      {/* ── 5. Final solution ──────────────────────────── */}
-      <SectionAnimate delay={0.22}>
-        <div className='flex flex-col' style={{ gap: sectionGap }}>
-          <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SectionHeading>Final solution</SectionHeading>
-            <SubHeading>Prevent forks before they started</SubHeading>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'The system used three token layers: raw values, primitives and semantic tokens. Raw values and primitives kept the shared palette organized. Semantic tokens carried product meaning, which is where each brand could safely differ.',
-              )}
-            </p>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'That mattered because the component implementation stayed shared. A product could change',
-              )}{' '}
-              <code>color-primary</code>
-              {', '}
-              <code>font-heading</code>
-              {', or '}
-              <code>radius-default</code>{' '}
-              {nbsp(
-                'without creating a product-specific button, input or table. Identity lived in tokens; behavior and structure stayed in one library.',
-              )}
-            </p>
-            <MobileDataCards
-              headers={['Layer', 'Purpose', 'Example', 'Themeable?']}
-              rows={tokenLayers.map((t) => [
-                t.layer,
-                t.purpose,
-                t.example,
-                t.themeable,
-              ])}
-              mono={[2]}
-            />
-            <div className='hidden sm:block'>
-              <DataTable
-                headers={['Layer', 'Purpose', 'Example', 'Themeable?']}
-                rows={tokenLayers.map((t) => [
-                  t.layer,
-                  t.purpose,
-                  t.example,
-                  t.themeable,
-                ])}
-                mono={[2]}
-              />
-            </div>
-          </div>
-
-          <div className='-mx-4 sm:mx-0'>
-            <ImageWithFallback
-              src={semanticsImage}
-              alt='Token and theming model \u2014 three-layer diagram showing primitives \u2192 semantics \u2192 component tokens'
-              className='w-full rounded-none sm:rounded-xl'
-            />
-          </div>
-
-          <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SubHeading>
-              Let products look different without separate components
-            </SubHeading>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'Each product gets a theme file that overrides semantic tokens. The component library does not need to know which product is using it. Switching themes changes the product expression while preserving the same implementation underneath.',
-              )}
-            </p>
-            <MobileDataCards
-              headers={['Token', 'Product A', 'Product B', 'Product C']}
-              rows={subBrandThemes.map((t) => [
-                t.token,
-                t.productA,
-                t.productB,
-                t.productC,
-              ])}
-              mono={[0]}
-            />
-            <div className='hidden sm:block'>
-              <DataTable
-                headers={['Token', 'Product A', 'Product B', 'Product C']}
-                rows={subBrandThemes.map((t) => [
-                  t.token,
-                  t.productA,
-                  t.productB,
-                  t.productC,
-                ])}
-                mono={[0]}
-              />
-            </div>
-          </div>
-
-          <div className='-mx-4 sm:mx-0'>
-            <ImageWithFallback
-              src={subBrandsImage}
-              alt='Sub-brand themes comparison \u2014 same component rendered in three product themes side by side'
-              className='w-full rounded-none sm:rounded-xl'
-            />
-          </div>
-
-          <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SubHeading>Make density and usage rules explicit</SubHeading>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'Density became a system-level token. Components respond to a density setting (default, compact, spacious) without separate variants. Tokens are named by function, not appearance:',
-              )}{' '}
-              <code>color-fg-secondary</code>{' '}
-              {nbsp(
-                'tells you it\u2019s a secondary foreground color without looking up the hex.',
-              )}
-            </p>
-          </div>
-
-          <div className='flex flex-col' style={{ gap: innerGap }}>
-            <SubHeading>Make adoption lighter than rebuilding</SubHeading>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'Each component includes a live preview, prop/variant table, usage guidelines (when to use and when not to), accessibility notes and a changelog.',
-              )}
-            </p>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'Product managers could prototype with real components, so concepts looked like the actual product from day one instead of a rough wireframe that needed to be redesigned later.',
-              )}
-            </p>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'Instead of mandating a full migration, I worked with each product team to migrate high-impact, low-risk surfaces first: settings pages and list views. The adoption path matched the prioritization work: useful surfaces first, broad cleanup later.',
-              )}
-            </p>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'To keep requests manageable, teams submitted component requests through Jira. I reviewed and ranked them weekly. New components went through design review with at least one consuming team, then were built, documented, versioned and tested across all three product themes.',
-              )}
-            </p>
-          </div>
-        </div>
-      </SectionAnimate>
-
-      {/* ── 6. Before / After ──────────────────────────── */}
-      <SectionAnimate delay={0.26}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Before / After</SectionHeading>
-          <div className='flex flex-col gap-3 sm:gap-4'>
-            <div className='rounded-xl bg-card card-shadow p-5 sm:p-6 flex flex-col gap-2'>
-              <SubHeading>Before: repeated decisions</SubHeading>
-              <p
-                className='text-foreground/80'
-                style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-                {nbsp(
-                  'Products used separate patterns, reviews slowed down on style questions, and teams kept re-deciding common B2B UI details.',
-                )}
+          <SectionHeading>Success meant adoption, not a complete catalogue</SectionHeading>
+          <div className='grid gap-3 sm:grid-cols-2'>
+            <div className='rounded-xl bg-card p-5 card-shadow'>
+              <p className='text-xs font-medium uppercase tracking-wide text-muted-foreground'>My ownership</p>
+              <p className='mt-2 text-pretty text-sm leading-[1.55] text-foreground/80'>
+                I owned the Figma architecture: shared component structure, reusable patterns, token hierarchy, and theming. I also worked through product-specific cases with engineers and handled design QA during adoption.
               </p>
             </div>
-            <div className='rounded-xl bg-card card-shadow p-5 sm:p-6 flex flex-col gap-2'>
-              <SubHeading>After: shared rules</SubHeading>
-              <p
-                className='text-foreground/80'
-                style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-                {nbsp(
-                  'Teams had shared components, token-based theming and documented usage rules that preserved product identity without forking the library.',
-                )}
+            <div className='rounded-xl bg-card p-5 card-shadow'>
+              <p className='text-xs font-medium uppercase tracking-wide text-muted-foreground'>Engineering ownership</p>
+              <p className='mt-2 text-pretty text-sm leading-[1.55] text-foreground/80'>
+                Engineers implemented the components and styles in the products. I clarified the design logic, worked through technical constraints and edge cases with them, and reviewed the result against the system.
               </p>
             </div>
           </div>
+          <Body>
+            {nbsp(
+              'Adoption happened product by product with PMs, engineers, and relevant stakeholders. There was no single design-system owner who formally approved all three. I used two practical success signals: less setup for designers and fewer visual inconsistencies during design QA.',
+            )}
+          </Body>
         </div>
       </SectionAnimate>
 
-      {/* ── 7. Result ──────────────────────────────────── */}
+      <SectionAnimate delay={0.2}>
+        <div className='flex flex-col' style={{ gap: innerGap }}>
+          <SectionHeading>Decision 1: name tokens by purpose</SectionHeading>
+          <SubHeading>Move product identity out of component structure</SubHeading>
+          <Body>
+            {nbsp(
+              'Raw colour values were too brittle, and primitive names such as blue-500 still described appearance. Semantic names such as color-action-primary described the job a value performed. Each product could point that token to a different primitive while the component kept the same anatomy and behaviour.',
+            )}
+          </Body>
+          <Body>
+            {nbsp(
+              'The extra token layer added naming work up front. It paid for itself by preventing a brand change from becoming a component fork.',
+            )}
+          </Body>
+          <Body>
+            {nbsp(
+              'Engineering challenged my first interactive-state names because they described the states from a design perspective. Production used CSS terminology such as',
+            )}{' '}
+            <code>:hover</code> {nbsp('and')} <code>:focus-visible</code>
+            {nbsp(
+              '. I renamed the Figma variants to match. That small change gave both teams one vocabulary and became a rule for the wider system: use implementation semantics when they make the design-to-code mapping clearer.',
+            )}
+          </Body>
+        </div>
+      </SectionAnimate>
+
+      <SectionAnimate delay={0.22}>
+        <CaseFigure
+          src='/images/design-system-semantics.png'
+          alt='Token architecture mapping values to primitives and semantic product roles'
+          caption='Semantic tokens carry intent. Product themes can change colour, type, radius, and density without changing the component API.'
+        />
+      </SectionAnimate>
+
+      <SectionAnimate delay={0.24}>
+        <div className='flex flex-col' style={{ gap: innerGap }}>
+          <SectionHeading>Decision 2: share anatomy, vary the theme</SectionHeading>
+          <Body>
+            {nbsp(
+              'Buttons, fields, tables, and feedback states used one structural definition. The theme changed the values that belonged to the product: colour, type, radius, and density. Teams gained a distinct surface without maintaining a distinct component set.',
+            )}
+          </Body>
+        </div>
+      </SectionAnimate>
+
+      <SectionAnimate delay={0.26}>
+        <CaseFigure
+          src='/images/design-system-sub-brands.png'
+          alt='The same design-system components rendered across three Yesim product themes'
+          caption='The same component structure across three themes. Identity changes through semantics; interaction and accessibility rules remain shared.'
+        />
+      </SectionAnimate>
+
       <SectionAnimate delay={0.28}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Result</SectionHeading>
-          <div className='grid grid-cols-3 gap-3 sm:gap-4'>
-            {impactStats.map((s) => (
-              <div
-                key={s.label}
-                className='rounded-xl bg-card card-shadow p-4 sm:p-5 flex flex-col gap-1 items-center text-center'>
-                <span
-                  className='text-foreground'
-                  style={{
-                    fontFamily: 'var(--font-serif)',
-                    fontSize: fluidStat,
-                    lineHeight: 1.3,
-                  }}>
-                  {s.value}
-                </span>
-                <span className='text-xs leading-[1.3] text-muted-foreground'>
-                  {s.label}
-                </span>
-              </div>
-            ))}
-          </div>
-          <LabeledList items={impactItems} />
+          <SectionHeading>Ship the system without pausing product work</SectionHeading>
+          <Body>
+            {nbsp(
+              'A full rewrite would have delayed feature work and made the library feel like an external programme. I started with recurring, visible surfaces and let teams migrate them as related product work moved through delivery.',
+            )}
+          </Body>
+          <Body>
+            {nbsp(
+              'Forms and tables made up the first high-frequency scope. As each product adopted the system, I added patterns that proved reusable in real work and adjusted the architecture with engineering. The totals below describe the library at maturity.',
+            )}
+          </Body>
+          <Body>
+            {nbsp(
+              'Each component included anatomy, states, usage guidance, accessibility notes, and implementation-facing specifications. That gave design and engineering one place to resolve a rule before it appeared in three products.',
+            )}
+          </Body>
         </div>
       </SectionAnimate>
 
-      {/* ── 8. Reflection ──────────────────────────────── */}
+      <SectionAnimate delay={0.3}>
+        <CaseFigure
+          src='/images/design-system-specs.png'
+          alt='Design-system component specification with anatomy, variants, states, and implementation notes'
+          caption='Delivery evidence: component anatomy and state documentation turned a Figma asset into a repeatable implementation reference.'
+        />
+      </SectionAnimate>
+
       <SectionAnimate delay={0.32}>
         <div className='flex flex-col' style={{ gap: innerGap }}>
-          <SectionHeading>Reflection</SectionHeading>
-          <div className='flex flex-col gap-2'>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'The system worked best where the rules were small enough for product teams to remember. The useful decisions were less about polishing components and more about preventing the library from splitting apart.',
-              )}
-            </p>
-            <LabeledList items={whatWorked} />
-          </div>
-          <div className='flex flex-col gap-2'>
-            <p
-              className='text-foreground/80'
-              style={{ fontSize: fluidBase, lineHeight: 1.6 }}>
-              {nbsp(
-                'The next pass would make the system easier to operate, not just easier to adopt. I would put more automation, measurement and engineering feedback into the foundation before migration work picked up speed.',
-              )}
-            </p>
-            <LabeledList items={whatIdChange} />
-          </div>
+          <SectionHeading>Result</SectionHeading>
+          <Body>
+            {nbsp(
+              'The mature library grew to 48 components and more than 140 tokens across three product themes. In repeated, comparable setup work, Figma preparation typically took about one quarter of the previous effort. Comparable releases across all three products also surfaced around 30% fewer recurring style issues during design QA, including spacing, typography, colour, and component styling. Neither result came from a formal experiment or fixed reporting window, so I treat both as operational estimates.',
+            )}
+          </Body>
+          <Body>
+            {nbsp(
+              'I learned that adoption is mostly an operations problem. Teams used the system when it helped them finish current product work. Naming, documentation, and migration order mattered as much as the components.',
+            )}
+          </Body>
         </div>
       </SectionAnimate>
 
-      {/* Bottom back link */}
-      <SectionAnimate delay={0.36}>
-        <div className='flex items-center justify-between'>
-          <Link
-            to='/'
-            data-goatcounter-click='back-to-home-bottom'
-            className='inline-flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:text-foreground transition-colors'
-            style={{ fontSize: fluidSmall, lineHeight: 1 }}>
-            <RiArrowLeftLine size={16} />
-            Home
-          </Link>
-          <Link
-            to='/work/white-label-esim'
-            data-goatcounter-click='next-case-study'
-            className='inline-flex items-center gap-2 text-muted-foreground hover:text-foreground focus-visible:text-foreground transition-colors'
-            style={{ fontSize: fluidSmall, lineHeight: 1 }}>
-            Next work
-            <RiArrowRightLine size={16} />
-          </Link>
-        </div>
+      <SectionAnimate delay={0.34}>
+        <CaseNavigation next='/work/white-label-esim' />
       </SectionAnimate>
     </div>
   );

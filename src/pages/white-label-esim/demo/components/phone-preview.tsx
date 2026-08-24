@@ -74,13 +74,28 @@ function hexToRgb(hex: string): [number, number, number] {
 function relLuminance([r, g, b]: [number, number, number]) {
   const f = (c: number) => {
     const cs = c / 255;
-    return cs <= 0.03928 ? cs / 12.92 : Math.pow((cs + 0.055) / 1.055, 2.4);
+    return cs <= 0.04045 ? cs / 12.92 : Math.pow((cs + 0.055) / 1.055, 2.4);
   };
   return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
 }
 
+function contrastRatio(first: [number, number, number], second: [number, number, number]) {
+  const firstLuminance = relLuminance(first);
+  const secondLuminance = relLuminance(second);
+  const lighter = Math.max(firstLuminance, secondLuminance);
+  const darker = Math.min(firstLuminance, secondLuminance);
+
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
 function readableTextColor(hex: string) {
-  return relLuminance(hexToRgb(hex)) > 0.55 ? "#101828" : "#ffffff";
+  const surface = hexToRgb(hex);
+  const darkText: [number, number, number] = [0, 0, 0];
+  const whiteText: [number, number, number] = [255, 255, 255];
+
+  return contrastRatio(surface, darkText) >= contrastRatio(surface, whiteText)
+    ? "#000000"
+    : "#ffffff";
 }
 
 /* ──────────────  phone shell  ────────────── */

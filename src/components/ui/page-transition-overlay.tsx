@@ -1,7 +1,9 @@
 import { useSyncExternalStore } from "react";
+import { useReducedMotion } from "motion/react";
 import { pageTransition } from "@/lib/page-transition";
 
 export function PageTransitionOverlay() {
+  const reduceMotion = useReducedMotion() === true;
   const phase = useSyncExternalStore(
     pageTransition.subscribe,
     pageTransition.get,
@@ -15,12 +17,13 @@ export function PageTransitionOverlay() {
       ? "translateX(100%)"
       : "translateX(-100%)";
 
-  const transition =
-    phase === "entering"
+  const transition = reduceMotion
+    ? "none"
+    : phase === "entering"
       ? "transform 300ms cubic-bezier(0.4, 0, 1, 1)"
       : phase === "exiting"
-      ? "transform 300ms cubic-bezier(0, 0, 0.2, 1)"
-      : "none";
+        ? "transform 300ms cubic-bezier(0, 0, 0.2, 1)"
+        : "none";
 
   return (
     <div

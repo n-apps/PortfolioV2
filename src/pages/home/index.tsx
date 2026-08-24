@@ -56,33 +56,33 @@ const workExperience = [
 
 const selectedWorks = [
   {
-    title: 'White-label eSIM',
-    subtitle: 'Yesim',
-    description:
-      'Validated white-label eSIM customization through a production-stack prototype',
-    caseStudy: '/work/white-label-esim',
-    cover: whiteLabelEsimCover,
-  },
-  {
-    title: 'Designing onboarding',
-    subtitle: 'Yesim',
-    description:
-      'Turned sales-assisted B2B onboarding into a self-serve activation flow',
-    caseStudy: '/work/saas-onboarding',
-    cover: saasOnboardingCover,
-  },
-  {
     title: 'Design system',
     subtitle: 'Yesim',
     description:
-      'Built a token-based system for 3 B2B products with 48 components and 140+ tokens',
+      'Unified 3 B2B products; about 4× faster Figma setup and around 30% fewer style QA issues',
     caseStudy: '/work/design-system',
     cover: designSystemCover,
   },
   {
+    title: 'White-label eSIM',
+    subtitle: 'Yesim',
+    description:
+      'Used a working prototype to resolve contrast, validation, and conditional states',
+    caseStudy: '/work/white-label-esim',
+    cover: whiteLabelEsimCover,
+  },
+  {
+    title: 'Self-serve onboarding',
+    subtitle: 'Yesim',
+    description:
+      'Designed the path from an empty account to the first assigned eSIM',
+    caseStudy: '/work/saas-onboarding',
+    cover: saasOnboardingCover,
+  },
+  {
     title: 'Score Counter',
     subtitle: 'Android app',
-    description: 'Owned a solo Android app from 0 to 1M+ installs and 100K MAU',
+    description: 'Designed, built, and ran a solo app to 1M+ installs and 100K MAU',
     caseStudy: '/work/score-counter',
     cover: scoreCounterCover,
   },
