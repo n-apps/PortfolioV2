@@ -11,7 +11,6 @@ import {
   CaseHero,
   CaseNavigation,
   ConfidentialityNote,
-  EvidenceStatus,
   SectionHeading,
   SubHeading,
 } from '@/components/case-study/case-study-components';
@@ -41,12 +40,6 @@ export function SaasOnboardingPage() {
           title='Designing a self-serve path to the first active eSIM'
           lede='I worked on moving manual B2B account creation to self-service signup. The flow shipped, but the repository does not contain a measured conversion result.'
         />
-      </SectionAnimate>
-
-      <SectionAnimate delay={0.08}>
-        <EvidenceStatus>
-          The exact flow shipped without user testing or a formal experiment. Its screens and activation logic are documented. There was no post-launch analytics result.
-        </EvidenceStatus>
       </SectionAnimate>
 
       <SectionAnimate delay={0.1}>
