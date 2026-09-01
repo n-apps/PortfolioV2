@@ -114,7 +114,7 @@ const connectLinks: ConnectLink[] = [
   },
   {
     label: 'CV',
-    href: '/CV_Roma_Shuliatiev_Product_Designer.pdf',
+    href: '/Roma_Shuliatiev_Product_Designer_Resume.pdf',
     download: true,
   },
 ];
